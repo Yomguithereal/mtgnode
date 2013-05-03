@@ -1,0 +1,9 @@
+// Game Mixins
+mixin card(id)
+	img(class='card-min draggable', src="http://gatherer.wizards.com/Handlers/Image.ashx?type=card&multiverseid=#{id}", card_id=id)
+
+mixin card_full(id)
+	img(class='', src="http://gatherer.wizards.com/Handlers/Image.ashx?type=card&multiverseid=#{id}", card_id=id)
+
+mixin card_viewer_widget()
+	img(id='card_viewer_widget', src='/images/card-back.jpeg')

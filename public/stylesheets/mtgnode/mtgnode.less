@@ -1,0 +1,102 @@
+/*
+| -------------------------------------------------------------------
+|  MTG Node LESS StyleSheet
+| -------------------------------------------------------------------
+|
+|
+|	Author : PLIQUE Guillaume
+|	Version : 1.0
+*/
+
+/*
+| -------------------------------------------------------------------
+|  Dependancies
+| -------------------------------------------------------------------
+*/
+
+@import '../bootstrap/bootstrap.min.css';
+
+
+/*
+| -------------------------------------------------------------------
+|  Layout
+| -------------------------------------------------------------------
+*/
+
+BODY{
+	margin:0px;
+}
+
+#mainframe{
+	margin: 0px auto;
+	margin-top:10px;
+	padding:0px;
+	width: 1203px;
+	min-height:760px;
+}
+
+#helper_block{
+	width: 226px;
+	margin:0px;
+	height:760px;
+	float:left;
+	border:1px solid black;
+	border-right:none;
+}
+
+#top_helper_block, #bottom_helper_block{
+	height:200px;
+}
+
+#top_helper_block{
+	border-bottom : 1px solid black;
+}
+
+#bottom_helper_block{
+	border-top : 1px solid black;
+}
+
+#card_viewer_block{
+	height:311px;
+}
+
+#game_block{
+	width: 974px;
+	margin: 0px;
+	height:760px;
+	float:right;
+	border:1px solid black;
+}
+
+#top_game_block{
+	height: 380px;
+}
+
+#bottom_game_block{
+	height: 379px;
+	border-top:1px solid black;
+}
+
+/*
+| -------------------------------------------------------------------
+|  Cards
+| -------------------------------------------------------------------
+*/
+
+.card-min{
+	width:79px;
+	height:108px;
+
+	&.tapped{
+		-webkit-transform: rotate(90deg);
+		-moz-transform: rotate(90deg);
+		transform: rotate(90deg);
+	}
+}
+
+#card_viewer_widget{
+	width:226px;
+	height:311px;
+}
+
+

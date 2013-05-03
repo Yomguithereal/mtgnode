@@ -1,0 +1,26 @@
+extends ../layout
+include mixins
+
+block content
+	div#mainframe.clearfix
+		div#helper_block
+			div#top_helper_block
+			div#card_viewer_block
+				mixin card_viewer_widget()
+			div#bottom_helper_block
+		div#game_block.game-area
+			div#top_game_block
+				mixin card(1)
+				mixin card(2)
+				mixin card(3)
+				mixin card(4)
+				mixin card(5)
+				mixin card(6)
+			div#bottom_game_block
+
+
+block contextual_js
+	script(type="text/javascript")
+		$(document).ready(function(){
+			var kernel = new MTGNodeKernel();
+		});

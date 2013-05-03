@@ -1,0 +1,5 @@
+# Removing mac filthy files
+.DS_Store
+
+# Removing my todo
+TODO.txt
