@@ -8,6 +8,7 @@
 | Version : 1.0
 */
 
+// Dependencies
 
 // Login page
 exports.login = function(req, res){
@@ -30,6 +31,5 @@ exports.lobby = function(req, res){
 	}
 
 	// Rendering the view
-	res.render('lobby', {});
+	res.render('lobby', {username : req.session.user_id});
 };
-

@@ -20,7 +20,8 @@ block content
 
 
 block contextual_js
+	script(type='text/javascript', src='/javascripts/mtgnode/mtgnode_game_kernel.js')
 	script(type="text/javascript")
 		$(document).ready(function(){
-			var kernel = new MTGNodeKernel();
+			var kernel = new MTGNodeGameKernel();
 		});

@@ -12,17 +12,20 @@
 // Login Attempt
 exports.login_attempt = function(req, res){
 
-	// Harcoded login for the time being
-	if((req.body.username == 'Yomgui') || (req.body.username == 'Nibor')){
-		if(req.body.password == 'nifluril'){
+	// Loading the model
+	var UserModel = require('../model/user.js');
 
-			// Registering user
+	// Checking if the user is registered
+	UserModel.checkLogin(req.body.username, req.body.password, function(result){
+		if(result){
 			req.session.user_id= req.body.username;
 			res.send('success');
 			return false;
 		}
-	}
+		else{
+			res.send('fail');
+			return false;
+		}
+	});
 
-	res.send('fail');
-	return false;
 };

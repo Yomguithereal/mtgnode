@@ -1,6 +1,6 @@
 /*
 | -------------------------------------------------------------------
-|  MTGNode Client Kernel
+|  MTGNode Game Kernel
 | -------------------------------------------------------------------
 |
 |
@@ -9,11 +9,17 @@
 */
 
 
-function MTGNodeKernel(){
+function MTGNodeGameKernel(){
 
 	var self = this;
-	socket = io.connect();
-	PID = '';
+	var socket = io.connect();
+	var PID = '';
+
+	/*
+	| ------------------
+	|  Interface Actions
+	| ------------------
+	*/
 
 	/*
 	| ---------------
@@ -46,10 +52,15 @@ function MTGNodeKernel(){
 
 	// Variables
 	//-------------
+
+	// Selectors
 	var $ingame_card = $('.card-min');
+	var $card_viewer = $('#card_viewer_widget');
+
+	// Variables
 	var flipped_card_image = '/images/card-back.jpeg'
 	var card_image_url = 'http://gatherer.wizards.com/Handlers/Image.ashx?type=card&multiverseid=';
-	var $card_viewer = $('#card_viewer_widget');
+
 
 
 	// Card Viewer Widget

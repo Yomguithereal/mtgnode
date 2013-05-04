@@ -2,4 +2,17 @@ extends layout
 
 block content
 	div#mainframe
-		p Welcome to the Lobby
+		p Welcome to the Lobby #{username}.
+		br
+		p Current Games :
+		div.well
+			ul#game_list
+		div
+			button(type="button", class="btn") Host Game
+
+block contextual_js
+	script(type='text/javascript', src='/javascripts/mtgnode/mtgnode_lobby_kernel.js')
+	script(type="text/javascript")
+		$(document).ready(function(){
+			var kernel = new MTGNodeLobbyKernel();
+		});

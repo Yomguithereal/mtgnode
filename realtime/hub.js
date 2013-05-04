@@ -15,6 +15,10 @@ function IoHub(port_to_listen){
 
 	// Variables
 	//-------------
+	var games = [];
+
+
+	// TEMP
 	var players = [];
 
 	// Events

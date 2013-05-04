@@ -52,7 +52,7 @@ var home = require('./controllers')
 
 // Main routes
 app.get('/', home.login);
-app.get('/lobby', home.lobby)
+app.get('/lobby', home.lobby);
 
 // Game routes
 app.get('/game', game.index);
@@ -69,10 +69,11 @@ server.listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
 
-var sl = require('sqlite3');
 
-
-
+// Database
+//---------
+var sqlite3 = require('sqlite3').verbose();
+DB = new sqlite3.Database('./database/mtgnode.db');
 
 
 
