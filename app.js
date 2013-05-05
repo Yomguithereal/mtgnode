@@ -59,7 +59,8 @@ app.get('/deck-builder', home.deckBuilder);
 app.get('/game', game.index);
 
 // Ajax
-app.post('/ajax/login_attempt', ajax.login_attempt);
+app.post('/ajax/login_attempt', ajax.loginAttempt);
+app.post('/ajax/select_set', ajax.selectSet);
 
 
 // Server

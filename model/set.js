@@ -16,16 +16,15 @@ function SetModel(){
 	var self = this;
 	var scan_base_url = 'http://magiccards.info/scans/en/'
 
-	// Harcoded object containing set informations
-	//		-- Subject to change
-	var setInfos = {
-		'alpha' : {
-			block : 'core',
-			code : 'al',
-			maxCard : 295
-		}
-	};
+	// Loading config file
+	var setInfos = require('./config/setinfo.js');
 
+	// Get the sets informations
+	this.getSetsList = function(){
+		return setInfos;
+	}
+
+	// Get all the cards src of a set
 	this.getSetCards = function(set){
 
 		var cards = [];

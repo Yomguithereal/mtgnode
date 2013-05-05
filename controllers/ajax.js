@@ -10,7 +10,8 @@
 
 
 // Login Attempt
-exports.login_attempt = function(req, res){
+//-------------------
+exports.loginAttempt = function(req, res){
 
 	// Loading the model
 	var UserModel = require('../model/user.js');
@@ -27,5 +28,16 @@ exports.login_attempt = function(req, res){
 			return false;
 		}
 	});
-
 };
+
+
+// Selecting a set
+//-------------------
+exports.selectSet = function(req, res){
+
+	// Loading the model
+	var SetModel = require('../model/set.js');
+
+	var cards = SetModel.getSetCards(req.body.selected_set);
+	res.render('parts/deckbuilder_set', { cards : cards});
+}

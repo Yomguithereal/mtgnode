@@ -40,8 +40,6 @@ exports.deckBuilder = function(req, res){
 	// Loading the sets model
 	var SetModel = require('../model/set.js');
 
-	var testSet = SetModel.getSetCards('alpha');
-
 	// TEMP
-	res.render('deckbuilder', {cards : testSet});
+	res.render('deckbuilder', {set_list : SetModel.getSetsList()});
 }

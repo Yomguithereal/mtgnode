@@ -3,8 +3,18 @@ include mixins/cards
 
 block content
 	div#mainframe
-		each card in cards
-			mixin card(card)
+		div#helper_block
+			div#top_helper_block
+				select(id="set_select")
+					option(value='none')
+					each set , i in set_list
+						option(value=set.name)= set.label
+			div#card_viewer_block
+				mixin card_viewer_widget()
+			div#bottom_helper_block
+		div#deck_builder_container
+			div#deck_builder_left_panel
+			div#deck_builder_right_panel
 
 block contextual_js
 	script(type='text/javascript', src='/javascripts/mtgnode/mtgnode_deckbuilder_kernel.js')
