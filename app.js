@@ -53,6 +53,7 @@ var home = require('./controllers')
 // Main routes
 app.get('/', home.login);
 app.get('/lobby', home.lobby);
+app.get('/deck-builder', home.deckBuilder);
 
 // Game routes
 app.get('/game', game.index);
@@ -74,7 +75,6 @@ server.listen(app.get('port'), function(){
 //---------
 var sqlite3 = require('sqlite3').verbose();
 DB = new sqlite3.Database('./database/mtgnode.db');
-
 
 
 

@@ -1,0 +1,14 @@
+extends layout
+include mixins/cards
+
+block content
+	div#mainframe
+		each card in cards
+			mixin card(card)
+
+block contextual_js
+	script(type='text/javascript', src='/javascripts/mtgnode/mtgnode_deckbuilder_kernel.js')
+	script(type="text/javascript")
+		$(document).ready(function(){
+			var kernel = new MTGNodeDeckBuilderKernel();
+		});

@@ -1,6 +1,6 @@
-// Game Mixins
-mixin card(id)
-	img(class='card-min draggable', src="http://gatherer.wizards.com/Handlers/Image.ashx?type=card&multiverseid=#{id}", card_id=id)
+// Card Mixins
+mixin card(src)
+	img(class='card-min draggable', src="#{src}")
 
 mixin card_full(id)
 	img(class='', src="http://gatherer.wizards.com/Handlers/Image.ashx?type=card&multiverseid=#{id}", card_id=id)

@@ -18,5 +18,5 @@ exports.index = function(req, res){
 	}
 
 	// Rendering the view
-	res.render('game/main', {});
+	res.render('game', {});
 };
