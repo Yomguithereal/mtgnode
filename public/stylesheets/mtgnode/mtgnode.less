@@ -92,13 +92,36 @@ BODY{
 	border:1px solid black;
 }
 
+.game-area{
+	position : relative;
+}
+
 #top_game_block{
 	height: 380px;
+	position: relative;
 }
 
 #bottom_game_block{
 	height: 379px;
 	border-top:1px solid black;
+	position: relative;
+}
+
+.deck-emplacement,
+.cemetery-emplacement{
+	width:79px;
+	height:108px;
+	border-right:1px solid black;
+	border-bottom:1px solid black;
+	position: relative;
+}
+
+.deck-emplacement{
+
+}
+
+.cemetery-emplacement{
+
 }
 
 /*
@@ -111,14 +134,27 @@ BODY{
 	width:79px;
 	height:108px;
 
-	position: relative;
+	position: absolute;
 
+
+	// Tapped Card
 	&.tapped{
 		-webkit-transform: rotate(90deg);
 		-moz-transform: rotate(90deg);
 		transform: rotate(90deg);
 	}
+
+	// In deck card
+	&.in-deck{
+		top:0px;
+	}
+
+	// In hand card
+	&.in-hand{
+		border:2px solid blue;
+	}
 }
+
 
 #card_viewer_widget{
 	width:312px;

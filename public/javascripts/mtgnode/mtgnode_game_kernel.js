@@ -14,6 +14,8 @@ function MTGNodeGameKernel(){
 	var self = this;
 	var socket = io.connect('/game');
 
+	var card_back = '/images/card-back.jpeg';
+
 	// User info
 	var user = {
 		id : $("#USER_ID").val(),
@@ -34,6 +36,12 @@ function MTGNodeGameKernel(){
 	var $start_game = $("#start_game");
 	var $deck_select = $("#deck_select");
 
+	/*
+	| --------
+	|  Helpers
+	| --------
+	*/
+
 	// Game message data formatting
 	function gmd(data){
 
@@ -45,11 +53,39 @@ function MTGNodeGameKernel(){
 		this.body = data;
 	}
 
-	/*
-	| ------------------
-	|  Interface Actions
-	| ------------------
-	*/
+	// Opponent card id
+	function opponent_card(card_id){
+		return '#card'+card_id+'_opponent';
+	}
+
+	// Flipping a card
+	function flip_card($card){
+		if($card.attr('src') == card_back){
+			$card.attr('src', $card.attr('true_src'));
+		}
+		else{
+			$card.attr('src', card_back);
+		}
+	}
+
+	// Drawing card
+	function deck_to_hand($card){
+		$card.removeClass('in-deck');
+		$card.addClass('in-hand');
+	}
+
+	// Revealing a card
+	function hand_to_game($card){
+		$card.removeClass('in-hand');
+		$card.addClass('in-game');
+	}
+
+	// Tapping a card
+	function tap_card($card){
+		$card.toggleClass('tapped');
+	}
+
+
 
 	/*
 	| ---------------
@@ -98,8 +134,11 @@ function MTGNodeGameKernel(){
 		socket.emit('chosenDeck', new gmd(chosen_deck_id));
 
 		// Getting them ajaxwise
-		$('div.'+user.game_side).load('ajax/deck_cards', {deck_id : chosen_deck_id, game_side : 'mine'}, function(){
+		$.post('ajax/deck_cards', {deck_id : chosen_deck_id, game_side : 'mine'}, function(data){
 			$start_game_modal.modal('hide');
+
+			// Populating the deck
+			$('div.'+user.game_side).append(data);
 
 			// Calling on the draggable
 			draggable_register();
@@ -110,10 +149,13 @@ function MTGNodeGameKernel(){
 	socket.on('opponentDeck', function(opponent_deck_id){
 
 		// Getting them ajaxwise
-		$('div.'+user.opponent_side).load('ajax/deck_cards', {deck_id : opponent_deck_id, game_side : 'opponent'}, function(){
-
+		$.post('ajax/deck_cards', {deck_id : opponent_deck_id, game_side : 'opponent'}, function(data){
+			$('div.'+user.opponent_side).append(data)
 		});
 	});
+
+
+
 
 	/*
 	| -------------
@@ -133,7 +175,9 @@ function MTGNodeGameKernel(){
 	// Variables
 	var flipped_card_image = '/images/card-back.jpeg'
 	var ingame_card = '.card-min';
-	var my_ingame_card = '.card-min.draggable.mine';
+	var my_card = '.card-min.mine'
+	var my_hand_card = '.card-min.in-hand.mine';
+	var my_ingame_card = '.card-min.in-game.mine';
 
 
 
@@ -150,7 +194,7 @@ function MTGNodeGameKernel(){
 
 	// Sending
 	function draggable_register(){
-		$(my_ingame_card).draggable({
+		$(my_card).draggable({
 			'containment' : '.game-area',
 			'stack' : '.card-min',
 			drag : function(event, ui){
@@ -160,19 +204,96 @@ function MTGNodeGameKernel(){
 
 				// Sending the message
 				socket.emit('draggingCard', new gmd(coordinates));
+			},
+			stop : function(event, ui){
+
+				// If card comes from deck
+				var $card = ui.helper;
+				if($card.hasClass('in-deck')){
+
+					// Adding the class
+					deck_to_hand($card);
+
+					// Flipping it for me
+					flip_card($card);
+					$card.trigger('mouseenter');
+
+					// Sending information to server
+					socket.emit('drawingCard', new gmd($card.attr('card_id')));
+				}
+
 			}
 		});
 	}
 
-	// Getting
+	// Getting dragging
 	socket.on('draggingCard', function(coordinates){
 
 		// Moving the card
-		$('#card'+coordinates.card+'_opponent').css({
+		$(opponent_card(coordinates.card)).css({
 			'left' : coordinates.left,
 			'top' : coordinates.top,
 			'z-index' : coordinates.zindex
 		});
+	});
+
+	// Getting drawing
+	socket.on('drawingCard', function(card_id){
+
+		// Shifting classes
+		deck_to_hand($(opponent_card(card_id)));
+	});
+
+
+	// Revealing a card
+	//----------------
+
+	// Sending
+	$game_area.on('dblclick', my_hand_card, function(e){
+		var $card = $(e.target);
+
+		// Flipping the card
+		hand_to_game($card);
+
+		// Sending information to server
+		socket.emit('revealingCard', new gmd($card.attr('card_id')));
+	});
+
+	// Getting
+	socket.on('revealingCard', function(card_id){
+
+		// Flipping the card and revealing it
+		var $card = $(opponent_card(card_id));
+		hand_to_game($card);
+		flip_card($card);
+	});
+
+
+
+	// Tapping a card
+	//----------------
+
+	// Sending
+	$game_area.on('contextmenu', my_ingame_card, function(e){
+
+		e.preventDefault();
+		var $card = $(e.target);
+
+		// Flipping the card
+		tap_card($card);
+
+		// Sending information to server
+		socket.emit('tappingCard', new gmd($card.attr('card_id')));
+
+		return false;
+	});
+
+	// Getting
+	socket.on('tappingCard', function(card_id){
+
+		// Flipping the card and revealing it
+		var $card = $(opponent_card(card_id));
+		tap_card($card);
 	});
 
 

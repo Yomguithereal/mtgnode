@@ -20,12 +20,17 @@ function IoHub(port_to_listen){
 	var games = {};
 
 	// Helpers
-	function opponent_socket(current_game, player_game_side){
-		if(player_game_side == 'player1'){
-			return current_game.player2.socket;
+	function opponent_socket(data){
+
+		// Getting current game
+		var cg = games[data.game.name];
+
+		// Determining opponent socket
+		if(data.user.game_side == 'player1'){
+			return cg.player2.socket;
 		}
 		else{
-			return current_game.player1.socket;
+			return cg.player1.socket;
 		}
 	}
 
@@ -94,8 +99,7 @@ function IoHub(port_to_listen){
 
 		// Sending chosen deck to opponent
 		socket.on('chosenDeck', function(data){
-			var cg = games[data.game.name];
-			opponent_socket(cg, data.user.game_side).emit('opponentDeck', data.body);
+			opponent_socket(data).emit('opponentDeck', data.body);
 		});
 
 
@@ -105,9 +109,24 @@ function IoHub(port_to_listen){
 
 		// Dragging Cards
 		socket.on('draggingCard', function(data){
-			var cg = games[data.game.name];
-			opponent_socket(cg, data.user.game_side).emit('draggingCard', data.body);
+			opponent_socket(data).emit('draggingCard', data.body);
 		});
+
+		// Drawing Cards
+		socket.on('drawingCard', function(data){
+			opponent_socket(data).emit('drawingCard', data.body);
+		});
+
+		// Revealing Cards
+		socket.on('revealingCard', function(data){
+			opponent_socket(data).emit('revealingCard', data.body);
+		});
+
+		// Tapping Cards
+		socket.on('tappingCard', function(data){
+			opponent_socket(data).emit('tappingCard', data.body);
+		});
+
 
 	});
 
