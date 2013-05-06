@@ -8,6 +8,9 @@
 | Version : 1.0
 */
 
+// Dependancies
+var DeckModel = require('../model/deck.js');
+
 // Index Page
 exports.index = function(req, res){
 
@@ -17,6 +20,13 @@ exports.index = function(req, res){
 		res.redirect('/');
 	}
 
-	// Rendering the view
-	res.render('game', {});
+	// Getting every decks -- Do it ajaxwise later
+	DeckModel.getAllDecks(req.session.user_id, function(decks){
+
+		// Rendering the view
+		res.render('game', {decks : decks});
+
+	});
+
+
 };

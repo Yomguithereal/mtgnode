@@ -31,6 +31,16 @@ app.use(express.bodyParser());
 app.use(express.methodOverride());
 app.use(express.cookieParser('tezcatlipoca'));
 app.use(express.session({secret : 'coatlicue'}));
+app.use(function(req, res, next) {
+
+  // Giving session access to the layout
+  res.locals.session = req.session;
+
+  // Configuring the driver base_url
+  res.locals.CARD_BASE_URL = 'http://magiccards.info/scans/en/';
+
+  next();
+});
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -49,7 +59,6 @@ var home = require('./controllers')
   , game = require('./controllers/game')
   , ajax = require('./controllers/ajax');
 
-
 // Main routes
 app.get('/', home.login);
 app.get('/lobby', home.lobby);
@@ -62,6 +71,7 @@ app.get('/game', game.index);
 app.post('/ajax/login_attempt', ajax.loginAttempt);
 app.post('/ajax/select_set', ajax.selectSet);
 app.post('/ajax/save_deck', ajax.saveDeck);
+app.post('/ajax/deck_cards', ajax.deckCards);
 
 
 // Server
@@ -77,7 +87,6 @@ server.listen(app.get('port'), function(){
 //---------
 var sqlite3 = require('sqlite3').verbose();
 DB = new sqlite3.Database('./database/mtgnode.db');
-
 
 
 

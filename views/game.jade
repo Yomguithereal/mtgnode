@@ -9,9 +9,20 @@ block content
 				mixin card_viewer_widget()
 			div#bottom_helper_block
 		div#game_block.game-area
-			div#top_game_block
-			div#bottom_game_block
+			div#top_game_block.player2
+			div#bottom_game_block.player1
 
+
+	// Modals
+	div#start_game_modal.modal.hide.fade
+		div.modal-header
+			h3 Choose your deck
+		div.modal-body
+			select(id='deck_select')
+				each deck in decks
+					option(value=deck.id)= deck.name
+		div.modal-footer
+			button(type='button', class='btn btn-info', id='start_game') Choose
 
 block contextual_js
 	script(type='text/javascript', src='/javascripts/mtgnode/mtgnode_game_kernel.js')

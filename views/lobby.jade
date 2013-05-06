@@ -2,14 +2,22 @@ extends layout
 
 block content
 	div#mainframe
-		p Welcome to the Lobby #{username}.
+		p Welcome to the Lobby #{session.username}
 		br
 		a(href='/deck-builder') Deck Builder
 		p Current Games :
 		div.well
 			ul#game_list
 		div
-			button(type="button", class="btn") Host Game
+			a(href='#host_game_modal', data-toggle='modal', class="btn") Host Game
+		div#host_game_modal.modal.hide.fade
+			div.modal-header
+				h3 Host a Game
+			div.modal-body
+				input(type='text', id='host_game_name')
+			div.modal-footer
+				button(type='button', class='btn', data-dismiss='modal', aria-hidden='true') Close
+				button(type='button', class='btn btn-info', id='host_game') Start
 
 block contextual_js
 	script(type='text/javascript', src='/javascripts/mtgnode/mtgnode_lobby_kernel.js')

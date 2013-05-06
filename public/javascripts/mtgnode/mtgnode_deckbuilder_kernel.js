@@ -60,7 +60,7 @@ function MTGNodeDeckBuilderKernel(){
 
 	// Card Viewer Widget
 	//-------------------
-	$(document).on('mouseover', $card, function(e){
+	$left_panel.on('mouseover', $card, function(e){
 		var src_to_see = $(e.target).attr('src');
 		$card_viewer.attr('src', src_to_see);
 	});

@@ -8,6 +8,10 @@ block content
 		input(type='password', placeholder='Password', id='password')
 		br
 		button(type='button', class='btn', id='connect') Connect
+		br
+		button(type='button', class='btn override-connect', user='Yomgui', password='nifluril') Connect as Yomgui
+		br
+		button(type='button', class='btn override-connect', user='Nibor', password='nifluril') Connect as Nibor
 
 block contextual_js
 	script(type='text/javascript')
@@ -25,6 +29,21 @@ block contextual_js
 					else{
 						location.href= '/lobby';
 					}
-				})
+				});
+			});
+
+			$('.override-connect').click(function(){
+				var username = $(this).attr('user');
+				var password = $(this).attr('password');
+
+				$.post('/ajax/login_attempt', {'username' : username, 'password' : password}, function(data, status){
+					if(data == 'fail'){
+						alert('wrong id');
+					}
+					else{
+						location.href= '/lobby';
+					}
+				});
+
 			});
 		});

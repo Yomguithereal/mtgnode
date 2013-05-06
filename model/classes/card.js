@@ -11,11 +11,10 @@
 // Dependancies
 
 // Object
-function CardObject(set, set_code, number, url){
+function CardObject(set, set_code, number){
 	this.set = set;
 	this.set_code = set_code;
 	this.number = number;
-	this.base_url = url;
 }
 
 module.exports = CardObject;

@@ -15,7 +15,6 @@ var Card = require('./classes/card.js');
 function SetModel(){
 
 	var self = this;
-	var scan_base_url = 'http://magiccards.info/scans/en/'
 
 	// Loading config file
 	var setInfos = require('./config/setinfo.js');
@@ -32,7 +31,7 @@ function SetModel(){
 		for(i=1; i <= setInfos[set].maxCard; i++){
 
 			// Setting a new card
-			var card = new Card(set, setInfos[set].code, i, scan_base_url);
+			var card = new Card(set, setInfos[set].code, i);
 			cards.push(card);
 		}
 

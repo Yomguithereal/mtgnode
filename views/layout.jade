@@ -9,10 +9,13 @@ html
 			less = { env: 'development' };
 		script(type='text/javascript', src='/javascripts/less/less.min.js')
 	body
-		// DOM Constants
-
 		// Main Block
 		block content
+
+		// DOM Constants Block
+		block dom_constants
+		input(type='hidden', id='USER_ID', value= session.user_id)
+		input(type='hidden', id='USERNAME', value= session.username)
 
 		// Javascript Imports
 		script(type='text/javascript', src='/socket.io/socket.io.js')

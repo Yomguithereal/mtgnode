@@ -16,7 +16,7 @@ function UserModel(){
 	var self = this;
 
 	this.checkLogin = function(username, password, callback){
-		DB.get('SELECT id from users WHERE username = ? AND password = ?', [username, password], function(err, row){
+		DB.get('SELECT id, username from users WHERE username = ? AND password = ?', [username, password], function(err, row){
 			console.log(row);
 			if(row){
 				callback(row);

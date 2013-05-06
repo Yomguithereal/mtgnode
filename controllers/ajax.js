@@ -17,8 +17,8 @@ exports.loginAttempt = function(req, res){
 	var UserModel = require('../model/user.js');
 
 	// Checking if the user is registered
-	UserModel.checkLogin(req.body.username, req.body.password, function(result){
-		if(result){
+	UserModel.checkLogin(req.body.username, req.body.password, function(row){
+		if(row){
 			req.session.username = row.username;
 			req.session.user_id = row.id;
 			res.send('success');
@@ -59,3 +59,21 @@ exports.saveDeck = function(req, res){
 
 }
 
+
+// Getting Cards from a Deck
+//--------------------------
+exports.deckCards = function(req, res){
+
+	// Loading the model
+	var DeckModel = require('../model/deck.js');
+
+	DeckModel.getDeckCards(req.body.deck_id, function(cards){
+
+		if(req.body.game_side == 'mine'){
+			res.render('parts/gamecards_mine', { 'cards' : cards});
+		}
+		else{
+			res.render('parts/gamecards_opponent', { 'cards' : cards});
+		}
+	});
+}
