@@ -9,6 +9,9 @@ block content
 					option(value='none')
 					each set , i in set_list
 						option(value=set.name)= set.label
+				input(type='text', id='deck_name')
+				br
+				button(type='button', id='save_deck', class='btn btn-info') Save Deck
 			div#card_viewer_block
 				mixin card_viewer_widget()
 			div#bottom_helper_block

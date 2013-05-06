@@ -61,6 +61,7 @@ app.get('/game', game.index);
 // Ajax
 app.post('/ajax/login_attempt', ajax.loginAttempt);
 app.post('/ajax/select_set', ajax.selectSet);
+app.post('/ajax/save_deck', ajax.saveDeck);
 
 
 // Server

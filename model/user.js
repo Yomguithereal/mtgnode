@@ -19,7 +19,7 @@ function UserModel(){
 		DB.get('SELECT id from users WHERE username = ? AND password = ?', [username, password], function(err, row){
 			console.log(row);
 			if(row){
-				callback(true);
+				callback(row);
 			}
 			else{
 				callback(false);

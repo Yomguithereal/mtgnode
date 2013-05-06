@@ -9,7 +9,7 @@
 */
 
 // Dependancies
-var Card = require('./config/card.js');
+var Card = require('./classes/card.js');
 
 // Object
 function SetModel(){

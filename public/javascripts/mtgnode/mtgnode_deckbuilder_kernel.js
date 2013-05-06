@@ -30,6 +30,9 @@ function MTGNodeDeckBuilderKernel(){
 	var $left_panel = $('#deck_builder_left_panel');
 	var $right_panel = $('#deck_builder_right_panel');
 
+	var $save_button = $('#save_deck');
+	var $deck_name = $('#deck_name');
+
 	// Objects
 	function Card(set_code, number){
 		this.set_code = set_code;
@@ -75,6 +78,14 @@ function MTGNodeDeckBuilderKernel(){
 		}
 	});
 
+	// Changing Deck name
+	//-------------------
+	$deck_name.change(function(){
+		self.DECK.name = $(this).val();
+		console.log(self.DECK);
+	});
+
+
 	// Add Card to Deck
 	//-------------------
 	$left_panel.on('click', $card, function(e){
@@ -101,6 +112,22 @@ function MTGNodeDeckBuilderKernel(){
 
 		// Updating view
 		$c.remove();
+	});
+
+	// Saving the Deck
+	//----------------------
+	$save_button.click(function(){
+
+		// Stopping if name is not here
+		if($.trim(self.DECK.name) == ''){
+			alert('Deck name not given');
+			return false;
+		}
+
+		// Sending the deck to the server
+		$.post('ajax/save_deck', {name : self.DECK.name, cards : self.DECK.cards}, function(){
+			location.href = location.href;
+		});
 	});
 
 }
