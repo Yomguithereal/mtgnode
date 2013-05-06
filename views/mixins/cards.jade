@@ -1,6 +1,6 @@
 // Card Mixins
-mixin card(src)
-	img(class='card-min draggable', src="#{src}")
+mixin card(card_object)
+	img(class='card-min draggable', src="#{card_object.base_url}#{card_object.set_code}/#{card_object.number}.jpg", card_number='#{card_object.number}', set_code='#{card_object.set_code}')
 
 mixin card_viewer_widget()
 	img(id='card_viewer_widget', src='/images/card-back.jpeg')

@@ -9,6 +9,7 @@
 */
 
 // Dependancies
+var Card = require('./config/card.js');
 
 // Object
 function SetModel(){
@@ -29,7 +30,10 @@ function SetModel(){
 
 		var cards = [];
 		for(i=1; i <= setInfos[set].maxCard; i++){
-			cards.push(scan_base_url+setInfos[set].code+'/'+i+'.jpg');
+
+			// Setting a new card
+			var card = new Card(set, setInfos[set].code, i, scan_base_url);
+			cards.push(card);
 		}
 
 		// Getting the cards back

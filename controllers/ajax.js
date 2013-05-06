@@ -39,5 +39,5 @@ exports.selectSet = function(req, res){
 	var SetModel = require('../model/set.js');
 
 	var cards = SetModel.getSetCards(req.body.selected_set);
-	res.render('parts/deckbuilder_set', { cards : cards});
+	res.render('parts/deckbuilder_set', { 'cards' : cards});
 }
