@@ -17,12 +17,12 @@ block content
 					span(class='life-counter player1') 20
 					button(type='button', class='btn player1 gain-life update-life') +
 		div#game_block.game-area
-			div#top_game_block.player2
-				div#top_deck.deck-emplacement
-				div#top_cemetery.cemetery-emplacement
-			div#bottom_game_block.player1
-				div#bottom_deck.deck-emplacement
-				div#bottom_cemetery.cemetery-emplacement
+			div#top_game_block.player2.player-side
+				div#top_deck.deck-emplacement.player2
+				div#top_cemetery.cemetery-emplacement.player2
+			div#bottom_game_block.player1.player-side
+				div#bottom_deck.deck-emplacement.player1
+				div#bottom_cemetery.cemetery-emplacement.player1
 
 
 	// Modals
@@ -38,6 +38,7 @@ block content
 
 block contextual_js
 	script(type='text/javascript', src='/javascripts/mtgnode/mtgnode_game_kernel.js')
+	script(type='text/javascript', src='/javascripts/plugins/shuffle.jquery.js')
 	script(type="text/javascript")
 		$(document).ready(function(){
 			var kernel = new MTGNodeGameKernel();

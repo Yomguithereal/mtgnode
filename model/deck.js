@@ -50,7 +50,8 @@ function DeckModel(){
 	this.getDeckCards = function(deck_id, callback){
 		DB.get("SELECT cards from decks WHERE id = ?", [deck_id], function(err, row){
 
-			callback(JSON.parse(row.cards));
+			var cards = JSON.parse(row.cards);
+			callback(cards);
 		});
 	}
 

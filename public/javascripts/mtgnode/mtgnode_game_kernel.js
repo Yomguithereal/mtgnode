@@ -110,7 +110,9 @@ function MTGNodeGameKernel(){
 			$start_game_modal.modal('hide');
 
 			// Populating the deck
-			$('div.'+user.game_side).append(data);
+			$('.player-side.'+user.game_side).append(data);
+			// Shuffling deck
+			$(my_deck_card).shuffle();
 
 			// Calling on the draggable
 			draggable_register();
@@ -122,7 +124,7 @@ function MTGNodeGameKernel(){
 
 		// Getting them ajaxwise
 		$.post('ajax/deck_cards', {deck_id : opponent_deck_id, game_side : 'opponent'}, function(data){
-			$('div.'+user.opponent_side).append(data)
+			$('.player-side.'+user.opponent_side).append(data)
 		});
 	});
 
@@ -145,9 +147,11 @@ function MTGNodeGameKernel(){
 	var my_life_counter = '.life-counter.mine';
 	var my_update_life = '.update-life.mine';
 	var opponent_life_counter = '.life-counter.opponent';
+	var my_cemetery = '.cemetery-emplacement.mine';
 		// Cards
 	var ingame_card = '.card-min';
-	var my_card = '.card-min.mine'
+	var my_card = '.card-min.mine';
+	var my_deck_card = '.card-min.in-deck.mine';
 	var my_hand_card = '.card-min.in-hand.mine';
 	var my_ingame_card = '.card-min.in-game.mine';
 
@@ -236,6 +240,7 @@ function MTGNodeGameKernel(){
 		$(my_card).draggable({
 			'containment' : '.game-area',
 			'stack' : '.card-min',
+			snap : my_cemetery,
 			drag : function(event, ui){
 
 				// Getting coordinates
