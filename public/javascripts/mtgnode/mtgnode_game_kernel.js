@@ -58,34 +58,6 @@ function MTGNodeGameKernel(){
 		return '#card'+card_id+'_opponent';
 	}
 
-	// Flipping a card
-	function flip_card($card){
-		if($card.attr('src') == card_back){
-			$card.attr('src', $card.attr('true_src'));
-		}
-		else{
-			$card.attr('src', card_back);
-		}
-	}
-
-	// Drawing card
-	function deck_to_hand($card){
-		$card.removeClass('in-deck');
-		$card.addClass('in-hand');
-	}
-
-	// Revealing a card
-	function hand_to_game($card){
-		$card.removeClass('in-hand');
-		$card.addClass('in-game');
-	}
-
-	// Tapping a card
-	function tap_card($card){
-		$card.toggleClass('tapped');
-	}
-
-
 
 	/*
 	| ---------------
@@ -154,7 +126,76 @@ function MTGNodeGameKernel(){
 		});
 	});
 
+	/*
+	| -------------
+	|  Variables
+	| -------------
+	*/
 
+	// Selectors
+		// Areas
+	var $card_viewer = $('#card_viewer_widget');
+	var $game_area = $('.game-area');
+	var $helper_block = $('#helper_block')
+
+	// Variables
+		// Values
+	var flipped_card_image = '/images/card-back.jpeg';
+		// Interface
+	var my_life_counter = '.life-counter.mine';
+	var my_update_life = '.update-life.mine';
+	var opponent_life_counter = '.life-counter.opponent';
+		// Cards
+	var ingame_card = '.card-min';
+	var my_card = '.card-min.mine'
+	var my_hand_card = '.card-min.in-hand.mine';
+	var my_ingame_card = '.card-min.in-game.mine';
+
+	/*
+	| ------------------
+	|  Interface Actions
+	| ------------------
+	*/
+
+	// Updating life
+	//----------------
+
+	// Logic
+	function update_life($life_counter, action){
+
+		// Getting current life
+		var current_hp = parseInt($life_counter.text());
+
+		// Acting according parameter
+		if(action == 'gain'){
+			current_hp += 1;
+		}
+		else{
+			current_hp -= 1;
+		}
+
+		$life_counter.text(current_hp);
+	}
+
+	// Sending
+	$helper_block.on('click', my_update_life,function(){
+
+		if($(this).hasClass('gain-life')){
+			update_life($(my_life_counter), 'gain');
+			socket.emit('updatingLife', new gmd('gain'));
+		}
+		else{
+			update_life($(my_life_counter), 'lose');
+			socket.emit('updatingLife', new gmd('lose'));
+		}
+	});
+
+	// Getting
+	socket.on('updatingLife', function(action){
+
+		// Updating opponent
+		update_life($(opponent_life_counter), action);
+	});
 
 
 	/*
@@ -162,23 +203,6 @@ function MTGNodeGameKernel(){
 	|  Card Actions
 	| -------------
 	*/
-
-
-
-	// Variables
-	//-------------
-
-	// Selectors
-	var $card_viewer = $('#card_viewer_widget');
-	var $game_area = $('.game-area');
-
-	// Variables
-	var flipped_card_image = '/images/card-back.jpeg'
-	var ingame_card = '.card-min';
-	var my_card = '.card-min.mine'
-	var my_hand_card = '.card-min.in-hand.mine';
-	var my_ingame_card = '.card-min.in-game.mine';
-
 
 
 	// Card Viewer Widget
@@ -191,6 +215,21 @@ function MTGNodeGameKernel(){
 
 	// Dragging a Card
 	//----------------
+
+	// Logic
+	function flip_card($card){
+		if($card.attr('src') == card_back){
+			$card.attr('src', $card.attr('true_src'));
+		}
+		else{
+			$card.attr('src', card_back);
+		}
+	}
+
+	function deck_to_hand($card){
+		$card.removeClass('in-deck');
+		$card.addClass('in-hand');
+	}
 
 	// Sending
 	function draggable_register(){
@@ -248,6 +287,13 @@ function MTGNodeGameKernel(){
 	// Revealing a card
 	//----------------
 
+	// Logic
+	function hand_to_game($card){
+		$card.removeClass('in-hand');
+		$card.addClass('in-game');
+	}
+
+
 	// Sending
 	$game_area.on('dblclick', my_hand_card, function(e){
 		var $card = $(e.target);
@@ -272,6 +318,11 @@ function MTGNodeGameKernel(){
 
 	// Tapping a card
 	//----------------
+
+	// Logic
+	function tap_card($card){
+		$card.toggleClass('tapped');
+	}
 
 	// Sending
 	$game_area.on('contextmenu', my_ingame_card, function(e){

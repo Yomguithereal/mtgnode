@@ -5,9 +5,17 @@ block content
 	div#mainframe.clearfix
 		div#helper_block
 			div#top_helper_block
+				div#life_block
+					button(type='button', class='btn player2 lose-life update-life') -
+					span(class='life-counter player2') 20
+					button(type='button', class='btn player2 gain-life update-life') +
 			div#card_viewer_block
 				mixin card_viewer_widget()
 			div#bottom_helper_block
+				div#life_block
+					button(type='button', class='btn player1 lose-life update-life') -
+					span(class='life-counter player1') 20
+					button(type='button', class='btn player1 gain-life update-life') +
 		div#game_block.game-area
 			div#top_game_block.player2
 				div#top_deck.deck-emplacement

@@ -102,6 +102,14 @@ function IoHub(port_to_listen){
 			opponent_socket(data).emit('opponentDeck', data.body);
 		});
 
+		///////////////////////
+		// INTERFACE ACTIONS //
+		///////////////////////
+
+		// Updating life
+		socket.on('updatingLife', function(data){
+			opponent_socket(data).emit('updatingLife', data.body);
+		});
 
 		//////////////////
 		// CARD ACTIONS //
