@@ -1,5 +1,6 @@
 Magic The Gathering for Node.js
 ===============================
+Alpha 0.1
 
 About
 -----
@@ -9,6 +10,9 @@ on which you can play Magic the Gathering with a friend
 in realtime. My intention is not to enforce the rules of
 the game whatsoever but just to provide a digital interface
 giving the oppportunity to play as in real life.
+
+The application is still pretty ugly and basic but does
+its job.
 
 Disclaimer
 ----------
