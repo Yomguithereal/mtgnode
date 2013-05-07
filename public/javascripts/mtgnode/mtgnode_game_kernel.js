@@ -284,8 +284,8 @@ function MTGNodeGameKernel(){
 	});
 
 
-	// Revealing a card
-	//----------------
+	// Revealing / Concealing a card
+	//------------------------------
 
 	// Logic
 	function hand_to_game($card){
@@ -293,16 +293,33 @@ function MTGNodeGameKernel(){
 		$card.addClass('in-game');
 	}
 
+	function game_to_hand($card){
+		$card.removeClass('in-game');
+		$card.addClass('in-hand');
+	}
+
 
 	// Sending
-	$game_area.on('dblclick', my_hand_card, function(e){
+	$game_area.on('dblclick', my_hand_card+', '+my_ingame_card, function(e){
 		var $card = $(e.target);
 
-		// Flipping the card
-		hand_to_game($card);
+		if($card.hasClass('in-hand')){
+			// Flipping the card
+			hand_to_game($card);
 
-		// Sending information to server
-		socket.emit('revealingCard', new gmd($card.attr('card_id')));
+			// Sending information to server
+			socket.emit('revealingCard', new gmd($card.attr('card_id')));
+		}
+		else{
+			// Flipping the card
+			game_to_hand($card);
+
+			// Sending information to server
+			socket.emit('concealingCard', new gmd($card.attr('card_id')));
+		}
+
+
+
 	});
 
 	// Getting
@@ -311,6 +328,14 @@ function MTGNodeGameKernel(){
 		// Flipping the card and revealing it
 		var $card = $(opponent_card(card_id));
 		hand_to_game($card);
+		flip_card($card);
+	});
+
+	socket.on('concealingCard', function(card_id){
+
+		// Flipping the card and revealing it
+		var $card = $(opponent_card(card_id));
+		game_to_hand($card);
 		flip_card($card);
 	});
 

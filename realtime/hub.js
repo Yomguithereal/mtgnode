@@ -130,6 +130,11 @@ function IoHub(port_to_listen){
 			opponent_socket(data).emit('revealingCard', data.body);
 		});
 
+		// Concealing Cards
+		socket.on('concealingCard', function(data){
+			opponent_socket(data).emit('concealingCard', data.body);
+		});
+
 		// Tapping Cards
 		socket.on('tappingCard', function(data){
 			opponent_socket(data).emit('tappingCard', data.body);
