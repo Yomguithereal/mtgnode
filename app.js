@@ -70,8 +70,10 @@ app.get('/game', game.index);
 // Ajax
 app.post('/ajax/login_attempt', ajax.loginAttempt);
 app.post('/ajax/select_set', ajax.selectSet);
-app.post('/ajax/save_deck', ajax.saveDeck);
 app.post('/ajax/deck_cards', ajax.deckCards);
+app.post('/ajax/save_deck', ajax.saveDeck);
+app.post('/ajax/delete_deck', ajax.deleteDeck);
+app.post('/ajax/update_deck', ajax.updateDeck);
 
 
 // Server

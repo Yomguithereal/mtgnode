@@ -40,7 +40,7 @@ exports.selectSet = function(req, res){
 	var SetModel = require('../model/set.js');
 
 	var cards = SetModel.getSetCards(req.body.selected_set);
-	res.render('parts/deckbuilder_set', { 'cards' : cards});
+	res.render('parts/gamecards_deckbuilder', { 'cards' : cards});
 }
 
 // Saving a Deck
@@ -59,6 +59,35 @@ exports.saveDeck = function(req, res){
 
 }
 
+// Updating a Deck
+//-------------------
+exports.updateDeck = function(req, res){
+
+	// Loading the model
+	var DeckModel = require('../model/deck.js');
+
+	// JSON for the cards
+	var cards = JSON.stringify(req.body.cards);
+
+	DeckModel.updateDeck(req.body.deck_id, req.body.name, cards, function(){
+		res.send('success');
+	});
+
+}
+
+// Deleting a Deck
+//-------------------
+exports.deleteDeck = function(req, res){
+
+	// Loading the Model
+	var DeckModel = require('../model/deck.js');
+
+	DeckModel.deleteDeck(req.body.deck_id, function(){
+		res.send('success');
+	});
+
+}
+
 
 // Getting Cards from a Deck
 //--------------------------
@@ -72,8 +101,11 @@ exports.deckCards = function(req, res){
 		if(req.body.game_side == 'mine'){
 			res.render('parts/gamecards_mine', { 'cards' : cards});
 		}
-		else{
+		else if(req.body.game_side == 'opponent'){
 			res.render('parts/gamecards_opponent', { 'cards' : cards});
+		}
+		else{
+			res.render('parts/gamecards_deckbuilder', {'cards' : cards});
 		}
 	});
 }

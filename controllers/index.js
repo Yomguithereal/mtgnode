@@ -45,7 +45,19 @@ exports.deckBuilder = function(req, res){
 
 	// Loading the sets model
 	var SetModel = require('../model/set.js');
+	var DeckModel = require('../model/deck.js');
 
-	// TEMP
-	res.render('deckbuilder', {set_list : SetModel.getSetsList(), user_id : req.session.user_id});
+	DeckModel.getAllDecks(req.session.user_id, function(rows){
+
+		// Populating data to return
+		var data = {
+			set_list : SetModel.getSetsList(),
+			player_decks : rows
+		}
+
+		// Rendering the view
+		res.render('deckbuilder', data);
+	});
+
+	return false;
 }

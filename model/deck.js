@@ -26,9 +26,22 @@ function DeckModel(){
 			user_id = '1';
 		}
 
-		// Check if deck exists before running the query
-
+		// Inserting Deck
 		DB.run("INSERT INTO decks (user_id, name, cards) VALUES (?, ?, ?)", [user_id, name, cards], function(err){
+			if(!err){
+				callback();
+			}
+			else{
+				console.log(err);
+			}
+		});
+	}
+
+	// Updating a Deck
+	this.updateDeck = function(deck_id, name, cards, callback){
+
+		// Updating Deck
+		DB.run("UPDATE decks SET name = ?, cards = ? WHERE id = ?", [name, cards, deck_id], function(err){
 			if(!err){
 				callback();
 			}
@@ -52,6 +65,18 @@ function DeckModel(){
 
 			var cards = JSON.parse(row.cards);
 			callback(cards);
+		});
+	}
+
+	// Deleting a deck
+	this.deleteDeck = function(deck_id, callback){
+		DB.run("DELETE from decks WHERE id = ?", [deck_id], function(err){
+			if(!err){
+				callback();
+			}
+			else{
+				console.log(err);
+			}
 		});
 	}
 
