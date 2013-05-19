@@ -26,6 +26,7 @@ function MTGNodeDeckBuilderKernel(){
 	var $card_viewer = $('#card_viewer_widget');
 	var $card = $('.card-min');
 
+	var $main_container = $('#deck_builder_container');
 	var $set_selector = $('#set_select');
 	var $left_panel = $('#deck_builder_left_panel');
 	var $right_panel = $('#deck_builder_right_panel');
@@ -60,7 +61,7 @@ function MTGNodeDeckBuilderKernel(){
 
 	// Card Viewer Widget
 	//-------------------
-	$left_panel.on('mouseover', $card, function(e){
+	$main_container.on('mouseover', $card, function(e){
 		var src_to_see = $(e.target).attr('src');
 		$card_viewer.attr('src', src_to_see);
 	});
