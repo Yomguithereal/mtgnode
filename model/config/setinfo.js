@@ -13,15 +13,6 @@
 //		-- Subject to change
 var setInfos = {
 
-	// Core Block
-	'alpha' : {
-		name : 'alpha',
-		block : 'core',
-		code : 'al',
-		maxCard : 295,
-		label : 'Limited Edition Alpha'
-	},
-
 	// Early Sets
 	'arabian_nights' : {
 		name : 'arabian_nights',
@@ -496,6 +487,114 @@ var setInfos = {
 		maxCard : 156,
 		label : 'Dragon\'s Maze'
 	},
+
+	// Core Sets
+	'alpha' : {
+		name : 'alpha',
+		block : 'core',
+		code : 'al',
+		maxCard : 295,
+		label : 'Limited Edition Alpha'
+	},
+	'limited_edition_beta' : {
+		name : 'limited_edition_beta',
+		block : 'core_sets',
+		code : 'be',
+		maxCard : 302,
+		label : 'Limited Edition Beta'
+	},
+	'unlimited_edition' : {
+		name : 'unlimited_edition',
+		block : 'core_sets',
+		code : 'un',
+		maxCard : 302,
+		label : 'Unlimited Edition'
+	},
+	'revised-edition' : {
+		name : 'revised_edition',
+		block : 'core_sets',
+		code : 'rv',
+		maxCard : 306,
+		label : 'Revised Edition'
+	},
+	'fourth_edition' : {
+		name : 'fourth_edition',
+		block : 'core_sets',
+		code : '4e',
+		maxCard : 378,
+		label : 'Fourth Edition'
+	},
+	'fifth_edition' : {
+		name : 'fifth_edition',
+		block : 'core_sets',
+		code : '5e',
+		maxCard : 449,
+		label : 'Fifth Edition'
+	},
+	'classic_sixth_edition' : {
+		name : 'classic_sixth_edition',
+		block : 'core_sets',
+		code : '6e',
+		maxCard : 350,
+		label : 'Classic Sixth Edition'
+	},
+	'seventh_edition' : {
+		name : 'seventh_edition',
+		block : 'core_sets',
+		code : '7e',
+		maxCard : 350,
+		label : 'Seventh Edition'
+	},
+	'eighth_edition' : {
+		name : 'eighth_edition',
+		block : 'core_sets',
+		code : '8e',
+		maxCard : 350,
+		label : 'Eighth Edition'
+	},
+	'ninth_edition' : {
+		name : 'ninth_edition',
+		block : 'core_sets',
+		code : '98',
+		maxCard : 350,
+		label : 'Ninth Edition'
+	},
+	'tenth_edition' : {
+		name : 'tenth_edition',
+		block : 'core_sets',
+		code : '10e',
+		maxCard : 383,
+		label : 'Tenth Edition'
+	},
+	'magic_2010' : {
+		name : 'magic_2010',
+		block : 'core_sets',
+		code : 'm10',
+		maxCard : 249,
+		label : 'Magic 2010'
+	},
+	'magic_2011' : {
+		name : 'magic2011',
+		block : 'core_sets',
+		code : 'm11',
+		maxCard : 249,
+		label : 'Magic 2011'
+	},
+	'magic_2012' : {
+		name : 'magic_2012',
+		block : 'core_sets',
+		code : 'm12',
+		maxCard : 249,
+		label : 'Magic 2012'
+	},
+	'magic_2013' : {
+		name : 'magic_2013',
+		block : 'core_sets',
+		code : 'm13',
+		maxCard : 249,
+		label : 'Magic 2013'
+	}
+
 };
 
 
