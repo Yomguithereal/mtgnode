@@ -22,7 +22,7 @@ Therefore, do not overuse the application as it might harm
 the site if too many requests were to be executed.
 
 The application is not yet secured in any way so you should
-use it on a LAN.
+use it on a LAN only.
 
 Commands
 -------------
@@ -53,6 +53,7 @@ Dependencies
 	Express
 	Jade
 	Sqlite3
+	Cheerio
 
 
 Start

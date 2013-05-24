@@ -15,7 +15,8 @@
     "express": "3.2.1",
     "jade": "0.30.0",
     "sqlite3" : "2.1.17",
-    "socket.io" : "0.9.14"
+    "socket.io" : "0.9.14",
+    "cheerio" : "0.11.0"
   },
   "engines" : {
     "node" : ">=0.10.5"
