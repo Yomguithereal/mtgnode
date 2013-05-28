@@ -10,22 +10,22 @@ block content
 					option(value='none')
 					each set , i in set_list
 						option(value=set.name)= set.label
-				p Choosen Deck
-					br
-					input(id='deck_name', type='text', value='')
+				div.input-append
+					input#card_search(type='text')
+					button#card_search_button(type='button', class='btn', data-loading-text='Searching...') Search
 			div#card_viewer_block
 				mixin card_viewer_widget()
 			div#bottom_helper_block
-				p Select a Deck
 				select(id='deck_select')
 					option(value='empty')
 					each deck in player_decks
 						option(value=deck.id)= deck.name
-				button(type='button', id='delete_deck', class='btn btn-danger', data-toggle='modal', href='#delete_deck_modal') Delete Deck
-				br
-				button(type='button', id='save_deck', class='btn btn-info') Save Deck
-				br
-				button(type='button', id='create_deck', class='btn btn-success', data-toggle='modal', href='#new_deck_modal') Create a Deck
+				p Choosen Deck
+					input(id='deck_name', type='text', value='')
+				div.btn-group
+					button(type='button', id='delete_deck', class='btn btn-danger', data-toggle='modal', href='#delete_deck_modal') Delete Deck
+					button(type='button', id='save_deck', class='btn btn-info') Save Deck
+					button(type='button', id='create_deck', class='btn btn-success', data-toggle='modal', href='#new_deck_modal') Create a Deck
 		div#deck_builder_container
 			div#deck_builder_left_panel
 			div#deck_builder_right_panel

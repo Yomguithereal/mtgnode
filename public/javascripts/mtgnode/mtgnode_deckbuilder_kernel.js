@@ -28,6 +28,7 @@ function MTGNodeDeckBuilderKernel(){
 
 	var $set_selector = $('#set_select');
 	var $deck_selector = $('#deck_select');
+	var $search_cards = $('#card_search_button');
 
 	var $main_container = $('#deck_builder_container');
 	var $left_panel = $('#deck_builder_left_panel');
@@ -92,6 +93,20 @@ function MTGNodeDeckBuilderKernel(){
 			// Calling ajax
 			$left_panel.load('ajax/select_set', {'selected_set' : selected_set});
 		}
+	});
+
+	// Searching for Cards
+	//--------------------
+	$search_cards.click(function(){
+
+		// Getting the request
+		var query = $("#card_search").val();
+		if($.trim(query) == ""){ return false; }
+
+		$search_cards.button('loading');
+		$left_panel.load('ajax/specific_cards', {'query' : query}, function(){
+			$search_cards.button('reset');
+		});
 	});
 
 	// Changing Deck

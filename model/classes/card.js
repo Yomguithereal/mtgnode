@@ -11,8 +11,7 @@
 // Dependancies
 
 // Object
-function CardObject(set, set_code, number){
-	this.set = set;
+function CardObject(set_code, number){
 	this.set_code = set_code;
 	this.number = number;
 }

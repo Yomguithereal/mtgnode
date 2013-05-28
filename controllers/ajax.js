@@ -43,6 +43,22 @@ exports.selectSet = function(req, res){
 	res.render('parts/gamecards_deckbuilder', { 'cards' : cards});
 }
 
+// Searching for specific cards
+//-----------------------------
+exports.specificCards = function(req, res){
+
+	// Loading the model
+	var SetModel = require('../model/set.js');
+
+	var cards = SetModel.getSpecificCards(req.body.query, function(cards){
+		if(cards.length == 0){
+			res.send('no results');
+			return false;
+		}
+		res.render('parts/gamecards_deckbuilder', { 'cards' : cards});
+	});
+}
+
 // Saving a Deck
 //-------------------
 exports.saveDeck = function(req, res){
