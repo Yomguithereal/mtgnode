@@ -12,7 +12,7 @@ block content
 					mixin set_select(set_list)
 				div.input-append
 					input#card_search(type='text')
-					button#card_search_button(type='button', class='btn', data-loading-text='Searching...') Search
+					button#card_search_button.active_enter(type='button', class='btn', data-loading-text='Searching...') Search
 			div#card_viewer_block
 				mixin card_viewer_widget()
 			div#bottom_helper_block

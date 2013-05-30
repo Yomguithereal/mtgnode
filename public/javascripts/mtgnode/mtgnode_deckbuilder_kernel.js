@@ -227,4 +227,27 @@ function MTGNodeDeckBuilderKernel(){
 
 	});
 
+
+	// Enter Key Mapping
+	//----------------------
+	$(document).keypress(function(event){
+
+		if(!$('textarea').is(":focus")){
+
+			var keycode = (event.keyCode ? event.keyCode : event.which);
+			if(keycode == '13'){
+
+				if($('.active_enter').length != 0){
+					if($('.active_enter').is(":visible")){
+						$('.active_enter').trigger("click");
+						return false;
+					}
+				}
+				return false;
+			}
+		}
+	});
+
+
+
 }
