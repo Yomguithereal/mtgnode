@@ -110,7 +110,7 @@ function MTGNodeGameKernel(){
 			$start_game_modal.modal('hide');
 
 			// Populating the deck
-			$('.player-side.'+user.game_side).append(data);
+			$('.deck-emplacement.'+user.game_side).append(data);
 			// Shuffling deck
 			$(my_deck_card).shuffle();
 
@@ -241,6 +241,7 @@ function MTGNodeGameKernel(){
 			'containment' : '.game-area',
 			'stack' : '.card-min',
 			snap : my_cemetery,
+			grid : [10, 10],
 			drag : function(event, ui){
 
 				// Getting coordinates

@@ -18,11 +18,15 @@ block content
 					button(type='button', class='btn player1 gain-life update-life') +
 		div#game_block.game-area
 			div#top_game_block.player2.player-side
-				div#top_deck.deck-emplacement.player2
+				div#top_handlogic.deck-and-hand.player2
+					div#top_deck.deck-emplacement.player2
+					div#top_hand.hand-emplacement.player2
 				div#top_cemetery.cemetery-emplacement.player2
 			div#bottom_game_block.player1.player-side
-				div#bottom_deck.deck-emplacement.player1
 				div#bottom_cemetery.cemetery-emplacement.player1
+				div#bottom_handlogic.deck-and-hand.player1
+					div#bottom_deck.deck-emplacement.player1
+					div#bottom_hand.hand-emplacement.player1
 
 
 	// Modals
@@ -42,4 +46,9 @@ block contextual_js
 	script(type="text/javascript")
 		$(document).ready(function(){
 			var kernel = new MTGNodeGameKernel();
+
+			// Fix on unload
+			//- $(window).bind('beforeunload', function(){
+			//- 	return "Are you sure you want to quit the game?";
+			//- });
 		});

@@ -118,21 +118,61 @@ BODY{
 	background-color: #cccccc;
 }
 
-.deck-emplacement,
-.cemetery-emplacement{
-	width:79px;
+.deck-and-hand{
+	position:absolute;
+	width:974px;
 	height:108px;
-	border-right:1px solid black;
-	border-bottom:1px solid black;
-	position: relative;
+
+	&.player2{
+		top:0px;
+		border-bottom:1px solid black;
+	}
+
+	&.player1{
+		bottom:0px;
+		border-top: 1px solid black;
+	}
+}
+
+.hand-emplacement{
+	height: 108px;
+	width: 894px;
+	position: absolute;
+	left:80px;
 }
 
 .deck-emplacement{
+	width:79px;
+	height:108px;
+	position: absolute;
 
+	&.player2{
+		border-right:1px solid black;
+	}
+
+	&.player1{
+		bottom:0px;
+		border-right:1px solid black;
+		border-top:1px solid black;
+	}
 }
 
 .cemetery-emplacement{
+	width:79px;
+	height:108px;
+	position: absolute;
 
+	&.player2{
+		border-bottom:1px solid black;
+		border-right: 1px solid black;
+		top:109px;
+	}
+
+	&.player1{
+		bottom:109px;
+		border-top:1px solid black;
+		border-right:1px solid black;
+	}
 }
 
 /*

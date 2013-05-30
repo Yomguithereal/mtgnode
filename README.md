@@ -54,6 +54,7 @@ Dependencies
 	Jade
 	Sqlite3
 	Cheerio
+	Request
 
 
 Start
