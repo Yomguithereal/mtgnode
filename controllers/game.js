@@ -27,6 +27,22 @@ exports.index = function(req, res){
 		res.render('game', {decks : decks});
 
 	});
+};
 
+// Debug page
+exports.debug = function(req, res){
 
+	// Checking the connection
+	if(!req.session.user_id){
+		console.log("Unauthorized Connection Attempt")
+		res.redirect('/');
+	}
+
+	// Getting every decks -- Do it ajaxwise later
+	DeckModel.getAllDecks(req.session.user_id, function(decks){
+
+		// Rendering the view
+		res.render('game', {decks : decks});
+
+	});
 };

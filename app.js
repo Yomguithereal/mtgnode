@@ -66,6 +66,7 @@ app.get('/deck-builder', home.deckBuilder);
 
 // Game routes
 app.get('/game', game.index);
+app.get('/game-debug', game.debug);
 
 // Ajax
 app.post('/ajax/login_attempt', ajax.loginAttempt);

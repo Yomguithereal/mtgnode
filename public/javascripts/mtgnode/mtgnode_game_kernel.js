@@ -27,6 +27,7 @@ function MTGNodeGameKernel(){
 	// Connecting to game room
 
 	var room = location.href.split('?')[1];
+	console.log(room);
 
 	// Selectors
 	var $start_game_modal = $("#start_game_modal");
@@ -135,6 +136,7 @@ function MTGNodeGameKernel(){
 	var $card_viewer = $('#card_viewer_widget');
 	var $game_area = $('.game-area');
 	var $helper_block = $('#helper_block')
+	var $my_hand_area = $('.hand-emplacement.mine');
 
 	// Variables
 		// Values
@@ -249,19 +251,19 @@ function MTGNodeGameKernel(){
 			stop : function(event, ui){
 
 				// If card comes from deck
-				var $card = ui.helper;
-				if($card.hasClass('in-deck')){
+				// var $card = ui.helper;
+				// if($card.hasClass('in-deck')){
 
-					// Adding the class
-					deck_to_hand($card);
+				// 	// Adding the class
+				// 	deck_to_hand($card);
 
-					// Flipping it for me
-					flip_card($card);
-					$card.trigger('mouseenter');
+				// 	// Flipping it for me
+				// 	flip_card($card);
+				// 	$card.trigger('mouseenter');
 
-					// Sending information to server
-					socket.emit('drawingCard', new message($card.attr('card_id')));
-				}
+				// 	// Sending information to server
+				// 	socket.emit('drawingCard', new message($card.attr('card_id')));
+				// }
 
 			}
 		});
@@ -283,6 +285,14 @@ function MTGNodeGameKernel(){
 
 		// Shifting classes
 		deck_to_hand($(opponent_card(card_id)));
+	});
+
+	// Drawing a Card
+	//----------------
+	$game_area.on('click', my_hand_card, function(e){
+		var $card = $(e.target);
+		deck_to_hand($card);
+		$my_hand_area.append($card);
 	});
 
 
