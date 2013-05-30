@@ -21,6 +21,9 @@ exports.loginAttempt = function(req, res){
 		if(row){
 			req.session.username = row.username;
 			req.session.user_id = row.id;
+
+			// Registering in console
+			console.log("User '"+row.username+"' (id : "+row.id+") has connected.");
 			res.send('success');
 			return false;
 		}

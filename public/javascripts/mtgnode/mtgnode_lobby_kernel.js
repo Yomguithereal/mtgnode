@@ -20,6 +20,12 @@ function MTGNodeLobbyKernel(){
 	| ------------------
 	*/
 
+	// Helpers
+	//-------------
+	function uniqid(){
+		return (new Date().getTime()).toString(16);
+	}
+
 	// Variables
 	//-------------
 
@@ -31,19 +37,15 @@ function MTGNodeLobbyKernel(){
 	var user_id = $('#USER_ID').val();
 	var username = $('#USERNAME').val();
 
-	// Connection
-	//---------------
-	socket.emit('registerPlayer', {user_id : user_id, username : username});
-
 
 	// Retrieve Games
 	//---------------
-	socket.on('retrieveGames', function(games){
+	socket.on('retrieveGames', function(data){
 
 		// Iterates through the list
-		for(var key in games){
-			var game = games[key];
-			$game_list.append('<li><a href="/game?'+game.name+'||'+game.host+'">'+game.name+' (Host : '+game.host+')</a></li>');
+		console.log(data.games);
+		for(var i = 0; i < data.games.length; i++){
+			$game_list.append('<li><a href="/game?'+data.games[i]+'">'+data.games[i]+'</a></li>');
 		}
 	});
 
@@ -52,7 +54,8 @@ function MTGNodeLobbyKernel(){
 
 	// Client
 	$host_game.click(function(){
-		var name = $('#host_game_name').val();
+		var name = $('#host_game_name').val()+"#"+uniqid();
+		name = encodeURIComponent(name);
 
 		// Enforcing game name
 		if($.trim(name) == ''){
@@ -60,15 +63,17 @@ function MTGNodeLobbyKernel(){
 		}
 
 		// To socket
-		socket.emit('newGame',{name : name, host : user_id});
-		location.href = '/game?'+name+'||'+user_id
+		socket.emit('newGame', {name : name});
+
+		// Joining the room
+		location.href = '/game?'+name;
 	});
 
 	// Server
-	socket.on('newGame', function(game){
+	socket.on('newGame', function(name){
 
 		// Adding an entry
-		$game_list.append('<li><a href="/game?'+game.name+'||'+game.host+'">'+game.name+' (Host : '+game.host+')</a></li>');
+		$game_list.append('<li><a href="/game?'+name+'">'+name+'</a></li>');
 	});
 
 

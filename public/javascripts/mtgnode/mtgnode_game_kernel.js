@@ -24,12 +24,9 @@ function MTGNodeGameKernel(){
 		opponent_side : false
 	};
 
-	// Game info
-	var game_params = location.href.split('?')[1].split('||');
-	var game = {
-		name : game_params[0],
-		host : game_params[1]
-	};
+	// Connecting to game room
+
+	var room = location.href.split('?')[1];
 
 	// Selectors
 	var $start_game_modal = $("#start_game_modal");
@@ -42,12 +39,11 @@ function MTGNodeGameKernel(){
 	| --------
 	*/
 
-	// Game message data formatting
-	function gmd(data){
+	// Message data formatting
+	function message(data){
 
-		// Always send user and game information
-		this.user = user;
-		this.game = game;
+		// Room information
+		this.room = room;
 
 		// Body of the message
 		this.body = data;
@@ -66,7 +62,7 @@ function MTGNodeGameKernel(){
 	*/
 
 	// Send player infos to server
-	socket.emit('registerPlayer', {user : user, game : game});
+	socket.emit('registerPlayer', {room : room});
 
 	// Acts when server responds
 	socket.on('kickPlayer', function(){
@@ -103,7 +99,7 @@ function MTGNodeGameKernel(){
 		var chosen_deck_id = $deck_select.val();
 
 		// Sending your choice to server
-		socket.emit('chosenDeck', new gmd(chosen_deck_id));
+		socket.emit('chosenDeck', new message(chosen_deck_id));
 
 		// Getting them ajaxwise
 		$.post('ajax/deck_cards', {deck_id : chosen_deck_id, game_side : 'mine'}, function(data){
@@ -124,7 +120,7 @@ function MTGNodeGameKernel(){
 
 		// Getting them ajaxwise
 		$.post('ajax/deck_cards', {deck_id : opponent_deck_id, game_side : 'opponent'}, function(data){
-			$('.player-side.'+user.opponent_side).append(data)
+			$('.deck-emplacement.'+user.opponent_side).append(data)
 		});
 	});
 
@@ -186,11 +182,11 @@ function MTGNodeGameKernel(){
 
 		if($(this).hasClass('gain-life')){
 			update_life($(my_life_counter), 'gain');
-			socket.emit('updatingLife', new gmd('gain'));
+			socket.emit('updatingLife', new message('gain'));
 		}
 		else{
 			update_life($(my_life_counter), 'lose');
-			socket.emit('updatingLife', new gmd('lose'));
+			socket.emit('updatingLife', new message('lose'));
 		}
 	});
 
@@ -248,7 +244,7 @@ function MTGNodeGameKernel(){
 				var coordinates = {'card' : ui.helper.attr('card_id'), 'zindex' : ui.helper.css('z-index'),'top' : ui.position.top, 'left' : ui.position.left}
 
 				// Sending the message
-				socket.emit('draggingCard', new gmd(coordinates));
+				socket.emit('draggingCard', new message(coordinates));
 			},
 			stop : function(event, ui){
 
@@ -264,7 +260,7 @@ function MTGNodeGameKernel(){
 					$card.trigger('mouseenter');
 
 					// Sending information to server
-					socket.emit('drawingCard', new gmd($card.attr('card_id')));
+					socket.emit('drawingCard', new message($card.attr('card_id')));
 				}
 
 			}
@@ -314,14 +310,14 @@ function MTGNodeGameKernel(){
 			hand_to_game($card);
 
 			// Sending information to server
-			socket.emit('revealingCard', new gmd($card.attr('card_id')));
+			socket.emit('revealingCard', new message($card.attr('card_id')));
 		}
 		else{
 			// Flipping the card
 			game_to_hand($card);
 
 			// Sending information to server
-			socket.emit('concealingCard', new gmd($card.attr('card_id')));
+			socket.emit('concealingCard', new message($card.attr('card_id')));
 		}
 
 
@@ -365,7 +361,7 @@ function MTGNodeGameKernel(){
 		tap_card($card);
 
 		// Sending information to server
-		socket.emit('tappingCard', new gmd($card.attr('card_id')));
+		socket.emit('tappingCard', new message($card.attr('card_id')));
 
 		return false;
 	});

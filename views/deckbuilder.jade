@@ -1,5 +1,6 @@
 extends layout
 include mixins/cards
+include mixins/selects
 
 block content
 	div#mainframe
@@ -8,8 +9,7 @@ block content
 				p Choose a Set
 				select(id="set_select")
 					option(value='none')
-					each set , i in set_list
-						option(value=set.name)= set.label
+					mixin set_select(set_list)
 				div.input-append
 					input#card_search(type='text')
 					button#card_search_button(type='button', class='btn', data-loading-text='Searching...') Search

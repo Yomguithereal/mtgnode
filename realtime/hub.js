@@ -8,8 +8,6 @@
 |	Version : 1.0
 */
 
-// Dependancies
-var Game = require('../model/classes/game.js');
 
 function IoHub(port_to_listen){
 
@@ -17,22 +15,7 @@ function IoHub(port_to_listen){
 	var io = require('socket.io').listen(port_to_listen);
 
 	// Variables
-	var games = {};
-
-	// Helpers
-	function opponent_socket(data){
-
-		// Getting current game
-		var cg = games[data.game.name];
-
-		// Determining opponent socket
-		if(data.user.game_side == 'player1'){
-			return cg.player2.socket;
-		}
-		else{
-			return cg.player1.socket;
-		}
-	}
+	var rooms = [];
 
 
 	// Lobby Events
@@ -40,19 +23,19 @@ function IoHub(port_to_listen){
 	io.of('/lobby').on('connection', function(socket){
 
 		// Connection
-		var games_clients = {};
-		for(var key in games){
-			games_clients[key] = games[key].gameForClient();
+		var games = io.sockets.manager.rooms;
+		var games_for_client = [];
+		for(var game in games){
+			if((game != "") && (game != "/lobby") &&(game != "/game")){
+				games_for_client.push(game.replace('/game/', ''));
+			}
 		}
-		socket.emit('retrieveGames', games_clients);
+		socket.emit('retrieveGames', {games : games_for_client});
 
 		// New Game
 		socket.on('newGame', function(data){
-			var new_game = new Game(data.name, data.host)
-			games[data.name] = new_game;
-			socket.broadcast.emit('newGame', new_game);
+			io.of('/lobby').emit('newGame', data.name);
 		});
-
 
 	});
 
@@ -64,42 +47,38 @@ function IoHub(port_to_listen){
 		// Player registration
 		socket.on('registerPlayer', function(data){
 
-			// Check if game exists
-			if(games[data.game.name]){
+			// We register the user to the correct room
+			socket.join(data.room);
 
-				// Check if game is full
-				if(games[data.game.name].isFull){
-					console.log('Game Full');
-					socket.emit('kickPlayer');
-					return false;
-				}
+			// We check the number of player in the room
+			var players = io.of('/game').clients(data.room);
 
-				// Send back player info
-				if(data.user.id == games[data.game.name].host){
-					var game_side = 'player1';
-					games[data.game.name].player1.socket = socket;
-				}
-				else{
-					var game_side = 'player2';
-					games[data.game.name].isFull = true;
-					games[data.game.name].player2.socket = socket;
+			// If game is full, we kick the player
+			if(players.length == 3){
+				socket.leave(data.room);
+				socket.emit('kickPlayer');
+				return false;
+			}
 
-					// On annonce que les deux joueurs sont présents
-					games[data.game.name].player1.socket.emit('chooseDeck');
-					games[data.game.name].player2.socket.emit('chooseDeck');
-				}
-
+			// We check whether the player is 1 or 2
+			if(players.length == 1){
+				var game_side = 'player1';
 				socket.emit('gameSide', game_side);
 			}
-			else{
-				console.log('Inexistant Game');
-				socket.emit('kickPlayer');
+			else if(players.length == 2){
+
+				// Game is now ready to start, we notify the client
+				var game_side = 'player2';
+				socket.emit('gameSide', game_side);
+				io.of('/game').in(data.room).emit('chooseDeck');
 			}
+
+
 		});
 
 		// Sending chosen deck to opponent
 		socket.on('chosenDeck', function(data){
-			opponent_socket(data).emit('opponentDeck', data.body);
+			socket.broadcast.to(data.room).emit('opponentDeck', data.body);
 		});
 
 		///////////////////////
@@ -108,7 +87,7 @@ function IoHub(port_to_listen){
 
 		// Updating life
 		socket.on('updatingLife', function(data){
-			opponent_socket(data).emit('updatingLife', data.body);
+			socket.broadcast.to(data.room).emit('updatingLife', data.body);
 		});
 
 		//////////////////
@@ -117,27 +96,27 @@ function IoHub(port_to_listen){
 
 		// Dragging Cards
 		socket.on('draggingCard', function(data){
-			opponent_socket(data).emit('draggingCard', data.body);
+			socket.broadcast.to(data.room).emit('draggingCard', data.body);
 		});
 
 		// Drawing Cards
 		socket.on('drawingCard', function(data){
-			opponent_socket(data).emit('drawingCard', data.body);
+			socket.broadcast.to(data.room).emit('drawingCard', data.body);
 		});
 
 		// Revealing Cards
 		socket.on('revealingCard', function(data){
-			opponent_socket(data).emit('revealingCard', data.body);
+			socket.broadcast.to(data.room).emit('revealingCard', data.body);
 		});
 
 		// Concealing Cards
 		socket.on('concealingCard', function(data){
-			opponent_socket(data).emit('concealingCard', data.body);
+			socket.broadcast.to(data.room).emit('concealingCard', data.body);
 		});
 
 		// Tapping Cards
 		socket.on('tappingCard', function(data){
-			opponent_socket(data).emit('tappingCard', data.body);
+			socket.broadcast.to(data.room).emit('tappingCard', data.body);
 		});
 
 
