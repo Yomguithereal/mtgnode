@@ -28,6 +28,9 @@ function MTGNodeGameKernel(){
 
 	var room = location.href.split('?')[1];
 	console.log(room);
+	if(typeof room == 'undefined'){
+		socket.emit('debugGame');
+	}
 
 	// Selectors
 	var $start_game_modal = $("#start_game_modal");
@@ -148,7 +151,7 @@ function MTGNodeGameKernel(){
 	var my_cemetery = '.cemetery-emplacement.mine';
 		// Cards
 	var ingame_card = '.card-min';
-	var my_card = '.card-min.mine';
+	var my_card = '.card-min.in-hand.mine, .card-min.in-game.mine';
 	var my_deck_card = '.card-min.in-deck.mine';
 	var my_hand_card = '.card-min.in-hand.mine';
 	var my_ingame_card = '.card-min.in-game.mine';

@@ -76,6 +76,10 @@ function IoHub(port_to_listen){
 
 		});
 
+		socket.on('debugGame', function(){
+			socket.emit('chooseDeck');
+		});
+
 		// Sending chosen deck to opponent
 		socket.on('chosenDeck', function(data){
 			socket.broadcast.to(data.room).emit('opponentDeck', data.body);
