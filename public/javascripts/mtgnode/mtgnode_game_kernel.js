@@ -8,6 +8,17 @@
 | Version : 1.0
 */
 
+// Determining room
+var socket = io.connect('/game');
+var room = location.href.split('?')[1];
+
+// User info
+var user = {
+	id : $("#USER_ID").val(),
+	name : $("#USERNAME").val(),
+	game_side : false,
+	opponent_side : false
+};
 
 function MTGNodeGameKernel(){
 
@@ -18,22 +29,6 @@ function MTGNodeGameKernel(){
 	| ---------------
 	*/
 
-	var self = this;
-	var socket = io.connect('/game');
-
-	var card_back = '/images/card-back.jpeg';
-
-	// User info
-	var user = {
-		id : $("#USER_ID").val(),
-		name : $("#USERNAME").val(),
-		game_side : false,
-		opponent_side : false
-	};
-
-	// Determining room
-	var room = location.href.split('?')[1];
-
 	// Debug mode
 	if(typeof room == 'undefined'){
 		socket.emit('debugGame');
@@ -43,28 +38,6 @@ function MTGNodeGameKernel(){
 	var $start_game_modal = $("#start_game_modal");
 	var $start_game = $("#start_game");
 	var $deck_select = $("#deck_select");
-
-	/*
-	| --------
-	|  Helpers
-	| --------
-	*/
-
-	// Message data formatting
-	function message(data){
-
-		// Room information
-		this.room = room;
-
-		// Body of the message
-		this.body = data;
-	}
-
-	// Opponent card id
-	function opponent_card(card_id){
-		return '#card'+card_id+'_opponent';
-	}
-
 
 	/*
 	| ------------------
@@ -110,7 +83,7 @@ function MTGNodeGameKernel(){
 		var chosen_deck_id = $deck_select.val();
 
 		// Sending your choice to server
-		socket.emit('chosenDeck', new message(chosen_deck_id));
+		socket.emit('chosenDeck', {body : chosen_deck_id, room : room});
 
 		// Getting them ajaxwise
 		$.post('ajax/deck_cards', {deck_id : chosen_deck_id, game_side : 'mine'}, function(data){
@@ -118,11 +91,9 @@ function MTGNodeGameKernel(){
 
 			// Populating the deck
 			$('.deck-emplacement.'+user.game_side).append(data);
-			// Shuffling deck
-			$(my_deck_card).shuffle();
 
-			// Calling on the draggable
-			//draggable_register();
+			// Invoking the beginning of the game
+			MTGNodeGameOperator();
 		});
 	});
 
@@ -135,42 +106,88 @@ function MTGNodeGameKernel(){
 		});
 	});
 
+}
 
 
+/*
+| -------------------------------------------------------------------
+|  MTGNode Game Operator
+| -------------------------------------------------------------------
+|
+|
+| Author : PLIQUE Guillaume
+| Version : 1.0
+*/
 
+function MTGNodeGameOperator(){
 
 
 	/*
-	| ---------------
-	|  Game Variables
-	| ---------------
+	| ------------------
+	|  Variables
+	| ------------------
 	*/
 
-	// Selectors //
+	// Object operation //
+	var self = this;
+	this.last_message = 'none';
+	this.generic_message = 'gameUpdate';
 
-		// Areas //
+	// Areas //
 	var $card_viewer = $('#card_viewer_widget');
 	var $game_area = $('.game-area');
 	var $helper_block = $('#helper_block')
 
-	// Variables //
+	// Values //
+	var card_back_src = $("#CARDBACK").val();
 
-		// Values //
-	var flipped_card_image = '/images/card-back.jpeg';
-
-		// Interface //
+	// Interface //
 	var my_life_counter = '.life-counter.mine';
 	var my_update_life = '.update-life.mine';
 	var opponent_life_counter = '.life-counter.opponent';
 	var my_cemetery = '.cemetery-emplacement.mine';
 
-		// Cards //
+	// Cards //
 	var ingame_card = '.card-min';
 	var my_card = '.card-min.in-hand.mine, .card-min.in-game.mine';
 	var my_deck_card = '.card-min.in-deck.mine';
 	var my_hand_card = '.card-min.in-hand.mine';
 	var my_ingame_card = '.card-min.in-game.mine';
 	var my_hand_area = '.hand-emplacement.mine';
+
+
+	/*
+	| ------------------
+	|  Helpers
+	| ------------------
+	*/
+
+	// Message to server abstraction
+	function message(message, data){
+
+		// Room information
+		this.room = room;
+
+		// Head of the message
+		this.head = message;
+
+		// Body of the message
+		this.body = data;
+	}
+
+	// Function generating opponent's cards ids
+	function opponent_card(card_id){
+		return '#card'+card_id+'_opponent';
+	}
+
+	/*
+	| ------------------
+	|  Starters
+	| ------------------
+	*/
+
+	// Shuffling Deck
+	$(my_deck_card).shuffle();
 
 	/*
 	| ------------------
@@ -222,7 +239,5 @@ function MTGNodeGameKernel(){
 
 	// Drawing a Card
 	//----------------
-
-
 
 }

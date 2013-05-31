@@ -89,39 +89,11 @@ function IoHub(port_to_listen){
 		// INTERFACE ACTIONS //
 		///////////////////////
 
-		// Updating life
-		socket.on('updatingLife', function(data){
-			socket.broadcast.to(data.room).emit('updatingLife', data.body);
+		// Generic Message Receiver
+		socket.on('gameUpdate', function(data){
+			socket.broadcast.to(data.room).emit(data.head, data.body);
 		});
 
-		//////////////////
-		// CARD ACTIONS //
-		//////////////////
-
-		// Dragging Cards
-		socket.on('draggingCard', function(data){
-			socket.broadcast.to(data.room).emit('draggingCard', data.body);
-		});
-
-		// Drawing Cards
-		socket.on('drawingCard', function(data){
-			socket.broadcast.to(data.room).emit('drawingCard', data.body);
-		});
-
-		// Revealing Cards
-		socket.on('revealingCard', function(data){
-			socket.broadcast.to(data.room).emit('revealingCard', data.body);
-		});
-
-		// Concealing Cards
-		socket.on('concealingCard', function(data){
-			socket.broadcast.to(data.room).emit('concealingCard', data.body);
-		});
-
-		// Tapping Cards
-		socket.on('tappingCard', function(data){
-			socket.broadcast.to(data.room).emit('tappingCard', data.body);
-		});
 
 
 	});
