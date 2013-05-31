@@ -197,7 +197,11 @@ function MTGNodeGameOperator(){
 	//-------------------
 	$game_area.on('mouseover', ingame_card, function(e){
 		var src_to_see = $(e.target).attr('src');
-		$card_viewer.attr('src', src_to_see);
+
+		// We block the action if the src is already there to prevent useless HTTP requests
+		if($card_viewer.attr('src') != src_to_see){
+			$card_viewer.attr('src', src_to_see);
+		}
 	});
 
 	/*
@@ -205,6 +209,17 @@ function MTGNodeGameOperator(){
 	|  From Client Interactions
 	| -------------------------
 	*/
+
+	// Drawing a Card
+	//----------------
+
+	// Logic
+
+	// Action
+	$game_area.on('click', my_deck_card, function(e){
+		var $card = $(e.target);
+		alert($card.attr('id'));
+	});
 
 	/*
 	| -------------------------
