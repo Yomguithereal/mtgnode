@@ -11,6 +11,13 @@
 
 function MTGNodeGameKernel(){
 
+
+	/*
+	| ---------------
+	|  Initialization
+	| ---------------
+	*/
+
 	var self = this;
 	var socket = io.connect('/game');
 
@@ -24,10 +31,10 @@ function MTGNodeGameKernel(){
 		opponent_side : false
 	};
 
-	// Connecting to game room
-
+	// Determining room
 	var room = location.href.split('?')[1];
-	console.log(room);
+
+	// Debug mode
 	if(typeof room == 'undefined'){
 		socket.emit('debugGame');
 	}
@@ -60,9 +67,9 @@ function MTGNodeGameKernel(){
 
 
 	/*
-	| ---------------
-	|  Player Actions
-	| ---------------
+	| ------------------
+	|  Starting the game
+	| ------------------
 	*/
 
 	// Send player infos to server
@@ -115,7 +122,7 @@ function MTGNodeGameKernel(){
 			$(my_deck_card).shuffle();
 
 			// Calling on the draggable
-			draggable_register();
+			//draggable_register();
 		});
 	});
 
@@ -128,80 +135,48 @@ function MTGNodeGameKernel(){
 		});
 	});
 
+
+
+
+
+
 	/*
-	| -------------
-	|  Variables
-	| -------------
+	| ---------------
+	|  Game Variables
+	| ---------------
 	*/
 
-	// Selectors
-		// Areas
+	// Selectors //
+
+		// Areas //
 	var $card_viewer = $('#card_viewer_widget');
 	var $game_area = $('.game-area');
 	var $helper_block = $('#helper_block')
-	var $my_hand_area = $('.hand-emplacement.mine');
 
-	// Variables
-		// Values
+	// Variables //
+
+		// Values //
 	var flipped_card_image = '/images/card-back.jpeg';
-		// Interface
+
+		// Interface //
 	var my_life_counter = '.life-counter.mine';
 	var my_update_life = '.update-life.mine';
 	var opponent_life_counter = '.life-counter.opponent';
 	var my_cemetery = '.cemetery-emplacement.mine';
-		// Cards
+
+		// Cards //
 	var ingame_card = '.card-min';
 	var my_card = '.card-min.in-hand.mine, .card-min.in-game.mine';
 	var my_deck_card = '.card-min.in-deck.mine';
 	var my_hand_card = '.card-min.in-hand.mine';
 	var my_ingame_card = '.card-min.in-game.mine';
+	var my_hand_area = '.hand-emplacement.mine';
 
 	/*
 	| ------------------
 	|  Interface Actions
 	| ------------------
 	*/
-
-	// Updating life
-	//----------------
-
-	// Logic
-	function update_life($life_counter, action){
-
-		// Getting current life
-		var current_hp = parseInt($life_counter.text());
-
-		// Acting according parameter
-		if(action == 'gain'){
-			current_hp += 1;
-		}
-		else{
-			current_hp -= 1;
-		}
-
-		$life_counter.text(current_hp);
-	}
-
-	// Sending
-	$helper_block.on('click', my_update_life,function(){
-
-		if($(this).hasClass('gain-life')){
-			update_life($(my_life_counter), 'gain');
-			socket.emit('updatingLife', new message('gain'));
-		}
-		else{
-			update_life($(my_life_counter), 'lose');
-			socket.emit('updatingLife', new message('lose'));
-		}
-	});
-
-	// Getting
-	socket.on('updatingLife', function(action){
-
-		// Updating opponent
-		update_life($(opponent_life_counter), action);
-	});
-
 
 	/*
 	| -------------
@@ -221,22 +196,8 @@ function MTGNodeGameKernel(){
 	// Dragging a Card
 	//----------------
 
-	// Logic
-	function flip_card($card){
-		if($card.attr('src') == card_back){
-			$card.attr('src', $card.attr('true_src'));
-		}
-		else{
-			$card.attr('src', card_back);
-		}
-	}
-
-	function deck_to_hand($card){
-		$card.removeClass('in-deck');
-		$card.addClass('in-hand');
-	}
-
 	// Sending
+	/*
 	function draggable_register(){
 		$(my_card).draggable({
 			'containment' : '.game-area',
@@ -253,139 +214,14 @@ function MTGNodeGameKernel(){
 			},
 			stop : function(event, ui){
 
-				// If card comes from deck
-				// var $card = ui.helper;
-				// if($card.hasClass('in-deck')){
-
-				// 	// Adding the class
-				// 	deck_to_hand($card);
-
-				// 	// Flipping it for me
-				// 	flip_card($card);
-				// 	$card.trigger('mouseenter');
-
-				// 	// Sending information to server
-				// 	socket.emit('drawingCard', new message($card.attr('card_id')));
-				// }
 
 			}
 		});
 	}
-
-	// Getting dragging
-	socket.on('draggingCard', function(coordinates){
-
-		// Moving the card
-		$(opponent_card(coordinates.card)).css({
-			'left' : coordinates.left,
-			'top' : coordinates.top,
-			'z-index' : coordinates.zindex
-		});
-	});
-
-	// Getting drawing
-	socket.on('drawingCard', function(card_id){
-
-		// Shifting classes
-		deck_to_hand($(opponent_card(card_id)));
-	});
+	*/
 
 	// Drawing a Card
 	//----------------
-	$game_area.on('click', my_hand_card, function(e){
-		var $card = $(e.target);
-		deck_to_hand($card);
-		$my_hand_area.append($card);
-	});
-
-
-	// Revealing / Concealing a card
-	//------------------------------
-
-	// Logic
-	function hand_to_game($card){
-		$card.removeClass('in-hand');
-		$card.addClass('in-game');
-	}
-
-	function game_to_hand($card){
-		$card.removeClass('in-game');
-		$card.addClass('in-hand');
-	}
-
-
-	// Sending
-	$game_area.on('dblclick', my_hand_card+', '+my_ingame_card, function(e){
-		var $card = $(e.target);
-
-		if($card.hasClass('in-hand')){
-			// Flipping the card
-			hand_to_game($card);
-
-			// Sending information to server
-			socket.emit('revealingCard', new message($card.attr('card_id')));
-		}
-		else{
-			// Flipping the card
-			game_to_hand($card);
-
-			// Sending information to server
-			socket.emit('concealingCard', new message($card.attr('card_id')));
-		}
-
-
-
-	});
-
-	// Getting
-	socket.on('revealingCard', function(card_id){
-
-		// Flipping the card and revealing it
-		var $card = $(opponent_card(card_id));
-		hand_to_game($card);
-		flip_card($card);
-	});
-
-	socket.on('concealingCard', function(card_id){
-
-		// Flipping the card and revealing it
-		var $card = $(opponent_card(card_id));
-		game_to_hand($card);
-		flip_card($card);
-	});
-
-
-
-	// Tapping a card
-	//----------------
-
-	// Logic
-	function tap_card($card){
-		$card.toggleClass('tapped');
-	}
-
-	// Sending
-	$game_area.on('contextmenu', my_ingame_card, function(e){
-
-		e.preventDefault();
-		var $card = $(e.target);
-
-		// Flipping the card
-		tap_card($card);
-
-		// Sending information to server
-		socket.emit('tappingCard', new message($card.attr('card_id')));
-
-		return false;
-	});
-
-	// Getting
-	socket.on('tappingCard', function(card_id){
-
-		// Flipping the card and revealing it
-		var $card = $(opponent_card(card_id));
-		tap_card($card);
-	});
 
 
 

@@ -13,6 +13,7 @@
 var express = require('express')
   , http = require('http')
   , path = require('path')
+  , config = require('./mtgconfig.js')
   , hub = require('./realtime/hub.js');
 
 // Initializing the application
@@ -38,6 +39,7 @@ app.use(function(req, res, next) {
 
   // Configuring the driver base_url
   res.locals.CARD_BASE_URL = 'http://magiccards.info/scans/en/';
+  res.locals.CARD_BACK_SRC = config.CardBackSrc;
 
   next();
 });
