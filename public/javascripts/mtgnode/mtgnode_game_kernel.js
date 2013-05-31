@@ -173,6 +173,9 @@ function MTGNodeGameOperator(){
 
 		// Body of the message
 		this.body = data;
+
+		// Savong the message for later use
+		self.last_message = this;
 	}
 
 	// Function generating opponent's cards ids
@@ -186,21 +189,9 @@ function MTGNodeGameOperator(){
 	| ------------------
 	*/
 
-	// Shuffling Deck
+	// Deck Shuffling
+	//-------------------
 	$(my_deck_card).shuffle();
-
-	/*
-	| ------------------
-	|  Interface Actions
-	| ------------------
-	*/
-
-	/*
-	| -------------
-	|  Card Actions
-	| -------------
-	*/
-
 
 	// Card Viewer Widget
 	//-------------------
@@ -208,6 +199,38 @@ function MTGNodeGameOperator(){
 		var src_to_see = $(e.target).attr('src');
 		$card_viewer.attr('src', src_to_see);
 	});
+
+	/*
+	| -------------------------
+	|  From Client Interactions
+	| -------------------------
+	*/
+
+	/*
+	| -------------------------
+	|  From Server Interactions
+	| -------------------------
+	*/
+	socket.on(this.generic_message, function(data){
+
+		// Switch on message kind
+		switch(data.head){
+			case 'Test' :
+				break;
+			default:
+				break;
+		}
+	});
+
+
+
+
+
+
+
+
+
+
 
 
 	// Dragging a Card
