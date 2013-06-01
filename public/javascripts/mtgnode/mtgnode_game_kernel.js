@@ -184,6 +184,7 @@ function MTGNodeGameOperator(){
 	var my_hand_card = '.card-min.in-hand.mine';
 	var my_ingame_card = '.card-min.in-game.mine';
 	var my_hand_area = '.hand-emplacement.mine';
+	var my_game_area = '.game-emplacement.mine';
 	var my_snap_to = '.hand-emplacement.mine, .deck-emplacement.mine, .cemetery-emplacement.mine';
 
 	// Opponent Cards //
@@ -191,6 +192,7 @@ function MTGNodeGameOperator(){
 	var opponent_deck_card = '.card-min.in-deck.mine';
 	var opponent_hand_card = '.card-min.in-hand.opponent';
 	var opponent_hand_area = '.hand-emplacement.opponent';
+	var opponent_ingame_card = '.card-min.in-game.opponent';
 
 
 	/*
@@ -532,6 +534,38 @@ function MTGNodeGameOperator(){
 		return false;
 	});
 
+	// Batch Untapping
+	//------------------
+
+	// Logic
+	function batch_untap(cards){
+		$(cards+'.tapped').removeClass('tapped');
+
+		// Sending information to server
+		new message('batchUntapping').send();
+	}
+
+	// Action
+	$.contextMenu({
+		selector: my_game_area,
+		zIndex : 100000,
+		callback: function(key, options) {
+
+			switch(key){
+
+				case 'untapAll' :
+					batch_untap(my_ingame_card);
+					break;
+
+				default :
+					break;
+			}
+		},
+		items: {
+			"untapAll": {name: "Untap all cards", icon: false},
+		}
+	});
+
 	/*
 	| -------------------------
 	|  From Server Interactions
@@ -583,6 +617,11 @@ function MTGNodeGameOperator(){
 			// Tapping a Card
 			case 'tappingCard' :
 				tap_card(opponent_card(data.body));
+				break;
+
+			// Batch Untapping
+			case 'batchUntapping' :
+				batch_untap(opponent_ingame_card);
 				break;
 
 			// Opponent Reorganize its hand
