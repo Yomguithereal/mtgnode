@@ -1,6 +1,6 @@
 Magic The Gathering for Node.js
 ===============================
-Alpha 0.1
+Alpha 0.2
 
 About
 -----
@@ -36,11 +36,10 @@ Possibility to create decks (/deck-builder).
 Choose a set and then : 1 click to add or remove cards.
 
 Game interface :
-* drag your cards to move them.
-* cards in your hand have a blue border.
-* double click to reveal or conceal them.
-* right click to tap them.
-* use the life counter to update your hp.
+* click on the deck to draw cards
+* drag the cards on the game to play
+* put them back in your hand the same way
+* right click the cards to tap them
 
 The controls are still pretty basic and you should try and
 avoid playing cards using tokens or dealing with the library
