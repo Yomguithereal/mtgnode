@@ -252,8 +252,6 @@ function MTGNodeGameOperator(){
 			this.count -= 1;
 		}
 	}
-
-	// Placeholders
 	var MY_DECK = new Deck($('.in-deck.mine').length);
 	var OP_DECK = new Deck($('.in-deck.opponent').length);
 
@@ -318,7 +316,7 @@ function MTGNodeGameOperator(){
 		var src_to_see = $(e.target).attr('src');
 
 		// We block the action if the src is already the same to prevent useless HTTP requests
-		if($card_viewer.attr('src') != src_to_see){
+		if(($card_viewer.attr('src') != src_to_see)){
 			$card_viewer.attr('src', src_to_see);
 		}
 	});
@@ -395,7 +393,10 @@ function MTGNodeGameOperator(){
 
 	// Action
 	$game_area.on('click', my_deck_card, function(e){
-		var $card = $(this);
+
+		// Getting first card of DOM
+		// WARNING :: Get the last DOM card otherwise because of z-index rule
+		var $card = $(my_deck_card).eq(0);
 
 		// Using Logic
 		deck_to_hand($card);
@@ -540,9 +541,6 @@ function MTGNodeGameOperator(){
 	// Logic
 	function batch_untap(cards){
 		$(cards+'.tapped').removeClass('tapped');
-
-		// Sending information to server
-		new message('batchUntapping').send();
 	}
 
 	// Action
@@ -555,6 +553,9 @@ function MTGNodeGameOperator(){
 
 				case 'untapAll' :
 					batch_untap(my_ingame_card);
+
+					// Sending information to server
+					new message('batchUntapping').send();
 					break;
 
 				default :
@@ -566,11 +567,46 @@ function MTGNodeGameOperator(){
 		}
 	});
 
+	// Drawing Full Hand
+	//------------------
+
+	// Logic
+	function draw_full_hand(cards, deck, hand){
+		for(var i = 0; i < 7; i++){
+			$(cards).eq(0).trigger('click');
+		}
+	}
+
+	// Action
+	$.contextMenu({
+		selector: my_deck_card,
+		zIndex : 100001,
+		callback: function(key, options) {
+
+			switch(key){
+
+				case 'drawFullHand' :
+					draw_full_hand(my_deck_card, MY_DECK, MY_HAND);
+
+					// Sending information to server
+					new message('drawingFullHand').send();
+					break;
+
+				default :
+					break;
+			}
+		},
+		items: {
+			"drawFullHand": {name: "Draw a full hand", icon: false},
+		}
+	});
+
 	/*
 	| -------------------------
 	|  From Server Interactions
 	| -------------------------
 	*/
+
 	socket.on(this.generic_message, function(data){
 
 		// Switch on message kind
@@ -622,6 +658,11 @@ function MTGNodeGameOperator(){
 			// Batch Untapping
 			case 'batchUntapping' :
 				batch_untap(opponent_ingame_card);
+				break;
+
+			// Draw Full Hand
+			case 'drawFullHand' :
+				draw_full_hand(opponent_deck_card, OP_DECK, OP_HAND);
 				break;
 
 			// Opponent Reorganize its hand
