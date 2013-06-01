@@ -170,10 +170,9 @@ function MTGNodeGameOperator(){
 	var card_back_src = $("#CARDBACK").val();
 
 	// Interface //
-	var my_life_counter = '.life-counter.mine';
-	var my_update_life = '.update-life.mine';
-	var opponent_life_counter = '.life-counter.opponent';
-	var my_cemetery = '.cemetery-emplacement.mine';
+	var $update_life = $(".update-life.mine");
+	var $my_life_counter = $(".life-counter.mine");
+	var $opponent_life_counter = $(".life-counter.opponent");
 
 	// Generic Cards //
 	var card_to_see = '.card-min';
@@ -189,7 +188,7 @@ function MTGNodeGameOperator(){
 
 	// Opponent Cards //
 	var opponent_deck = '.deck-emplacement.opponent';
-	var opponent_deck_card = '.card-min.in-deck.mine';
+	var opponent_deck_card = '.card-min.in-deck.opponent';
 	var opponent_hand_card = '.card-min.in-hand.opponent';
 	var opponent_hand_area = '.hand-emplacement.opponent';
 	var opponent_ingame_card = '.card-min.in-game.opponent';
@@ -601,6 +600,31 @@ function MTGNodeGameOperator(){
 		}
 	});
 
+	// Updating Life
+	//------------------
+
+	// Logic
+	function update_life($life_counter, type){
+		var hitpoints = parseInt($life_counter.text());
+
+		if(type){
+			$life_counter.text(hitpoints+1);
+		}
+		else{
+			$life_counter.text(hitpoints-1);
+		}
+	}
+
+	// Action
+	$update_life.click(function(){
+		var type = $(this).hasClass('gain-life') ? true : false;
+
+		update_life($my_life_counter, type);
+
+		// Sending information to server
+		new message('updatingLife', type).send();
+	});
+
 	/*
 	| -------------------------
 	|  From Server Interactions
@@ -668,6 +692,11 @@ function MTGNodeGameOperator(){
 			// Opponent Reorganize its hand
 			case 'reorganizingHand' :
 				OP_HAND.reorganize();
+				break;
+
+			// Updating Life Counter
+			case 'updatingLife' :
+				update_life($opponent_life_counter, data.body);
 				break;
 
 			default:
