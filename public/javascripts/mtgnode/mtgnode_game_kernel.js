@@ -29,13 +29,14 @@ function MTGNodeGameKernel(){
 	| ---------------
 	*/
 	var self = this;
-	this.game_operator = false;
+	this.ready = false;
 
 	// Debug mode
 	this.debug = false;
 	if(typeof room == 'undefined'){
 		socket.emit('debugGame');
 		this.debug = true;
+		this.ready = true;
 	}
 
 	// Selectors
@@ -100,8 +101,14 @@ function MTGNodeGameKernel(){
 			// Populating the deck
 			$('.deck-emplacement.'+user.game_side).append(data);
 
-			// Invoking the beginning of the game
-			self.game_operator = MTGNodeGameOperator();
+			// Ready?
+			if(self.ready){
+				MTGNodeGameOperator();
+			}
+			else{
+				self.ready = true;
+			}
+
 		});
 	});
 
@@ -112,8 +119,14 @@ function MTGNodeGameKernel(){
 		$.post('ajax/deck_cards', {deck_id : opponent_deck_id, game_side : 'opponent'}, function(data){
 			$('.deck-emplacement.'+user.opponent_side).append(data);
 
-			// Updating Operator Model
-			self.game_operator.set_opponent_deck($('.in-deck.opponent').length);
+			// Ready?
+			if(self.ready){
+				MTGNodeGameOperator();
+			}
+			else{
+				self.ready = true;
+			}
+
 		});
 	});
 
@@ -231,11 +244,11 @@ function MTGNodeGameOperator(){
 			this.count -= 1;
 		}
 	}
-	var OP_DECK = false;
-	this.set_opponent_deck = function(count){
-		OP_DECK = new Deck(count);
-	}
+
+	// Placeholders
 	var MY_DECK = new Deck($('.in-deck.mine').length);
+	var OP_DECK = new Deck($('.in-deck.opponent').length);
+
 
 
 
@@ -283,17 +296,15 @@ function MTGNodeGameOperator(){
 
 
 	/*
-	| ------------------
+	| -------------------------
 	|  Starters
-	| ------------------
+	| -------------------------
 	*/
 
 	// Deck Shuffling
-	//-------------------
 	$(my_deck_card).shuffle();
 
 	// Card Viewer Widget
-	//-------------------
 	$game_area.on('mouseover', card_to_see, function(e){
 		var src_to_see = $(e.target).attr('src');
 
@@ -302,6 +313,7 @@ function MTGNodeGameOperator(){
 			$card_viewer.attr('src', src_to_see);
 		}
 	});
+
 
 	/*
 	| -------------------------
