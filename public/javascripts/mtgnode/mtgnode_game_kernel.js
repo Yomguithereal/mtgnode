@@ -231,6 +231,10 @@ function MTGNodeGameOperator(){
 		$card.css('z-index', self.max_zindex);
 	}
 
+	$(my_update_life).click(function(){
+		$('.in-game').simulate("drag", {dy : 150});
+	});
+
 
 
 	/*
@@ -410,6 +414,9 @@ function MTGNodeGameOperator(){
 			'containment' : '.game-area',
 			snap : my_snap_to,
 			grid : operator.drag_grid,
+			drag : function(event, ui){
+
+			}
 		});
 	}
 
