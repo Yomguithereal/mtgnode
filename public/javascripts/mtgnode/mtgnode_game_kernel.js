@@ -231,12 +231,6 @@ function MTGNodeGameOperator(){
 		$card.css('z-index', self.max_zindex);
 	}
 
-	$(my_update_life).click(function(){
-		$('.in-game').simulate("drag", {dy : 150});
-	});
-
-
-
 	/*
 	| ------------------
 	|  Model
@@ -286,6 +280,7 @@ function MTGNodeGameOperator(){
 		this.reorganize = function(){
 			$($(hand_cards).get().reverse()).each(function(i){
 				var to_position = self.left + (operator.hand_offset*i);
+				update_zindex($(this));
 				$(this).animate({'left' : to_position}, 'fast');
 			});
 		}
@@ -368,6 +363,13 @@ function MTGNodeGameOperator(){
 		}
 	}
 
+	function conceal_card($card){
+		var $img = $card.children('img');
+		if($img.attr('src') != card_back_src){
+			$img.attr('src', card_back_src);
+		}
+	}
+
 	function deck_to_hand($card, deck, hand){
 
 		deck = deck || MY_DECK;
@@ -416,6 +418,21 @@ function MTGNodeGameOperator(){
 			grid : operator.drag_grid,
 			drag : function(event, ui){
 
+				// Card
+				var $card = $(ui.helper);
+
+				// Updating z-index
+				update_zindex($card);
+
+				// If mine
+				var pos = {
+					left : ui.position.left,
+					top : ui.position.top,
+					zindex : $card.css('z-index')
+				}
+				if($card.hasClass('mine')){
+					new message('draggingCard', {position : pos, card : $card.attr('card_id')}).send();
+				}
 			}
 		});
 	}
@@ -429,7 +446,7 @@ function MTGNodeGameOperator(){
 		$card.addClass('in-game');
 
 		// Updating Model
-		MY_HAND.decrement();
+		model.decrement();
 	}
 
 	function game_to_hand($card, model){
@@ -439,9 +456,10 @@ function MTGNodeGameOperator(){
 		// Updating Classes
 		$card.removeClass('in-game');
 		$card.addClass('in-hand');
+		$card.removeClass('tapped');
 
 		// Updating Model
-		MY_HAND.increment();
+		model.increment();
 	}
 
 	// Droping Cards
@@ -455,11 +473,15 @@ function MTGNodeGameOperator(){
 			var $card = $(ui.draggable);
 			hand_to_game($card);
 
+			// Sending message to server
+			new message('playingCard', $card.attr('card_id')).send();
+
 		}
 	});
 
 	// In Hand
 	$(my_hand_area).droppable({
+		tolerance : "fit",
 		drop : function(event, ui){
 
 			var $card = $(ui.draggable);
@@ -467,6 +489,9 @@ function MTGNodeGameOperator(){
 			// If card is already in hand, we cancel the event
 			if($card.hasClass('in-hand')){
 				MY_HAND.reorganize();
+
+				// Sending message to server
+				new message('reorganizingHand').send();
 				return false;
 			}
 
@@ -474,6 +499,9 @@ function MTGNodeGameOperator(){
 			if($card.hasClass('in-game')){
 
 				game_to_hand($card);
+
+				// Sending message to server
+				new message('backingCard', $card.attr('card_id')).send();
 			}
 
 		}
@@ -520,47 +548,48 @@ function MTGNodeGameOperator(){
 				deck_to_hand(opponent_card(data.body), OP_DECK, OP_HAND);
 				break;
 
+			// Dragging a Card
+			case 'draggingCard' :
+				var $card = opponent_card(data.body.card);
+
+				$card.css({
+					'left' : data.body.position.left,
+					'top' : data.body.position.top,
+					'z-index' : data.body.position.zindex
+				});
+
+				break;
+
+			// Playing a Card
+			case 'playingCard' :
+				var $card = opponent_card(data.body);
+
+				hand_to_game($card, OP_HAND);
+				reveal_card($card);
+				break;
+
+			// Backing a Card
+			case 'backingCard' :
+				var $card = opponent_card(data.body);
+
+				game_to_hand($card, OP_HAND);
+				conceal_card($card);
+				break;
+
+			// Tapping a Card
+			case 'tappingCard' :
+				tap_card(opponent_card(data.body));
+				break;
+
+			// Opponent Reorganize its hand
+			case 'reorganizingHand' :
+				OP_HAND.reorganize();
+				break;
+
 			default:
 				break;
 		}
 	});
 
-
-
-
-
-
-
-
-
-
-
-
-	// Dragging a Card
-	//----------------
-
-	// Sending
-	/*
-	function draggable_register(){
-		$(my_card).draggable({
-			'containment' : '.game-area',
-			'stack' : '.card-min',
-			snap : my_cemetery,
-			grid : [10, 10],
-			drag : function(event, ui){
-
-				// Getting coordinates
-				var coordinates = {'card' : ui.helper.attr('card_id'), 'zindex' : ui.helper.css('z-index'),'top' : ui.position.top, 'left' : ui.position.left}
-
-				// Sending the message
-				socket.emit('draggingCard', new message(coordinates));
-			},
-			stop : function(event, ui){
-
-
-			}
-		});
-	}
-	*/
 
 }
