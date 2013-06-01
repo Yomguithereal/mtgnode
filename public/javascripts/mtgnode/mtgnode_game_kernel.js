@@ -29,6 +29,7 @@ function MTGNodeGameKernel(){
 	| ---------------
 	*/
 	var self = this;
+	this.game_operator = false;
 
 	// Debug mode
 	this.debug = false;
@@ -100,7 +101,7 @@ function MTGNodeGameKernel(){
 			$('.deck-emplacement.'+user.game_side).append(data);
 
 			// Invoking the beginning of the game
-			MTGNodeGameOperator();
+			self.game_operator = MTGNodeGameOperator();
 		});
 	});
 
@@ -109,7 +110,10 @@ function MTGNodeGameKernel(){
 
 		// Getting them ajaxwise
 		$.post('ajax/deck_cards', {deck_id : opponent_deck_id, game_side : 'opponent'}, function(data){
-			$('.deck-emplacement.'+user.opponent_side).append(data)
+			$('.deck-emplacement.'+user.opponent_side).append(data);
+
+			// Updating Operator Model
+			self.game_operator.set_opponent_deck($('.in-deck.opponent').length);
 		});
 	});
 
@@ -199,7 +203,27 @@ function MTGNodeGameOperator(){
 		}
 	}
 
+	// Function generating opponent's cards ids
+	function opponent_card(card_id){
+		return '#card'+card_id+'_opponent';
+	}
+
+	// Function used to update cards z-index
+	function update_zindex($card){
+		operator.max_zindex += 1;
+		$card.css('z-index', self.max_zindex);
+	}
+
+
+
+	/*
+	| ------------------
+	|  Model
+	| ------------------
+	*/
+
 	// Deck Abstraction
+	//-------------------
 	function Deck(count){
 		this.count = count;
 
@@ -207,9 +231,16 @@ function MTGNodeGameOperator(){
 			this.count -= 1;
 		}
 	}
-	DECK = new Deck($('.in-deck.mine').length);
+	var OP_DECK = false;
+	this.set_opponent_deck = function(count){
+		OP_DECK = new Deck(count);
+	}
+	var MY_DECK = new Deck($('.in-deck.mine').length);
+
+
 
 	// Hand Abstraction
+	//-------------------
 	function Hand(){
 		var self = this;
 		this.count = 0;
@@ -238,25 +269,18 @@ function MTGNodeGameOperator(){
 			});
 		}
 	}
-	HAND = new Hand();
+	var MY_HAND = new Hand();
+	var OP_HAND = new Hand();
+
 
 	// Cemetery Abstraction
+	//---------------------
 	function Cemetery(){
 		this.count = 0;
 	}
-	CEMETERY = new Cemetery();
+	var MY_CEMETERY = new Cemetery();
+	var OP_CEMETERY = new Cemetery();
 
-
-	// Function generating opponent's cards ids
-	function opponent_card(card_id){
-		return '#card'+card_id+'_opponent';
-	}
-
-	// Function used to update cards z-index
-	function update_zindex($card){
-		operator.max_zindex += 1;
-		$card.css('z-index', self.max_zindex);
-	}
 
 	/*
 	| ------------------
@@ -296,7 +320,10 @@ function MTGNodeGameOperator(){
 		}
 	}
 
-	function deck_to_hand($card){
+	function deck_to_hand($card, deck, hand){
+
+		deck = deck || MY_DECK;
+		hand = hand || MY_HAND;
 
 		// Class Operation
 		$card.removeClass('in-deck');
@@ -305,8 +332,8 @@ function MTGNodeGameOperator(){
 		// Updating its z-index
 		update_zindex($card);
 
-		HAND.increment();
-		DECK.decrement();
+		hand.increment();
+		deck.decrement();
 
 		// Revealing card for player
 		reveal_card($card);
@@ -342,24 +369,28 @@ function MTGNodeGameOperator(){
 		});
 	}
 
-	function hand_to_game($card){
+	function hand_to_game($card, model){
+
+		model = model || MY_HAND;
 
 		// Updating Classes
 		$card.removeClass('in-hand');
 		$card.addClass('in-game');
 
 		// Updating Model
-		HAND.decrement();
+		MY_HAND.decrement();
 	}
 
-	function game_to_hand($card){
+	function game_to_hand($card, model){
+
+		model = model || MY_HAND;
 
 		// Updating Classes
 		$card.removeClass('in-game');
 		$card.addClass('in-hand');
 
 		// Updating Model
-		HAND.increment();
+		MY_HAND.increment();
 	}
 
 	// Droping Cards
@@ -384,7 +415,7 @@ function MTGNodeGameOperator(){
 
 			// If card is already in hand, we cancel the event
 			if($card.hasClass('in-hand')){
-				HAND.reorganize();
+				MY_HAND.reorganize();
 				return false;
 			}
 
@@ -427,7 +458,8 @@ function MTGNodeGameOperator(){
 
 		// Switch on message kind
 		switch(data.head){
-			case 'Test' :
+			case 'drawingCard' :
+				deck_to_hand(opponent_card(data.body), OP_DECK, OP_HAND);
 				break;
 			default:
 				break;
