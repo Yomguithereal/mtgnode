@@ -179,9 +179,13 @@ function MTGNodeGameOperator(){
 	var card_to_see = '.card-min';
 	var my_card = '.card-min.mine';
 	var my_deck_card = '.card-min.in-deck.mine';
+	var opponent_deck_card = '.card-min.in-deck.mine';
+	var opponent_deck = '.deck-emplacement.opponent';
 	var my_hand_card = '.card-min.in-hand.mine';
+	var opponent_hand_card = '.card-min.in-hand.opponent';
 	var my_ingame_card = '.card-min.in-game.mine';
 	var my_hand_area = '.hand-emplacement.mine';
+	var opponent_hand_area = '.hand-emplacement.opponent';
 	var my_snap_to = '.hand-emplacement.mine, .deck-emplacement.mine, .cemetery-emplacement.mine'
 
 
@@ -216,9 +220,9 @@ function MTGNodeGameOperator(){
 		}
 	}
 
-	// Function generating opponent's cards ids
+	// Function generating opponent's cards selectors
 	function opponent_card(card_id){
-		return '#card'+card_id+'_opponent';
+		return $('#card'+card_id+'_opponent');
 	}
 
 	// Function used to update cards z-index
@@ -254,10 +258,10 @@ function MTGNodeGameOperator(){
 
 	// Hand Abstraction
 	//-------------------
-	function Hand(){
+	function Hand(hand_area, hand_cards){
 		var self = this;
 		this.count = 0;
-		this.left = $(my_hand_area).position().left;
+		this.left = $(hand_area).position().left;
 
 		this.increment = function(){
 
@@ -276,14 +280,14 @@ function MTGNodeGameOperator(){
 			this.reorganize();
 		}
 		this.reorganize = function(){
-			$($(my_hand_card).get().reverse()).each(function(i){
+			$($(hand_cards).get().reverse()).each(function(i){
 				var to_position = self.left + (operator.hand_offset*i);
 				$(this).animate({'left' : to_position}, 'fast');
 			});
 		}
 	}
-	var MY_HAND = new Hand();
-	var OP_HAND = new Hand();
+	var MY_HAND = new Hand(my_hand_area, my_hand_card);
+	var OP_HAND = new Hand(opponent_hand_area, opponent_hand_card);
 
 
 	// Cemetery Abstraction
@@ -302,7 +306,7 @@ function MTGNodeGameOperator(){
 	*/
 
 	// Deck Shuffling
-	$(my_deck_card).shuffle();
+	shuffle_my_deck();
 
 	// Card Viewer Widget
 	$game_area.on('mouseover', card_to_see, function(e){
@@ -320,6 +324,34 @@ function MTGNodeGameOperator(){
 	|  From Client Interactions
 	| -------------------------
 	*/
+
+	// Shuffling Deck
+	//----------------
+	function shuffle_my_deck(){
+		var $cards = $(my_deck_card);
+		$cards.shuffle();
+
+		// Preparing data to send
+		var shuffle = [];
+		$(my_deck_card).each(function(i){
+			shuffle.push($(this).attr("card_id"));
+
+			// Sending data to opponent
+			if(i == $cards.length-1){
+				new message('shufflingDeck', shuffle).send();
+			}
+		});
+
+
+	}
+
+	function shuffle_opponent_deck(shuffle){
+
+		// Reorganizing opponent's deck
+		$.each(shuffle, function(i){
+			$(opponent_deck).append($(opponent_card(shuffle[i])));
+		});
+	}
 
 	// Drawing a Card
 	//----------------
@@ -347,9 +379,6 @@ function MTGNodeGameOperator(){
 		hand.increment();
 		deck.decrement();
 
-		// Revealing card for player
-		reveal_card($card);
-
 	}
 
 	// Action
@@ -361,6 +390,9 @@ function MTGNodeGameOperator(){
 
 		// Make the card draggable
 		register_draggable($card);
+
+		// Revealing card for me only
+		reveal_card($card);
 
 		// Alerting server
 		new message('drawingCard', $card.attr('card_id')).send();
@@ -470,9 +502,17 @@ function MTGNodeGameOperator(){
 
 		// Switch on message kind
 		switch(data.head){
+
+			// Shuffling Deck
+			case 'shufflingDeck' :
+				shuffle_opponent_deck(data.body);
+				break;
+
+			// Drawing a Card
 			case 'drawingCard' :
 				deck_to_hand(opponent_card(data.body), OP_DECK, OP_HAND);
 				break;
+
 			default:
 				break;
 		}
