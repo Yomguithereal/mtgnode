@@ -91,6 +91,7 @@ function IoHub(port_to_listen){
 
 		// Generic Message Receiver
 		socket.on('gameUpdate', function(data){
+			console.log(data.head);
 			socket.broadcast.to(data.room).emit(data.head, data.body);
 		});
 

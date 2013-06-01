@@ -28,10 +28,13 @@ function MTGNodeGameKernel(){
 	|  Initialization
 	| ---------------
 	*/
+	var self = this;
 
 	// Debug mode
+	this.debug = false;
 	if(typeof room == 'undefined'){
 		socket.emit('debugGame');
+		this.debug = true;
 	}
 
 	// Selectors
@@ -57,7 +60,7 @@ function MTGNodeGameKernel(){
 	socket.on('gameSide', function(game_side){
 		user.game_side = game_side;
 
-		// Setting some classes to assert what is yours
+		// Setting some classes to assert what is yours an what is not
 		if(game_side == 'player1'){
 			$('.player1').addClass('mine');
 			$('.player2').addClass('opponent');
@@ -74,6 +77,10 @@ function MTGNodeGameKernel(){
 	// Triggering deck modal
 	socket.on('chooseDeck', function(){
 		$start_game_modal.modal('show');
+
+		if(self.debug){
+			$start_game.trigger('click');
+		}
 	});
 
 	// Chosing your deck
@@ -128,15 +135,18 @@ function MTGNodeGameOperator(){
 	| ------------------
 	*/
 
-	// Object operation //
-	var self = this;
+	// Object Operation and Configuration //
+	var operator = this;
 	this.last_message = 'none';
 	this.generic_message = 'gameUpdate';
+	this.max_zindex = 30;
+	this.hand_offset = 30;
+	this.drag_grid = [10, 10];
 
 	// Areas //
 	var $card_viewer = $('#card_viewer_widget');
 	var $game_area = $('.game-area');
-	var $helper_block = $('#helper_block')
+	var $helper_block = $('#helper_block');
 
 	// Values //
 	var card_back_src = $("#CARDBACK").val();
@@ -148,12 +158,13 @@ function MTGNodeGameOperator(){
 	var my_cemetery = '.cemetery-emplacement.mine';
 
 	// Cards //
-	var ingame_card = '.card-min';
-	var my_card = '.card-min.in-hand.mine, .card-min.in-game.mine';
+	var card_to_see = '.card-min';
+	var my_card = '.card-min.mine';
 	var my_deck_card = '.card-min.in-deck.mine';
 	var my_hand_card = '.card-min.in-hand.mine';
 	var my_ingame_card = '.card-min.in-game.mine';
 	var my_hand_area = '.hand-emplacement.mine';
+	var my_snap_to = '.hand-emplacement.mine, .deck-emplacement.mine, .cemetery-emplacement.mine'
 
 
 	/*
@@ -174,13 +185,56 @@ function MTGNodeGameOperator(){
 		// Body of the message
 		this.body = data;
 
-		// Savong the message for later use
-		self.last_message = this;
+		// Send the message
+		this.send = function(){
+			socket.emit(operator.generic_message, {
+				head : this.head,
+				room : this.room,
+				body : this.body
+			});
+
+			// Registering the last message
+			operator.last_message = this;
+		}
 	}
+
+	// Deck Abstraction
+	function Deck(count){
+		this.count = count;
+
+		this.decrement = function(){
+			this.count -= 1;
+		}
+	}
+	DECK = new Deck($('.in-deck.mine').length);
+
+	// Hand Abstraction
+	function Hand(){
+		this.count = 0;
+		this.left = $(my_hand_area).position().left;
+
+		this.increment = function(){
+			this.count += 1;
+		}
+	}
+	HAND = new Hand();
+
+	// Cemetery Abstraction
+	function Cemetery(){
+		this.count = 0;
+	}
+	CEMETERY = new Cemetery();
+
 
 	// Function generating opponent's cards ids
 	function opponent_card(card_id){
 		return '#card'+card_id+'_opponent';
+	}
+
+	// Function used to update cards z-index
+	function update_zindex($card){
+		operator.max_zindex += 1;
+		$card.css('z-index', self.max_zindex);
 	}
 
 	/*
@@ -195,10 +249,10 @@ function MTGNodeGameOperator(){
 
 	// Card Viewer Widget
 	//-------------------
-	$game_area.on('mouseover', ingame_card, function(e){
+	$game_area.on('mouseover', card_to_see, function(e){
 		var src_to_see = $(e.target).attr('src');
 
-		// We block the action if the src is already there to prevent useless HTTP requests
+		// We block the action if the src is already the same to prevent useless HTTP requests
 		if($card_viewer.attr('src') != src_to_see){
 			$card_viewer.attr('src', src_to_see);
 		}
@@ -214,12 +268,69 @@ function MTGNodeGameOperator(){
 	//----------------
 
 	// Logic
+	function reveal_card($card){
+		var $img = $card.children('img');
+		if($img.attr('src') == card_back_src){
+			$img.attr('src', $img.attr('true_src'));
+		}
+	}
+
+	function deck_to_hand($card){
+
+		// Class Operation
+		$card.removeClass('in-deck');
+		$card.addClass('in-hand');
+
+		// Placing the card
+		var to_position = HAND.left + (operator.hand_offset*HAND.count);
+		$card.animate({'left' : to_position}, 'fast');
+
+		// Updating its z-index
+		update_zindex($card);
+
+		HAND.increment();
+		DECK.decrement();
+
+		// Revealing card for player
+		reveal_card($card);
+
+	}
 
 	// Action
 	$game_area.on('click', my_deck_card, function(e){
-		var $card = $(e.target);
-		alert($card.attr('id'));
+		var $card = $(this);
+
+		// Using Logic
+		deck_to_hand($card);
+
+		// Make the card draggable
+		register_draggable($card);
+
+		// Alerting server
+		new message('drawingCard', $card.attr('card_id')).send();
 	});
+
+
+	// Dragging Cards
+	//------------------
+
+	// Logic
+	function register_draggable($card){
+		$card.draggable({
+			'containment' : '.game-area',
+			snap : my_snap_to,
+			grid : operator.drag_grid,
+			drag : function(event, ui){
+
+
+			},
+			stop : function(event, ui){
+
+
+			}
+		});
+	}
+
 
 	/*
 	| -------------------------
@@ -274,8 +385,5 @@ function MTGNodeGameOperator(){
 		});
 	}
 	*/
-
-	// Drawing a Card
-	//----------------
 
 }
