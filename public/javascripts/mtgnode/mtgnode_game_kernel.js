@@ -146,6 +146,7 @@ function MTGNodeGameOperator(){
 	// Areas //
 	var $card_viewer = $('#card_viewer_widget');
 	var $game_area = $('.game-area');
+	var $game_zone = $('.game-emplacement');
 	var $helper_block = $('#helper_block');
 
 	// Values //
@@ -210,11 +211,31 @@ function MTGNodeGameOperator(){
 
 	// Hand Abstraction
 	function Hand(){
+		var self = this;
 		this.count = 0;
 		this.left = $(my_hand_area).position().left;
 
 		this.increment = function(){
+
+			// Updating counter
 			this.count += 1;
+
+			// Reorganizing hand
+			this.reorganize();
+		}
+		this.decrement = function(){
+
+			// Updating counter
+			this.count -= 1;
+
+			// Reorganizing hand
+			this.reorganize();
+		}
+		this.reorganize = function(){
+			$($(my_hand_card).get().reverse()).each(function(i){
+				var to_position = self.left + (operator.hand_offset*i);
+				$(this).animate({'left' : to_position}, 'fast');
+			});
 		}
 	}
 	HAND = new Hand();
@@ -281,10 +302,6 @@ function MTGNodeGameOperator(){
 		$card.removeClass('in-deck');
 		$card.addClass('in-hand');
 
-		// Placing the card
-		var to_position = HAND.left + (operator.hand_offset*HAND.count);
-		$card.animate({'left' : to_position}, 'fast');
-
 		// Updating its z-index
 		update_zindex($card);
 
@@ -316,21 +333,90 @@ function MTGNodeGameOperator(){
 
 	// Logic
 	function register_draggable($card){
+
+		// Draggable
 		$card.draggable({
 			'containment' : '.game-area',
 			snap : my_snap_to,
 			grid : operator.drag_grid,
-			drag : function(event, ui){
-
-
-			},
-			stop : function(event, ui){
-
-
-			}
 		});
 	}
 
+	function hand_to_game($card){
+
+		// Updating Classes
+		$card.removeClass('in-hand');
+		$card.addClass('in-game');
+
+		// Updating Model
+		HAND.decrement();
+	}
+
+	function game_to_hand($card){
+
+		// Updating Classes
+		$card.removeClass('in-game');
+		$card.addClass('in-hand');
+
+		// Updating Model
+		HAND.increment();
+	}
+
+	// Droping Cards
+	//------------------
+
+	// In Game
+	$game_zone.droppable({
+		drop : function(event, ui){
+
+			// When a card enter the game zone, we acknowledge its ingame nature
+			var $card = $(ui.draggable);
+			hand_to_game($card);
+
+		}
+	});
+
+	// In Hand
+	$(my_hand_area).droppable({
+		drop : function(event, ui){
+
+			var $card = $(ui.draggable);
+
+			// If card is already in hand, we cancel the event
+			if($card.hasClass('in-hand')){
+				HAND.reorganize();
+				return false;
+			}
+
+			// If card comes from game
+			if($card.hasClass('in-game')){
+
+				game_to_hand($card);
+			}
+
+		}
+	});
+
+	// Tapping Cards
+	//------------------
+
+	// Logic
+	function tap_card($card){
+		$card.toggleClass('tapped');
+	}
+
+	$game_area.on('contextmenu', my_ingame_card, function(e){
+		var $card = $(this);
+		e.preventDefault();
+
+		// Tapping Card
+		tap_card($card);
+
+		// Sending information to server
+		new message('tappingCard', $card.attr('card_id')).send();
+
+		return false;
+	});
 
 	/*
 	| -------------------------
