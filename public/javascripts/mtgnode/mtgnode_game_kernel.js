@@ -175,18 +175,22 @@ function MTGNodeGameOperator(){
 	var opponent_life_counter = '.life-counter.opponent';
 	var my_cemetery = '.cemetery-emplacement.mine';
 
-	// Cards //
+	// Generic Cards //
 	var card_to_see = '.card-min';
+
+	// My Cards //
 	var my_card = '.card-min.mine';
 	var my_deck_card = '.card-min.in-deck.mine';
-	var opponent_deck_card = '.card-min.in-deck.mine';
-	var opponent_deck = '.deck-emplacement.opponent';
 	var my_hand_card = '.card-min.in-hand.mine';
-	var opponent_hand_card = '.card-min.in-hand.opponent';
 	var my_ingame_card = '.card-min.in-game.mine';
 	var my_hand_area = '.hand-emplacement.mine';
+	var my_snap_to = '.hand-emplacement.mine, .deck-emplacement.mine, .cemetery-emplacement.mine';
+
+	// Opponent Cards //
+	var opponent_deck = '.deck-emplacement.opponent';
+	var opponent_deck_card = '.card-min.in-deck.mine';
+	var opponent_hand_card = '.card-min.in-hand.opponent';
 	var opponent_hand_area = '.hand-emplacement.opponent';
-	var my_snap_to = '.hand-emplacement.mine, .deck-emplacement.mine, .cemetery-emplacement.mine'
 
 
 	/*
