@@ -452,6 +452,11 @@ function MTGNodeGameOperator(){
 			switch(key){
 
 				case 'untapAll' :
+
+					// Do not activate if there is no tapped card
+					if($(my_ingame_card+'.tapped').length == 0){ break; }
+					console.log("test");
+
 					batch_untap(my_ingame_card);
 
 					// Sending information to server
