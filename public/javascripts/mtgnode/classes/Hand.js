@@ -56,4 +56,16 @@ function Hand(config){
 		});
 	}
 
+	// To Game
+	this.to_game = function($card, game){
+
+		// Updating Classes
+		$card.removeClass('in-hand');
+		$card.addClass('in-game');
+
+		// Updating Model
+		this.decrement();
+		game.increment();
+	}
+
 }

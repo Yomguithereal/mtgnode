@@ -200,7 +200,6 @@ function MTGNodeGameOperator(socket, room, user){
 	// Dragging Cards
 	//------------------
 
-	// Logic
 	function register_draggable($card){
 
 		// Draggable
@@ -229,32 +228,6 @@ function MTGNodeGameOperator(socket, room, user){
 		});
 	}
 
-	/*
-
-	function hand_to_game($card, model){
-
-		model = model || MY_HAND;
-
-		// Updating Classes
-		$card.removeClass('in-hand');
-		$card.addClass('in-game');
-
-		// Updating Model
-		model.decrement();
-	}
-
-	function game_to_hand($card, model){
-
-		model = model || MY_HAND;
-
-		// Updating Classes
-		$card.removeClass('in-game');
-		$card.addClass('in-hand');
-		$card.removeClass('tapped');
-
-		// Updating Model
-		model.increment();
-	}
 
 	// Droping Cards
 	//------------------
@@ -265,16 +238,16 @@ function MTGNodeGameOperator(socket, room, user){
 
 			// When a card enter the game zone, we acknowledge its ingame nature
 			var $card = $(ui.draggable);
-			hand_to_game($card);
+			MY_HAND.to_game($card, MY_GAME);
 
 			// Sending message to server
-			new message('playingCard', $card.attr('card_id')).send();
+			MESSAGER.send('playingCard', $card.attr('card_id'));
 
 		}
 	});
 
 	// In Hand
-	$(my_hand_area).droppable({
+	$(MY_HAND.area).droppable({
 		tolerance : "fit",
 		drop : function(event, ui){
 
@@ -285,21 +258,23 @@ function MTGNodeGameOperator(socket, room, user){
 				MY_HAND.reorganize();
 
 				// Sending message to server
-				new message('reorganizingHand').send();
+				MESSAGER.send('reorganizingHand');
 				return false;
 			}
 
 			// If card comes from game
 			if($card.hasClass('in-game')){
 
-				game_to_hand($card);
+				MY_GAME.to_hand($card, MY_HAND);
 
 				// Sending message to server
-				new message('backingCard', $card.attr('card_id')).send();
+				MESSAGER.send('backingCard', $card.attr('card_id'));
 			}
 
 		}
 	});
+
+	/*
 
 	// Tapping Cards
 	//------------------
@@ -479,23 +454,32 @@ function MTGNodeGameOperator(socket, room, user){
 
 				break;
 
-			/*
-
 			// Playing a Card
 			case 'playingCard' :
-				var $card = opponent_card(data.body);
+				var $card = HELPER.opponent_card(data.body);
 
-				hand_to_game($card, OP_HAND);
-				reveal_card($card);
+				OP_HAND.to_game($card, OP_GAME);
+				HELPER.reveal_card($card);
+				break;
+
+			// Opponent Reorganize its hand
+			case 'reorganizingHand' :
+				OP_HAND.reorganize();
 				break;
 
 			// Backing a Card
 			case 'backingCard' :
-				var $card = opponent_card(data.body);
+				var $card = HELPER.opponent_card(data.body);
 
-				game_to_hand($card, OP_HAND);
-				conceal_card($card);
+				OP_GAME.to_hand($card, OP_HAND);
+				HELPER.conceal_card($card);
 				break;
+
+			/*
+
+
+
+
 
 			// Tapping a Card
 			case 'tappingCard' :
@@ -512,10 +496,6 @@ function MTGNodeGameOperator(socket, room, user){
 				draw_full_hand(opponent_deck_card);
 				break;
 
-			// Opponent Reorganize its hand
-			case 'reorganizingHand' :
-				OP_HAND.reorganize();
-				break;
 
 			// Updating Life Counter
 			case 'updatingLife' :

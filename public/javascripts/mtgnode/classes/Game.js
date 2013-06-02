@@ -34,4 +34,17 @@ function Game(config){
 		this.count += 1;
 	}
 
+	// To Deck
+	this.to_hand = function($card, hand){
+
+		// Updating Classes
+		$card.removeClass('in-game');
+		$card.addClass('in-hand');
+		$card.removeClass('tapped');
+
+		// Updating Model
+		this.decrement();
+		hand.increment();
+	}
+
 }

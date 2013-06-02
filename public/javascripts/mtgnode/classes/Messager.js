@@ -28,6 +28,7 @@ function Messager(socket, room){
 	// Methods
 	//-------------------
 	this.send = function(head, data){
+		data = data || false;
 
 		// Preparing message
 		var message = {
