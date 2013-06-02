@@ -58,4 +58,18 @@ function Deck(config){
 		});
 	}
 
+	// To Hand
+	this.to_hand = function($card, hand){
+
+		// Class Operation
+		$card.removeClass('in-deck');
+		$card.addClass('in-hand');
+
+		// Updating its z-index
+		this.helper.update_zindex($card);
+
+		hand.increment();
+		this.decrement();
+	}
+
 }

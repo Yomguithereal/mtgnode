@@ -62,7 +62,7 @@ function MTGNodeGameOperator(socket, room, user){
 	// Messager & Helper
 	//-------------------
 	var MESSAGER = new Messager(socket, room);
-	var HELPER = new Helper();
+	var HELPER = new Helper({card_back_src : card_back_src});
 
 
 	// Registering Decks
@@ -108,12 +108,14 @@ function MTGNodeGameOperator(socket, room, user){
 	var my_hand_config = {
 		area : '.hand-emplacement'+my_class,
 		cards : '.card-min.in-hand'+my_class,
+		helper : HELPER,
 		counter : false
 	};
 
 	var opponent_hand_config = {
 		area : '.hand-emplacement'+opponent_class,
 		cards : '.card-min.in-hand'+opponent_class,
+		helper : HELPER,
 		counter : false
 	};
 
@@ -170,62 +172,31 @@ function MTGNodeGameOperator(socket, room, user){
 	| -------------------------
 	*/
 
-	/*
 	// Drawing a Card
 	//----------------
 
-	// Logic
-	function reveal_card($card){
-		var $img = $card.children('img');
-		if($img.attr('src') == card_back_src){
-			$img.attr('src', $img.attr('true_src'));
-		}
-	}
-
-	function conceal_card($card){
-		var $img = $card.children('img');
-		if($img.attr('src') != card_back_src){
-			$img.attr('src', card_back_src);
-		}
-	}
-
-	function deck_to_hand($card, deck, hand){
-
-		deck = deck || MY_DECK;
-		hand = hand || MY_HAND;
-
-		// Class Operation
-		$card.removeClass('in-deck');
-		$card.addClass('in-hand');
-
-		// Updating its z-index
-		update_zindex($card);
-
-		hand.increment();
-		deck.decrement();
-
-	}
-
 	// Action
-	$game_area.on('click', my_deck_card, function(e){
+	$game_area.on('click', MY_DECK.cards, function(e){
 
 		// Getting first card of DOM
 		// WARNING :: Get the last DOM card otherwise because of z-index rule
-		var $card = $(my_deck_card).eq(0);
+		var $card = $(MY_DECK.cards).eq(0);
 
 		// Using Logic
-		deck_to_hand($card);
+		MY_DECK.to_hand($card, MY_HAND);
 
 		// Make the card draggable
-		register_draggable($card);
+		//register_draggable($card);
 
 		// Revealing card for me only
-		reveal_card($card);
+		HELPER.reveal_card($card);
 
 		// Alerting server
-		new message('drawingCard', $card.attr('card_id')).send();
+		MESSAGER.send('drawingCard', $card.attr('card_id'));
+
 	});
 
+	/*
 
 	// Dragging Cards
 	//------------------
@@ -490,18 +461,14 @@ function MTGNodeGameOperator(socket, room, user){
 				OP_DECK.shuffleFromServer(data.body);
 				break;
 
-
-
-
-
-
-				/*
-
-
 			// Drawing a Card
 			case 'drawingCard' :
-				deck_to_hand(opponent_card(data.body), OP_DECK, OP_HAND);
+				OP_DECK.to_hand(HELPER.opponent_card(data.body), OP_HAND);
 				break;
+
+
+
+			/*
 
 			// Dragging a Card
 			case 'draggingCard' :

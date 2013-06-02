@@ -24,6 +24,7 @@ function Hand(config){
 	this.left = $(this.area).position().left;
 	this.cards = config.cards;
 	this.counter = config.counter;
+	this.helper = config.helper;
 
 	// Methods
 	//-------------------
@@ -31,11 +32,13 @@ function Hand(config){
 	// Losing a card
 	this.decrement = function(){
 		this.count -= 1;
+		this.reorganize();
 	}
 
 	// Gaining a card
 	this.increment = function(){
 		this.count += 1;
+		this.reorganize();
 	}
 
 	// Reorganize Hand
@@ -46,7 +49,7 @@ function Hand(config){
 			var to_position = self.left + (self.visual_offset*i);
 
 			// Updating z-index
-			update_zindex($(this));
+			self.helper.update_zindex($(this));
 
 			// Animating the card
 			$(this).animate({'left' : to_position}, 'fast');
