@@ -186,7 +186,7 @@ function MTGNodeGameOperator(socket, room, user){
 		MY_DECK.to_hand($card, MY_HAND);
 
 		// Make the card draggable
-		//register_draggable($card);
+		register_draggable($card);
 
 		// Revealing card for me only
 		HELPER.reveal_card($card);
@@ -196,7 +196,6 @@ function MTGNodeGameOperator(socket, room, user){
 
 	});
 
-	/*
 
 	// Dragging Cards
 	//------------------
@@ -206,8 +205,8 @@ function MTGNodeGameOperator(socket, room, user){
 
 		// Draggable
 		$card.draggable({
-			'containment' : '.game-area',
-			snap : my_snap_to,
+			containment : '.game-area',
+			snap : '.hand-emplacement.mine, game-emplacement.mine, cemetery-emplacement.mine',
 			grid : operator.drag_grid,
 			drag : function(event, ui){
 
@@ -215,7 +214,7 @@ function MTGNodeGameOperator(socket, room, user){
 				var $card = $(ui.helper);
 
 				// Updating z-index
-				update_zindex($card);
+				HELPER.update_zindex($card);
 
 				// If mine
 				var pos = {
@@ -224,11 +223,13 @@ function MTGNodeGameOperator(socket, room, user){
 					zindex : $card.css('z-index')
 				}
 				if($card.hasClass('mine')){
-					new message('draggingCard', {position : pos, card : $card.attr('card_id')}).send();
+					MESSAGER.send('draggingCard', {position : pos, card : $card.attr('card_id')});
 				}
 			}
 		});
 	}
+
+	/*
 
 	function hand_to_game($card, model){
 
@@ -466,13 +467,9 @@ function MTGNodeGameOperator(socket, room, user){
 				OP_DECK.to_hand(HELPER.opponent_card(data.body), OP_HAND);
 				break;
 
-
-
-			/*
-
 			// Dragging a Card
 			case 'draggingCard' :
-				var $card = opponent_card(data.body.card);
+				var $card = HELPER.opponent_card(data.body.card);
 
 				$card.css({
 					'left' : data.body.position.left,
@@ -481,6 +478,8 @@ function MTGNodeGameOperator(socket, room, user){
 				});
 
 				break;
+
+			/*
 
 			// Playing a Card
 			case 'playingCard' :
