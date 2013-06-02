@@ -178,6 +178,9 @@ function MTGNodeDeckBuilderKernel(){
 
 		// Adding card to deck
 		var $c = $(e.target);
+		if(!$c.hasClass('card-min')){ return false; }
+
+
 		var card_number = $c.attr('card_number');
 		var card_set_code = $c.attr('set_code');
 
@@ -193,6 +196,7 @@ function MTGNodeDeckBuilderKernel(){
 
 		// Adding card to deck
 		var $c = $(e.target);
+		if(!$c.hasClass('card-min')){ return false; }
 
 		self.DECK.removeCard($c.index());
 
