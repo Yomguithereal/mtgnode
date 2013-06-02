@@ -21,7 +21,9 @@ block content
 					each deck in player_decks
 						option(value=deck.id)= deck.name
 				p Choosen Deck
-					input(id='deck_name', type='text', value='')
+					div.input-append
+						input(id='deck_name', type='text', value='')
+						button#card_counter.btn(type='button') 0
 				div.btn-group
 					button(type='button', id='delete_deck', class='btn btn-danger', data-toggle='modal', href='#delete_deck_modal') Delete Deck
 					button(type='button', id='save_deck', class='btn btn-info') Save Deck

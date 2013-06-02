@@ -38,6 +38,7 @@ function MTGNodeDeckBuilderKernel(){
 	var $save_button = $('#save_deck');
 	var $delete_button = $('#delete_deck_confirm');
 	var $deck_name = $('#deck_name');
+	var $card_counter = $('#card_counter');
 
 	// Objects
 	function Card(set_code, number){
@@ -59,17 +60,27 @@ function MTGNodeDeckBuilderKernel(){
 		}
 
 		this.addCard = function(set_code, number){
+			// Updating model
 			this.cards.push(new Card(set_code, number));
+			// Updating counter
+			$card_counter.text(this.cards.length);
 		}
 
 		this.removeCard = function(id){
+			// Updating model
 			this.cards.splice(id, 1);
+			// Updating counter
+			$card_counter.text(this.cards.length);
 		}
 
 		this.reinitialize = function(id, name){
 			this.id = id;
 			this.name = name;
 			this.cards = [];
+
+			// Updating counter
+			$card_counter.text(0);
+
 		}
 	}
 	this.DECK = new Deck();
@@ -153,7 +164,8 @@ function MTGNodeDeckBuilderKernel(){
 
 		// Setting infos
 		$deck_name.val(name);
-		self.DECK.setName(name);
+		self.DECK.reinitialize(0, name);
+		$right_panel.empty();
 
 		// Closing the modal
 		$("#new_deck_modal").modal('hide');
