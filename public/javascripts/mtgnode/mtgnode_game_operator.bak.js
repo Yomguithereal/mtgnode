@@ -9,12 +9,10 @@
 |
 | Dependancies :
 |     * Class Messager
-|     * Class Deck
-|     * Class Hand
-|     * Class Game
 */
 
-function MTGNodeGameOperator(socket, room, user){
+function MTGNodeGameOperator(){
+
 
 	/*
 	| ------------------
@@ -22,25 +20,29 @@ function MTGNodeGameOperator(socket, room, user){
 	| ------------------
 	*/
 
-	// Object Operation
-	//-------------------
+	// Helper Classes //
+	var Messager = new Messager(socket, room);
+
+	// Object Operation and Configuration //
 	var operator = this;
-
-	this.socket = socket;
-	this.room = room;
-	this.user = user;
-
+	this.last_message = 'none';
+	this.generic_message = 'gameUpdate';
+	this.max_zindex = 30;
+	this.hand_offset = 30;
 	this.drag_grid = [10, 10];
 
-
-	// Interface Variables
-	//--------------------
-	var $update_life = $(".update-life.mine");
-	var $starting_player = $("#starting_player");
+	// Areas //
 	var $card_viewer = $('#card_viewer_widget');
 	var $game_area = $('.game-area');
 	var $game_zone = $('.game-emplacement');
 	var $helper_block = $('#helper_block');
+
+	// Values //
+	var card_back_src = $("#CARDBACK").val();
+
+	// Interface //
+	var $update_life = $(".update-life.mine");
+	var $starting_player = $("#starting_player");
 
 	var $my_life_counter = $(".life-counter.mine");
 	var $my_message_receiver = $(".message-receiver.mine");
@@ -50,76 +52,115 @@ function MTGNodeGameOperator(socket, room, user){
 	var $opponent_message_receiver = $(".message-receiver.opponent");
 	var $opponent_turn_indicator = $(".turn-indicator.opponent");
 
-
-	// Globals Values
-	//-------------------
-	var my_class = '.mine';
-	var opponent_class = '.opponent';
+	// Generic Cards //
 	var card_to_see = '.card-min';
-	var card_back_src = $("#CARDBACK").val();
+
+	// My Cards //
+	var my_card = '.card-min.mine';
+	var my_deck_card = '.card-min.in-deck.mine';
+	var my_hand_card = '.card-min.in-hand.mine';
+	var my_ingame_card = '.card-min.in-game.mine';
+	var my_hand_area = '.hand-emplacement.mine';
+	var my_game_area = '.game-emplacement.mine';
+	var my_snap_to = '.hand-emplacement.mine, .deck-emplacement.mine, .cemetery-emplacement.mine';
+
+	// Opponent Cards //
+	var opponent_deck = '.deck-emplacement.opponent';
+	var opponent_deck_card = '.card-min.in-deck.opponent';
+	var opponent_hand_card = '.card-min.in-hand.opponent';
+	var opponent_hand_area = '.hand-emplacement.opponent';
+	var opponent_ingame_card = '.card-min.in-game.opponent';
 
 
-	// Messager & Helper
+	/*
+	| ------------------
+	|  Helpers
+	| ------------------
+	*/
+
+	// Function generating opponent's cards selectors
+	function opponent_card(card_id){
+		return $('#card'+card_id+'_opponent');
+	}
+
+	// Function used to update cards z-index
+	function update_zindex($card){
+		operator.max_zindex += 1;
+		$card.css('z-index', self.max_zindex);
+	}
+
+	// Function to print message
+	function notify($receiver, text, type){
+		type = type || 'valid';
+
+		$receiver.text(text);
+		$receiver.removeClass('valid error');
+		$receiver.addClass(type);
+	}
+
+	/*
+	| ------------------
+	|  Model
+	| ------------------
+	*/
+
+	// Deck Abstraction
 	//-------------------
-	var MESSAGER = new Messager(socket, room);
-	var HELPER = new Helper();
+	function Deck(count){
+		this.count = count;
+
+		this.decrement = function(){
+			this.count -= 1;
+		}
+	}
+	var MY_DECK = new Deck($('.in-deck.mine').length);
+	var OP_DECK = new Deck($('.in-deck.opponent').length);
 
 
-	// Registering Decks
+
+
+	// Hand Abstraction
 	//-------------------
-	var my_deck_config = {
-		count : $('.in-deck'+my_class).length,
-		area : '.deck-emplacement'+my_class,
-		cards : '.card-min.in-deck'+my_class,
-		helper : HELPER,
-		counter : false
-	};
+	function Hand(hand_area, hand_cards){
+		var self = this;
+		this.count = 0;
+		this.left = $(hand_area).position().left;
 
-	var opponent_deck_config = {
-		count : $('.in-deck'+opponent_class).length,
-		area : '.deck-emplacement'+opponent_class,
-		cards : '.card-min.in-deck'+opponent_class,
-		helper : HELPER,
-		counter : false
-	};
+		this.increment = function(){
 
-	var MY_DECK = new Deck(my_deck_config);
-	var OP_DECK = new Deck(opponent_deck_config);
+			// Updating counter
+			this.count += 1;
 
+			// Reorganizing hand
+			this.reorganize();
+		}
+		this.decrement = function(){
 
-	// Registering Games
-	//-------------------
-	var my_game_config = {
-		area : '.game-emplacement'+my_class,
-		cards : '.card-min.in-game'+my_class
-	};
+			// Updating counter
+			this.count -= 1;
 
-	var opponent_game_config = {
-		area : '.game-emplacement'+opponent_class,
-		cards : '.card-min.in-game'+opponent_class
-	};
-
-	var MY_GAME = new Game(my_game_config);
-	var OP_GAME = new Game(opponent_game_config);
+			// Reorganizing hand
+			this.reorganize();
+		}
+		this.reorganize = function(){
+			$($(hand_cards).get().reverse()).each(function(i){
+				var to_position = self.left + (operator.hand_offset*i);
+				update_zindex($(this));
+				$(this).animate({'left' : to_position}, 'fast');
+			});
+		}
+	}
+	var MY_HAND = new Hand(my_hand_area, my_hand_card);
+	var OP_HAND = new Hand(opponent_hand_area, opponent_hand_card);
 
 
-	// Registering Hands
-	//-------------------
-	var my_hand_config = {
-		area : '.hand-emplacement'+my_class,
-		cards : '.card-min.in-hand'+my_class,
-		counter : false
-	};
-
-	var opponent_hand_config = {
-		area : '.hand-emplacement'+opponent_class,
-		cards : '.card-min.in-hand'+opponent_class,
-		counter : false
-	};
-
-	var MY_HAND = new Hand(my_hand_config);
-	var OP_HAND = new Hand(opponent_hand_config);
-
+	// Cemetery Abstraction
+	//---------------------
+	function Cemetery(){
+		this.count = 0;
+	}
+	var MY_CEMETERY = new Cemetery();
+	var OP_CEMETERY = new Cemetery();
 
 
 	/*
@@ -129,9 +170,7 @@ function MTGNodeGameOperator(socket, room, user){
 	*/
 
 	// Deck Shuffling
-	var shuffle = MY_DECK.shuffleFromClient();
-	MESSAGER.send('shufflingDeck', shuffle);
-
+	shuffle_my_deck();
 
 	// Card Viewer Widget
 	$game_area.on('mouseover', card_to_see, function(e){
@@ -147,7 +186,7 @@ function MTGNodeGameOperator(socket, room, user){
 	if($starting_player.hasClass('mine')){
 
 		// Message
-		HELPER.notify($my_message_receiver, 'You start');
+		notify($my_message_receiver, 'You start');
 
 		// Indicator
 		$my_turn_indicator.addClass('btn-success my-turn');
@@ -156,7 +195,7 @@ function MTGNodeGameOperator(socket, room, user){
 	else{
 
 		// Message
-		HELPER.notify($opponent_message_receiver, 'Your opponent starts', 'error');
+		notify($opponent_message_receiver, 'Your opponent starts', 'error');
 
 		// Indicator
 		$my_turn_indicator.addClass('btn-danger');
@@ -170,7 +209,34 @@ function MTGNodeGameOperator(socket, room, user){
 	| -------------------------
 	*/
 
-	/*
+	// Shuffling Deck
+	//----------------
+	function shuffle_my_deck(){
+		var $cards = $(my_deck_card);
+		$cards.shuffle();
+
+		// Preparing data to send
+		var shuffle = [];
+		$(my_deck_card).each(function(i){
+			shuffle.push($(this).attr("card_id"));
+
+			// Sending data to opponent
+			if(i == $cards.length-1){
+				new message('shufflingDeck', shuffle).send();
+			}
+		});
+
+
+	}
+
+	function shuffle_opponent_deck(shuffle){
+
+		// Reorganizing opponent's deck
+		$.each(shuffle, function(i){
+			$(opponent_deck).append($(opponent_card(shuffle[i])));
+		});
+	}
+
 	// Drawing a Card
 	//----------------
 
@@ -472,31 +538,21 @@ function MTGNodeGameOperator(socket, room, user){
 		}
 	});
 
-*/
-
 	/*
 	| -------------------------
 	|  From Server Interactions
 	| -------------------------
 	*/
 
-	socket.on(MESSAGER.generic_message, function(data){
+	socket.on(this.generic_message, function(data){
 
 		// Switch on message kind
 		switch(data.head){
 
 			// Shuffling Deck
 			case 'shufflingDeck' :
-				OP_DECK.shuffleFromServer(data.body);
+				shuffle_opponent_deck(data.body);
 				break;
-
-
-
-
-
-
-				/*
-
 
 			// Drawing a Card
 			case 'drawingCard' :
@@ -562,7 +618,6 @@ function MTGNodeGameOperator(socket, room, user){
 				start_turn($my_turn_indicator);
 				break;
 
-		*/
 
 			default:
 				break;

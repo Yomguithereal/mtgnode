@@ -6,19 +6,10 @@
 |
 | Author : PLIQUE Guillaume
 | Version : 1.0
+|
+| Dependancies :
+|     * MTGNode Game Operator
 */
-
-// Determining room
-var socket = io.connect('/game');
-var room = location.href.split('?')[1];
-
-// User info
-var user = {
-	id : $("#USER_ID").val(),
-	name : $("#USERNAME").val(),
-	game_side : false,
-	opponent_side : false
-};
 
 function MTGNodeGameKernel(){
 
@@ -28,6 +19,20 @@ function MTGNodeGameKernel(){
 	|  Initialization
 	| ---------------
 	*/
+
+	// Determining room
+	var socket = io.connect('/game');
+	var room = location.href.split('?')[1];
+
+	// User info
+	var user = {
+		id : $("#USER_ID").val(),
+		name : $("#USERNAME").val(),
+		game_side : false,
+		opponent_side : false
+	};
+
+	// Object Operation
 	var self = this;
 	this.ready = false;
 
@@ -113,7 +118,7 @@ function MTGNodeGameKernel(){
 
 			// Ready?
 			if(self.ready){
-				MTGNodeGameOperator();
+				MTGNodeGameOperator(socket, room, user);
 			}
 			else{
 				self.ready = true;
@@ -131,7 +136,7 @@ function MTGNodeGameKernel(){
 
 			// Ready?
 			if(self.ready){
-				MTGNodeGameOperator();
+				MTGNodeGameOperator(socket, room, user);
 			}
 			else{
 				self.ready = true;
