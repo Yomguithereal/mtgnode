@@ -70,14 +70,21 @@ function IoHub(port_to_listen){
 				// Game is now ready to start, we notify the client
 				var game_side = 'player2';
 				socket.emit('gameSide', game_side);
-				io.of('/game').in(data.room).emit('chooseDeck');
+
+
+				// Determining who is going to start
+				var starting_player_number = Math.floor(Math.random() * 2) + 1;
+
+				io.of('/game').in(data.room).emit('chooseDeck', starting_player_number);
+
 			}
 
 
 		});
 
 		socket.on('debugGame', function(){
-			socket.emit('chooseDeck');
+			var starting_player_number = Math.floor(Math.random() * 2) + 1;
+			socket.emit('chooseDeck', starting_player_number);
 		});
 
 		// Sending chosen deck to opponent

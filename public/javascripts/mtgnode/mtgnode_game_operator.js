@@ -36,8 +36,15 @@ function MTGNodeGameOperator(){
 
 	// Interface //
 	var $update_life = $(".update-life.mine");
+	var $starting_player = $("#starting_player");
+
 	var $my_life_counter = $(".life-counter.mine");
+	var $my_message_receiver = $(".message-receiver.mine");
+	var $my_turn_indicator = $(".turn-indicator.mine");
+
 	var $opponent_life_counter = $(".life-counter.opponent");
+	var $opponent_message_receiver = $(".message-receiver.opponent");
+	var $opponent_turn_indicator = $(".turn-indicator.opponent");
 
 	// Generic Cards //
 	var card_to_see = '.card-min';
@@ -99,6 +106,15 @@ function MTGNodeGameOperator(){
 	function update_zindex($card){
 		operator.max_zindex += 1;
 		$card.css('z-index', self.max_zindex);
+	}
+
+	// Function to print message
+	function notify($receiver, text, type){
+		type = type || 'valid';
+
+		$receiver.text(text);
+		$receiver.removeClass('valid error');
+		$receiver.addClass(type);
 	}
 
 	/*
@@ -184,6 +200,26 @@ function MTGNodeGameOperator(){
 			$card_viewer.attr('src', src_to_see);
 		}
 	});
+
+	// Determining the starting player
+	if($starting_player.hasClass('mine')){
+
+		// Message
+		notify($my_message_receiver, 'You start');
+
+		// Indicator
+		$my_turn_indicator.addClass('btn-success my-turn');
+		$opponent_turn_indicator.addClass('btn-danger');
+	}
+	else{
+
+		// Message
+		notify($opponent_message_receiver, 'Your opponent starts', 'error');
+
+		// Indicator
+		$my_turn_indicator.addClass('btn-danger');
+		$opponent_turn_indicator.addClass('btn-success my-turn');
+	}
 
 
 	/*
@@ -435,7 +471,7 @@ function MTGNodeGameOperator(){
 	//------------------
 
 	// Logic
-	function draw_full_hand(cards, deck, hand){
+	function draw_full_hand(cards){
 		for(var i = 0; i < 7; i++){
 			$(cards).eq(0).trigger('click');
 		}
@@ -450,7 +486,7 @@ function MTGNodeGameOperator(){
 			switch(key){
 
 				case 'drawFullHand' :
-					draw_full_hand(my_deck_card, MY_DECK, MY_HAND);
+					draw_full_hand(my_deck_card);
 
 					// Sending information to server
 					new message('drawingFullHand').send();
@@ -488,6 +524,32 @@ function MTGNodeGameOperator(){
 
 		// Sending information to server
 		new message('updatingLife', type).send();
+	});
+
+	// Finish Turn
+	//------------------
+
+	// Logic
+	function finish_turn($indicator){
+		$indicator.removeClass('my-turn btn-success');
+		$indicator.addClass('btn-danger');
+	}
+
+	function start_turn($indicator){
+		$indicator.removeClass('btn-danger');
+		$indicator.addClass('btn-success my-turn');
+	}
+
+	// Action
+	$my_turn_indicator.click(function(){
+		// Preventing if not my turn
+		var $indicator = $(this);
+		if($indicator.hasClass('my-turn')){
+			finish_turn($indicator);
+			start_turn($opponent_turn_indicator);
+
+			new message('finishingTurn').send();
+		}
 	});
 
 	/*
@@ -551,7 +613,7 @@ function MTGNodeGameOperator(){
 
 			// Draw Full Hand
 			case 'drawFullHand' :
-				draw_full_hand(opponent_deck_card, OP_DECK, OP_HAND);
+				draw_full_hand(opponent_deck_card);
 				break;
 
 			// Opponent Reorganize its hand
@@ -563,6 +625,13 @@ function MTGNodeGameOperator(){
 			case 'updatingLife' :
 				update_life($opponent_life_counter, data.body);
 				break;
+
+			// Finishing Turn
+			case 'finishingTurn' :
+				finish_turn($opponent_turn_indicator);
+				start_turn($my_turn_indicator);
+				break;
+
 
 			default:
 				break;

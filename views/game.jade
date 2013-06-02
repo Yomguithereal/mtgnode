@@ -2,20 +2,27 @@ extends layout
 include mixins/cards
 
 block content
+	input#starting_player(type='hidden')
 	div#mainframe.clearfix
 		div#helper_block
 			div#top_helper_block
-				div#life_block
+				div.life-block
 					button(type='button', class='btn player2 lose-life update-life') -
 					span(class='life-counter player2') 20
 					button(type='button', class='btn player2 gain-life update-life') +
+				div.message-receiver.player2 &nbsp;
+				div.turn-block
+					button(type='button', class='btn player2 turn-indicator') &nbsp;
 			div#card_viewer_block
 				mixin card_viewer_widget()
 			div#bottom_helper_block
-				div#life_block
+				div.life-block
 					button(type='button', class='btn player1 lose-life update-life') -
 					span(class='life-counter player1') 20
 					button(type='button', class='btn player1 gain-life update-life') +
+				div.message-receiver.player1 &nbsp;
+				div.turn-block
+					button(type='button', class='btn player1 turn-indicator') &nbsp;
 		div#game_block.game-area
 			div#top_game_block.player2.player-side
 				div#top_handlogic.deck-and-hand.player2

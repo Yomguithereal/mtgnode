@@ -43,6 +43,7 @@ function MTGNodeGameKernel(){
 	var $start_game_modal = $("#start_game_modal");
 	var $start_game = $("#start_game");
 	var $deck_select = $("#deck_select");
+	var $starting_player = $("#starting_player");
 
 	/*
 	| ------------------
@@ -77,8 +78,17 @@ function MTGNodeGameKernel(){
 	});
 
 	// Triggering deck modal
-	socket.on('chooseDeck', function(){
+	socket.on('chooseDeck', function(data){
 		$start_game_modal.modal('show');
+
+		// Updating starting player info
+		$starting_player.addClass('player'+data);
+		if(user.opponent_side == 'player'+data){
+			$starting_player.addClass('mine');
+		}
+		else{
+			$starting_player.addClass('opponent');
+		}
 
 		if(self.debug){
 			$start_game.trigger('click');
