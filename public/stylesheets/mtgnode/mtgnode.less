@@ -24,6 +24,32 @@
 | -------------------------------------------------------------------
 */
 
+.transform(...) {
+  -webkit-transform: @arguments;
+  -moz-transform: @arguments;
+  -o-transform: @arguments;
+  -ms-transform: @arguments;
+  transform: @arguments;
+}
+
+.rotation(@deg){
+  .transform(rotate(@deg));
+}
+
+.transition(@duration:0.2s, @ease:ease-out) {
+  -webkit-transition: all @duration @ease;
+  -moz-transition: all @duration @ease;
+  -o-transition: all @duration @ease;
+  transition: all @duration @ease;
+}
+
+.transform-transition(@duration:0.2s, @ease:ease-out) {
+  -webkit-transition: -webkit-transform @duration @ease;
+  -moz-transition: -moz-transform @duration @ease;
+  -o-transition: -o-transform @duration @ease;
+  transition: transform @duration @ease;
+}
+
 /*
 | -------------------------------------------------------------------
 |  Layout
@@ -209,14 +235,15 @@ BODY{
 	cursor:pointer;
 
 	position: absolute;
+	.transform-transition(0.2s);
 
 
 	// Tapped Card
 	&.tapped{
-		-webkit-transform: rotate(90deg);
-		-moz-transform: rotate(90deg);
-		transform: rotate(90deg);
+		.rotation(90deg);
+		.transform-transition(0.2s);
 	}
+
 
 	// In deck card
 	&.in-deck{

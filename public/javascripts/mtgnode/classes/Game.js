@@ -47,4 +47,9 @@ function Game(config){
 		hand.increment();
 	}
 
+	// Tap Card
+	this.tap = function($card){
+		$card.toggleClass('tapped');
+	}
+
 }

@@ -274,28 +274,25 @@ function MTGNodeGameOperator(socket, room, user){
 		}
 	});
 
-	/*
+
 
 	// Tapping Cards
 	//------------------
 
-	// Logic
-	function tap_card($card){
-		$card.toggleClass('tapped');
-	}
-
-	$game_area.on('contextmenu', my_ingame_card, function(e){
+	$game_area.on('click', MY_GAME.cards, function(e){
 		var $card = $(this);
 		e.preventDefault();
 
 		// Tapping Card
-		tap_card($card);
+		MY_GAME.tap($card);
 
 		// Sending information to server
-		new message('tappingCard', $card.attr('card_id')).send();
+		MESSAGER.send('tappingCard', $card.attr('card_id'));
 
 		return false;
 	});
+
+	/*
 
 	// Batch Untapping
 	//------------------
@@ -475,16 +472,18 @@ function MTGNodeGameOperator(socket, room, user){
 				HELPER.conceal_card($card);
 				break;
 
+			// Tapping a Card
+			case 'tappingCard' :
+				OP_GAME.tap(HELPER.opponent_card(data.body));
+				break;
+
 			/*
 
 
 
 
 
-			// Tapping a Card
-			case 'tappingCard' :
-				tap_card(opponent_card(data.body));
-				break;
+
 
 			// Batch Untapping
 			case 'batchUntapping' :
