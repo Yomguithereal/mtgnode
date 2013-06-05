@@ -350,7 +350,6 @@ function MTGNodeGameOperator(socket, room, user){
 		}
 	});
 
-	/*
 
 	// Updating Life
 	//------------------
@@ -374,8 +373,9 @@ function MTGNodeGameOperator(socket, room, user){
 		update_life($my_life_counter, type);
 
 		// Sending information to server
-		new message('updatingLife', type).send();
+		MESSAGER.send('updatingLife', type);
 	});
+
 
 	// Finish Turn
 	//------------------
@@ -399,11 +399,11 @@ function MTGNodeGameOperator(socket, room, user){
 			finish_turn($indicator);
 			start_turn($opponent_turn_indicator);
 
-			new message('finishingTurn').send();
+			MESSAGER.send('finishingTurn');
 		}
 	});
 
-*/
+
 
 	/*
 	| -------------------------
@@ -474,19 +474,6 @@ function MTGNodeGameOperator(socket, room, user){
 				OP_DECK.draw_full_hand();
 				break;
 
-			/*
-
-
-
-
-
-
-
-
-
-
-
-
 			// Updating Life Counter
 			case 'updatingLife' :
 				update_life($opponent_life_counter, data.body);
@@ -497,8 +484,6 @@ function MTGNodeGameOperator(socket, room, user){
 				finish_turn($opponent_turn_indicator);
 				start_turn($my_turn_indicator);
 				break;
-
-		*/
 
 			default:
 				break;
