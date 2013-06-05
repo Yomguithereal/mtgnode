@@ -72,4 +72,13 @@ function Deck(config){
 		this.decrement();
 	}
 
+	// Draw Full Hand
+	this.draw_full_hand = function(){
+
+		// Looping seven times
+		for(var i = 0; i < 7; i++){
+			$(this.cards).eq(0).trigger('click');
+		}
+	}
+
 }

@@ -296,7 +296,6 @@ function MTGNodeGameOperator(socket, room, user){
 	// Batch Untapping
 	//------------------
 
-	// Action
 	$.contextMenu({
 		selector: MY_GAME.area,
 		zIndex : 100000,
@@ -324,31 +323,22 @@ function MTGNodeGameOperator(socket, room, user){
 		}
 	});
 
-	/*
 
 	// Drawing Full Hand
 	//------------------
 
-	// Logic
-	function draw_full_hand(cards){
-		for(var i = 0; i < 7; i++){
-			$(cards).eq(0).trigger('click');
-		}
-	}
-
-	// Action
 	$.contextMenu({
-		selector: my_deck_card,
+		selector: MY_DECK.area,
 		zIndex : 100001,
 		callback: function(key, options) {
 
 			switch(key){
 
 				case 'drawFullHand' :
-					draw_full_hand(my_deck_card);
+					MY_DECK.draw_full_hand();
 
 					// Sending information to server
-					new message('drawingFullHand').send();
+					MESSAGER.send('drawingFullHand');
 					break;
 
 				default :
@@ -359,6 +349,8 @@ function MTGNodeGameOperator(socket, room, user){
 			"drawFullHand": {name: "Draw a full hand", icon: false},
 		}
 	});
+
+	/*
 
 	// Updating Life
 	//------------------
@@ -477,6 +469,11 @@ function MTGNodeGameOperator(socket, room, user){
 				OP_GAME.batch_untap();
 				break;
 
+			// Draw Full Hand
+			case 'drawFullHand' :
+				OP_DECK.draw_full_hand();
+				break;
+
 			/*
 
 
@@ -487,10 +484,7 @@ function MTGNodeGameOperator(socket, room, user){
 
 
 
-			// Draw Full Hand
-			case 'drawFullHand' :
-				draw_full_hand(opponent_deck_card);
-				break;
+
 
 
 			// Updating Life Counter
