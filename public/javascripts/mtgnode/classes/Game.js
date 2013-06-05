@@ -52,4 +52,9 @@ function Game(config){
 		$card.toggleClass('tapped');
 	}
 
+	// Batch Untap
+	this.batch_untap = function(){
+		$(this.cards+'.tapped').removeClass('tapped');
+	}
+
 }

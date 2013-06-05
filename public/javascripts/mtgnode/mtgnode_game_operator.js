@@ -292,19 +292,13 @@ function MTGNodeGameOperator(socket, room, user){
 		return false;
 	});
 
-	/*
 
 	// Batch Untapping
 	//------------------
 
-	// Logic
-	function batch_untap(cards){
-		$(cards+'.tapped').removeClass('tapped');
-	}
-
 	// Action
 	$.contextMenu({
-		selector: my_game_area,
+		selector: MY_GAME.area,
 		zIndex : 100000,
 		callback: function(key, options) {
 
@@ -313,13 +307,12 @@ function MTGNodeGameOperator(socket, room, user){
 				case 'untapAll' :
 
 					// Do not activate if there is no tapped card
-					if($(my_ingame_card+'.tapped').length == 0){ break; }
-					console.log("test");
+					if($(MY_GAME.cards+'.tapped').length == 0){ break; }
 
-					batch_untap(my_ingame_card);
+					MY_GAME.batch_untap();
 
 					// Sending information to server
-					new message('batchUntapping').send();
+					MESSAGER.send('batchUntapping');
 					break;
 
 				default :
@@ -330,6 +323,8 @@ function MTGNodeGameOperator(socket, room, user){
 			"untapAll": {name: "Untap all cards", icon: false},
 		}
 	});
+
+	/*
 
 	// Drawing Full Hand
 	//------------------
@@ -477,6 +472,11 @@ function MTGNodeGameOperator(socket, room, user){
 				OP_GAME.tap(HELPER.opponent_card(data.body));
 				break;
 
+			// Batch Untapping
+			case 'batchUntapping' :
+				OP_GAME.batch_untap();
+				break;
+
 			/*
 
 
@@ -485,10 +485,7 @@ function MTGNodeGameOperator(socket, room, user){
 
 
 
-			// Batch Untapping
-			case 'batchUntapping' :
-				batch_untap(opponent_ingame_card);
-				break;
+
 
 			// Draw Full Hand
 			case 'drawFullHand' :
