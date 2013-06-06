@@ -35,8 +35,15 @@ function Hand(config){
 	this.decrement = function(){
 		this.count -= 1;
 		this.reorganize();
-		if($(this.cards).length * this.visual_offset < this.width-this.base_visual_offset){
+
+		// Unsqueeze hand
+		if((this.width - (this.count * this.visual_offset)) > this.visual_offset){
 			this.visual_offset += 10;
+
+			// Cannot go further than base
+			if(this.visual_offset > this.base_visual_offset){
+				this.visual_offset = this.base_visual_offset;
+			}
 		}
 	}
 
