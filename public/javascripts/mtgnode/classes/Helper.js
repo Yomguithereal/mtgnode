@@ -40,18 +40,12 @@ function Helper(config){
 
 	// Function to reveal a card
 	this.reveal_card = function($card){
-		var $img = $card.children('img');
-		if($img.attr('src') == this.card_back_src){
-			$img.attr('src', $img.attr('true_src'));
-		}
+		$card.removeClass('flipped');
 	}
 
 	// Function to conceal a card
 	this.conceal_card = function($card){
-		var $img = $card.children('img');
-		if($img.attr('src') != this.card_back_src){
-			$img.attr('src', this.card_back_src);
-		}
+		$card.addClass('flipped');
 	}
 
 }

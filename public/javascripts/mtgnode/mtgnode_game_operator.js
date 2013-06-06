@@ -323,12 +323,11 @@ function MTGNodeGameOperator(socket, room, user){
 		}
 	});
 
-
 	// Drawing Full Hand
 	//------------------
 
 	$.contextMenu({
-		selector: MY_DECK.area,
+		selector: MY_DECK.cards,
 		zIndex : 100001,
 		callback: function(key, options) {
 

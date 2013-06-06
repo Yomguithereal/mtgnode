@@ -133,7 +133,7 @@ function MTGNodeGameKernel(){
 		// Getting them ajaxwise
 		$.post('ajax/deck_cards', {deck_id : opponent_deck_id, game_side : 'opponent'}, function(data){
 			$('.deck-emplacement.'+user.opponent_side).append(data);
-
+			console.log(data);
 			// Ready?
 			if(self.ready){
 				MTGNodeGameOperator(socket, room, user);

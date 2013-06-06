@@ -25,30 +25,80 @@
 */
 
 .transform(...) {
-  -webkit-transform: @arguments;
-  -moz-transform: @arguments;
-  -o-transform: @arguments;
-  -ms-transform: @arguments;
-  transform: @arguments;
+	-webkit-transform: @arguments;
+	-moz-transform: @arguments;
+	-o-transform: @arguments;
+	-ms-transform: @arguments;
+	transform: @arguments;
 }
 
 .rotation(@deg){
-  .transform(rotate(@deg));
+	.transform(rotate(@deg));
+}
+
+.rotate-3d(@arg1, @arg2, @arg3, @arg4){
+	-webkit-transform: rotate3d(@arg1, @arg2, @arg3, @arg4) translate3d(0,0,0);
+	-moz-transform: rotate3d(@arg1, @arg2, @arg3, @arg4) translate3d(0,0,0);
+	-ms-transform: rotate3d(@arg1, @arg2, @arg3, @arg4) translate3d(0,0,0);
+	-o-transform: rotate3d(@arg1, @arg2, @arg3, @arg4) translate3d(0,0,0);
+	transform: rotate3d(@arg1, @arg2, @arg3, @arg4) translate3d(0,0,0);
 }
 
 .transition(@duration:0.2s, @ease:ease-out) {
-  -webkit-transition: all @duration @ease;
-  -moz-transition: all @duration @ease;
-  -o-transition: all @duration @ease;
-  transition: all @duration @ease;
+	-webkit-transition: all @duration @ease;
+	-moz-transition: all @duration @ease;
+	-o-transition: all @duration @ease;
+	transition: all @duration @ease;
 }
 
-.transform-transition(@duration:0.2s, @ease:ease-out) {
-  -webkit-transition: -webkit-transform @duration @ease;
-  -moz-transition: -moz-transform @duration @ease;
-  -o-transition: -o-transform @duration @ease;
-  transition: transform @duration @ease;
+.transform-transition(@duration:0.2s, @ease:ease) {
+	-webkit-transition: -webkit-transform @duration @ease;
+	-moz-transition: -moz-transform @duration @ease;
+	-o-transition: -o-transform @duration @ease;
+	transition: transform @duration @ease;
 }
+
+.transform-origin(@origin){
+	-webkit-transform-origin: @origin;
+	-moz-transform-origin: @origin;
+	transform-origin: @origin;
+	-o-transform-origin: @origin;
+	-ms-transform-origin: @origin;
+}
+
+.preserve-3d(){
+	-webkit-transform-style: preserve-3d;
+	-moz-transform-style: preserve-3d;
+	transform-style: preserve-3d;
+	-o-transform-style: preserve-3d;
+	-ms-transform-style: preserve-3d;
+}
+
+.perspective(@distance){
+	-webkit-perspective: @distance;
+	-moz-perspective: @distance;
+	perspective: @distance;
+	-o-perspective: @distance;
+	-ms-perspective: @distance;
+}
+
+.backface-visibility(@visibility){
+	-webkit-backface-visibility: @visibility;
+	-moz-backface-visibility: @visibility;
+	backface-visibility: @visibility;
+	-o-backface-visibility: @visibility;
+	-ms-backface-visibility: @visibility;
+}
+
+/*
+| -------------------------------------------------------------------
+|  Constants
+| -------------------------------------------------------------------
+*/
+
+@card-min-width : 78px;
+@card-min-height : 111px;
+
 
 /*
 | -------------------------------------------------------------------
@@ -148,7 +198,7 @@ BODY{
 .deck-and-hand{
 	position:absolute;
 	width:974px;
-	height:108px;
+	height:@card-min-height;
 
 	&.player2{
 		top:0px;
@@ -162,15 +212,15 @@ BODY{
 }
 
 .hand-emplacement{
-	height: 108px;
+	height:@card-min-height;
 	width: 894px;
 	position: absolute;
 	left:80px;
 }
 
 .deck-emplacement{
-	width:79px;
-	height:108px;
+	width:@card-min-width;
+	height:@card-min-height;
 	position: absolute;
 
 	&.player2{
@@ -185,8 +235,8 @@ BODY{
 }
 
 .cemetery-emplacement{
-	width:79px;
-	height:108px;
+	width:@card-min-width;
+	height:@card-min-height;
 	position: absolute;
 
 	z-index:20;
@@ -229,19 +279,20 @@ BODY{
 */
 
 .card-min{
-	width:79px;
-	height:108px;
-
+	width:@card-min-width;
+	height:@card-min-height;
 	cursor:pointer;
 
 	position: absolute;
-	.transform-transition(0.2s);
+	.transform-transition(0.3s);
+	.preserve-3d();
+	.perspective(100);
+
 
 
 	// Tapped Card
 	&.tapped{
-		.rotation(90deg);
-		.transform-transition(0.2s);
+		.transform(rotate(90deg) scale3d(1,1,1) translate3d(0,0,0));
 	}
 
 
@@ -259,11 +310,32 @@ BODY{
 	&.deck-builder{
 		position:relative;
 	}
+
+	// Flipped
+	&.flipped{
+		.transform(rotateY(-180deg) translate3d(0,0,0));
+	}
+
 }
 
+.front-side, .back-side{
+	.transform(rotateZ(0px) translate3d(0,0,0));
+	// .backface-visibility(hidden);
+	display:block;
+}
+
+.back-side{
+	.transform(rotateY(180deg) translateZ(1px) translate3d(0,0,0));
+}
+
+.front-side{
+	margin-top:-111px;
+}
+
+
 .card-min img{
-	width:79px;
-	height:108px;
+	width:@card-min-width;
+	height:@card-min-height;
 }
 
 #card_viewer_widget{

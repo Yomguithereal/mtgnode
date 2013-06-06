@@ -66,7 +66,7 @@ function Deck(config){
 		$card.addClass('in-hand');
 
 		// Updating its z-index
-		this.helper.update_zindex($card);
+		// this.helper.update_zindex($card);
 
 		hand.increment();
 		this.decrement();

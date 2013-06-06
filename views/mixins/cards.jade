@@ -3,12 +3,14 @@ mixin card_deckbuilder(card_object)
 	img(class='card-min deck-builder', src="#{CARD_BASE_URL}#{card_object.set_code}/#{card_object.number}.jpg", card_number='#{card_object.number}', set_code='#{card_object.set_code}')
 
 mixin card_mine(card_object, i)
-	div(id='card#{i}_mine', card_id='#{i}', class='card-min draggable mine in-deck')
-		img(true_src="#{CARD_BASE_URL}#{card_object.set_code}/#{card_object.number}.jpg", src="/images/card-back.jpeg")
+	div(id='card#{i}_mine', card_id='#{i}', class='card-min draggable mine in-deck flipped')
+		img.back-side(src="/images/card-back.jpeg")
+		img.front-side(src="#{CARD_BASE_URL}#{card_object.set_code}/#{card_object.number}.jpg")
 
 mixin card_opponent(card_object, i)
-	div(id='card#{i}_opponent', card_id='#{i}', class='card-min draggable opponent in-deck')
-		img(true_src="#{CARD_BASE_URL}#{card_object.set_code}/#{card_object.number}.jpg", src="/images/card-back.jpeg")
+	div(id='card#{i}_opponent', card_id='#{i}', class='card-min draggable opponent in-deck flipped')
+		img.back-side(src="/images/card-back.jpeg")
+		img.front-side(src="#{CARD_BASE_URL}#{card_object.set_code}/#{card_object.number}.jpg")
 
 mixin card_viewer_widget()
 	img(id='card_viewer_widget', src='/images/card-back.jpeg')
