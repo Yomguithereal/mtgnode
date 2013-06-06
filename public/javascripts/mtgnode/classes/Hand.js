@@ -17,11 +17,13 @@ function Hand(config){
 
 	// Model
 	this.count = 0;
-	this.visual_offset = 30;
+	this.base_visual_offset = 77;
+	this.visual_offset = this.base_visual_offset;
 
 	// DOM
 	this.area = config.area;
 	this.left = $(this.area).position().left;
+	this.width = $(this.area).width();
 	this.cards = config.cards;
 	this.counter = config.counter;
 	this.helper = config.helper;
@@ -33,6 +35,9 @@ function Hand(config){
 	this.decrement = function(){
 		this.count -= 1;
 		this.reorganize();
+		if($(this.cards).length * this.visual_offset < this.width-this.base_visual_offset){
+			this.visual_offset += 10;
+		}
 	}
 
 	// Gaining a card
@@ -43,7 +48,15 @@ function Hand(config){
 
 	// Reorganize Hand
 	this.reorganize = function(){
-		$($(this.cards).get().reverse()).each(function(i){
+
+		var $cards = $(this.cards);
+
+		// Checking remaining place in hand
+		if($cards.length * this.visual_offset > this.width-this.base_visual_offset){
+			this.visual_offset -= 10;
+		}
+
+		$($cards.get().reverse()).each(function(i){
 
 			// Getting to position
 			var to_position = self.left + (self.visual_offset*i);

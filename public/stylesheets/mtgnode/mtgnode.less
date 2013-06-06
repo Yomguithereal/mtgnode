@@ -90,6 +90,12 @@
 	-ms-backface-visibility: @visibility;
 }
 
+.box-sizing(@property:border-box){
+	box-sizing:@property;
+	-moz-box-sizing:@property;
+	-webkit-box-sizing:@property;
+}
+
 /*
 | -------------------------------------------------------------------
 |  Constants
@@ -291,7 +297,7 @@ BODY{
 
 	// Tapped Card
 	&.tapped{
-		.transform(rotate(90deg) scale3d(1,1,1) translate3d(0,0,0));
+		.transform(rotate(90deg) scale(1) translate3d(0,0,0));
 	}
 
 
@@ -325,10 +331,12 @@ BODY{
 
 .back-side{
 	.transform(rotateY(180deg) translateZ(1px) translate3d(0,0,0));
+	border:1px solid black;
 }
 
 .front-side{
-	margin-top:-@card-min-height;
+	margin-top:-(@card-min-height)-1;
+	margin-left:1px;
 }
 
 

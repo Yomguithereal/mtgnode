@@ -43,7 +43,7 @@ Game interface :
 * click on the deck to draw cards
 * drag the cards on the game to play
 * put them back in your hand the same way
-* right click the cards to tap them
+* click the ingame cards to tap them
 
 The controls are still pretty basic and you should try and
 avoid playing cards using tokens or dealing with the library

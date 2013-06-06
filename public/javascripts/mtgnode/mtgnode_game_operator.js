@@ -14,6 +14,7 @@
 |     * Class Game
 */
 
+
 function MTGNodeGameOperator(socket, room, user){
 
 	/*
