@@ -124,6 +124,26 @@ function MTGNodeGameOperator(socket, room, user){
 	var OP_HAND = new Hand(opponent_hand_config);
 
 
+	// Registering Graveyards
+	//-----------------------
+	var my_graveyard_config = {
+		area : '.cemetery-emplacement'+my_class,
+		cards : '.card-min.in-cemetery'+my_class,
+		helper : HELPER,
+		counter : false
+	};
+
+	var opponent_graveyard_config = {
+		area : '.cemetery-emplacement'+opponent_class,
+		cards : '.card-min.in-cemetery'+opponent_class,
+		helper : HELPER,
+		counter : false
+	};
+
+	var MY_GRAVE = new Graveyard(my_graveyard_config);
+	var OP_GRAVE = new Graveyard(opponent_graveyard_config);
+
+
 
 	/*
 	| -------------------------
