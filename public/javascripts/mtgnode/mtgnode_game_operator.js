@@ -226,6 +226,8 @@ function MTGNodeGameOperator(socket, room, user){
 				}
 			}
 		});
+
+		$card.draggable('enable');
 	}
 
 
@@ -269,6 +271,24 @@ function MTGNodeGameOperator(socket, room, user){
 
 				// Sending message to server
 				MESSAGER.send('backingCard', $card.attr('card_id'));
+			}
+
+		}
+	});
+
+	// In Deck
+	$(MY_DECK.area).droppable({
+		drop : function(event, ui){
+
+			var $card = $(ui.draggable);
+
+			if($card.hasClass('in-hand')){
+				MY_HAND.to_deck($card, MY_DECK);
+				MESSAGER.send('deckingCardFromHand', $card.attr('card_id'));
+			}
+			else if($card.hasClass('in-game')){
+				MY_GAME.to_deck($card, MY_DECK);
+				MESSAGER.send('deckingCardFromGame', $card.attr('card_id'));
 			}
 
 		}
@@ -461,6 +481,16 @@ function MTGNodeGameOperator(socket, room, user){
 			// Tapping a Card
 			case 'tappingCard' :
 				OP_GAME.tap(HELPER.opponent_card(data.body));
+				break;
+
+			// Decking a Card From Hand
+			case 'deckingCardFromHand' :
+				OP_GAME.to_deck(HELPER.opponent_card(data.body), OP_DECK);
+				break;
+
+			// Decking a Card From Game
+			case 'deckingCardFromGame' :
+				OP_HAND.to_deck(HELPER.opponent_card(data.body), OP_DECK);
 				break;
 
 			// Batch Untapping

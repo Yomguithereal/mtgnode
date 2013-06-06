@@ -23,6 +23,9 @@ function Deck(config){
 	this.counter = config.counter;
 	this.helper = config.helper;
 
+	this.left = $(this.area).position().left;
+	this.top = $(this.area).position().top;
+
 	// Methods
 	//-------------------
 
@@ -79,6 +82,26 @@ function Deck(config){
 		for(var i = 0; i < 7; i++){
 			$(this.cards).eq(0).trigger('click');
 		}
+	}
+
+	// Getting cards back
+	this.card_on_top = function($card){
+
+		// Putting card on top
+		this.helper.conceal_card($card);
+		$(this.area).prepend($card);
+
+		// Reaxing card
+		$card.animate({
+			'left' : this.left
+			,'top' : this.top
+		}, 'fast');
+
+		// Disabling draggable
+		$card.draggable('disable');
+
+		// Removing tapped
+		$card.removeClass('tapped');
 	}
 
 }

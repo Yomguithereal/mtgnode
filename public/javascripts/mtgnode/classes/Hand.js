@@ -68,4 +68,17 @@ function Hand(config){
 		game.increment();
 	}
 
+	// To Deck
+	this.to_deck = function($card, deck){
+
+		// Updating Classes
+		$card.removeClass('in-hand');
+		$card.addClass('in-deck');
+
+		// Updating Model
+		this.decrement();
+		deck.increment();
+		deck.card_on_top($card);
+	}
+
 }

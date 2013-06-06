@@ -14,6 +14,10 @@ giving the oppportunity to play as in real life.
 The application is still pretty ugly and basic but does
 its job.
 
+WARNING :: You would rather use Chrome if you want
+to play correctly. 3d animations are yet to be correctly implemented
+and/or supported by other browsers.
+
 Disclaimer
 ----------
 This application is purely experimental and is not
