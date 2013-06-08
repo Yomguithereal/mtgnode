@@ -118,6 +118,12 @@
 	border-radius: @radius;
 }
 
+.box-shadow(@arguments) {
+	-webkit-box-shadow: @arguments;
+	-moz-box-shadow: @arguments;
+	box-shadow: @arguments;
+}
+
 /*
 | -------------------------------------------------------------------
 |  Constants
@@ -126,6 +132,7 @@
 
 @card-min-width : 78px;
 @card-min-height : 111px;
+@card-shadow: rgba(100, 100, 100, 0.298039) 0px 2px 6px 0px;
 
 
 /*
@@ -330,8 +337,14 @@ BODY{
 
 	// In hand card
 	&.in-hand{
-		//border:2px solid blue;
+
 	}
+
+	// In game card
+	&.in-game{
+		.box-shadow(@card-shadow);
+	}
+
 
 	// Deck builder
 	&.deck-builder{
