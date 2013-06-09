@@ -119,7 +119,7 @@ function MTGNodeGameOperator(socket, room, user){
 		area : '.hand-emplacement'+opponent_class,
 		cards : '.card-min.in-hand'+opponent_class,
 		helper : HELPER,
-		counter : '.hand-counter'+my_class
+		counter : '.hand-counter'+opponent_class
 	};
 
 	var MY_HAND = new Hand(my_hand_config);
