@@ -47,7 +47,7 @@ function SetModel(){
 		// Setting the url options
 		var options = {
 			host : "http://www.magiccards.info",
-			path : '/query?v=list&s=cname&q='+query,
+			path : '/query?v=list&s=cname&q=%2B%2Bo+'+query,
 		};
 
 		// Getting html
