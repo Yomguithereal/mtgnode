@@ -25,6 +25,8 @@ function Deck(config){
 	this.container = config.container;
 	this.$counter = $(config.counter);
 
+	this.$search_deck_modal = $("#search_deck_modal");
+
 	this.left = $(this.area).offset().left;
 	this.top = $(this.area).offset().top;
 
@@ -109,6 +111,17 @@ function Deck(config){
 
 		// Removing tapped
 		$card.removeClass('tapped');
+	}
+
+	// Searching for a card
+	this.search_card = function(){
+
+		// Populating the modal
+		$(this.cards).each(function(){
+			self.$search_deck_modal.children('.modal-body').append('<img src="'+$(this).children('.front-side').attr('src')+'" class="card-min-deckbuilder" />');
+		});
+
+		this.$search_deck_modal.modal('show');
 	}
 
 }

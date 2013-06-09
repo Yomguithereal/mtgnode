@@ -60,8 +60,8 @@ block content
 					div#bottom_hand.hand-emplacement.player1
 
 
-	// Modals
-	div#start_game_modal.modal.hide.fade
+	// Start Game Modal
+	div#start_game_modal.modal.hide.fade(data-backdrop='static')
 		div.modal-header
 			h3 Choose your deck
 		div.modal-body
@@ -70,6 +70,15 @@ block content
 					option(value=deck.id)= deck.name
 		div.modal-footer
 			button(type='button', class='btn btn-info', id='start_game') Choose
+
+	// Deck Searching Modal
+	div#search_deck_modal.modal.hide
+		div.modal-header
+			h3 Search for a card
+		div.modal-body
+
+		div.modal-footer
+			button(type='button', class='btn', data-dismiss='modal', aria-hidden='true') Close
 
 block contextual_js
 	script(type='text/javascript', src='/javascripts/mtgnode/classes/Messager.js')

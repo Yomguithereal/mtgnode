@@ -154,8 +154,12 @@ function MTGNodeGameOperator(socket, room, user){
 	*/
 
 	// Deck Shuffling
-	var shuffle = MY_DECK.shuffleFromClient();
-	MESSAGER.send('shufflingDeck', shuffle);
+	function shuffleDeck(){
+		var shuffle = MY_DECK.shuffleFromClient();
+		MESSAGER.send('shufflingDeck', shuffle);
+	}
+
+	shuffleDeck();
 
 
 	// Card Viewer Widget
@@ -421,7 +425,17 @@ function MTGNodeGameOperator(socket, room, user){
 					MY_DECK.draw_full_hand();
 
 					// Sending information to server
-					MESSAGER.send('drawingFullHand');
+					MESSAGER.send('');
+					break;
+
+				case 'searchCard' :
+					MY_DECK.search_card();
+
+					// Sending information to server
+					break;
+
+				case 'shuffleDeck' :
+					shuffleDeck()
 					break;
 
 				default :
@@ -430,6 +444,8 @@ function MTGNodeGameOperator(socket, room, user){
 		},
 		items: {
 			"drawFullHand": {name: "Draw a full hand", icon: false},
+			"searchCard" : {name: "Search for a card", icon: false},
+			"shuffleDeck" : {name: "Shuffle Deck", icon: false}
 		}
 	});
 
