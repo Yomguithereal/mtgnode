@@ -24,7 +24,7 @@ function MTGNodeDeckBuilderKernel(){
 
 	// Selectors
 	var $card_viewer = $('#card_viewer_widget');
-	var $card = $('.card-min');
+	var card = '.card-min-deckbuilder';
 
 	var $set_selector = $('#set_select');
 	var $deck_selector = $('#deck_select');
@@ -88,7 +88,7 @@ function MTGNodeDeckBuilderKernel(){
 
 	// Card Viewer Widget
 	//-------------------
-	$main_container.on('mouseover', $card, function(e){
+	$main_container.on('mouseover', card, function(e){
 		var src_to_see = $(e.target).attr('src');
 		$card_viewer.attr('src', src_to_see);
 	});
@@ -137,7 +137,7 @@ function MTGNodeDeckBuilderKernel(){
 
 				// Setting the deck information
 				self.DECK.reinitialize(deck, deck_name);
-				$('#deck_builder_right_panel > .card-min').each(function(){
+				$('#deck_builder_right_panel > .card-min-deckbuilder').each(function(){
 					self.DECK.addCard($(this).attr('set_code'), $(this).attr('card_number'));
 				});
 
@@ -174,11 +174,11 @@ function MTGNodeDeckBuilderKernel(){
 
 	// Add Card to Deck
 	//-------------------
-	$left_panel.on('click', $card, function(e){
+	$left_panel.on('click', card, function(e){
 
 		// Adding card to deck
 		var $c = $(e.target);
-		if(!$c.hasClass('card-min')){ return false; }
+		if(!$c.hasClass('card-min-deckbuilder')){ return false; }
 
 
 		var card_number = $c.attr('card_number');
@@ -192,11 +192,11 @@ function MTGNodeDeckBuilderKernel(){
 
 	// Remove Card from Deck
 	//----------------------
-	$right_panel.on('click', $card, function(e){
+	$right_panel.on('click', card, function(e){
 
 		// Adding card to deck
 		var $c = $(e.target);
-		if(!$c.hasClass('card-min')){ return false; }
+		if(!$c.hasClass('card-min-deckbuilder')){ return false; }
 
 		self.DECK.removeCard($c.index());
 
