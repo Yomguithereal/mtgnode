@@ -14,6 +14,7 @@ function Helper(config){
 	//-------------------
 	this.max_zindex = 30;
 	this.card_back_src = config.card_back_src;
+	this.searched_cards = '.card-search';
 
 	// Methods
 	//-------------------
@@ -21,6 +22,11 @@ function Helper(config){
 	// Function generating opponent's cards selectors
 	this.opponent_card = function(card_id){
 		return $('#card'+card_id+'_opponent');
+	}
+
+	// Function generating my cards selectors
+	this.my_card = function(card_id){
+		return $('#card'+card_id+'_mine');
 	}
 
 	// Function used to update cards z-index
@@ -46,6 +52,14 @@ function Helper(config){
 	// Function to conceal a card
 	this.conceal_card = function($card){
 		$card.addClass('flipped');
+	}
+
+	// Searching Cards Modal Template
+	this.search_card_template = function($card_src){
+		var card_id = $card_src.attr('card_id');
+		var src = $card_src.children('.front-side').attr('src');
+
+		return '<img src="'+src+'" class="card-search" card_id="'+card_id+'" />';
 	}
 
 }

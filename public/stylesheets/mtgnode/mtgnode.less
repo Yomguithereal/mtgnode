@@ -373,6 +373,18 @@ BODY{
 	cursor:pointer;
 }
 
+.card-search{
+	width:@card-min-width;
+	height:@card-min-height;
+	cursor:pointer;
+	margin:8px;
+	border:2px solid transparent;
+
+	&.selected{
+		border:2px solid blue;
+	}
+}
+
 .front-side, .back-side{
 	.transform(rotateZ(0px) translate3d(0,0,0));
 	// .backface-visibility(hidden);

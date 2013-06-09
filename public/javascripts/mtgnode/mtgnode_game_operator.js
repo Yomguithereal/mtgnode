@@ -51,6 +51,8 @@ function MTGNodeGameOperator(socket, room, user){
 	var $opponent_message_receiver = $(".message-receiver.opponent");
 	var $opponent_turn_indicator = $(".turn-indicator.opponent");
 
+	var $search_choose = $('.card-choose');
+
 
 	// Globals Values
 	//-------------------
@@ -449,6 +451,25 @@ function MTGNodeGameOperator(socket, room, user){
 		}
 	});
 
+	// Searching For Cards
+	//--------------------
+
+	// Selecting cards
+	$('body').on('click', HELPER.searched_cards, function(){
+
+		// Affecting Classes
+		$(this).toggleClass('selected');
+	});
+
+	// Validation of choice
+	$search_choose.click(function(){
+		var chosen_cards = MY_DECK.get_searched_cards(MY_HAND);
+		if(chosen_cards.length > 0){
+			MESSAGER.send('searchingCards', chosen_cards);
+		}
+	});
+
+
 
 	// Updating Life
 	//------------------
@@ -492,6 +513,7 @@ function MTGNodeGameOperator(socket, room, user){
 
 	// Action
 	$my_turn_indicator.click(function(){
+
 		// Preventing if not my turn
 		var $indicator = $(this);
 		if($indicator.hasClass('my-turn')){
@@ -523,6 +545,13 @@ function MTGNodeGameOperator(socket, room, user){
 			// Drawing a Card
 			case 'drawingCard' :
 				OP_DECK.to_hand(HELPER.opponent_card(data.body), OP_HAND);
+				break;
+
+			// Searching Cards
+			case 'searchingCards' :
+				data.body.forEach(function(i){
+					OP_DECK.to_hand(HELPER.opponent_card(data.body[i]), OP_HAND);
+				});
 				break;
 
 			// Dragging a Card

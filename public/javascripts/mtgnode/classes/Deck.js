@@ -118,10 +118,35 @@ function Deck(config){
 
 		// Populating the modal
 		$(this.cards).each(function(){
-			self.$search_deck_modal.children('.modal-body').append('<img src="'+$(this).children('.front-side').attr('src')+'" class="card-min-deckbuilder" />');
+			self.$search_deck_modal.children('.modal-body').append(self.helper.search_card_template($(this)));
 		});
 
 		this.$search_deck_modal.modal('show');
+	}
+
+	// Getting searched cards
+	this.get_searched_cards = function(){
+
+		// Dismissing modal
+		this.$search_deck_modal.modal('hide');
+
+		// Loop through selection
+		var selected_cards = [];
+		$(this.helper.searched_cards+'.selected').each(function(){
+			var card_id = $(this).attr('card_id');
+
+			var $card = self.helper.my_card(card_id);
+			$card.prependTo(self.container);
+			$card.trigger('click');
+
+			// Populating response
+			selected_cards.push(card_id);
+		});
+
+		// Destroy the cards
+		this.$search_deck_modal.children('.modal-body').empty();
+
+		return selected_cards;
 	}
 
 }
