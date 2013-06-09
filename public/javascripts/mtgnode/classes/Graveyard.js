@@ -56,4 +56,42 @@ function Graveyard(config){
 		$card.removeClass('tapped');
 	}
 
+	// To Deck
+	this.to_deck = function($card, deck){
+
+		// Updating Classes
+		$card.removeClass('in-graveyard');
+		$card.addClass('in-deck');
+
+		// Updating Model
+		this.decrement();
+		deck.increment();
+		deck.card_on_top($card);
+	}
+
+	// To Hand
+	this.to_hand = function($card, hand){
+
+		// Updating Classes
+		$card.removeClass('in-graveyard');
+		$card.addClass('in-hand');
+		$card.removeClass('tapped');
+
+		// Updating Model
+		this.decrement();
+		hand.increment();
+	}
+
+	// To Game
+	this.to_game = function($card, game){
+
+		// Updating Classes
+		$card.removeClass('in-graveyard');
+		$card.addClass('in-game');
+
+		// Updating Model
+		this.decrement();
+		game.increment();
+	}
+
 }

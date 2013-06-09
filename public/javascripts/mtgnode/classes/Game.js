@@ -34,7 +34,7 @@ function Game(config){
 		this.count += 1;
 	}
 
-	// To Deck
+	// To Hand
 	this.to_hand = function($card, hand){
 
 		// Updating Classes

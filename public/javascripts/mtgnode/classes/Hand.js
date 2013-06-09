@@ -23,6 +23,7 @@ function Hand(config){
 	// DOM
 	this.area = config.area;
 	this.left = $(this.area).offset().left;
+	this.top = $(this.area).offset().top;
 	this.width = $(this.area).width();
 	this.cards = config.cards;
 	this.counter = config.counter;
@@ -72,7 +73,7 @@ function Hand(config){
 			self.helper.update_zindex($(this));
 
 			// Animating the card
-			$(this).animate({'left' : to_position}, 'fast');
+			$(this).animate({'left' : to_position, 'top' : self.top}, 'fast');
 		});
 	}
 

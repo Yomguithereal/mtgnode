@@ -263,10 +263,20 @@ function MTGNodeGameOperator(socket, room, user){
 
 			// When a card enter the game zone, we acknowledge its ingame nature
 			var $card = $(ui.draggable);
-			MY_HAND.to_game($card, MY_GAME);
 
-			// Sending message to server
-			MESSAGER.send('playingCard', $card.attr('card_id'));
+			if($card.hasClass('in-hand')){
+				MY_HAND.to_game($card, MY_GAME);
+
+				// Sending message to server
+				MESSAGER.send('playingCard', $card.attr('card_id'));
+			}
+			else if($card.hasClass('in-graveyard')){
+				MY_GRAVE.to_game($card, MY_GAME);
+
+				// Sending message to server
+				MESSAGER.send('playingCardFromGrave', $card.attr('card_id'));
+			}
+
 
 		}
 	});
@@ -296,6 +306,15 @@ function MTGNodeGameOperator(socket, room, user){
 				MESSAGER.send('backingCard', $card.attr('card_id'));
 			}
 
+			// If card comes from graveyard
+			if($card.hasClass('in-graveyard')){
+
+				MY_GRAVE.to_hand($card, MY_HAND);
+
+				// Sending message to server
+				MESSAGER.send('backingCardFromGrave', $card.attr('card_id'));
+			}
+
 		}
 	});
 
@@ -312,6 +331,10 @@ function MTGNodeGameOperator(socket, room, user){
 			else if($card.hasClass('in-game')){
 				MY_GAME.to_deck($card, MY_DECK);
 				MESSAGER.send('deckingCardFromGame', $card.attr('card_id'));
+			}
+			else if($card.hasClass('in-graveyard')){
+				MY_GRAVE.to_deck($card, MY_DECK);
+				MESSAGER.send('deckingCardFromGrave', $card.attr('card_id'));
 			}
 
 		}
@@ -506,6 +529,14 @@ function MTGNodeGameOperator(socket, room, user){
 				HELPER.reveal_card($card);
 				break;
 
+			// Playing a Card from Grave
+			case 'playingCard' :
+				var $card = HELPER.opponent_card(data.body);
+
+				OP_GRAVE.to_game($card, OP_GAME);
+				HELPER.reveal_card($card);
+				break;
+
 			// Opponent Reorganize its hand
 			case 'reorganizingHand' :
 				OP_HAND.reorganize();
@@ -516,6 +547,14 @@ function MTGNodeGameOperator(socket, room, user){
 				var $card = HELPER.opponent_card(data.body);
 
 				OP_GAME.to_hand($card, OP_HAND);
+				HELPER.conceal_card($card);
+				break;
+
+			// Backing a Card From Grave
+			case 'backingCardFromGrave' :
+				var $card = HELPER.opponent_card(data.body);
+
+				OP_GRAVE.to_hand($card, OP_HAND);
 				HELPER.conceal_card($card);
 				break;
 
@@ -532,6 +571,11 @@ function MTGNodeGameOperator(socket, room, user){
 			// Decking a Card From Game
 			case 'deckingCardFromGame' :
 				OP_HAND.to_deck(HELPER.opponent_card(data.body), OP_DECK);
+				break;
+
+			// Decking a Card From Grave
+			case 'deckingCardFromGrave' :
+				OP_GRAVE.to_deck(HELPER.opponent_card(data.body), OP_DECK);
 				break;
 
 			// Discarding a Card
