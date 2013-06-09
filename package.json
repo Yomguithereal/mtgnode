@@ -14,7 +14,7 @@
   "dependencies": {
     "express": "3.2.1",
     "jade": "0.30.0",
-    "sqlite3" : "2.1.17",
+    "sqlite3" : "*",
     "socket.io" : "0.9.14",
     "cheerio" : "0.11.0",
     "request" : "2.21.0"
