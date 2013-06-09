@@ -60,6 +60,19 @@ function Game(config){
 		deck.card_on_top($card);
 	}
 
+	// To Graveyard
+	this.to_graveyard = function($card, graveyard){
+
+		// Updating Classes
+		$card.removeClass('in-game');
+		$card.addClass('in-graveyard');
+
+		// Updating Model
+		this.decrement();
+		graveyard.increment();
+		graveyard.card_on_top($card);
+	}
+
 	// Tap Card
 	this.tap = function($card){
 		$card.toggleClass('tapped');

@@ -69,6 +69,7 @@ function MTGNodeGameOperator(socket, room, user){
 	// Registering Decks
 	//-------------------
 	var my_deck_config = {
+		container : '.card-container'+my_class,
 		count : $('.in-deck'+my_class).length,
 		area : '.deck-emplacement'+my_class,
 		cards : '.card-min.in-deck'+my_class,
@@ -77,6 +78,7 @@ function MTGNodeGameOperator(socket, room, user){
 	};
 
 	var opponent_deck_config = {
+		container : '.card-container'+opponent_class,
 		count : $('.in-deck'+opponent_class).length,
 		area : '.deck-emplacement'+opponent_class,
 		cards : '.card-min.in-deck'+opponent_class,
@@ -157,7 +159,7 @@ function MTGNodeGameOperator(socket, room, user){
 
 
 	// Card Viewer Widget
-	$game_area.on('mouseover', card_to_see, function(e){
+	$(MY_DECK.container+', '+OP_DECK.container).on('mouseover', card_to_see, function(e){
 		var src_to_see = $(e.target).attr('src');
 
 		// We block the action if the src is already the same to prevent useless HTTP requests
@@ -197,7 +199,7 @@ function MTGNodeGameOperator(socket, room, user){
 	//----------------
 
 	// Action
-	$game_area.on('click', MY_DECK.cards, function(e){
+	$(MY_DECK.container).on('click', MY_DECK.cards, function(e){
 
 		// Getting first card of DOM
 		// WARNING :: Get the last DOM card otherwise because of z-index rule
@@ -315,12 +317,30 @@ function MTGNodeGameOperator(socket, room, user){
 		}
 	});
 
+	// In Graveyard
+	$(MY_GRAVE.area).droppable({
+		drop : function(event, ui){
+
+			var $card = $(ui.draggable);
+
+			if($card.hasClass('in-hand')){
+				MY_HAND.to_graveyard($card, MY_GRAVE);
+				MESSAGER.send('discardingCard', $card.attr('card_id'));
+			}
+			else if($card.hasClass('in-game')){
+				MY_GAME.to_graveyard($card, MY_GRAVE);
+				MESSAGER.send('buryingCard', $card.attr('card_id'));
+			}
+
+		}
+	});
+
 
 
 	// Tapping Cards
 	//------------------
 
-	$game_area.on('click', MY_GAME.cards, function(e){
+	$(MY_DECK.container).on('click', MY_GAME.cards, function(e){
 		var $card = $(this);
 		e.preventDefault();
 
@@ -512,6 +532,16 @@ function MTGNodeGameOperator(socket, room, user){
 			// Decking a Card From Game
 			case 'deckingCardFromGame' :
 				OP_HAND.to_deck(HELPER.opponent_card(data.body), OP_DECK);
+				break;
+
+			// Discarding a Card
+			case 'discardingCard' :
+				OP_GAME.to_graveyard(HELPER.opponent_card(data.body), OP_GRAVE);
+				break;
+
+			// Burying a Card
+			case 'buryingCard' :
+				OP_HAND.to_graveyard(HELPER.opponent_card(data.body), OP_GRAVE);
 				break;
 
 			// Batch Untapping

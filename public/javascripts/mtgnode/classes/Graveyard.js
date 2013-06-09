@@ -20,10 +20,40 @@ function Graveyard(config){
 
 	// DOM
 	this.area = config.area;
-	this.left = $(this.area).position().left;
-	this.width = $(this.area).width();
+	this.left = $(this.area).offset().left;
+	this.top = $(this.area).offset().top;
 	this.cards = config.cards;
 	this.counter = config.counter;
 	this.helper = config.helper;
+
+
+	// Methods
+	//-------------------
+
+	// Losing a card
+	this.decrement = function(){
+		this.count -= 1;
+	}
+
+	// Gaining a card
+	this.increment = function(){
+		this.count += 1;
+	}
+
+	// Getting cards back
+	this.card_on_top = function($card){
+
+		// Revealing card
+		this.helper.reveal_card($card);
+
+		// Reaxing card
+		$card.animate({
+			'left' : this.left
+			,'top' : this.top
+		}, 'fast', function(){console.log($card.position().top);});
+
+		// Removing tapped
+		$card.removeClass('tapped');
+	}
 
 }

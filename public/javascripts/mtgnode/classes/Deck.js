@@ -22,9 +22,10 @@ function Deck(config){
 	this.cards = config.cards;
 	this.counter = config.counter;
 	this.helper = config.helper;
+	this.container = config.container;
 
-	this.left = $(this.area).position().left;
-	this.top = $(this.area).position().top;
+	this.left = $(this.area).offset().left;
+	this.top = $(this.area).offset().top;
 
 	// Methods
 	//-------------------
@@ -57,7 +58,7 @@ function Deck(config){
 
 		// Reorganizing DOM
 		$.each(shuffle, function(i){
-			$(self.area).append($(self.helper.opponent_card(shuffle[i])));
+			$(self.container).append($(self.helper.opponent_card(shuffle[i])));
 		});
 	}
 
@@ -89,7 +90,7 @@ function Deck(config){
 
 		// Putting card on top
 		this.helper.conceal_card($card);
-		$(this.area).prepend($card);
+		$(this.container).prepend($card);
 
 		// Reaxing card
 		$card.animate({

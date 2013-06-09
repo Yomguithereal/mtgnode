@@ -300,6 +300,12 @@ BODY{
 	bottom:0px;
 }
 
+.card-container{
+	position:absolute;
+	top:0px;
+	left:0px;
+}
+
 .valid{
 	color:green;
 }
@@ -317,11 +323,14 @@ BODY{
 	width:@card-min-width;
 	height:@card-min-height;
 	cursor:pointer;
+	z-index:40;
 
 	position: absolute;
 	.transform-transition(0.3s);
 	.preserve-3d();
 	.perspective(100);
+
+	.transform(rotateY(0deg) translate3d(0,0,0));
 
 
 	// Tapped Card

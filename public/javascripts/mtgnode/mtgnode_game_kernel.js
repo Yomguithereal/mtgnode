@@ -114,7 +114,11 @@ function MTGNodeGameKernel(){
 			$start_game_modal.modal('hide');
 
 			// Populating the deck
-			$('.deck-emplacement.'+user.game_side).append(data);
+			$('.card-container.'+user.game_side).append(data);
+			$('.card-min.mine').css({
+				'top' : $('.deck-emplacement.'+user.game_side).offset().top
+				,'left' : $('.deck-emplacement.'+user.game_side).offset().left
+			});
 
 			// Ready?
 			if(self.ready){
@@ -132,8 +136,15 @@ function MTGNodeGameKernel(){
 
 		// Getting them ajaxwise
 		$.post('ajax/deck_cards', {deck_id : opponent_deck_id, game_side : 'opponent'}, function(data){
-			$('.deck-emplacement.'+user.opponent_side).append(data);
-			console.log(data);
+
+			// Populating the deck
+			$('.card-container.'+user.opponent_side).append(data);
+			$('.card-min.opponent').css({
+				'top' : $('.deck-emplacement.'+user.opponent_side).offset().top
+				,'left' : $('.deck-emplacement.'+user.opponent_side).offset().left
+			});
+
+
 			// Ready?
 			if(self.ready){
 				MTGNodeGameOperator(socket, room, user);

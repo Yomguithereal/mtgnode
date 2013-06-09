@@ -22,7 +22,7 @@ function Hand(config){
 
 	// DOM
 	this.area = config.area;
-	this.left = $(this.area).position().left;
+	this.left = $(this.area).offset().left;
 	this.width = $(this.area).width();
 	this.cards = config.cards;
 	this.counter = config.counter;
@@ -99,6 +99,19 @@ function Hand(config){
 		this.decrement();
 		deck.increment();
 		deck.card_on_top($card);
+	}
+
+	// To Graveyard
+	this.to_graveyard = function($card, graveyard){
+
+		// Updating Classes
+		$card.removeClass('in-hand');
+		$card.addClass('in-graveyard');
+
+		// Updating Model
+		this.decrement();
+		graveyard.increment();
+		graveyard.card_on_top($card);
 	}
 
 }
