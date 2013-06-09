@@ -15,6 +15,16 @@ block content
 				div.message-receiver.player2 &nbsp;
 				div.turn-block
 					button(type='button', class='btn player2 turn-indicator') &nbsp;
+				div.counters.player2
+					div.btn-group
+						button.btn(type='button') Deck
+						button.btn.deck-counter.player2(type='button') 0
+					div.btn-group
+						button.btn(type='button') Hand
+						button.btn.hand-counter.player2(type='button') 0
+					div.btn-group
+						button.btn(type='button') Graveyard
+						button.btn.cemetery-counter.player2(type='button') 0
 			div#card_viewer_block
 				mixin card_viewer_widget()
 			div#bottom_helper_block
@@ -25,6 +35,16 @@ block content
 				div.message-receiver.player1 &nbsp;
 				div.turn-block
 					button(type='button', class='btn player1 turn-indicator') &nbsp;
+				div.counters.player1
+					div.btn-group
+						button.btn(type='button') Deck
+						button.btn.deck-counter.player1(type='button') 0
+					div.btn-group
+						button.btn(type='button') Hand
+						button.btn.hand-counter.player1(type='button') 0
+					div.btn-group
+						button.btn(type='button') Graveyard
+						button.btn.cemetery-counter.player1(type='button') 0
 		div#game_block.game-area
 			div#top_game_block.player2.player-side
 				div#top_handlogic.deck-and-hand.player2

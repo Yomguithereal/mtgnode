@@ -74,7 +74,7 @@ function MTGNodeGameOperator(socket, room, user){
 		area : '.deck-emplacement'+my_class,
 		cards : '.card-min.in-deck'+my_class,
 		helper : HELPER,
-		counter : false
+		counter : '.deck-counter'+my_class
 	};
 
 	var opponent_deck_config = {
@@ -83,7 +83,7 @@ function MTGNodeGameOperator(socket, room, user){
 		area : '.deck-emplacement'+opponent_class,
 		cards : '.card-min.in-deck'+opponent_class,
 		helper : HELPER,
-		counter : false
+		counter : '.deck-counter'+opponent_class
 	};
 
 	var MY_DECK = new Deck(my_deck_config);
@@ -112,14 +112,14 @@ function MTGNodeGameOperator(socket, room, user){
 		area : '.hand-emplacement'+my_class,
 		cards : '.card-min.in-hand'+my_class,
 		helper : HELPER,
-		counter : false
+		counter : '.hand-counter'+my_class
 	};
 
 	var opponent_hand_config = {
 		area : '.hand-emplacement'+opponent_class,
 		cards : '.card-min.in-hand'+opponent_class,
 		helper : HELPER,
-		counter : false
+		counter : '.hand-counter'+my_class
 	};
 
 	var MY_HAND = new Hand(my_hand_config);
@@ -132,14 +132,14 @@ function MTGNodeGameOperator(socket, room, user){
 		area : '.cemetery-emplacement'+my_class,
 		cards : '.card-min.in-cemetery'+my_class,
 		helper : HELPER,
-		counter : false
+		counter : '.cemetery-counter'+my_class
 	};
 
 	var opponent_graveyard_config = {
 		area : '.cemetery-emplacement'+opponent_class,
 		cards : '.card-min.in-cemetery'+opponent_class,
 		helper : HELPER,
-		counter : false
+		counter : '.cemetery-counter'+opponent_class
 	};
 
 	var MY_GRAVE = new Graveyard(my_graveyard_config);

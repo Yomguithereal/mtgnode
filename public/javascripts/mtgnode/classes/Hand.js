@@ -26,7 +26,7 @@ function Hand(config){
 	this.top = $(this.area).offset().top;
 	this.width = $(this.area).width();
 	this.cards = config.cards;
-	this.counter = config.counter;
+	this.$counter = $(config.counter);
 	this.helper = config.helper;
 
 	// Methods
@@ -36,6 +36,8 @@ function Hand(config){
 	this.decrement = function(){
 		this.count -= 1;
 		this.reorganize();
+
+		this.$counter.text(this.count);
 
 		// Unsqueeze hand
 		if((this.width - (this.count * this.visual_offset)) > this.visual_offset){
@@ -52,6 +54,8 @@ function Hand(config){
 	this.increment = function(){
 		this.count += 1;
 		this.reorganize();
+
+		this.$counter.text(this.count);
 	}
 
 	// Reorganize Hand

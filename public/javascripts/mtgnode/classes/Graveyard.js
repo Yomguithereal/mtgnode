@@ -23,7 +23,7 @@ function Graveyard(config){
 	this.left = $(this.area).offset().left;
 	this.top = $(this.area).offset().top;
 	this.cards = config.cards;
-	this.counter = config.counter;
+	this.$counter = $(config.counter);
 	this.helper = config.helper;
 
 
@@ -33,11 +33,13 @@ function Graveyard(config){
 	// Losing a card
 	this.decrement = function(){
 		this.count -= 1;
+		this.$counter.text(this.count);
 	}
 
 	// Gaining a card
 	this.increment = function(){
 		this.count += 1;
+		this.$counter.text(this.count);
 	}
 
 	// Getting cards back

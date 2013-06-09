@@ -23,9 +23,13 @@ function Deck(config){
 	this.counter = config.counter;
 	this.helper = config.helper;
 	this.container = config.container;
+	this.$counter = $(config.counter);
 
 	this.left = $(this.area).offset().left;
 	this.top = $(this.area).offset().top;
+
+	this.$counter.text(this.count);
+
 
 	// Methods
 	//-------------------
@@ -33,11 +37,13 @@ function Deck(config){
 	// Losing a card
 	this.decrement = function(){
 		this.count -= 1;
+		this.$counter.text(this.count);
 	}
 
 	// Gaining a card
 	this.increment = function(){
 		this.count += 1;
+		this.$counter.text(this.count);
 	}
 
 	// Shuffling
