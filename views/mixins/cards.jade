@@ -1,6 +1,6 @@
 // Card Mixins
 mixin card_deckbuilder(card_object)
-	img(class='card-min deck-builder', src="#{CARD_BASE_URL}#{card_object.set_code}/#{card_object.number}.jpg", card_number='#{card_object.number}', set_code='#{card_object.set_code}')
+	img(class='card-min-deckbuilder', src="#{CARD_BASE_URL}#{card_object.set_code}/#{card_object.number}.jpg", card_number='#{card_object.number}', set_code='#{card_object.set_code}')
 
 mixin card_mine(card_object, i)
 	div(id='card#{i}_mine', card_id='#{i}', class='card-min draggable mine in-deck flipped')
