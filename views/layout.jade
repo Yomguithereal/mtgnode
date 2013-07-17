@@ -1,26 +1,9 @@
-doctype 5
-html
-	head
-		title MTG Node
-
-		// Css Imports
-		link(rel='stylesheet/less', href='/stylesheets/mtgnode/mtgnode.less')
-		script(type='text/javascript')
-			less = { env: 'development' };
-		script(type='text/javascript', src='/javascripts/less/less.min.js')
-	body
-		// Main Block
-		block content
-
-		// DOM Constants Block
-		block dom_constants
-		input(type='hidden', id='USER_ID', value= session.user_id)
-		input(type='hidden', id='USERNAME', value= session.username)
-		input(type='hidden', id='CARDBACK', value= CARD_BACK_SRC)
-
-		// Javascript Imports
-		script(type='text/javascript', src='/socket.io/socket.io.js')
-		script(type='text/javascript', src='//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js')
-		script(type='text/javascript', src='/javascripts/jquery-ui/jquery-ui.min.js')
-		script(type='text/javascript', src='/javascripts/bootstrap/bootstrap.min.js')
-		block contextual_js
+!!!
+head
+  title= title
+  meta(name="viewport",content="width=device-width, initial-scale=1, maximum-scale=1")
+  | !{assets.css()}
+body
+  block body
+  | !{assets.templateLibrary()}
+  | !{assets.js()}

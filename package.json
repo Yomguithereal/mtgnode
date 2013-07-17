@@ -1,25 +1,18 @@
 {
-  "name": "mtgnode",
-  "version": "0.0.1",
-  "private": true,
-  "author" : "Yomgui",
-  "description" : "A simple node.js application to play Magic the Gathering with friends in realtime.",
-  "scripts": {
-    "start": "node app.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "to complete"
-  },
-  "dependencies": {
-    "express": "3.2.1",
-    "jade": "0.30.0",
-    "sqlite3" : "*",
-    "socket.io" : "0.9.14",
-    "cheerio" : "0.11.0",
-    "request" : "2.21.0"
-  },
-  "engines" : {
-    "node" : ">=0.10.5"
-  }
+    "name": "mtgnode",
+    "private": true,
+    "version": "0.0.1",
+    "description": "Realtime Magic the Gathering app.",
+    "dependencies": {
+        "sails": "0.8.94",
+        "optimist": "0.4.0"
+    },
+    "scripts": {
+        "start": "node app.js",
+        "debug": "node debug app.js"
+    },
+    "main": "app.js",
+    "repository": "git@github.com:Yomguithereal/mtgnode.git",
+    "author": "Yomguithereal",
+    "license": "MIT"
 }
