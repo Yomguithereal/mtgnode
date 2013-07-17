@@ -25,10 +25,15 @@ module.exports.adapters = {
 		inMemory: false
 	},
 
-	// MySQL is the world's most popular relational database.
-	// Learn more: http://en.wikipedia.org/wiki/MySQL
-	mysql: {
+	// Standard MtgNode Database
+	standard: {
 		module		: 'sails-dirty',
 		filePath: '../databases/mtgnode.db'
+	},
+
+	// Card database
+	cards: {
+		module		: 'sails-dirty',
+		filePath: '../databases/cards.db'
 	}
 };

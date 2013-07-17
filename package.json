@@ -5,7 +5,8 @@
     "description": "Realtime Magic the Gathering app.",
     "dependencies": {
         "sails": "0.8.94",
-        "optimist": "0.4.0"
+        "optimist": "0.4.0",
+        "dirty": "*"
     },
     "scripts": {
         "start": "node app.js",

@@ -1,9 +1,11 @@
 !!!
 head
-  title= title
+  title MTG Node
   meta(name="viewport",content="width=device-width, initial-scale=1, maximum-scale=1")
   | !{assets.css()}
 body
   block body
+  block dom_constants
   | !{assets.templateLibrary()}
   | !{assets.js()}
+  block contextual_js
