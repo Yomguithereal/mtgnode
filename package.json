@@ -2,18 +2,20 @@
     "name": "mtgnode",
     "private": true,
     "version": "0.0.1",
-    "description": "Realtime Magic the Gathering app.",
+    "description": "Realtime application for Magic the Gathering.",
     "dependencies": {
-        "sails": "0.8.94",
-        "optimist": "0.4.0",
-        "dirty": "*"
+        "sails": "0.9.3",
+        "grunt": "0.4.1",
+        "sails-disk": "~0.9.0",
+        "jade": "0.33.0",
+        "optimist": "0.3.4"
     },
     "scripts": {
         "start": "node app.js",
         "debug": "node debug app.js"
     },
     "main": "app.js",
-    "repository": "git@github.com:Yomguithereal/mtgnode.git",
-    "author": "Yomguithereal",
-    "license": "MIT"
+    "repository": "",
+    "author": "",
+    "license": ""
 }

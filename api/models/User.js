@@ -1,11 +1,15 @@
-/*---------------------
-	:: User
-	-> model
----------------------*/
+/**
+ * User
+ *
+ * @module      :: Model
+ * @description :: Application users
+ *
+ */
+
 module.exports = {
 	attributes: {
-		username: 'STRING',
-		password: 'STRING',
-		decks: []
+		username: 'String',
+		password: 'String',
+		decks: 'Array'
 	}
 };

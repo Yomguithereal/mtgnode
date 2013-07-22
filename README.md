@@ -1,2 +1,1 @@
-# mtgnode
-### a Sails application
+#MTGNode
