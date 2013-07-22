@@ -1,0 +1,51 @@
+extends ../layout
+
+block body
+	div#mainframe
+		div#helper_block
+			div#top_helper_block
+				p Choose a Set
+				select(id="set_select")
+					option(value='none')
+				div.input-append
+					input#card_search(type='text')
+					button#card_search_button.active_enter(type='button', class='btn', data-loading-text='Searching...') Search
+				div
+					p You can use 'and'/'or' to be more precise or get several cards at once -- &nbsp;
+						a(href='http://magiccards.info/syntax.html') syntax help
+			div#card_viewer_block
+			div#bottom_helper_block
+				select(id='deck_select')
+					option(value='empty')
+					each deck in player_decks
+						option(value=deck.id)= deck.name
+				p Choosen Deck
+					div.input-append
+						input(id='deck_name', type='text', value='')
+						button#card_counter.btn(type='button') 0
+				div.btn-group
+					button(type='button', id='delete_deck', class='btn btn-danger', data-toggle='modal', href='#delete_deck_modal') Delete Deck
+					button(type='button', id='save_deck', class='btn btn-info') Save Deck
+					button(type='button', id='create_deck', class='btn btn-success', data-toggle='modal', href='#new_deck_modal') Create a Deck
+		div#deck_builder_container
+			div#deck_builder_left_panel
+			div#deck_builder_right_panel
+
+	// Modals
+	div#new_deck_modal.modal.hide.fade
+		div.modal-header
+			h3 Create a Deck
+		div.modal-body
+			p
+				input(type='text', id='new_deck_name', placeholder='Deck Name')
+		div.modal-footer
+			button(type='button', class='btn', data-dismiss='modal', aria-hidden='true') Close
+			button(type='button', class='btn btn-info', id='create_deck_confirm') Create
+
+	div#delete_deck_modal.modal.hide.fade
+		div.modal-header
+			h3 Delete a Deck
+		div.modal-body Are you sure this is what you want
+		div.modal-footer
+			button(type='button', class='btn', data-dismiss='modal', aria-hidden='true') No
+			button(type='button', class='btn btn-danger', id='delete_deck_confirm') Yes

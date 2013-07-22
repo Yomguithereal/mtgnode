@@ -1,21 +1,22 @@
 !!!
 html
   head
-    title= title
+    title MTG Node
 
     // Viewport mobile tag for sensible mobile support
     meta(name="viewport",content="width=device-width, initial-scale=1, maximum-scale=1")
+    link(rel="stylesheet", type="text/css", href="/styles/bootstrap.min.css")
+    link(rel="stylesheet", type="text/css", href="/styles/mtgnode.css")
 
   body
     block body
 
-    // A few key dependencies, linked in order
+    block dom_constants
 
-    // Bring in the socket.io client
     script(type="text/javascript", src="/js/socket.io.js")
-
-    // then beef it up with some convenience logic for talking to Sails.js'
     script(type="text/javascript", src="/js/sails.io.js")
-
-    // listen on socket.io for incoming messages
     script(type="text/javascript", src="/js/app.js")
+    script(type="text/javascript", src="/js/jquery.min.js")
+    script(type="text/javascript", src="/js/bootstrap.min.js")
+
+    block contextual_js

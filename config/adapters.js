@@ -26,6 +26,7 @@ module.exports.adapters = {
   // Persistent adapter for DEVELOPMENT ONLY
   // (data IS preserved when the server shuts down)
   disk: {
-    module: 'sails-disk',
+    module: 'sails-disk-custom',
+    filePath: 'db/users.db'
   }
 };

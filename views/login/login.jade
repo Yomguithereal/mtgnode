@@ -1,0 +1,17 @@
+extends ../layout
+
+block body
+  div#mainframe
+    p Welcome to MTGNode
+    input(type='text', placeholder='Username', id='username')
+    br
+    input(type='password', placeholder='Password', id='password')
+    br
+    button(type='button', class='btn', id='connect') Connect
+    br
+    button(type='button', class='btn override-connect', user='Yomgui', password='test') Connect as Yomgui
+    br
+    button(type='button', class='btn override-connect', user='Nibor', password='test') Connect as Nibor
+
+block contextual_js
+    script(type="text/javascript", src="/js/mtgnode/simple/login.js")

@@ -1,0 +1,80 @@
+extends ../layout
+
+block body
+	div.card-container.player2
+	div.card-container.player1
+	input#starting_player(type='hidden')
+	div#mainframe.clearfix
+		div#helper_block
+			div#top_helper_block
+				div.life-block
+					button(type='button', class='btn player2 lose-life update-life') -
+					span(class='life-counter player2') 20
+					button(type='button', class='btn player2 gain-life update-life') +
+				div.message-receiver.player2 &nbsp;
+				div.turn-block
+					button(type='button', class='btn player2 turn-indicator') &nbsp;
+				div.counters.player2
+					div.btn-group
+						button.btn(type='button') Deck
+						button.btn.deck-counter.player2(type='button') 0
+					div.btn-group
+						button.btn(type='button') Hand
+						button.btn.hand-counter.player2(type='button') 0
+					div.btn-group
+						button.btn(type='button') Graveyard
+						button.btn.cemetery-counter.player2(type='button') 0
+			div#card_viewer_block
+			div#bottom_helper_block
+				div.life-block
+					button(type='button', class='btn player1 lose-life update-life') -
+					span(class='life-counter player1') 20
+					button(type='button', class='btn player1 gain-life update-life') +
+				div.message-receiver.player1 &nbsp;
+				div.turn-block
+					button(type='button', class='btn player1 turn-indicator') &nbsp;
+				div.counters.player1
+					div.btn-group
+						button.btn(type='button') Deck
+						button.btn.deck-counter.player1(type='button') 0
+					div.btn-group
+						button.btn(type='button') Hand
+						button.btn.hand-counter.player1(type='button') 0
+					div.btn-group
+						button.btn(type='button') Graveyard
+						button.btn.cemetery-counter.player1(type='button') 0
+		div#game_block.game-area
+			div#top_game_block.player2.player-side
+				div#top_handlogic.deck-and-hand.player2
+					div#top_deck.deck-emplacement.player2
+					div#top_hand.hand-emplacement.player2
+				div#top_cemetery.cemetery-emplacement.player2
+				div#top_game_zone.game-emplacement.player2
+			div#bottom_game_block.player1.player-side
+				div#bottom_cemetery.cemetery-emplacement.player1
+				div#bottom_game_zone.game-emplacement.player1
+				div#bottom_handlogic.deck-and-hand.player1
+					div#bottom_deck.deck-emplacement.player1
+					div#bottom_hand.hand-emplacement.player1
+
+
+	// Start Game Modal
+	div#start_game_modal.modal.hide.fade(data-backdrop='static')
+		div.modal-header
+			h3 Choose your deck
+		div.modal-body
+			select(id='deck_select')
+				each deck in decks
+					option(value=deck.id)= deck.name
+		div.modal-footer
+			button(type='button', class='btn btn-info', id='start_game') Choose
+
+	// Deck Searching Modal
+	div#search_deck_modal.modal.hide
+		div.modal-header
+			h3 Search for a card
+		div.modal-body
+
+		div.modal-footer
+			button(type='button', class='btn', data-dismiss='modal', aria-hidden='true') Close
+			button(type='button', class='btn btn-info card-choose') Choose

@@ -28,13 +28,11 @@
 
 module.exports.routes = {
 
-  // By default, your root route (aka home page) points to a view
-  // located at `views/home/index.ejs`
-  // 
-  // (This would also work if you had a file at: `/views/home.ejs`)
-  '/': {
-    view: 'home/index'
-  }
+  // Index route
+  '/': { controller: 'LoginController', action: 'login' }
+  ,'/lobby': { controller: 'LobbyController', action: 'lobby' }
+  ,'/deck-builder': { view: 'deck-builder/deck-builder' }
+  ,'/game': { view: 'game/game' }
 
   /*
   // But what if you want your home page to display
