@@ -12,6 +12,10 @@
  * http://sailsjs.org/#documentation
  */
 
+// File Path Override for sails-disk
+var diskAdapter = require('sails-disk');
+diskAdapter.filePath = 'db/disk.db';
+
 module.exports.adapters = {
 
   // If you leave the adapter config unspecified 
@@ -26,7 +30,6 @@ module.exports.adapters = {
   // Persistent adapter for DEVELOPMENT ONLY
   // (data IS preserved when the server shuts down)
   disk: {
-    module: 'sails-disk-custom',
-    filePath: 'db/users.db'
+    module: diskAdapter
   }
 };

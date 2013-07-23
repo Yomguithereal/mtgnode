@@ -28,10 +28,18 @@
 
 module.exports.routes = {
 
-  // Index route
-  '/': { controller: 'LoginController', action: 'login' }
+  // Login Routes
+  '/': { controller: 'LoginController', action: 'login'}
+  ,'/ajax/login/authenticate': { controller: 'LoginController', action: 'authenticate'}
+
+  // Lobby Routes
   ,'/lobby': { controller: 'LobbyController', action: 'lobby' }
-  ,'/deck-builder': { view: 'deck-builder/deck-builder' }
+
+  // Deck Builder Routes
+  ,'/deck-builder': { controller: 'DeckBuilderController', action: 'builder' }
+  ,'/ajax/deck-builder/set': { controller: 'DeckBuilderController', action: 'set_cards' }
+
+  // Game Routes
   ,'/game': { view: 'game/game' }
 
   /*

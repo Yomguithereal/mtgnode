@@ -1,0 +1,117 @@
+{
+  "data": {
+    "user": [
+      {
+        "username": "Yomgui",
+        "password": "test",
+        "createdAt": "2013-07-23T12:54:38.977Z",
+        "updatedAt": "2013-07-23T12:54:38.977Z",
+        "id": 1
+      }
+    ],
+    "sets": [],
+    "cards": [],
+    "cardmodel": [],
+    "setmodel": []
+  },
+  "schema": {
+    "user": {
+      "username": {
+        "type": "string"
+      },
+      "password": {
+        "type": "string"
+      },
+      "decks": {
+        "type": "array"
+      },
+      "id": {
+        "type": "integer",
+        "autoIncrement": true,
+        "defaultsTo": "AUTO_INCREMENT",
+        "primaryKey": true
+      },
+      "createdAt": {
+        "type": "DATE",
+        "default": "NOW"
+      },
+      "updatedAt": {
+        "type": "DATE",
+        "default": "NOW"
+      }
+    },
+    "sets": {
+      "id": {
+        "type": "integer",
+        "autoIncrement": true,
+        "defaultsTo": "AUTO_INCREMENT",
+        "primaryKey": true
+      },
+      "createdAt": {
+        "type": "DATE",
+        "default": "NOW"
+      },
+      "updatedAt": {
+        "type": "DATE",
+        "default": "NOW"
+      }
+    },
+    "cards": {
+      "id": {
+        "type": "integer",
+        "autoIncrement": true,
+        "defaultsTo": "AUTO_INCREMENT",
+        "primaryKey": true
+      },
+      "createdAt": {
+        "type": "DATE",
+        "default": "NOW"
+      },
+      "updatedAt": {
+        "type": "DATE",
+        "default": "NOW"
+      }
+    },
+    "cardmodel": {
+      "id": {
+        "type": "integer",
+        "autoIncrement": true,
+        "defaultsTo": "AUTO_INCREMENT",
+        "primaryKey": true
+      },
+      "createdAt": {
+        "type": "DATE",
+        "default": "NOW"
+      },
+      "updatedAt": {
+        "type": "DATE",
+        "default": "NOW"
+      }
+    },
+    "setmodel": {
+      "id": {
+        "type": "integer",
+        "autoIncrement": true,
+        "defaultsTo": "AUTO_INCREMENT",
+        "primaryKey": true
+      },
+      "createdAt": {
+        "type": "DATE",
+        "default": "NOW"
+      },
+      "updatedAt": {
+        "type": "DATE",
+        "default": "NOW"
+      }
+    }
+  },
+  "counters": {
+    "user": {
+      "id": 1
+    },
+    "sets": {},
+    "cards": {},
+    "cardmodel": {},
+    "setmodel": {}
+  }
+}

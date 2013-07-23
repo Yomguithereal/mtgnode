@@ -61,6 +61,7 @@ module.exports = function (grunt) {
     // *->    put other dependencies here   <-*
     'linker/js/jquery.min.js',
     'linker/js/bootstrap.min.js',
+    'linker/js/domino.min.js',
     'linker/js/mtgnode/**/*.js',
 
     // All of the rest of your app scripts imported here

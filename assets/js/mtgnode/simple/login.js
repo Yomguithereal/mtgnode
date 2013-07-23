@@ -1,4 +1,15 @@
 // Simple login actions
 $(document).ready(function(){
-	alert('test');
+
+	// Override connect
+	$('.override-connect').click(function(){
+		$.post('ajax/login/authenticate', {username: $(this).attr('username'), password: $(this).attr('password')}, function(result){
+			if(!!result.authenticated){
+				location.href = location.href.split('?')[0]+'lobby';
+			}
+			else{
+				alert('Wrong Login');
+			}
+		});
+	});
 });
