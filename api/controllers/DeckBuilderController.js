@@ -20,5 +20,5 @@ exports.builder = function(req, res){
 exports.set_cards = function(req, res){
 
 	// Sending back the cards
-	res.json(SetModel.getCards(req.param('set')));
+	res.json(SetModel.getCards(req.param('code')));
 }

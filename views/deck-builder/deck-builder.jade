@@ -1,4 +1,6 @@
 extends ../layout
+include ../mixins/card_drivers
+include ../mixins/modals
 
 block body
 	div#mainframe
@@ -39,13 +41,8 @@ block body
 			button(type='button', class='btn', data-dismiss='modal', aria-hidden='true') Close
 			button(type='button', class='btn btn-info', id='create_deck_confirm') Create
 
-	div#delete_deck_modal.modal.hide.fade
-		div.modal-header
-			h3 Delete a Deck
-		div.modal-body Are you sure this is what you want
-		div.modal-footer
-			button(type='button', class='btn', data-dismiss='modal', aria-hidden='true') No
-			button(type='button', class='btn btn-danger', id='delete_deck_confirm') Yes
+	mixin confirm_modal('delete_deck_modal', 'Delete a Deck', 'Are you sure this is what you want ?')
 
 block contextual_js
+	mixin load_driver()
 	script(type="text/javascript", src="/js/mtgnode/deck-builder/controller.js")

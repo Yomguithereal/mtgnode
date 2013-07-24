@@ -27,7 +27,7 @@ module.exports.controllers = {
     // Whether routes are automatically generated for every action in your controllers
     // (also maps `index` to /:controller)
     // '/:controller', '/:controller/index', and '/:controller/:action'
-    actions: true,
+    actions: false,
 
 
     // ** NOTE **

@@ -1,0 +1,14 @@
+// Bootstrap Modal Mixins
+
+// Simple confirmation modals
+mixin confirm_modal(id, title, text, status, no, yes)
+	- status = status || 'danger'
+	- no = no || 'No'
+	- yes = yes || 'Yes'
+	div.modal.hide.fade(id=id)
+		div.modal-header
+			h3= title
+		div.modal-body= text
+		div.modal-footer
+			button(type='button', class='btn', data-dismiss='modal', aria-hidden='true')= no
+			button(type='button', class="btn btn-#{status}", id="#{id}_confirm")= yes
