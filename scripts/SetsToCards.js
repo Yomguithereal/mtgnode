@@ -11,6 +11,10 @@ for(var set in sets){
 	// Looping through cards
 	sets[set].cards.forEach(function(card, index){
 		card['set'] = set;
+
+		if(card['number'] === undefined){
+			card['number'] = index+1;
+		}
 		cards_array.push(card);
 	});
 }

@@ -55,12 +55,14 @@
 
 
 	// Card Display Module
-	function CardDisplay(){
+	function LeftPanel(){
 		domino.module.call(this);
 
 		// Variables
 		var self = this;
+		this.template = new CardTemplate();
 		var $set_select = $("#set_select");
+		var $panel = $('#left_panel')
 
 		// Emettor
 		//------------
@@ -73,13 +75,17 @@
 		// Receptor
 		//----------
 		this.triggers.events['viewedCardsUpdated'] = function(d){
-			console.log(d.get('viewedCards'));
+			$panel.empty();
+			d.get('viewedCards').forEach(function(card){
+				$panel.append(self.template.render(card));
+			});
+			console.log(d.get('viewedCards')[0]);
 		}
 		
 	}
 
 	// Instanciating Modules
-	var cardDisplay = controller.addModule(CardDisplay);
+	var leftPanel = controller.addModule(LeftPanel);
 
 
 })(jQuery, window);

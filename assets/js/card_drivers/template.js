@@ -16,11 +16,19 @@
 
 		// Properties
 		var self = this;
-		var _driver = new CardDriver();
+		this._index = -1;
+		this._driver = new CardDriver();
+		this._template = $('#tpl_card').html();
 
 		// Methods
-		this.deckBuilderCard = function(card){
-
+		this.render = function(card){
+			this._index += 1;
+			var data = {
+				number: this._index
+				,multiverseid: card.multiverseid
+				,src: this._driver.getUrl(card)
+			}
+			return Mustache.to_html(this._template, data);
 		}
 	}
 

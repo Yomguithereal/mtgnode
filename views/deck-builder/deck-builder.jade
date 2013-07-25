@@ -1,6 +1,7 @@
 extends ../layout
 include ../mixins/card_drivers
 include ../mixins/modals
+include ../templates/cards
 
 block body
 	div#mainframe
@@ -27,8 +28,8 @@ block body
 					button(type='button', id='save_deck', class='btn btn-info') Save Deck
 					button(type='button', id='create_deck', class='btn btn-success', data-toggle='modal', href='#new_deck_modal') Create a Deck
 		div#deck_builder_container
-			div#deck_builder_left_panel
-			div#deck_builder_right_panel
+			div#left_panel
+			div#right_panel
 
 	// Modals
 	div#new_deck_modal.modal.hide.fade
@@ -43,6 +44,8 @@ block body
 
 	mixin confirm_modal('delete_deck_modal', 'Delete a Deck', 'Are you sure this is what you want ?')
 
+block templates
+	mixin deckBuilderCardTemplate()
 block contextual_js
 	mixin load_driver()
 	script(type="text/javascript", src="/js/mtgnode/deck-builder/controller.js")

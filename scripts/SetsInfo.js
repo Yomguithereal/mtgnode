@@ -6,6 +6,7 @@ var sets = require('../db/AllSets.json');
 
 // Main Loop
 for(var set in sets){
+	sets[set]['nb_cards'] = sets[set].cards.length
 	delete sets[set].cards;
 }
 

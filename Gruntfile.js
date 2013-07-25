@@ -62,6 +62,7 @@ module.exports = function (grunt) {
     'linker/js/jquery.min.js',
     'linker/js/bootstrap.min.js',
     'linker/js/domino.min.js',
+    'linker/js/mustache.min.js',
     'linker/js/card_drivers/*.js',
     'linker/js/mtgnode/**/*.js',
 
