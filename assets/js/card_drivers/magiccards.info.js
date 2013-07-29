@@ -140,5 +140,5 @@
 
 	// Exporting 
 	//-----------
-	window.CardDriver = CardDriver;
+	window.CardDriver = new CardDriver();
 })();

@@ -14,15 +14,15 @@ module.exports.policies = {
 
   // Default policy for all controllers and actions
   // (`true` allows public access) 
-  '*': 'views_globals'
+  '*': true
 
   ,LobbyController: {
   	"*": 'authenticated'
   }
 
-  // ,DeckBuilderController: {
-  // 	"*": 'authenticated'
-  // }
+  ,DeckBuilderController: {
+  	"*": ['authenticated', 'views_globals']
+  }
 
   /*
 	// Here's an example of adding some policies to a controller

@@ -11,12 +11,15 @@ module.exports = {
 	attributes: {
 		username: 'String',
 		password: 'String',
-		decks: 'Array'
+		decks: {
+			type: 'Array',
+			defaultsTo: []
+		}
 	},
 
 	authenticate: function(username, password, callback){
-		this.find().where({username: username, password: password}).exec(function(err, result){
-			callback(result.length > 0);
+		this.findOne().where({username: username, password: password}).exec(function(err, user){
+			callback(user);
 		});
 	}
 };

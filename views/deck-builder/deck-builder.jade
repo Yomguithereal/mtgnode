@@ -1,6 +1,7 @@
 extends ../layout
 include ../mixins/card_drivers
 include ../mixins/modals
+include ../mixins/selects
 include ../mixins/widgets
 include ../templates/cards
 
@@ -9,17 +10,13 @@ block body
 		div#helper_block
 			div#top_helper_block
 				p Choose a Set
-				select(id="set_select")
-					option(value='none')
-					each set in sets
-						option(value=set.code)= set.name
+				mixin set_select(sets)
 				div.input-append
 					input#card_search(type='text')
 					button#card_search_button.active_enter(type='button', class='btn', data-loading-text='Searching...') Search
-			mixin card_viewer_widget
+			mixin card_viewer_widget()
 			div#bottom_helper_block
-				select(id='deck_select')
-					option(value='empty')
+				mixin deck_select(decks)
 				p Choosen Deck
 					div.input-append
 						input(id='deck_name', type='text', value='')

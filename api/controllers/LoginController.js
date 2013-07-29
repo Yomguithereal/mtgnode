@@ -22,10 +22,13 @@ exports.login = function(req, res){
 exports.authenticate = function(req, res){
 
 	// Interrogating Model
-	User.authenticate(req.param('username'), req.param('password'), function(result){
-		if(!!result){
+	User.authenticate(req.param('username'), req.param('password'), function(user){
+		if(user !== undefined){
 			req.session.authenticated = true;
+			req.session.user = user;
+			res.json({authenticated: true});
+			return false;
 		}
-		res.json({authenticated: result});
+		res.json({authenticated: false});
 	});
 }

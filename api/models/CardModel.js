@@ -40,6 +40,15 @@ function CardModel(){
 			}).length == Object.keys(criteria).length;
 		});
 	}
+
+	// Batch search card by array
+	this.getByIdArray = function(card_array){
+		return this._cards.filter(function(card){
+			return card_array.filter(function(id){
+				return card.multiverseid === id;
+			}).length > 0;
+		});
+	}
 }
 
 // Exporting

@@ -37,10 +37,18 @@ module.exports.routes = {
 
   // Deck Builder Routes
   ,'/deck-builder': { controller: 'DeckBuilderController', action: 'builder' }
-  ,'/ajax/deck-builder/set': { controller: 'DeckBuilderController', action: 'set_cards' }
+  ,'/ajax/deck-builder/set/:id': { controller: 'DeckBuilderController', action: 'set_cards' }
+  ,'/ajax/deck-builder/deck/:id': { controller: 'DeckBuilderController', action: 'deck_cards'}
 
   // Game Routes
   ,'/game': { view: 'game/game' }
+
+  // Card Rest
+  ,'/card/:id': {controller: 'CardController', action: 'get'}
+
+  // Debug Routes
+  // ,'/user/test_user': { controller: 'UserController', action: 'test_user'}
+  
 
   /*
   // But what if you want your home page to display
