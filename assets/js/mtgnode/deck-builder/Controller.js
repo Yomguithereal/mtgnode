@@ -13,8 +13,8 @@
 
 	// Domino Settings
 	domino.settings({
-		verbose: true,
-		displayTime: true,
+		// verbose: true,
+		// displayTime: true,
 		mergeRequests: false
 	});
 
@@ -79,13 +79,15 @@
 			d.get('viewedCards').forEach(function(card){
 				$panel.append(self.template.render(card));
 			});
-			console.log(d.get('viewedCards')[0]);
 		}
 		
 	}
 
 	// Instanciating Modules
 	var leftPanel = controller.addModule(LeftPanel);
+
+	// Instanciating Widgets
+	$('#card_viewer_widget').cardViewerWidget({container: '#deck_builder_container', cards: '.card-min-deckbuilder'});
 
 
 })(jQuery, window);

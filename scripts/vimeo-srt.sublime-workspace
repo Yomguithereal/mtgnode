@@ -1,0 +1,1192 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"se",
+				"seconds_end"
+			],
+			[
+				"secon",
+				"seconds_begin"
+			],
+			[
+				"_cur",
+				"_currentSecond"
+			],
+			[
+				"_curr",
+				"_currentStep"
+			],
+			[
+				"sec",
+				"seconds_begin"
+			],
+			[
+				"su",
+				"subtitles"
+			],
+			[
+				"vie",
+				"viewedCards"
+			],
+			[
+				"Ca",
+				"CardTemplate"
+			],
+			[
+				"t",
+				"_template"
+			],
+			[
+				"vi",
+				"viewedCards"
+			],
+			[
+				"di",
+				"dispatchEvent"
+			],
+			[
+				"sel",
+				"selectedSet"
+			],
+			[
+				"get",
+				"getViewedCards"
+			],
+			[
+				"set",
+				"set_select"
+			],
+			[
+				"Card",
+				"CardDisplay"
+			],
+			[
+				"SE",
+				"SetModel"
+			],
+			[
+				"c",
+				"criterion"
+			],
+			[
+				"crit",
+				"criteria"
+			],
+			[
+				"auth",
+				"authenticated"
+			],
+			[
+				"Logi",
+				"LoginController"
+			],
+			[
+				"disk",
+				"diskAdapter"
+			],
+			[
+				"sails",
+				"sails-disk"
+			],
+			[
+				"file",
+				"filePath"
+			],
+			[
+				"pr",
+				"production"
+			],
+			[
+				"ca",
+				"cards_array"
+			],
+			[
+				"ch",
+				"chapters"
+			],
+			[
+				"ass",
+				"assessment_report"
+			],
+			[
+				"rb",
+				"rb"
+			],
+			[
+				"pa",
+				"participations"
+			],
+			[
+				"p",
+				"participations"
+			],
+			[
+				"first",
+				"first_name"
+			],
+			[
+				"aut",
+				"authors"
+			],
+			[
+				"Depa",
+				"Department"
+			],
+			[
+				"dep",
+				"departments"
+			],
+			[
+				"typ",
+				"typkey"
+			],
+			[
+				"ty",
+				"type_taxonomy"
+			],
+			[
+				"lo",
+				"load_csv"
+			],
+			[
+				"requir",
+				"require_relative"
+			],
+			[
+				"ins",
+				"institutions"
+			],
+			[
+				"mysql_num",
+				"mysql_num_rows"
+			],
+			[
+				"sub",
+				"subquery"
+			],
+			[
+				"mysql_fr",
+				"mysql_fetch_array"
+			],
+			[
+				"mys",
+				"mysql_ping"
+			],
+			[
+				"Aut",
+				"AuthorToDepartment"
+			],
+			[
+				"au",
+				"authors"
+			],
+			[
+				"de",
+				"departments"
+			],
+			[
+				"re",
+				"read_line"
+			],
+			[
+				"read",
+				"read_line"
+			],
+			[
+				"rea",
+				"read_csv"
+			],
+			[
+				"conn",
+				"connection"
+			],
+			[
+				"in",
+				"institution"
+			],
+			[
+				"insti",
+				"institutions"
+			],
+			[
+				"Ins",
+				"InstitutionToInstitutionTypes"
+			],
+			[
+				"sym",
+				"sym_to_ins"
+			],
+			[
+				"for",
+				"ForeignKeyField"
+			],
+			[
+				"isn",
+				"institution_types"
+			],
+			[
+				"Auh",
+				"AuthorToInstitution"
+			],
+			[
+				"Dep",
+				"Department"
+			],
+			[
+				"db",
+				"db_table"
+			],
+			[
+				"cre",
+				"create_table"
+			],
+			[
+				"nb",
+				"nb_reduced"
+			],
+			[
+				"min",
+				"min_posts"
+			],
+			[
+				"nu",
+				"number_of_posts"
+			],
+			[
+				"clean",
+				"cleaned_url"
+			],
+			[
+				"po",
+				"pool"
+			],
+			[
+				"it",
+				"it"
+			],
+			[
+				"sor",
+				"sortJSON"
+			],
+			[
+				"fi",
+				"filename"
+			],
+			[
+				"cl",
+				"cleansing_regex"
+			],
+			[
+				"thre",
+				"thread"
+			],
+			[
+				"the",
+				"thread"
+			],
+			[
+				"thread",
+				"threads"
+			],
+			[
+				"out",
+				"output"
+			],
+			[
+				"next",
+				"next_page_url"
+			],
+			[
+				"to",
+				"to_parse"
+			],
+			[
+				"check",
+				"check_processes"
+			],
+			[
+				"proto",
+				"prototype"
+			],
+			[
+				"A",
+				"ArgvParser"
+			],
+			[
+				"ti",
+				"timeout_range"
+			],
+			[
+				"las",
+				"last_domain"
+			],
+			[
+				"url",
+				"url_object"
+			],
+			[
+				"g",
+				"getRandomIntInRange"
+			],
+			[
+				"nex",
+				"nextPage"
+			],
+			[
+				"loop",
+				"loop_through_thread"
+			],
+			[
+				"processes",
+				"num_processes"
+			],
+			[
+				"u",
+				"update_processes"
+			],
+			[
+				"ma",
+				"max_pile"
+			],
+			[
+				"thr",
+				"threadModel"
+			],
+			[
+				"th",
+				"threadModel"
+			],
+			[
+				"ou",
+				"output_directory"
+			],
+			[
+				"mo",
+				"mongoose"
+			],
+			[
+				"json",
+				"json_path"
+			],
+			[
+				"key",
+				"keywords"
+			],
+			[
+				"o",
+				"output"
+			],
+			[
+				"pro",
+				"program"
+			],
+			[
+				"ex",
+				"existsSync"
+			],
+			[
+				"js",
+				"json_directory"
+			],
+			[
+				"outp",
+				"output_directory"
+			],
+			[
+				"cach",
+				"cache_directory"
+			],
+			[
+				"is",
+				"isRelevant"
+			],
+			[
+				"rel",
+				"relevance_check_string"
+			],
+			[
+				"el",
+				"elapsed_time"
+			],
+			[
+				"Prc",
+				"ProcessTimer"
+			],
+			[
+				"Process",
+				"ProcessTimer"
+			],
+			[
+				"Af",
+				"AFHelper"
+			],
+			[
+				"forum",
+				"forum_url"
+			],
+			[
+				"ba",
+				"base_url"
+			],
+			[
+				"output",
+				"output"
+			],
+			[
+				"en",
+				"encrypted_link"
+			],
+			[
+				"num",
+				"num_processes"
+			],
+			[
+				"n",
+				"num_processes"
+			],
+			[
+				"m",
+				"max_pile"
+			],
+			[
+				"date",
+				"date_to_reach"
+			],
+			[
+				"dat",
+				"date_to_reach"
+			],
+			[
+				"d",
+				"date_to_reach"
+			],
+			[
+				"back",
+				"backEnough"
+			],
+			[
+				"curren",
+				"current_date"
+			],
+			[
+				"retur",
+				"return_object"
+			],
+			[
+				"firs",
+				"thread_first_path"
+			],
+			[
+				"page",
+				"pages_to_visit"
+			],
+			[
+				"loo",
+				"loop_through_forum"
+			],
+			[
+				"author",
+				"author"
+			],
+			[
+				"ge",
+				"getDate"
+			],
+			[
+				"coo",
+				"cookie3"
+			],
+			[
+				"cook",
+				"cookie1"
+			],
+			[
+				"fo",
+				"formatDate"
+			],
+			[
+				"Ge",
+				"GenericPost"
+			],
+			[
+				"aff_",
+				"aff_FormatDate"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "/home/yomgui/sites/vimeo-srt/sample.srt",
+			"settings":
+			{
+				"buffer_size": 9422,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/home/yomgui/sites/vimeo-srt/jquery.vimeo-srt.js",
+			"settings":
+			{
+				"buffer_size": 4323,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/home/yomgui/sites/vimeo-srt/index.html",
+			"settings":
+			{
+				"buffer_size": 1518,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/home/yomgui/sites/vimeo-srt/.gitignore",
+			"settings":
+			{
+				"buffer_size": 33,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/home/yomgui/sites/vimeo-srt/TODO.md",
+			"settings":
+			{
+				"buffer_size": 55,
+				"line_ending": "Unix",
+				"name": "TODO"
+			}
+		}
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 75.0,
+		"selected_items":
+		[
+			[
+				"list pac",
+				"Package Control: List Packages"
+			],
+			[
+				"instal",
+				"Package Control: Install Package"
+			],
+			[
+				"min",
+				"Minify Javascript"
+			],
+			[
+				"pr",
+				"Pretty JSON: Reformat (Pretty Print) JSON"
+			],
+			[
+				"pre",
+				"Pretty JSON: Reformat (Pretty Print) JSON"
+			],
+			[
+				"prett",
+				"Pretty JSON: Reformat (Pretty Print) JSON"
+			],
+			[
+				"",
+				"About"
+			],
+			[
+				"ins",
+				"Package Control: Install Package"
+			],
+			[
+				"lis",
+				"Package Control: List Packages"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"remov",
+				"Package Control: Remove Package"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"key",
+				"Preferences: Key Bindings - Default"
+			],
+			[
+				"settings",
+				"Preferences: Settings - Default"
+			],
+			[
+				"pret",
+				"Pretty JSON: Reformat (Pretty Print) JSON"
+			],
+			[
+				"packa",
+				"Package Control: List Packages"
+			],
+			[
+				"js fo",
+				"Pretty JSON: Reformat (Pretty Print) JSON"
+			],
+			[
+				"pac lis",
+				"Package Control: List Packages"
+			],
+			[
+				"js",
+				"Pretty JSON: Reformat (Pretty Print) JSON"
+			],
+			[
+				"pretty",
+				"Pretty JSON: Reformat (Pretty Print) JSON"
+			],
+			[
+				"list",
+				"Package Control: List Packages"
+			],
+			[
+				"list p",
+				"Package Control: List Packages"
+			],
+			[
+				"refor",
+				"Pretty JSON: Reformat (Pretty Print) JSON"
+			],
+			[
+				"install pa",
+				"Package Control: Install Package"
+			],
+			[
+				"prtt",
+				"HTMLPrettify: Prettify"
+			],
+			[
+				"jso",
+				"Pretty JSON: Reformat (Pretty Print) JSON"
+			],
+			[
+				"trai",
+				"Trailing Spaces: Toggle Trailing Spaces Highlighting"
+			],
+			[
+				"inst",
+				"Package Control: Install Package"
+			],
+			[
+				"instll",
+				"Package Control: Install Package"
+			],
+			[
+				"hex",
+				"Hex Viewer: Toggle Hex View"
+			]
+		],
+		"width": 467.0
+	},
+	"console":
+	{
+		"height": 139.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/home/yomgui/sites/vimeo-srt/jquery.vimeo-srt.min.js",
+		"/home/yomgui/sites/vimeo-srt/long-sample.srt",
+		"/home/yomgui/sites/vimeo-srt/.gitignore",
+		"/home/yomgui/sites/mtgnode/assets/js/mustache.min.js",
+		"/home/yomgui/.config/sublime-text-2/Packages/YUI Compressor/README.md",
+		"/home/yomgui/sites/mtgnode/db/SetInfos.json",
+		"/home/yomgui/sites/mtgnode/scripts/MagicCardsInfoSets.js",
+		"/home/yomgui/sites/mtgnode/db/magiccardsinfo_template.json",
+		"/home/yomgui/sites/mtgnode/TODO.md",
+		"/home/yomgui/sites/mtgnode/.gitignore",
+		"/home/yomgui/sites/mtgnode/views/deck-builder/deck-builder.jade",
+		"/home/yomgui/sites/mtgnode/scripts/SetsToCards.js",
+		"/home/yomgui/sites/mtgnode/scripts/SetsInfo.js",
+		"/home/yomgui/sites/mtgnode/views/mixins/card_drivers.jade",
+		"/home/yomgui/sites/mtgnode/views/layout.jade",
+		"/home/yomgui/sites/mtgnode/assets/templates/test.html",
+		"/home/yomgui/sites/mtgnode/views/mixins/modals.jade",
+		"/home/yomgui/sites/mtgnode/Gruntfile.js",
+		"/home/yomgui/Downloads/hogan.js-3.0.0/lib/compiler.js",
+		"/home/yomgui/Downloads/hogan.js-3.0.0/lib/hogan.js",
+		"/home/yomgui/sites/mtgnode/assets/js/domino.min.bak",
+		"/home/yomgui/sites/mtgnode/assets/js/domino.min.1-3-0-v2.js",
+		"/home/yomgui/sites/mtgnode/assets/js/domino.min.1-3-1.js",
+		"/home/yomgui/sites/mtgnode/assets/js/domino.min.1-2-4.js",
+		"/home/yomgui/sites/mtgnode/assets/js/domino.min.1-3-0.js",
+		"/home/yomgui/sites/mtgnode/config/log.js",
+		"/home/yomgui/sites/mtgnode/assets/js/domino.min.js",
+		"/home/yomgui/sites/mtgnode/api/policies/views_globals.js",
+		"/home/yomgui/sites/mtgnode/api/models/SetModel.js",
+		"/home/yomgui/sites/mtgnode/assets/js/card_drivers/test.js",
+		"/home/yomgui/sites/mtgnode/config/policies.js",
+		"/home/yomgui/sites/mtgnode/api/models/CardModel.js",
+		"/home/yomgui/sites/mtgnode/config/controllers.js",
+		"/home/yomgui/sites/mtgnode/api/policies/authenticated.js",
+		"/home/yomgui/sites/mtgnode/assets/js/mtgnode/deck-builder/controller.js",
+		"/home/yomgui/sites/mtgnode/config/routes.js",
+		"/home/yomgui/sites/mtgnode/api/controllers/DeckBuilderController.js",
+		"/home/yomgui/sites/mtgnode/config/bootstrap.js",
+		"/home/yomgui/sites/mtgnode/api/models/Cards.js",
+		"/home/yomgui/sites/mtgnode/assets/js/mtgnode/simple/login.js",
+		"/home/yomgui/sites/mtgnode/config/adapters.js",
+		"/home/yomgui/sites/mtgnode/api/controllers/LoginController.js",
+		"/home/yomgui/sites/mtgnode/api/models/User.js",
+		"/home/yomgui/sites/mtgnode/db/SetsInfo.json",
+		"/home/yomgui/sites/mtgnode/views/login/login.jade",
+		"/home/yomgui/sites/mtgnode/node_modules/sails-disk/index.js",
+		"/home/yomgui/sites/mtgnode/api/adapters/sails-disk-custom/adapter.js",
+		"/home/yomgui/sites/mtgnode/api/adapters/sails-disk-custom/package.json",
+		"/home/yomgui/sites/mtgnode/api/adapters/sails-disk-custom/index.js",
+		"/home/yomgui/sites/mtgnode/api/controllers/LobbyController.js",
+		"/home/yomgui/sites/mtgnode/package.json",
+		"/home/yomgui/sites/sails-disk/package.json",
+		"/home/yomgui/sites/mtgnode/api/drivers/.gitkeep",
+		"/home/yomgui/sites/sails-disk/index.js",
+		"/home/yomgui/sites/mtgnode/node_modules/sails-disk-custom/index.js",
+		"/home/yomgui/sites/mtgnode/db/disk.db",
+		"/home/yomgui/sites/mtgnode/.tmp/disk.db",
+		"/home/yomgui/sites/mtgnode/sails-disk-custom.js",
+		"/home/yomgui/sites/mtgnode/config/local.js",
+		"/home/yomgui/sites/mtgnode/assets/styles/mtgnode.less",
+		"/home/yomgui/sites/mtgnode/views/home/index.jade",
+		"/home/yomgui/sites/mtgnode/views/game/game.jade",
+		"/home/yomgui/sites/mtgnode/views/lobby/lobby.jade",
+		"/home/yomgui/sites/mtgnode/assets/js/jquery-2.0.3.min.js",
+		"/home/yomgui/sites/mtgnode/README.md",
+		"/home/yomgui/sites/mtgnode/db/users.db",
+		"/home/yomgui/sites/mtgnode/config/views.js",
+		"/home/yomgui/sites/mtgnode/config/i18n.js",
+		"/home/yomgui/sites/mtgnode/.tmp/dirty.db",
+		"/home/yomgui/sites/giec/model/upgrade.rb",
+		"/home/yomgui/sites/giec/import",
+		"/home/yomgui/sites/giec/model/update.rb",
+		"/home/yomgui/sites/python-boilerpipe/setup.py",
+		"/home/yomgui/sites/BoilerPy/boilerpy/test.html",
+		"/home/yomgui/sites/BoilerPy/boilerpy/extractors.py",
+		"/home/yomgui/sites/BoilerPy/boilerpy/filters.py",
+		"/home/yomgui/sites/BoilerPy/tests/unittests.py",
+		"/home/yomgui/sites/giec/README.md",
+		"/home/yomgui/sites/giec/import_authors.rb",
+		"/home/yomgui/sites/giec/import_institutions.rb",
+		"/home/yomgui/sites/giec/import_taxonomies.rb",
+		"/home/yomgui/sites/giec/config/filter.grel",
+		"/home/yomgui/sites/giec/model/test.grel",
+		"/home/yomgui/sites/giec/.gitignore",
+		"/home/yomgui/sites/giec/model/test",
+		"/home/yomgui/Mods.txt",
+		"/home/yomgui/sites/giec/config/database.yml",
+		"/home/yomgui/.config/sublime-text-2/Packages/Ruby/Ruby.tmLanguage",
+		"/home/yomgui/sites/giec/doublons.php",
+		"/home/yomgui/sites/giec/feed/authors.csv",
+		"/home/yomgui/sites/giec/doublons_institutions.txt",
+		"/home/yomgui/sites/giec/rules.json",
+		"/home/yomgui/sites/giec/settings.yml",
+		"/home/yomgui/sites/giec/import_institutions.py",
+		"/home/yomgui/sites/giec/import_authors.py",
+		"/home/yomgui/sites/giec/model/tables.py",
+		"/home/yomgui/sites/giec/requirements.txt",
+		"/home/yomgui/sites/giec/operation.php",
+		"/home/yomgui/Downloads/OpenRefine-master/README.txt",
+		"/home/yomgui/Downloads/OpenRefine-master/README.md",
+		"/home/yomgui/sites/giec/migrate.py",
+		"/home/yomgui/sites/giec/feed/institutions.csv",
+		"/home/yomgui/sites/giec/create_database.py",
+		"/home/yomgui/sites/giec/scripts/create_database.py",
+		"/home/yomgui/sites/giec/scripts/__init__.py",
+		"/home/yomgui/sites/giec/__init__.py",
+		"/home/yomgui/sites/giec/model/__init__.py",
+		"/home/yomgui/sites/giec/app/models/author.rb",
+		"/home/yomgui/sites/giec/database.yml",
+		"/home/yomgui/sites/giec/model/tables.rb",
+		"/home/yomgui/sites/giec/schema.md",
+		"/home/yomgui/sites/giec_base/model/models.py",
+		"/home/yomgui/sites/giec_base/giec_base/settings.py",
+		"/home/yomgui/sites/giec_base/schema.md",
+		"/home/yomgui/sites/giec_base/giec_base/models.py",
+		"/home/yomgui/sites/giec_base/database/giec.db",
+		"/home/yomgui/sites/giec_base/giec_base/model/institution_type.py",
+		"/home/yomgui/sites/giec_base/giec_base/model/institution.py",
+		"/home/yomgui/sites/giec_base/giec_base/model/author.py",
+		"/home/yomgui/sites/giec_base/giec_base/model/authors.py",
+		"/home/yomgui/sites/giec_base/giec_base/model/__init__.py",
+		"/home/yomgui/sites/giec_base/README.md",
+		"/home/yomgui/Desktop/TiresiasDesktop/qp.py",
+		"/home/yomgui/Desktop/TiresiasDesktop/support.publi",
+		"/home/yomgui/Desktop/TiresiasDesktop/lexis.py",
+		"/home/yomgui/Desktop/TiresiasDesktop/text_cleaner.py",
+		"/home/yomgui/Desktop/TiresiasDesktop/carteqp.py",
+		"/home/yomgui/Desktop/TiresiasDesktop/factiva.py"
+	],
+	"find":
+	{
+		"height": 35.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"451",
+			"51",
+			"gobier",
+			"del gobie",
+			"anoche la web del gobierno.",
+			"-y anoche la web del gobierno.",
+			"mustache",
+			"name",
+			"url",
+			"config",
+			"filePa",
+			"filepa",
+			"find",
+			"api",
+			"filePath",
+			"defaul",
+			"auth",
+			"auten",
+			"mixin",
+			"filePath",
+			"gettextblo",
+			"fromUrl",
+			"puts",
+			"gem",
+			"authorsLastNames",
+			"cold and ari",
+			"chinese ac",
+			"japan agenc",
+			"ETH Zurich,",
+			"appli",
+			"model",
+			")\n",
+			"false",
+			"style",
+			"12904",
+			"c-s",
+			"cae",
+			"ces",
+			"timer",
+			"nb",
+			"aff_addNbRep",
+			"nbrep",
+			".load",
+			"load",
+			"alt+p",
+			"proje",
+			"word",
+			".find",
+			"cesar",
+			"cesa",
+			"call",
+			"json_p",
+			";});",
+			"Command",
+			"-1",
+			"aff2_signature",
+			"conn",
+			"close",
+			"disc",
+			"quit",
+			"exit",
+			"var",
+			"connection",
+			"disconne",
+			"help",
+			"keywordords",
+			"test",
+			":\n",
+			"from_date",
+			"forum/matern1/__f576958_matern1--triste-aider-moi-les-filles-toux-seche-triste.html",
+			"http://forum.aufeminin.com/forum/matern1/__f576958_matern1--triste-aider-moi-les-filles-toux-seche-triste.html",
+			"));",
+			"aff_format",
+			"Qui tente un accouchement",
+			"main_date_path",
+			"main_post_path",
+			"sd",
+			"23",
+			"file",
+			"aff_FormatDate",
+			"gedit",
+			"gedi",
+			"jav",
+			"key",
+			"    ",
+			"macin",
+			"33 42",
+			"3342",
+			"Thanks",
+			"thanks"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"date_path",
+			"post_path",
+			"sublime"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": false,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 4,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "/home/yomgui/sites/vimeo-srt/sample.srt",
+					"settings":
+					{
+						"buffer_size": 9422,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								281,
+								281
+							]
+						],
+						"settings":
+						{
+							"encoding_helper_confidence": 0.899620000238,
+							"encoding_helper_encoding": "UTF-8",
+							"encoding_helper_encoding_sublime": "UTF-8",
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 244.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "/home/yomgui/sites/vimeo-srt/jquery.vimeo-srt.js",
+					"settings":
+					{
+						"buffer_size": 4323,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								239,
+								0
+							]
+						],
+						"settings":
+						{
+							"encoding_helper_confidence": 1.0,
+							"encoding_helper_encoding": "UTF-8",
+							"encoding_helper_encoding_sublime": "UTF-8",
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "/home/yomgui/sites/vimeo-srt/index.html",
+					"settings":
+					{
+						"buffer_size": 1518,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								426,
+								426
+							]
+						],
+						"settings":
+						{
+							"encoding_helper_confidence": 1.0,
+							"encoding_helper_encoding": "UTF-8",
+							"encoding_helper_encoding_sublime": "UTF-8",
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "/home/yomgui/sites/vimeo-srt/.gitignore",
+					"settings":
+					{
+						"buffer_size": 33,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								33,
+								33
+							]
+						],
+						"settings":
+						{
+							"encoding_helper_confidence": 1.0,
+							"encoding_helper_encoding": "UTF-8",
+							"encoding_helper_encoding_sublime": "UTF-8",
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "/home/yomgui/sites/vimeo-srt/TODO.md",
+					"settings":
+					{
+						"buffer_size": 55,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								55,
+								55
+							]
+						],
+						"settings":
+						{
+							"auto_name": "TODO",
+							"encoding_helper_confidence": 1.0,
+							"encoding_helper_encoding": "UTF-8",
+							"encoding_helper_encoding_sublime": "UTF-8",
+							"syntax": "Packages/Markdown/Markdown.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 0.0
+	},
+	"input":
+	{
+		"height": 33.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 112.0
+	},
+	"output.hex_viewer_inspector":
+	{
+		"height": 112.0
+	},
+	"replace":
+	{
+		"height": 64.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"",
+				"afscrap_thread.js"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+			[
+				"",
+				"/home/yomgui/sites/sublime-projects/giec_base.sublime-project"
+			]
+		],
+		"width": 380.0
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 258.0,
+	"status_bar_visible": true
+}

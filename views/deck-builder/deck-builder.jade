@@ -1,6 +1,7 @@
 extends ../layout
 include ../mixins/card_drivers
 include ../mixins/modals
+include ../mixins/widgets
 include ../templates/cards
 
 block body
@@ -15,7 +16,7 @@ block body
 				div.input-append
 					input#card_search(type='text')
 					button#card_search_button.active_enter(type='button', class='btn', data-loading-text='Searching...') Search
-			div#card_viewer_block
+			mixin card_viewer_widget
 			div#bottom_helper_block
 				select(id='deck_select')
 					option(value='empty')
@@ -31,21 +32,13 @@ block body
 			div#left_panel
 			div#right_panel
 
-	// Modals
-	div#new_deck_modal.modal.hide.fade
-		div.modal-header
-			h3 Create a Deck
-		div.modal-body
-			p
-				input(type='text', id='new_deck_name', placeholder='Deck Name')
-		div.modal-footer
-			button(type='button', class='btn', data-dismiss='modal', aria-hidden='true') Close
-			button(type='button', class='btn btn-info', id='create_deck_confirm') Create
 
-	mixin confirm_modal('delete_deck_modal', 'Delete a Deck', 'Are you sure this is what you want ?')
+// Modals
+mixin confirm_modal('delete_deck_modal', 'Delete a Deck', 'Are you sure this is what you want ?')
 
 block templates
 	mixin deckBuilderCardTemplate()
 block contextual_js
 	mixin load_driver()
-	script(type="text/javascript", src="/js/mtgnode/deck-builder/controller.js")
+	script(type="text/javascript", src="/js/mtgnode/widgets/CardViewer.js")
+	script(type="text/javascript", src="/js/mtgnode/deck-builder/Controller.js")
