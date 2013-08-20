@@ -19,12 +19,11 @@ block body
 				mixin deck_select(decks)
 				p Choosen Deck
 					div.input-append
-						input(id='deck_name', type='text', value='')
+						input#deck_name(type='text', value='')
 						button#card_counter.btn(type='button') 0
 				div.btn-group
-					button(type='button', id='delete_deck', class='btn btn-danger', data-toggle='modal', href='#delete_deck_modal') Delete Deck
-					button(type='button', id='save_deck', class='btn btn-info') Save Deck
-					button(type='button', id='create_deck', class='btn btn-success', data-toggle='modal', href='#new_deck_modal') Create a Deck
+					button#delete_deck(type='button', class='btn btn-danger', data-toggle='modal', href='#delete_deck_modal') Delete Deck
+					button#save_deck(type='button', class='btn btn-info') Save Deck
 		div#deck_builder_container
 			div#left_panel
 			div#right_panel

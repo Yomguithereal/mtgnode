@@ -40,7 +40,16 @@
 				value: [],
 				label: 'Card of the deck.',
 				type: 'array',
-				dispatch: 'deckCardsUpdated',
+				dispatch: 'deckCardsUpdated'
+			},
+
+			// Deck Name
+			{
+				id: 'deckName',
+				label: 'Name of the current selected deck.',
+				type: 'string',
+				triggers: 'updateDeckName',
+				dispatch: 'deckNameUpdated'
 			}
 		]
 		,services: [
@@ -71,11 +80,30 @@
 				method: function(event){
 					this.request('getDeckCards', {
 						shortcuts: {
-							deck_id: event.data
+							deck_id: event.data.deck
 						}
 					});
+
+					this.deckName = event.data.name;
 				}
 			},
+			{
+				triggers: 'deckCardAdded',
+				method: function(event){
+					var deckCards = this.get('deckCards');
+					var addedCard = this.get('viewedCards')[event.data];
+					deckCards.push(addedCard);
+					this.deckCards = deckCards;
+				}
+			},
+			{
+				triggers: 'deckCardRemoved',
+				method: function(event){
+					var deckCards = this.get('deckCards');
+					deckCards.splice(event.data, 1);
+					this.deckCards = deckCards;
+				}
+			}
 		]
 	});
 
@@ -91,6 +119,7 @@
 
 		// Variables
 		var self = this;
+		var cards = '.card-min-deckbuilder';
 		var $set_select = $("#set_select");
 		var $panel = $('#left_panel');
 
@@ -104,12 +133,16 @@
 			}
 		});
 
+		$panel.on('click', cards, function(){
+			self.dispatchEvent('deckCardAdded', $(this).attr('index'));
+		});
+
 		// Receptor
 		//----------
 		this.triggers.events['viewedCardsUpdated'] = function(d){
 			$panel.empty();
-			d.get('viewedCards').forEach(function(card){
-				$panel.append(__leftTemplate.render(card));
+			d.get('viewedCards').forEach(function(card, index){
+				$panel.append(__leftTemplate.render(card, index));
 			});
 		}
 	}
@@ -121,6 +154,7 @@
 
 		// Variables
 		var self = this;
+		var cards = '.card-min-deckbuilder';
 		var $deck_select = $('#deck_select');
 		var $panel = $("#right_panel");
 
@@ -128,17 +162,22 @@
 		//------------
 		$deck_select.change(function(){
 			var deck = $(this).val();
+			var name = $(this).text();
 			if(deck != '-none-'){
-				self.dispatchEvent('deckSelected', deck);
+				self.dispatchEvent('deckSelected', {deck: deck, name: name});
 			}
+		});
+
+		$panel.on('click', cards, function(){
+			self.dispatchEvent('deckCardRemoved', $(this).attr('index'));
 		});
 
 		// Receptor
 		//------------
 		this.triggers.events['deckCardsUpdated'] = function(d){
 			$panel.empty();
-			d.get('deckCards').forEach(function(card){
-				$panel.append(__rightTemplate.render(card));
+			d.get('deckCards').forEach(function(card, index){
+				$panel.append(__rightTemplate.render(card, index));
 			});
 		}
 	}
@@ -147,6 +186,27 @@
 	//===========
 	function Controls(){
 		domino.module.call(this);
+
+		// Variables
+		var self = this;
+		var $counter = $("#card_counter");
+		var $deck_name = $("#deck_name");
+
+		// Emettor
+		//------------
+		$deck_name.change(function(){
+			self.dispatchEvent('updateDeckName', {deckName: $(this).val()});
+		});
+
+		// Receptor
+		//------------
+		this.triggers.events['deckCardsUpdated'] = function(d){
+			$counter.text(d.get('deckCards').length);
+		}
+
+		this.triggers.events['deckNameUpdated'] = function(d){
+			$deck_name.val(d.get('deckName'));
+		}
 	}
 
 	// Launching

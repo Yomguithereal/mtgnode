@@ -8,7 +8,7 @@
 |	Version : 1.0
 */
 
-;(function(Driver, undefined){
+;(function(Mustache, Driver, undefined){
 
 	// Templates 
 	//-----------
@@ -22,11 +22,18 @@
 		this._template = $('#tpl_card').html();
 
 		// Methods
-		this.render = function(card){
-			this._index += 1;
+		this.render = function(card, index_override){
+			if(index_override === undefined){
+				this._index += 1;
+				index = this._index;
+			}
+			else{
+				index = index_override;
+			}
+			
 			var data = {
 				id_prefix: this._prefix
-				,number: this._index
+				,number: index
 				,multiverseid: card.multiverseid
 				,src: this._driver.getUrl(card)
 			}
@@ -37,4 +44,4 @@
 	// Exporting 
 	//-----------
 	window.CardTemplate = CardTemplate;
-})(CardDriver);
+})(Mustache, CardDriver);
