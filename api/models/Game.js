@@ -10,10 +10,19 @@ module.exports = {
     adapter: 'memory',
     attributes: {
         name: 'String',
-        player1: false,
-        player2: false,
+        player1: {
+            type: 'Integer',
+            defaultsTo: 0
+        },
+        player2: {
+            type: 'Integer',
+            defaultsTo: 0
+        },
         full: function(){
-            return (player1 !== false && player2 !== false);
+            return (this.player1 !== 0 && this.player2 !== 0);
+        },
+        empty: function(){
+            return !this.full();
         }
     }
 }

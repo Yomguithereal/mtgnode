@@ -1,17 +1,14 @@
 /**
- * GaleController
+ * GameController
  *
  * @module      :: Controller
  * @description :: Contains logic for handling requests.
  */
 
 module.exports = {
-    host: function(req, res){
-
-        // Creating Game
-        var game = Game.save({name: req.param('name'), player1: req.session.user});
-
-        // Subscribing Game
-        res.json({data: game})
+    get_and_clean: function(req, res){
+        Game.find({}).exec(function(err, games){
+            res.json({status: games[0].full()});
+        });
     }
 }

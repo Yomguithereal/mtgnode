@@ -50,7 +50,7 @@ module.exports.routes = {
   ,'/card/:id': {controller: 'CardController', action: 'get'}
 
   // Game Routes
-  ,'/game/host': {controller: 'GameController', action: 'host'}
+  ,'/game/get_and_clean': {controller: 'GameController', action: 'get_and_clean'}
 
   // Debug Routes
   ,'/user/test_user': { controller: 'UserController', action: 'test_user'}
