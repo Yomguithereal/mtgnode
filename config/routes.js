@@ -39,6 +39,10 @@ module.exports.routes = {
   ,'/deck-builder': { controller: 'DeckBuilderController', action: 'builder' }
   ,'/ajax/deck-builder/set/:id': { controller: 'DeckBuilderController', action: 'set_cards' }
   ,'/ajax/deck-builder/deck/:id': { controller: 'DeckBuilderController', action: 'deck_cards'}
+  ,'/ajax/deck-builder/save_deck': { controller: 'DeckBuilderController', action: 'save_deck'}
+  ,'/ajax/deck-builder/update_deck': { controller: 'DeckBuilderController', action: 'update_deck'}
+  ,'/ajax/deck-builder/delete_deck': { controller: 'DeckBuilderController', action: 'delete_deck'}
+
 
   // Game Routes
   ,'/game': { view: 'game/game' }

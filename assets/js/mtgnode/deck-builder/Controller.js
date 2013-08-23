@@ -16,7 +16,7 @@
 	domino.settings({
 		// verbose: true,
 		// displayTime: true,
-		mergeRequests: false
+		// mergeRequests: false
 	});
 
 	// Domino Instance

@@ -11,6 +11,7 @@ var SetModel = require('../models/SetModel');
 var DeckModel = require('../models/DeckModel');
 
 // Index
+//------
 exports.builder = function(req, res){
 
 	// Getting Relevant Data
@@ -24,6 +25,7 @@ exports.builder = function(req, res){
 }
 
 // Get all cards from a Set
+//-------------------------
 exports.set_cards = function(req, res){
 
 	// Sending back the cards
@@ -31,8 +33,27 @@ exports.set_cards = function(req, res){
 }
 
 // Get cards from a deck
+//----------------------
 exports.deck_cards = function(req, res){
 
 	// Sending back the cards
 	res.json(DeckModel.getCards(req.session.user, req.param('id')));
+}
+
+// Save a deck
+//------------
+exports.save_deck = function(req, res){
+
+}
+
+// Update a deck
+//--------------
+exports.update_deck = function(req, res){
+	
+}
+
+// Delete a deck
+//--------------
+exports.delete_deck = function(req, res){
+
 }
