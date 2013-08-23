@@ -8,6 +8,10 @@
 |	Version : 1.0
 */
 
+// Dependencies
+//==============
+var _ = require('lodash');
+
 // Main Class
 //============
 function CardModel(){
@@ -23,9 +27,9 @@ function CardModel(){
 
 	// Get card by Id
 	this.get = function(id){
-		return this._cards.filter(function(card){
+		return _.find(this._cards, function(card){
 			return card.multiverseid === id;
-		})[0];
+		});
 	}
 
 	// Search card by criteria

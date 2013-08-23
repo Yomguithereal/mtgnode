@@ -10,6 +10,7 @@
 
 // Dependencies
 //==============
+var _ = require('lodash');
 var CardModel = require('./CardModel');
 
 // Main Class
@@ -24,9 +25,9 @@ function DeckModel(){
 	// Methods
 	//----------
 	this.getCards = function(user, deck_id){
-		var deck = user.decks.filter(function(d){
-			return d.id === deck_id;
-		})[0];
+		var deck = _.find(user.decks, function(deck){
+			return deck.id == deck_id;
+		});
 		return CardModel.getByIdArray(deck.cards);
 	}
 
