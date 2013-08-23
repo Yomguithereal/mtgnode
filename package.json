@@ -8,7 +8,8 @@
         "grunt": "0.4.1",
         "sails-disk": "~0.9.0",
         "jade": "0.33.0",
-        "optimist": "0.3.4"
+        "optimist": "0.3.4",
+        "lodash": "1.2.1"
     },
     "scripts": {
         "start": "node app.js",

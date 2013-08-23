@@ -2,7 +2,7 @@
 
 mixin set_select(sets)
 	select#set_select
-		option(value='none')
+		option(value='-none-')
 			each set in sets
 				option(value=set.code)= set.name
 

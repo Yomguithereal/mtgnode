@@ -44,16 +44,27 @@ exports.deck_cards = function(req, res){
 //------------
 exports.save_deck = function(req, res){
 
-}
+	var deck = JSON.parse(req.param('deck'));
 
-// Update a deck
-//--------------
-exports.update_deck = function(req, res){
-	
+	if(deck.id === undefined){
+		User.addDeck(req.session.user, deck, function(updated_user){
+			req.session.user = updated_user;
+			res.json({result: "success"});
+		});
+	}
+	else{
+		User.updateDeck(req.session.user, deck, function(updated_user){
+			req.session.user = updated_user;
+			res.json({result: "success"});
+		});
+	}
 }
 
 // Delete a deck
 //--------------
 exports.delete_deck = function(req, res){
-
+	User.deleteDeck(req.session.user, req.param('deck_id'), function(updated_user){
+		req.session.user = updated_user;
+		res.json({result: "success"});
+	});
 }

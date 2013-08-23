@@ -30,7 +30,8 @@ block body
 
 
 // Modals
-mixin confirm_modal('delete_deck_modal', 'Delete a Deck', 'Are you sure this is what you want ?')
+block modals
+	mixin confirm_modal('delete_deck_modal', 'Delete a Deck', 'Are you sure this is what you want ?')
 
 block templates
 	mixin deckBuilderCardTemplate()

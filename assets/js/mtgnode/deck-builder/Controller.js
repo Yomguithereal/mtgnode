@@ -19,8 +19,16 @@
 		// mergeRequests: false
 	});
 
+	// Domino Helpers
+	//================
+	function cardsToMultiverseIdArray(cards){
+		return cards.map(function(card){
+			return card.multiverseid;
+		});
+	}
+
 	// Domino Instance
-	//======================
+	//=================
 	var controller = new domino({
 		name: 'DeckBuilder',
 		properties: [
@@ -50,6 +58,13 @@
 				type: 'string',
 				triggers: 'updateDeckName',
 				dispatch: 'deckNameUpdated'
+			},
+
+			// Deck Id if any
+			{
+				id: 'deckId',
+				label: 'Database id of the current selected deck.',
+				type: 'string',
 			}
 		]
 		,services: [
@@ -62,6 +77,17 @@
 				id: 'getDeckCards',
 				setter: 'deckCards',
 				url: 'ajax/deck-builder/deck/:deck_id'
+			},
+			{
+				id: 'saveDeck',
+				url: 'ajax/deck-builder/save_deck',
+				type: 'POST',
+				dataType: 'json'
+			},
+			{
+				id: 'deleteDeck',
+				url: 'ajax/deck-builder/delete_deck',
+				type: 'POST'
 			}
 		]
 		,hacks: [
@@ -83,7 +109,7 @@
 							deck_id: event.data.deck
 						}
 					});
-
+					this.deckId = event.data.deck;
 					this.deckName = event.data.name;
 				}
 			},
@@ -102,6 +128,44 @@
 					var deckCards = this.get('deckCards');
 					deckCards.splice(event.data, 1);
 					this.deckCards = deckCards;
+				}
+			},
+			{
+				triggers: 'saveDeck',
+				method: function(event){
+
+					// Need to do it ?
+					var deckCards = this.get('deckCards');
+					if (deckCards.length === 0 || this.get('deckName') === undefined)
+						return false;
+
+					// Calling service
+					this.request('saveDeck', {
+						data: {
+							deck: JSON.stringify({
+								cards: cardsToMultiverseIdArray(deckCards),
+								name: this.get('deckName'),
+								id: this.get('deckId')
+							}),
+						}
+					});
+				}
+			},
+			{
+				triggers: 'deleteDeck',
+				method: function(event){
+
+					// Need to do it?
+					var deckId = this.get('deckId');
+					if (deckId === undefined)
+						return false;
+
+					// Calling service
+					this.request('deleteDeck', {
+						data: {
+							deck_id: deckId
+						}
+					});
 				}
 			}
 		]
@@ -128,7 +192,7 @@
 		$set_select.change(function(){
 			var set = $(this).val();
 
-			if(set != 'none'){
+			if(set != '-none-'){
 				self.dispatchEvent('setSelected', set);
 			}
 		});
@@ -162,7 +226,7 @@
 		//------------
 		$deck_select.change(function(){
 			var deck = $(this).val();
-			var name = $(this).text();
+			var name = $(this).children(':selected').text();
 			if(deck != '-none-'){
 				self.dispatchEvent('deckSelected', {deck: deck, name: name});
 			}
@@ -191,11 +255,21 @@
 		var self = this;
 		var $counter = $("#card_counter");
 		var $deck_name = $("#deck_name");
+		var $save_deck = $("#save_deck");
+		var $delete_deck = $("#delete_deck_modal_confirm");
 
 		// Emettor
 		//------------
 		$deck_name.change(function(){
 			self.dispatchEvent('updateDeckName', {deckName: $(this).val()});
+		});
+
+		$save_deck.click(function(){
+			self.dispatchEvent('saveDeck');
+		});
+
+		$delete_deck.click(function(){
+			self.dispatchEvent('deleteDeck');
 		});
 
 		// Receptor

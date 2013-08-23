@@ -9,19 +9,40 @@
         "password": "test",
         "decks": [
           {
-            "id": "033bd94b1168d7e4f0d644c3c95e35bf",
-            "name": "TEST",
             "cards": [
+              94,
+              95,
+              96,
+              305,
+              543,
+              350,
+              306
+            ],
+            "name": "TEST",
+            "id": "9e4832c4cde7740f898e6efd961a1a0c"
+          },
+          {
+            "cards": [
+              435,
+              344,
+              436,
               345,
-              567,
-              876,
-              4563,
-              356
-            ]
+              298,
+              532,
+              534,
+              438,
+              489,
+              488,
+              356,
+              484,
+              353
+            ],
+            "name": "Essai",
+            "id": "7acd2602cfda8a3dbb684ec47e75c922"
           }
         ],
-        "createdAt": "2013-07-29T15:05:41.848Z",
-        "updatedAt": "2013-07-29T15:05:41.848Z",
+        "createdAt": "2013-08-23T12:43:08.724Z",
+        "updatedAt": "2013-08-23T13:09:13.844Z",
         "id": 1
       }
     ]
@@ -83,7 +104,8 @@
         "type": "string"
       },
       "decks": {
-        "type": "array"
+        "type": "array",
+        "defaultsTo": []
       },
       "id": {
         "type": "integer",

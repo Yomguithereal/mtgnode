@@ -40,7 +40,6 @@ module.exports.routes = {
   ,'/ajax/deck-builder/set/:id': { controller: 'DeckBuilderController', action: 'set_cards' }
   ,'/ajax/deck-builder/deck/:id': { controller: 'DeckBuilderController', action: 'deck_cards'}
   ,'/ajax/deck-builder/save_deck': { controller: 'DeckBuilderController', action: 'save_deck'}
-  ,'/ajax/deck-builder/update_deck': { controller: 'DeckBuilderController', action: 'update_deck'}
   ,'/ajax/deck-builder/delete_deck': { controller: 'DeckBuilderController', action: 'delete_deck'}
 
 
@@ -51,7 +50,7 @@ module.exports.routes = {
   ,'/card/:id': {controller: 'CardController', action: 'get'}
 
   // Debug Routes
-  // ,'/user/test_user': { controller: 'UserController', action: 'test_user'}
+  ,'/user/test_user': { controller: 'UserController', action: 'test_user'}
   
 
   /*
