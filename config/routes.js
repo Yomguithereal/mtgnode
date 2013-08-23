@@ -43,11 +43,14 @@ module.exports.routes = {
   ,'/ajax/deck-builder/delete_deck': { controller: 'DeckBuilderController', action: 'delete_deck'}
 
 
-  // Game Routes
-  ,'/game': { view: 'game/game' }
+  // Playground Routes
+  ,'/playground/:id': {controller: 'PlaygroundController', action: 'playground'}
 
   // Card Rest
   ,'/card/:id': {controller: 'CardController', action: 'get'}
+
+  // Game Routes
+  ,'/game/host': {controller: 'GameController', action: 'host'}
 
   // Debug Routes
   ,'/user/test_user': { controller: 'UserController', action: 'test_user'}
