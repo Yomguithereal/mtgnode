@@ -11,15 +11,15 @@ module.exports = {
     attributes: {
         name: 'String',
         player1: {
-            type: 'Integer',
-            defaultsTo: 0
+            type: 'Json',
+            defaultsTo: {connected: false, socket: false, user: false}
         },
         player2: {
-            type: 'Integer',
-            defaultsTo: 0
+            type: 'Json',
+            defaultsTo: {connected: false, socket: false, user: false}
         },
         full: function(){
-            return (this.player1 !== 0 && this.player2 !== 0);
+            return (this.player1.connected && this.player2.connected);
         },
         empty: function(){
             return !this.full();

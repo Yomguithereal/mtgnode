@@ -16,7 +16,7 @@
  * Middleware included with `app.use` is run first, before the router
  */
 
- 
+
 /**
  * (2) Static routes
  *
@@ -45,6 +45,7 @@ module.exports.routes = {
 
   // Playground Routes
   ,'/playground/:id': {controller: 'PlaygroundController', action: 'playground'}
+  ,'/playground/connect/:id': {controller: 'PlaygroundController', action: 'connect'}
 
   // Card Rest
   ,'/card/:id': {controller: 'CardController', action: 'get'}
@@ -54,7 +55,7 @@ module.exports.routes = {
 
   // Debug Routes
   ,'/user/test_user': { controller: 'UserController', action: 'test_user'}
-  
+
 
   /*
   // But what if you want your home page to display
@@ -88,7 +89,7 @@ module.exports.routes = {
   // If you want to set up a route only for one in particular
   // (GET, POST, PUT, DELETE, etc.), just specify the verb before the path.
   // For example, if you have a `UserController` with a `signup` action,
-  // and somewhere else, you're serving a signup form looks like: 
+  // and somewhere else, you're serving a signup form looks like:
   //
   //		<form action="/signup">
   //			<input name="username" type="text"/>
@@ -186,4 +187,3 @@ module.exports.routes = {
  * Finally, if nothing else matched, the default 404 handler is triggered.
  * See `config/404.js` to adjust your app's 404 logic.
  */
- 

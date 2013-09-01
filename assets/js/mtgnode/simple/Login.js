@@ -5,7 +5,7 @@ $(document).ready(function(){
 	$('.override-connect').click(function(){
 		$.post('ajax/login/authenticate', {username: $(this).attr('username'), password: $(this).attr('password')}, function(result){
 			if(!!result.authenticated){
-				location.href = location.href.split('?')[0]+'lobby';
+				location.href = '/lobby';
 			}
 			else{
 				alert('Wrong Login');

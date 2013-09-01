@@ -13,17 +13,25 @@ $(document).ready(function(){
     //-------
 
     // Fetching Games
-    socket.get('/game', function(games){
+    socket.get('/game/get_and_clean', function(games){
         counter += games.length;
+        console.log(games);
         games.forEach(function(game){
             $game_list.append(_renderListItem(game));
         });
     });
 
-    // Updating Games
+    // Adding and Deleting Games
     socket.on('message', function(message){
         counter += 1;
-        $game_list.append(_renderListItem(message.data));
+
+        // Verb condition
+        if(message.verb == 'create'){
+            _renderListItem(message.data);
+        }
+        else if(message.verb == 'destroy'){
+            _destroyListItem(message.id);
+        }
     });
 
     // Hosting a Game
@@ -32,7 +40,7 @@ $(document).ready(function(){
         if($.trim(name) === '')
             return false;
 
-        // TODO :: Fix this hacky part when sails get fixed
+        // TODO :: Fix this hacky part when sails get repaired
         socket.post('/game/create', {name: name});
         location.href = '/playground/'+String(counter);
     });
@@ -44,7 +52,13 @@ $(document).ready(function(){
 
     // Render game list
     function _renderListItem(game){
-        return '<li game_id="'+game.id+'" >'+game.name+'</li>';
+        $game_list.append('<li game_id="'+game.id+'" ><a href="/playground/'+game.id+'">'+game.name+'</a></li>');
+    }
+
+
+    // Destroy list item
+    function _destroyListItem(id){
+        $("[game_id="+id+"]").remove();
     }
 
 });

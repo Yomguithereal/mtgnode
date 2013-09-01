@@ -1,0 +1,39 @@
+extends ../layout
+include ../mixins/card_drivers
+include ../mixins/modals
+include ../mixins/selects
+include ../mixins/widgets
+include ../templates/cards
+
+block body
+	div#mainframe
+		div#helper_block
+			div#top_helper_block
+				p#playground_id(value=id)= id
+				div.input-append
+					input#card_search(type='text')
+					button#card_search_button.active_enter(type='button', class='btn', data-loading-text='Searching...') Search
+			mixin card_viewer_widget()
+			div#bottom_helper_block
+				p Choosen Deck
+					div.input-append
+						input#deck_name(type='text', value='')
+						button#card_counter.btn(type='button') 0
+				div.btn-group
+					button#delete_deck(type='button', class='btn btn-danger', data-toggle='modal', href='#delete_deck_modal') Delete Deck
+					button#save_deck(type='button', class='btn btn-info') Save Deck
+		div#deck_builder_container
+			div#left_panel
+			div#right_panel
+
+
+// Modals
+block modals
+	mixin confirm_modal('delete_deck_modal', 'Delete a Deck', 'Are you sure this is what you want ?')
+
+block templates
+	mixin deckBuilderCardTemplate()
+block contextual_js
+	mixin load_driver()
+	script(type="text/javascript", src="/js/mtgnode/widgets/CardViewer.js")
+	script(type="text/javascript", src="/js/mtgnode/playground/Controller.js")
