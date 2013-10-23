@@ -18,5 +18,8 @@
 		console.log(res);
 	});
 
+	socket.on('message', function(m){
+		console.log(m);
+	});
 
 })(jQuery, window, domino, CardTemplate);

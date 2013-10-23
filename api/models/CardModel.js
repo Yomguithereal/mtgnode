@@ -4,8 +4,8 @@
 | -------------------------------------------------------------------
 |
 |
-|	Author : Yomguithereal
-|	Version : 1.0
+| Author : Yomguithereal
+| Version : 1.0
 */
 
 // Dependencies
@@ -16,43 +16,43 @@ var _ = require('lodash');
 //============
 function CardModel(){
 
-	// Properties
-	//------------
-	var self = this;
-	this._cards = require('../../db/AllCards.json');
+  // Properties
+  //------------
+  var self = this;
+  this._cards = require('../../db/AllCards.json');
 
 
-	// Utilities
-	//-----------
+  // Utilities
+  //-----------
 
-	// Get card by Id
-	this.get = function(id){
-		return _.find(this._cards, function(card){
-			return card.multiverseid === id;
-		});
-	}
+  // Get card by Id
+  this.get = function(id){
+    return _.find(this._cards, function(card){
+      return card.multiverseid === id;
+    });
+  }
 
-	// Search card by criteria
-	this.getBy = function(criteria){
-		return this._cards.filter(function(card){
-			return Object.keys(criteria).filter(function(key){
+  // Search card by criteria
+  this.getBy = function(criteria){
+    return this._cards.filter(function(card){
+      return Object.keys(criteria).filter(function(key){
 
-				// TODO :: If Array
-				// TODO :: If fuzzy
-				// TODO :: Conditions
-				return card[key] === criteria[key];
-			}).length == Object.keys(criteria).length;
-		});
-	}
+        // TODO :: If Array
+        // TODO :: If fuzzy
+        // TODO :: Conditions
+        return card[key] === criteria[key];
+      }).length == Object.keys(criteria).length;
+    });
+  }
 
-	// Batch search card by array
-	this.getByIdArray = function(card_array){
-		return this._cards.filter(function(card){
-			return card_array.filter(function(id){
-				return card.multiverseid === id;
-			}).length > 0;
-		});
-	}
+  // Batch search card by array
+  this.getByIdArray = function(card_array){
+    return this._cards.filter(function(card){
+      return card_array.filter(function(id){
+        return card.multiverseid === id;
+      }).length > 0;
+    });
+  }
 }
 
 // Exporting

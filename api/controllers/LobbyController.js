@@ -4,11 +4,11 @@
 | -------------------------------------------------------------------
 |
 |
-|	Author : Yomguithereal
-|	Version : 1.0
+| Author : Yomguithereal
+| Version : 1.0
 */
 
 // Index
 exports.lobby = function(req, res){
-	res.view('lobby/lobby');
+  res.view('lobby/lobby');
 }
