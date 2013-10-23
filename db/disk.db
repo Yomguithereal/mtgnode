@@ -18,43 +18,9 @@
             ]
           }
         ],
-        "createdAt": "2013-08-23T13:26:42.111Z",
-        "updatedAt": "2013-08-23T13:26:42.111Z",
+        "createdAt": "2013-10-23T08:27:49.265Z",
+        "updatedAt": "2013-10-23T08:27:49.265Z",
         "id": 1
-      }
-    ],
-    "game": [
-      {
-        "name": "ok",
-        "player1": {
-          "connected": false,
-          "socket": false,
-          "user": false
-        },
-        "player2": {
-          "connected": false,
-          "socket": false,
-          "user": false
-        },
-        "createdAt": "2013-08-23T18:08:07.459Z",
-        "updatedAt": "2013-08-23T18:08:07.459Z",
-        "id": 4
-      },
-      {
-        "name": "red",
-        "player1": {
-          "connected": false,
-          "socket": false,
-          "user": false
-        },
-        "player2": {
-          "connected": false,
-          "socket": false,
-          "user": false
-        },
-        "createdAt": "2013-08-23T18:08:23.401Z",
-        "updatedAt": "2013-08-23T18:08:23.401Z",
-        "id": 5
       }
     ]
   },
@@ -132,33 +98,6 @@
         "type": "DATE",
         "default": "NOW"
       }
-    },
-    "game": {
-      "name": {
-        "type": "string"
-      },
-      "player1": {
-        "type": "integer",
-        "defaultsTo": 0
-      },
-      "player2": {
-        "type": "integer",
-        "defaultsTo": 0
-      },
-      "id": {
-        "type": "integer",
-        "autoIncrement": true,
-        "defaultsTo": "AUTO_INCREMENT",
-        "primaryKey": true
-      },
-      "createdAt": {
-        "type": "DATE",
-        "default": "NOW"
-      },
-      "updatedAt": {
-        "type": "DATE",
-        "default": "NOW"
-      }
     }
   },
   "counters": {
@@ -167,9 +106,6 @@
     "setmodel": {},
     "user": {
       "id": 1
-    },
-    "game": {
-      "id": 7
     }
   }
 }

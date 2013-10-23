@@ -25,7 +25,7 @@ module.exports.adapters = {
   // In-memory adapter for DEVELOPMENT ONLY
   memory: {
     // module: 'sails-memory'
-    module: 'sails-disk'
+    module: 'sails-memory'
   },
 
   // Persistent adapter for DEVELOPMENT ONLY
