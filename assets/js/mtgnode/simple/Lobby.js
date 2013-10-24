@@ -41,8 +41,9 @@ $(document).ready(function(){
       return false;
 
     // TODO :: Fix this hacky part when sails get repaired
-    socket.post('/game/create', {name: name});
-    location.href = '/playground/'+String(counter);
+    socket.post('/game/create', {name: name}, function(response){
+      location.href = '/playground/'+String(counter);
+    });
   });
 
 

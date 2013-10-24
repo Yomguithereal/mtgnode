@@ -16,22 +16,34 @@ exports.playground = function(req, res) {
 
 exports.connect = function(req, res) {
   var game_id = req.param('id');
+  var user_id = req.session.user.id;
 
-  Game.subscribe(req.socket, game_id);
   Game.findOne(game_id).done(function(err, current_game){
 
     // Registering Player
-    if (!current_game.player1.connected) {
+    if (!current_game.player1.connected && !current_game.hasPlayerWithId(user_id)) {
 
-      current_game.player1.connected = true;
-      current_game.save(function(err, game){
+      current_game.player1 = {
+        connected: true,
+        user: req.session.user
+      }
+
+      Game.subscribe(req.socket, game_id);
+
+      current_game.save(function(err, game) {
         res.json({player: 1, game: game});
       });
     }
-    else if (!current_game.player2.connected){
+    else if (!current_game.player2.connected && !current_game.hasPlayerWithId(user_id)) {
 
-      current_game.player2.connected = true;
-      current_game.save(function(err, game){
+      current_game.player2 = {
+        connected: true,
+        user: req.session.user
+      }
+
+      Game.subscribe(req.socket, game_id);
+
+      current_game.save(function(err, game) {
         res.json({player: 2, game: game});
       });
     }

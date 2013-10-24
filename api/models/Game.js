@@ -14,21 +14,21 @@ module.exports = {
     name: 'String',
     player1: {
       type: 'Json',
-      defaultsTo: {connected: false, id: false}
+      defaultsTo: {connected: false, user: false}
     },
     player2: {
       type: 'Json',
-      defaultsTo: {connected: false, id: false}
+      defaultsTo: {connected: false, user: false}
     },
     full: function(){
       return (this.player1.connected && this.player2.connected);
     },
     empty: function(){
-      return !this.full();
+      return (!this.player1.connected && !this.player2.connected);
     },
     hasPlayerWithId: function(id){
       return _.some([this.player1, this.player2], function(player){
-        return player.id === id;
+        return player.user.id === id;
       });
     }
   }
