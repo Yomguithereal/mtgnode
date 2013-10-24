@@ -53,6 +53,4 @@ exports.connect = function(req, res) {
 
   });
 
-  // console.log("Playground 4 :: ", Game.subscribers(4).length);
-  // console.log("Playground 5 :: ", Game.subscribers(5).length);
 }
