@@ -4,8 +4,8 @@
 | -------------------------------------------------------------------
 |
 |
-|	Author : Yomguithereal
-|	Version : 1.0
+| Author : Yomguithereal
+| Version : 1.0
 */
 
 // Dependencies
@@ -17,15 +17,15 @@ var CardModel = require('./CardModel');
 //============
 function SetModel(){
 
-	// Return set infos
-	this.getSetInfos = function(){
-		return sets;
-	}
+  // Return set infos
+  this.getSetInfos = function(){
+    return sets;
+  }
 
-	// Return every cards from a particular set
-	this.getCards = function(set_code){
-		return CardModel.getBy({set: set_code});
-	}
+  // Return every cards from a particular set
+  this.getCards = function(set_code){
+    return CardModel.getBy({set: set_code});
+  }
 }
 
 // Exporting
