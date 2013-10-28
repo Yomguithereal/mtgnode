@@ -6,33 +6,65 @@ include ../mixins/widgets
 include ../templates/cards
 
 block body
-	div#mainframe
+	div#mainframe.clearfix
 		div#helper_block
 			div#top_helper_block
-				p#playground_id(value=id)= id
-				div.input-append
-					input#card_search(type='text')
-					button#card_search_button.active_enter(type='button', class='btn', data-loading-text='Searching...') Search
+				div.life-block
+					button.btn.playe2.lose-life.update-life(type='button') -
+					span.life-counter.player2 20
+					button.btn.player2.gain-life.update-life(type='button') +
+				div.message-receiver.player2 &nbsp;
+				div.turn-block
+					button.btn.player2.turn-indicator(type='button') &nbsp;
+				div.counters.player2
+					div.btn-group
+						button.btn(type='button') Deck
+						button.btn.deck-counter.player2(type='button') 0
+					div.btn-group
+						button.btn(type='button') Hand
+						button.btn.hand-counter.player2(type='button') 0
+					div.btn-group
+						button.btn(type='button') Graveyard
+						button.btn.cemetery-counter.player2(type='button') 0
 			mixin card_viewer_widget()
 			div#bottom_helper_block
-				p Choosen Deck
-					div.input-append
-						input#deck_name(type='text', value='')
-						button#card_counter.btn(type='button') 0
-				div.btn-group
-					button#delete_deck(type='button', class='btn btn-danger', data-toggle='modal', href='#delete_deck_modal') Delete Deck
-					button#save_deck(type='button', class='btn btn-info') Save Deck
-		div#deck_builder_container
-			div#left_panel
-			div#right_panel
-
+				div.life-block
+					button.btn.player2.lose-life.update-life(type='button') -
+					span(class='life-counter player1') 20
+					button.btn.player1.gain-life.update-life(type='button') +
+				div.message-receiver.player1 &nbsp;
+				div.turn-block
+					button.btn.turn-indicator(type='button') &nbsp;
+				div.counters.player1
+					div.btn-group
+						button.btn(type='button') Deck
+						button.btn.deck-counter.player1(type='button') 0
+					div.btn-group
+						button.btn(type='button') Hand
+						button.btn.hand-counter.player1(type='button') 0
+					div.btn-group
+						button.btn(type='button') Graveyard
+						button.btn.cemetery-counter.player1(type='button') 0
+		div#game_block.game-area
+			div#top_game_block.player2.player-side
+				div#top_handlogic.deck-and-hand.player2
+					div#top_deck.deck-emplacement.player2
+					div#top_hand.hand-emplacement.player2
+				div#top_cemetery.cemetery-emplacement.player2
+				div#top_game_zone.game-emplacement.player2
+			div#bottom_game_block.player1.player-side
+				div#bottom_cemetery.cemetery-emplacement.player1
+				div#bottom_game_zone.game-emplacement.player1
+				div#bottom_handlogic.deck-and-hand.player1
+					div#bottom_deck.deck-emplacement.player1
+					div#bottom_hand.hand-emplacement.player1
 
 // Modals
 block modals
 	mixin confirm_modal('delete_deck_modal', 'Delete a Deck', 'Are you sure this is what you want ?')
 
 block templates
-	mixin deckBuilderCardTemplate()
+	mixin playgroundCardTemplate()
 block contextual_js
 	mixin load_driver()
 	script(type="text/javascript", src="/js/mtgnode/widgets/CardViewer.js")

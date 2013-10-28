@@ -1,4 +1,9 @@
 // Card Display Templates
+
 mixin deckBuilderCardTemplate()
 	script#tpl_card(type='text/html')
-		img.card-min-deckbuilder(id="{{id_prefix}}_{{number}}", index="{{number}}", src='{{src}}', multiverseid='{{multiverseid}}')
+		img.card-min-deckbuilder(id='{{id_prefix}}_{{number}}', index="{{number}}", src='{{src}}', multiverseid='{{multiverseid}}')
+
+mixin playgroundCardTemplate()
+	script#tpl_card(type='text/html')
+		img.card-min
