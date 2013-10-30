@@ -19,6 +19,14 @@
         "createdAt": "2013-10-23T08:27:49.265Z",
         "updatedAt": "2013-10-30T19:59:08.582Z",
         "id": 1
+      },
+      {
+        "username": "Nibor",
+        "password": "test",
+        "decks": [],
+        "createdAt": "2013-10-30T21:57:43.430Z",
+        "updatedAt": "2013-10-30T21:57:43.430Z",
+        "id": 2
       }
     ]
   },
@@ -103,7 +111,7 @@
     "deckmodel": {},
     "setmodel": {},
     "user": {
-      "id": 1
+      "id": 2
     }
   }
 }

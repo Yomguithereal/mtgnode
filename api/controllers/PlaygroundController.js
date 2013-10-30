@@ -10,12 +10,12 @@
 
 // Index
 exports.playground = function(req, res) {
-  res.view('playground/playground', {id: req.param('id'), debug: false});
+  res.view('playground/playground', {id: req.param('id')});
 }
 
 // Debug route
 exports.debug = function(req, res) {
-  res.view('playground/playground', {id: false, debug: true});
+  res.view('playground/playground', {id: 'debug'});
 }
 
 // Connection through socket.io
@@ -60,4 +60,11 @@ exports.connect = function(req, res) {
 
   });
 
+}
+
+// Socket.io standard messaging
+exports.message = function(req, res) {
+
+  // TODO: Message Control?
+  Game.publishUpdate(req.param('id'), {hello: 'world'});
 }

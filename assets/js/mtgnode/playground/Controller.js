@@ -8,7 +8,7 @@
 | Version : 1.0
 */
 
-;(function($, w, domino, CardTemplate, undefined){
+;(function($, w, domino, undefined){
   "use strict";
 
 
@@ -17,35 +17,93 @@
 
   var controller = new domino({
     name: 'PlaygroundController',
-    properties: [],
+    properties: [
+
+      // Me
+      {
+        id: 'myHitpoints',
+        type: 'integer',
+        value: 20,
+        dispatch: 'myHitpointsUpdated'
+      },
+      {
+        id: 'myTurn',
+        type: 'boolean',
+        value: false,
+        dispatch: 'myTurnUpdated'
+      },
+      {
+        id: 'myDeck',
+        type: 'array',
+        value: [],
+        dispatch: 'myDeckUpdated'
+      },
+
+
+      // Opponent
+      {
+        id: 'opponentHitpoints',
+        type: 'integer',
+        value: 20,
+        dispatch: 'opponentHitpointsUpdated'
+      },
+      {
+        id: 'opponentTurn',
+        type: 'boolean',
+        value: false,
+        dispatch: 'opponentTurnUpdated'
+      },
+      {
+        id: 'opponentDeck',
+        type: 'array',
+        value: [],
+        dispatch: 'opponentDeckUpdated'
+      }
+
+    ],
     services: [],
-    hacks: []
+    hacks: [
+      {
+        triggers: 'sendRealtimeMessage',
+        method: function(e) {
+          console.log(e);
+        }
+      },
+      {
+        triggers: 'receiveRealtimeMessage',
+        method: function(e) {
+          console.log(e);
+        }
+      }
+    ]
   });
 
 
-  // Instanciating Widgets
-  $('#card_viewer_widget').cardViewerWidget({container: '#deck_builder_container', cards: '.card-min'});
+  // Realtime Bootstrap
+  //====================
+  function RealtimeBootstrap(){
+    domino.module.call(this);
+
+    var _this = this;
+
+    socket.on('message', function(m) {
+      console.log(m);
+      _this.dispatchEvent('receiveRealtimeMessage', m);
+    });
+  }
 
 
+  // Instanciation
+  //===============
 
-
-
-
-
-
-
-
-  // Debug
-
-  var id = $('#playground_id').attr('value');
-  console.log(id);
-
-  socket.get('/playground/connect/'+id, function(res){
-    console.log(res);
+  // Widgets
+  $('#card_viewer_widget').cardViewerWidget({
+    container: '#deck_builder_container',
+    cards: '.card-min'
   });
 
-  socket.on('message', function(m){
-    console.log(m);
-  });
+  // Modules
+  var realtimeBootstrap = controller.addModule(RealtimeBootstrap);
 
-})(jQuery, window, domino, CardTemplate);
+
+})(jQuery, window, domino);

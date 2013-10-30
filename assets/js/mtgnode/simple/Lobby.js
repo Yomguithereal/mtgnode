@@ -6,7 +6,6 @@ $(document).ready(function(){
   var $host_game = $("#host_game");
   var $game_name = $("#host_game_name");
   var $game_list = $("#game_list");
-  var counter = 1;
 
 
   // Events
@@ -14,8 +13,6 @@ $(document).ready(function(){
 
   // Fetching Games
   socket.get('/game/get_and_clean', function(games){
-    counter += games.length;
-    console.log(games);
     games.forEach(function(game){
       $game_list.append(_renderListItem(game));
     });
@@ -23,7 +20,6 @@ $(document).ready(function(){
 
   // Adding and Deleting Games
   socket.on('message', function(message){
-    counter += 1;
 
     // Verb condition
     if(message.verb == 'create'){
@@ -40,9 +36,8 @@ $(document).ready(function(){
     if($.trim(name) === '')
       return false;
 
-    // TODO :: Fix this hacky part when sails get repaired
-    socket.post('/game/create', {name: name}, function(response){
-      location.href = '/playground/'+String(counter);
+    socket.post('/game/create', {name: name}, function(game){
+      location.href = '/playground/'+game.id;
     });
   });
 

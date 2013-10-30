@@ -29,6 +29,7 @@ module.exports = {
       });
 
       // Sending games back to client
+      // TODO, return only not full games
       res.json(games);
 
     });

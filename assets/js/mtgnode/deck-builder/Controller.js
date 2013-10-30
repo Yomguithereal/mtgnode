@@ -182,7 +182,7 @@
     domino.module.call(this);
 
     // Variables
-    var self = this;
+    var _this = this;
     var cards = '.card-min-deckbuilder';
     var $set_select = $("#set_select");
     var $panel = $('#left_panel');
@@ -193,12 +193,12 @@
       var set = $(this).val();
 
       if(set != '-none-'){
-        self.dispatchEvent('setSelected', set);
+        _this.dispatchEvent('setSelected', set);
       }
     });
 
     $panel.on('click', cards, function(){
-      self.dispatchEvent('deckCardAdded', $(this).attr('index'));
+      _this.dispatchEvent('deckCardAdded', $(this).attr('index'));
     });
 
     // Receptor
@@ -217,7 +217,7 @@
     domino.module.call(this);
 
     // Variables
-    var self = this;
+    var _this = this;
     var cards = '.card-min-deckbuilder';
     var $deck_select = $('#deck_select');
     var $panel = $("#right_panel");
@@ -228,12 +228,12 @@
       var deck = $(this).val();
       var name = $(this).children(':selected').text();
       if(deck != '-none-'){
-        self.dispatchEvent('deckSelected', {deck: deck, name: name});
+        _this.dispatchEvent('deckSelected', {deck: deck, name: name});
       }
     });
 
     $panel.on('click', cards, function(){
-      self.dispatchEvent('deckCardRemoved', $(this).attr('index'));
+      _this.dispatchEvent('deckCardRemoved', $(this).attr('index'));
     });
 
     // Receptor
@@ -252,7 +252,7 @@
     domino.module.call(this);
 
     // Variables
-    var self = this;
+    var _this = this;
     var $counter = $("#card_counter");
     var $deck_name = $("#deck_name");
     var $save_deck = $("#save_deck");
@@ -261,15 +261,15 @@
     // Emettor
     //------------
     $deck_name.change(function(){
-      self.dispatchEvent('updateDeckName', {deckName: $(this).val()});
+      _this.dispatchEvent('updateDeckName', {deckName: $(this).val()});
     });
 
     $save_deck.click(function(){
-      self.dispatchEvent('saveDeck');
+      _this.dispatchEvent('saveDeck');
     });
 
     $delete_deck.click(function(){
-      self.dispatchEvent('deleteDeck');
+      _this.dispatchEvent('deleteDeck');
     });
 
     // Receptor
