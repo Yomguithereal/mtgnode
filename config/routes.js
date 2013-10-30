@@ -57,6 +57,7 @@ module.exports.routes = {
 
   // Debug Routes
   ,'/user/test_user': { controller: 'UserController', action: 'test_user'}
+  ,'/debug/playground': { controller: 'PlaygroundController', action: 'debug'}
 
 
   /*

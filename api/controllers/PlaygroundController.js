@@ -9,11 +9,16 @@
 */
 
 // Index
-//-------
 exports.playground = function(req, res) {
-  res.view('playground/playground', {id: req.param('id')})
+  res.view('playground/playground', {id: req.param('id'), debug: false});
 }
 
+// Debug route
+exports.debug = function(req, res) {
+  res.view('playground/playground', {id: false, debug: true});
+}
+
+// Connection through socket.io
 exports.connect = function(req, res) {
   var game_id = req.param('id');
   var user_id = req.session.user.id;
@@ -21,7 +26,8 @@ exports.connect = function(req, res) {
   Game.findOne(game_id).done(function(err, current_game){
 
     // Registering Player
-    if (!current_game.player1.connected && !current_game.hasPlayerWithId(user_id)) {
+    if (!current_game.player1.connected &&
+        !current_game.hasPlayerWithId(user_id)) {
 
       current_game.player1 = {
         connected: true,
@@ -34,7 +40,8 @@ exports.connect = function(req, res) {
         res.json({player: 1, game: game});
       });
     }
-    else if (!current_game.player2.connected && !current_game.hasPlayerWithId(user_id)) {
+    else if (!current_game.player2.connected &&
+             !current_game.hasPlayerWithId(user_id)) {
 
       current_game.player2 = {
         connected: true,
