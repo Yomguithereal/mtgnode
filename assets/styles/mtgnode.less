@@ -120,9 +120,18 @@
 | -------------------------------------------------------------------
 */
 
+
+// Layout
+@playground-left-panel-width: 250px;
+
+
+// Cards
 @card-min-width : 78px;
 @card-min-height : 111px;
 @card-shadow: rgba(100, 100, 100, 0.298039) 0px 2px 6px 0px;
+
+@card-viewer-width: @playground-left-panel-width;
+@card-viewer-height: auto;
 
 
 /*
@@ -144,7 +153,7 @@ BODY{
 }
 
 #helper_block{
-	width: 312px;
+	width: @playground-left-panel-width;
 	margin:0px;
 	height:760px;
 	float:left;
@@ -194,9 +203,8 @@ BODY{
 
 #game_block{
 	width: 974px;
-	margin: 0px;
+	margin-left: @playground-left-panel-width;
 	height:760px;
-	float:right;
 	border:1px solid black;
 }
 
@@ -399,7 +407,7 @@ BODY{
 }
 
 #card_viewer_widget{
-	width:312px;
-	height:445px;
+	width: @card-viewer-width;
+	height: @card-viewer-height;
 }
 

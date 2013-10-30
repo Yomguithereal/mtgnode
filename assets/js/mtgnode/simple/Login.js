@@ -12,4 +12,10 @@ $(document).ready(function(){
       }
     });
   });
+
+  // Alert if not permitted
+  var flag = location.href.split('?')[1];
+
+  if (flag === 'unauthorized')
+    $('.alert').show();
 });

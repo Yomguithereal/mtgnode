@@ -3,6 +3,9 @@ extends ../layout
 block body
   div#mainframe
     p Welcome to MTGNode
+    div.alert.alert-error(style='display:none;')
+        button.close(data-dismiss='alert') &times;
+        strong Unauthorized Attempt!
     input(type='text', placeholder='Username', id='username')
     br
     input(type='password', placeholder='Password', id='password')
