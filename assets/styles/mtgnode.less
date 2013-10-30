@@ -123,6 +123,7 @@
 
 // Layout
 @playground-left-panel-width: 250px;
+@hand-width: 737px;
 
 
 // Cards
@@ -162,7 +163,7 @@ BODY{
 }
 
 #top_helper_block, #bottom_helper_block{
-	height:157px;
+	height:200px;
 }
 
 #top_helper_block{
@@ -174,7 +175,7 @@ BODY{
 }
 
 #card_viewer_block{
-	height:445px;
+	height:@card-viewer-height;
 }
 
 #deck_builder_container{
@@ -246,15 +247,33 @@ BODY{
 
 .hand-emplacement{
 	height:@card-min-height;
-	width: 894px;
+	width: @hand-width;
 	position: absolute;
-	left:80px;
+	left: (@card-min-width + 1) * 3;
+}
+
+.exile-emplacement{
+	width:@card-min-width;
+	height:@card-min-height;
+	position: absolute;
+	left: 0px;
+
+	&.player2{
+		border-right:1px solid black;
+	}
+
+	&.player1{
+		bottom:0px;
+		border-right:1px solid black;
+		border-top:1px solid black;
+	}
 }
 
 .deck-emplacement{
 	width:@card-min-width;
 	height:@card-min-height;
 	position: absolute;
+	left: (@card-min-width + 1) * 2;
 
 	&.player2{
 		border-right:1px solid black;
@@ -271,17 +290,15 @@ BODY{
 	width:@card-min-width;
 	height:@card-min-height;
 	position: absolute;
-
-	z-index:20;
+	left: (@card-min-width + 1);
 
 	&.player2{
-		border-bottom:1px solid black;
+		border-bottom: 1px solid black;
 		border-right: 1px solid black;
-		top:109px;
 	}
 
 	&.player1{
-		bottom:109px;
+		bottom:0px;
 		border-top:1px solid black;
 		border-right:1px solid black;
 	}
