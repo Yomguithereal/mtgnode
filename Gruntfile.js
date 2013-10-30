@@ -59,11 +59,7 @@ module.exports = function (grunt) {
     'linker/js/libs/app.js',
 
     // *->    put other dependencies here   <-*
-    'linker/js/libs/jquery.min.js',
-    'linker/js/libs/bootstrap.min.js',
-    'linker/js/libs/domino.min.js',
-    'linker/js/libs/mustache.min.js',
-    'linker/js/libs/lodash.min.js',
+    'linker/js/libs/*.js',
     'linker/js/mtgnode/**/*.js',
 
     // All of the rest of your app scripts imported here
