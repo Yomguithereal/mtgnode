@@ -8,6 +8,14 @@
         "createdAt": "2013-10-31T13:13:12.997Z",
         "updatedAt": "2013-10-31T13:13:12.997Z",
         "id": 1
+      },
+      {
+        "username": "Nibor",
+        "password": "test",
+        "decks": [],
+        "createdAt": "2013-10-31T13:17:08.835Z",
+        "updatedAt": "2013-10-31T13:17:08.835Z",
+        "id": 2
       }
     ]
   },
@@ -42,7 +50,7 @@
   },
   "counters": {
     "user": {
-      "id": 1
+      "id": 2
     }
   }
 }
