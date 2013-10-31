@@ -7,8 +7,8 @@
 | Author : Yomguithereal
 | Version : 1.0
 */
-var SetModel = require('../models/SetModel');
-var DeckModel = require('../models/DeckModel');
+var SetModel = require('../raw_models/SetModel');
+var DeckModel = require('../raw_models/DeckModel');
 
 // Index
 //------

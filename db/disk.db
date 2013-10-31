@@ -1,84 +1,8 @@
 {
   "data": {
-    "cardmodel": [],
-    "deckmodel": [],
-    "setmodel": [],
-    "user": [
-      {
-        "username": "Yomgui",
-        "password": "test",
-        "decks": [
-          {
-            "id": "033bd94b1168d7e4f0d644c3c95e35bf",
-            "name": "TEST",
-            "cards": [
-              876
-            ]
-          }
-        ],
-        "createdAt": "2013-10-23T08:27:49.265Z",
-        "updatedAt": "2013-10-30T19:59:08.582Z",
-        "id": 1
-      },
-      {
-        "username": "Nibor",
-        "password": "test",
-        "decks": [],
-        "createdAt": "2013-10-30T21:57:43.430Z",
-        "updatedAt": "2013-10-30T21:57:43.430Z",
-        "id": 2
-      }
-    ]
+    "user": []
   },
   "schema": {
-    "cardmodel": {
-      "id": {
-        "type": "integer",
-        "autoIncrement": true,
-        "defaultsTo": "AUTO_INCREMENT",
-        "primaryKey": true
-      },
-      "createdAt": {
-        "type": "DATE",
-        "default": "NOW"
-      },
-      "updatedAt": {
-        "type": "DATE",
-        "default": "NOW"
-      }
-    },
-    "deckmodel": {
-      "id": {
-        "type": "integer",
-        "autoIncrement": true,
-        "defaultsTo": "AUTO_INCREMENT",
-        "primaryKey": true
-      },
-      "createdAt": {
-        "type": "DATE",
-        "default": "NOW"
-      },
-      "updatedAt": {
-        "type": "DATE",
-        "default": "NOW"
-      }
-    },
-    "setmodel": {
-      "id": {
-        "type": "integer",
-        "autoIncrement": true,
-        "defaultsTo": "AUTO_INCREMENT",
-        "primaryKey": true
-      },
-      "createdAt": {
-        "type": "DATE",
-        "default": "NOW"
-      },
-      "updatedAt": {
-        "type": "DATE",
-        "default": "NOW"
-      }
-    },
     "user": {
       "username": {
         "type": "string"
@@ -94,24 +18,20 @@
         "type": "integer",
         "autoIncrement": true,
         "defaultsTo": "AUTO_INCREMENT",
-        "primaryKey": true
+        "primaryKey": true,
+        "unique": true
       },
       "createdAt": {
-        "type": "DATE",
+        "type": "datetime",
         "default": "NOW"
       },
       "updatedAt": {
-        "type": "DATE",
+        "type": "datetime",
         "default": "NOW"
       }
     }
   },
   "counters": {
-    "cardmodel": {},
-    "deckmodel": {},
-    "setmodel": {},
-    "user": {
-      "id": 2
-    }
+    "user": {}
   }
 }

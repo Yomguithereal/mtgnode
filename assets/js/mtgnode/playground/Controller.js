@@ -64,12 +64,6 @@
     services: [],
     hacks: [
       {
-        triggers: 'sendRealtimeMessage',
-        method: function(e) {
-          console.log(e);
-        }
-      },
-      {
         triggers: 'receiveRealtimeMessage',
         method: function(e) {
           console.log(e);
@@ -88,7 +82,8 @@
 
     socket.on('message', function(m) {
       console.log(m);
-      _this.dispatchEvent('receiveRealtimeMessage', m);
+      if (m.verb === 'update')
+        _this.dispatchEvent('receiveRealtimeMessage', m.data);
     });
   }
 

@@ -30,6 +30,7 @@ module.exports = {
 
       // Sending games back to client
       // TODO, return only not full games
+      // TODO, publish the destroy
       res.json(games);
 
     });

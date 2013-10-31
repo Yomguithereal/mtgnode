@@ -38,7 +38,7 @@
   //===========
   function _start(){
     socket.get('/playground/connect/'+_id, function(res){
-      _gameUpdate('test', 'bouh');
+
     });
   }
 
@@ -58,7 +58,7 @@
   //============
   window.Game = {
 
-    // Game propreties
+    // Game properties
     id: _id,
     started: _started,
 

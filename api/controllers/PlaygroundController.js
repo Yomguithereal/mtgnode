@@ -66,5 +66,12 @@ exports.connect = function(req, res) {
 exports.message = function(req, res) {
 
   // TODO: Message Control?
-  Game.publishUpdate(req.param('id'), {hello: 'world'});
+  Game.publishUpdate(
+    req.param('id'),
+    {
+      head: req.param('head'),
+      body: req.param('body')
+    },
+    req.socket
+  );
 }

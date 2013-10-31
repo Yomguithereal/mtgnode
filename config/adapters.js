@@ -13,8 +13,8 @@
  */
 
 // File Path Override for sails-disk
-var diskAdapter = require('sails-disk');
-diskAdapter.filePath = 'db/disk.db';
+// var diskAdapter = require('sails-disk');
+// diskAdapter.filePath = 'db/disk.db';
 
 module.exports.adapters = {
 
@@ -24,13 +24,12 @@ module.exports.adapters = {
 
   // In-memory adapter for DEVELOPMENT ONLY
   memory: {
-    // module: 'sails-memory'
-    module: 'sails-memory'
+    module: 'sails-memory',
   },
 
   // Persistent adapter for DEVELOPMENT ONLY
   // (data IS preserved when the server shuts down)
   disk: {
-    module: diskAdapter
+    module: 'sails-yomgui'
   }
 };
