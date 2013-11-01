@@ -48,6 +48,7 @@ module.exports.routes = {
   // Playground Routes
   ,'/playground/:id': {controller: 'PlaygroundController', action: 'playground'}
   ,'/playground/connect/:id': {controller: 'PlaygroundController', action: 'connect'}
+  ,'/playground/deck': {controller: 'PlaygroundController', action: 'deck'}
   ,'/realtime/message': {controller: 'PlaygroundController', action: 'message'}
 
   // Card Rest
@@ -57,8 +58,7 @@ module.exports.routes = {
   ,'/game/get_and_clean': {controller: 'GameController', action: 'get_and_clean'}
 
   // Debug Routes
-  ,'/user/test_user': { controller: 'UserController', action: 'test_user'}
-  ,'/debug/playground': { controller: 'PlaygroundController', action: 'debug'}
+  // ,'/user/test_user': { controller: 'UserController', action: 'test_user'}
 
 
   /*

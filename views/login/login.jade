@@ -3,7 +3,7 @@ extends ../layout
 block body
   div#mainframe
     p Welcome to MTGNode
-    div.alert.alert-error(style='display:none;')
+    div.alert.alert-error.hide
         button.close(data-dismiss='alert') &times;
         strong Unauthorized Attempt!
     input(type='text', placeholder='Username', id='username')

@@ -23,6 +23,7 @@ module.exports = {
 
         if (Game.subscribers(game.id).length === 0 && !game.empty()) {
 
+          game.destroy();
           Game.publishDestroy(game.id);
           games.remove(index);
         }

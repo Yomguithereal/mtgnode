@@ -9,64 +9,87 @@
 */
 
 // Index
+//-------
 exports.playground = function(req, res) {
   res.view('playground/playground', {id: req.param('id')});
 }
 
-// Debug route
-exports.debug = function(req, res) {
-  res.view('playground/playground', {id: 'debug'});
-}
-
-// Connection through socket.io
+// Connection
+//------------
 exports.connect = function(req, res) {
-  var game_id = req.param('id');
-  var user_id = req.session.user.id;
+  var gid = req.param('id'),
+      uid = req.session.user.id,
+      criterion = {id: gid};
 
-  Game.findOne(game_id).done(function(err, current_game){
+  if (gid === 'debug')
+    criterion = {debug: true}
 
-    // Registering Player
-    if (!current_game.player1.connected &&
-        !current_game.hasPlayerWithId(user_id)) {
+  Game.findOne(criterion).done(function(err, g){
 
-      current_game.player1 = {
+    // Player 1
+    if (!g.player1.connected &&
+        !g.hasPlayerWithId(uid)) {
+
+      g.player1 = {
         connected: true,
         user: req.session.user
       }
 
-      Game.subscribe(req.socket, game_id);
+      Game.subscribe(req.socket, gid);
 
-      current_game.save(function(err, game) {
-        res.json({player: 1, game: game});
+      // Debug mode
+      if (g.debug) {
+
+        // Mirror player 2
+        g.player2 = {
+          connected: true,
+          user: req.session.user
+        }
+      }
+
+      g.save(function(err, game) {
+        res.json({player: 1});
+
+        // Fake game start
+        if (g.debug)
+          Game.publishUpdate(gid, {start: true, game: game });
       });
     }
-    else if (!current_game.player2.connected &&
-             !current_game.hasPlayerWithId(user_id)) {
 
-      current_game.player2 = {
+    // Player 2
+    else if (!g.player2.connected &&
+             !g.hasPlayerWithId(uid)) {
+
+      g.player2 = {
         connected: true,
         user: req.session.user
       }
 
-      Game.subscribe(req.socket, game_id);
+      Game.subscribe(req.socket, gid);
 
-      current_game.save(function(err, game) {
+      g.save(function(err, game) {
 
-        // Telling player that the game may start
-        Game.publishUpdate(game_id, {start: true});
-
-        res.json({player: 2, game: game});
+        // Every player is connected, sending back game information
+        Game.publishUpdate(gid, {start: true, game: game });
+        res.json({player: 2});
       });
     }
+
+    // Irrelevant dumbass
     else {
       res.json({kicked: true});
     }
-
   });
+}
+
+// Deck choice
+//-------------
+exports.deck = function(res, res) {
 
 }
 
-// Socket.io standard messaging
+// Messaging
+//-----------
 exports.message = function(req, res) {
 
   // TODO: Message Control?

@@ -20,7 +20,7 @@
 
   // Debug
   if (_debug) {
-    socket.post('/game/create', {name: 'DEBUG'}, function(g) {
+    socket.post('/game/create', {name: 'DEBUG', debug: true}, function(g) {
       _id = g.id;
       _start();
     });

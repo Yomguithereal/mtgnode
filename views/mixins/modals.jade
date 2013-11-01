@@ -12,3 +12,13 @@ mixin confirm_modal(id, title, text, status, no, yes)
 		div.modal-footer
 			button(type='button', class='btn', data-dismiss='modal', aria-hidden='true')= no
 			button(type='button', class="btn btn-#{status}", id="#{id}_confirm")= yes
+
+// Deck choice modal
+mixin deck_choice_modal()
+	div.modal.hide
+		div.modal-header
+			h3 Choose your deck
+		div.modal-body
+			select#deck_select
+		div.modal-footer
+			button.btn Select this deck

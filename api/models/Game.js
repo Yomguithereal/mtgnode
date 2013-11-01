@@ -12,13 +12,25 @@ module.exports = {
   adapter: 'memory',
   attributes: {
     name: 'String',
+    debug: {
+      type: 'Boolean',
+      defaultsTo: false
+    },
     player1: {
       type: 'Json',
-      defaultsTo: {connected: false, user: false}
+      defaultsTo: {
+        connected: false,
+        user: false,
+        deck: false
+      }
     },
     player2: {
       type: 'Json',
-      defaultsTo: {connected: false, user: false}
+      defaultsTo: {
+        connected: false,
+        user: false,
+        deck: false
+      }
     },
     full: function(){
       return (this.player1.connected && this.player2.connected);
