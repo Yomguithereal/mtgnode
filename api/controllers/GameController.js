@@ -23,15 +23,17 @@ module.exports = {
 
         if (Game.subscribers(game.id).length === 0 && !game.empty()) {
 
-          game.destroy(function(){});
+          Game.publishDestroy(game.id);
           games.remove(index);
         }
       });
 
+      // TODO: delete game from list when game is full and client
+      // was already connected
       // Sending games back to client
-      // TODO, return only not full games
-      // TODO, publish the destroy
-      res.json(games);
+      res.json(games.filter(function(g){
+        return !g.full();
+      }));
 
     });
   }

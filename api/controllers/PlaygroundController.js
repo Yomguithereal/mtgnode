@@ -51,6 +51,10 @@ exports.connect = function(req, res) {
       Game.subscribe(req.socket, game_id);
 
       current_game.save(function(err, game) {
+
+        // Telling player that the game may start
+        Game.publishUpdate(game_id, {start: true});
+
         res.json({player: 2, game: game});
       });
     }
