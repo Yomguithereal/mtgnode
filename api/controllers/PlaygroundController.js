@@ -82,12 +82,6 @@ exports.connect = function(req, res) {
   });
 }
 
-// Deck choice
-//-------------
-exports.deck = function(res, res) {
-
-}
-
 // Messaging
 //-----------
 exports.message = function(req, res) {

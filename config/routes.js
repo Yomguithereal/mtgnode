@@ -48,7 +48,6 @@ module.exports.routes = {
   // Playground Routes
   ,'/playground/:id': {controller: 'PlaygroundController', action: 'playground'}
   ,'/playground/connect/:id': {controller: 'PlaygroundController', action: 'connect'}
-  ,'/playground/deck': {controller: 'PlaygroundController', action: 'deck'}
   ,'/realtime/message': {controller: 'PlaygroundController', action: 'message'}
 
   // Card Rest
