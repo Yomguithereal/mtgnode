@@ -81,7 +81,6 @@
     var _this = this;
 
     socket.on('message', function(m) {
-      console.log(m);
       if (m.verb === 'update')
         _this.dispatchEvent('receiveRealtimeMessage', m.data);
     });

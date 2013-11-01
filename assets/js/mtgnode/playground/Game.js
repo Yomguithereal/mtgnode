@@ -14,11 +14,12 @@
 
   // Constants
   //===========
-  var _id = $('#game').val();
-  var _started = false;
+  var _id = $('#game').val(),
+      _debug = (_id === 'debug'),
+      _started = false;
 
   // Debug
-  if (_id === 'debug') {
+  if (_debug) {
     socket.post('/game/create', {name: 'DEBUG'}, function(g) {
       _id = g.id;
       _start();
@@ -46,7 +47,7 @@
   function _gameUpdate(message, data) {
     socket.post(
       '/realtime/message',
-      {id: _id, head: message, body: data},
+      {id: _id, debug: _debug, head: message, body: data},
       function(res) {
 
       }
