@@ -213,9 +213,11 @@
 
     // Game Objects Modules
     myDeck: controller.addModule(DeckModule, ['my']),
-    opDeck: controller.addModule(DeckModule, ['op'])
+    opDeck: controller.addModule(DeckModule, ['op']),
 
     // Interface Modules
+    myHelpers: controller.addModule(InterfaceModule, ['my']),
+    opHelpers: controller.addModule(InterfaceModule, ['op'])
   };
 
 })(jQuery, window, domino);

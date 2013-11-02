@@ -17,7 +17,7 @@
     domino.module.call(this);
     var _this = this;
 
-    var _area = (side === 'my') ? 'bottom' : 'top';
+    var _area = Helpers.getArea(side);
     var _template = new CardTemplate(side);
 
     // Selectors
