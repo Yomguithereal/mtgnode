@@ -34,14 +34,6 @@
       _connect();
     }
 
-    // Test Button
-    $('#card_viewer_widget').click(function() {
-      _this.dispatchEvent('sendRealtimeMessage', {
-        head: 'test',
-        body: Math.random()
-      });
-    });
-
 
     // Functions
     //-----------

@@ -12,6 +12,7 @@
   "use strict";
 
   domino.settings({verbose: true});
+  var _modules = {};
 
   // Controller
   //============
@@ -152,6 +153,9 @@
           this.myUser = e.data.game['player'+this.mySide].user;
           this.opUser = e.data.game['player'+this.opSide].user;
 
+          // Instanciating delayed modules
+          this.dispatchEvent('delayedModules');
+
           // Passing to deck choice modal
           this.dispatchEvent('deckChoice');
         }
@@ -204,7 +208,7 @@
 
   // Realtime Bootstrap
   //====================
-  function RealtimeBootstrap(){
+  function RealtimeBootstrap() {
     domino.module.call(this);
 
     var _this = this;
@@ -213,6 +217,23 @@
       if (m.verb === 'update')
         _this.dispatchEvent('receiveRealtimeMessage', m.data);
     });
+  }
+
+  // Delayed Module
+  //================
+  function DelayedModules() {
+    domino.module.call(this);
+
+    var _this = this;
+
+    this.triggers.events['delayedModules'] = function(d) {
+
+      // Registering game modules
+      _modules.myDeck = controller.addModule(DeckModule, ['my']);
+      _modules.opDeck = controller.addModule(DeckModule, ['op']);
+      _modules.myHelpers = controller.addModule(InterfaceModule, ['my']);
+      _modules.opHelpers = controller.addModule(InterfaceModule, ['op']);
+    }
   }
 
 
@@ -226,22 +247,9 @@
   });
 
   // Modules
-  var modulesInstances = {
-
-    // Standard Modules
-    realtime: controller.addModule(RealtimeBootstrap),
-    start: controller.addModule(StartModule),
-    deckChoice: controller.addModule(Modals.deckChoice),
-
-    // Game Objects Modules
-    myDeck: controller.addModule(DeckModule, ['my']),
-    opDeck: controller.addModule(DeckModule, ['op']),
-
-    // Interface Modules
-    // TODO: initialize those modules later
-    // encapsulate them in another module?
-    myHelpers: controller.addModule(InterfaceModule, ['my']),
-    opHelpers: controller.addModule(InterfaceModule, ['op'])
-  };
+  _modules.realtime = controller.addModule(RealtimeBootstrap);
+  _modules.start = controller.addModule(StartModule);
+  _modules.delayed = controller.addModule(DelayedModules);
+  _modules.deckChoice = controller.addModule(Modals.deckChoice);
 
 })(jQuery, window, domino);
