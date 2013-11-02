@@ -71,22 +71,22 @@
       {
         id: 'getSetCards',
         setter: 'viewedCards',
-        url: 'ajax/deck-builder/set/:set'
+        url: '/ajax/deck-builder/set/:set'
       },
       {
         id: 'getDeckCards',
         setter: 'deckCards',
-        url: 'ajax/deck-builder/deck/:deck_id'
+        url: '/ajax/deck-builder/deck/:deck_id'
       },
       {
         id: 'saveDeck',
-        url: 'ajax/deck-builder/save_deck',
+        url: '/ajax/deck-builder/save_deck',
         type: 'POST',
         dataType: 'json'
       },
       {
         id: 'deleteDeck',
-        url: 'ajax/deck-builder/delete_deck',
+        url: '/ajax/deck-builder/delete_deck',
         type: 'POST'
       }
     ]

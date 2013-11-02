@@ -26,7 +26,7 @@ function DeckModel(){
   //----------
   this.getCards = function(user, deck_id){
     var deck = _.find(user.decks, function(deck){
-      return deck.id == deck_id;
+      return deck.id === deck_id;
     });
     return CardModel.getByIdArray(deck.cards);
   }

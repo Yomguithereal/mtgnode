@@ -97,12 +97,12 @@
       {
         id: 'getMyDeckCards',
         setter: 'myDeck',
-        url: 'ajax/deck-builder/deck/:deck_id'
+        url: '/ajax/deck-builder/deck/:id'
       },
       {
         id: 'getOpDeckCards',
         setter: 'opDeck',
-        url: 'ajax/deck-builder/deck/:deck_id'
+        url: '/ajax/deck-builder/deck/:id'
       }
     ],
     hacks: [
@@ -154,6 +154,26 @@
 
           // Passing to deck choice modal
           this.dispatchEvent('deckChoice');
+        }
+      },
+      {
+        triggers: 'myDeckSelected',
+        method: function(e) {
+          this.request('getMyDeckCards', {
+            shortcuts: {
+              id: e.data
+            }
+          });
+        }
+      },
+      {
+        triggers: 'opDeckSelected',
+        method: function(e) {
+          this.request('getOpDeckCards', {
+            shortcuts: {
+              id: e.data
+            }
+          });
         }
       }
     ]
