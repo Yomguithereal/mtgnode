@@ -52,6 +52,7 @@ module.exports.routes = {
 
   // Card Rest
   ,'/card/:id': {controller: 'CardController', action: 'get'}
+  ,'/card/set/:id': {controller: 'CardController', action: 'set'}
 
   // Game Routes
   ,'/game/get_and_clean': {controller: 'GameController', action: 'get_and_clean'}

@@ -20,7 +20,10 @@ module.exports = {
   },
 
   authenticate: function(username, password, callback){
-    this.findOne().where({username: username, password: password}).exec(function(err, user){
+    this.findOne().where({
+      username: username,
+      password: password
+    }).exec(function(err, user){
       callback(user);
     });
   },
@@ -44,13 +47,9 @@ module.exports = {
   updateDeck: function(user, deck, callback){
 
     // Searching
-    var update_id;
-    _.forEach(user.decks, function(current, index){
-      if(current.id == deck.id){
-        update_id = index;
-        return false;
-      }
-    });
+    var update_id = _.find(user.decks, function(deck){
+      return deck.id === deck.id;
+    }).id;
     user.decks[update_id].cards = deck.cards;
 
     // Updating
@@ -64,7 +63,7 @@ module.exports = {
     // Kicking deck out
 
     var decks = _.reject(user.decks, function(deck){
-      return deck.id == deck_id;
+      return deck.id === deck_id;
     });
 
     // Updating

@@ -21,10 +21,22 @@
             ],
             "name": "The Mighty Deck",
             "id": "51e7a65ff7abdb03fed1657c9f9daac2"
+          },
+          {
+            "cards": [
+              373661,
+              373712,
+              373543,
+              373657,
+              373582,
+              373700
+            ],
+            "name": "Theros Test",
+            "id": "f153fbaf29767d92735538d9920ee86a"
           }
         ],
         "createdAt": "2013-10-31T13:13:12.997Z",
-        "updatedAt": "2013-11-02T14:12:01.249Z",
+        "updatedAt": "2013-11-02T14:43:45.103Z",
         "id": 1
       },
       {
