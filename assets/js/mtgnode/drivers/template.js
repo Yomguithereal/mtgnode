@@ -10,7 +10,7 @@
 
 ;(function(Mustache, Driver, undefined){
 
-	// Templates 
+	// Templates
 	//-----------
 	function CardTemplate(id_prefix){
 
@@ -20,6 +20,7 @@
 		this._index = -1;
 		this._driver = Driver;
 		this._template = $('#tpl_card').html();
+		this._dummyTemplate = $('#tpl_dummy_card').html();
 
 		// Methods
 		this.render = function(card, index_override){
@@ -30,7 +31,7 @@
 			else{
 				index = index_override;
 			}
-			
+
 			var data = {
 				id_prefix: this._prefix
 				,number: index
@@ -39,9 +40,13 @@
 			}
 			return Mustache.to_html(this._template, data);
 		}
+
+		this.renderDummy = function(){
+			return Mustache.to_html(this._dummyTemplate);
+		}
 	}
 
-	// Exporting 
+	// Exporting
 	//-----------
 	window.CardTemplate = CardTemplate;
 })(Mustache, CardDriver);

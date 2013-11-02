@@ -48,10 +48,6 @@
       // Showing modal
       $modal.modal('show');
     }
-
-    this.triggers.events['opDeckUpdated'] = function(d) {
-      console.log(d.get('opDeck'));
-    }
   }
 
   // Exporting

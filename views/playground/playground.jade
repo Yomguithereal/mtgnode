@@ -67,6 +67,7 @@ block modals
 
 block templates
 	mixin playgroundCardTemplate()
+	mixin dummyCardTemplate()
 block dom_constants
 	input#gid(type='hidden', value=gid)
 	input#uid(type='hidden', value=uid)
@@ -75,4 +76,5 @@ block contextual_js
 	script(type="text/javascript", src="/js/mtgnode/widgets/CardViewer.js")
 	script(type="text/javascript", src="/js/mtgnode/playground/Start.js")
 	script(type="text/javascript", src="/js/mtgnode/playground/Modals.js")
+	script(type="text/javascript", src="/js/mtgnode/playground/Deck.js")
 	script(type="text/javascript", src="/js/mtgnode/playground/Controller.js")

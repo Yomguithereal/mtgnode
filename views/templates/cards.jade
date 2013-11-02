@@ -7,3 +7,7 @@ mixin deckBuilderCardTemplate()
 mixin playgroundCardTemplate()
 	script#tpl_card(type='text/html')
 		img.card-min
+
+mixin dummyCardTemplate()
+	script#tpl_dummy_card(type='text/html')
+		img.card-min.card-dummy(src='/images/card-back.jpeg')

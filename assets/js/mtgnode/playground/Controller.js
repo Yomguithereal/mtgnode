@@ -97,12 +97,12 @@
       {
         id: 'getMyDeckCards',
         setter: 'myDeck',
-        url: '/ajax/deck-builder/deck/:id'
+        url: '/ajax/playground/deck/:id'
       },
       {
         id: 'getOpDeckCards',
         setter: 'opDeck',
-        url: '/ajax/deck-builder/deck/:id'
+        url: '/ajax/playground/deck/:id'
       }
     ],
     hacks: [
@@ -204,19 +204,18 @@
   });
 
   // Modules
-  function registerModules(modules) {
-    var modulesInstances = {};
-    for(var key in modules) {
-      modulesInstances[key] = controller.addModule(modules[key]);
-    }
+  var modulesInstances = {
 
-    return modulesInstances;
-  }
+    // Standard Modules
+    realtime: controller.addModule(RealtimeBootstrap),
+    start: controller.addModule(StartModule),
+    deckChoice: controller.addModule(Modals.deckChoice),
 
-  var modulesInstances = registerModules({
-    realtime: RealtimeBootstrap,
-    start: StartModule,
-    deckChoice: Modals.deckChoice
-  });
+    // Game Objects Modules
+    myDeck: controller.addModule(DeckModule, ['my']),
+    opDeck: controller.addModule(DeckModule, ['op'])
+
+    // Interface Modules
+  };
 
 })(jQuery, window, domino);

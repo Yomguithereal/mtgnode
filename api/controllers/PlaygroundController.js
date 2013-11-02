@@ -8,6 +8,8 @@
 |   Version : 1.0
 */
 
+var DeckModel = require('../raw_models/DeckModel');
+
 // Index
 //-------
 exports.playground = function(req, res) {
@@ -97,6 +99,23 @@ exports.connect = function(req, res) {
       res.json({kicked: true});
     }
   });
+}
+
+// Deck Selection
+//----------------
+exports.deck = function(req, res) {
+
+  // Sending back the cards
+  var cards = DeckModel.getCards(
+    req.session.user,
+    req.param('id'))
+  .map(function(c, i){
+    c.pid = i;
+    c.flag = 'in-deck';
+    return c;
+  });
+
+  res.json(cards);
 }
 
 // Messaging
