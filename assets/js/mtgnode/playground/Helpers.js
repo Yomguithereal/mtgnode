@@ -17,6 +17,14 @@
     return (side === 'my') ? 'bottom' : 'top';
   }
 
+  function _flag(cards) {
+    return cards.map(function(c, i) {
+      c.id = i;
+      c.flag = 'in-deck';
+      return c;
+    });
+  }
+
   function _inFlagCards(cards, flag) {
     return cards.filter(function(c) {
       return c.flag === flag;
@@ -34,6 +42,7 @@
 
     // Misc
     getArea: _getArea,
+    flag: _flag,
 
     // Filters
     inDeckCards: _inDeckCards

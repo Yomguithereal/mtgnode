@@ -108,12 +108,8 @@ exports.deck = function(req, res) {
   // Sending back the cards
   var cards = DeckModel.getCards(
     req.session.user,
-    req.param('id'))
-  .map(function(c, i){
-    c.pid = i;
-    c.flag = 'in-deck';
-    return c;
-  });
+    req.param('id')
+  );
 
   res.json(cards);
 }

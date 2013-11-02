@@ -97,13 +97,23 @@
     services: [
       {
         id: 'getMyDeckCards',
-        setter: 'myDeck',
-        url: '/ajax/playground/deck/:id'
+        url: '/ajax/playground/deck/:id',
+        success: function(cards) {
+
+          // Flag and index
+          Helpers.flag(cards);
+          this.myDeck = _.shuffle(cards);
+        }
       },
       {
         id: 'getOpDeckCards',
-        setter: 'opDeck',
-        url: '/ajax/playground/deck/:id'
+        url: '/ajax/playground/deck/:id',
+        success: function(cards) {
+
+          // Flag and index
+          Helpers.flag(cards);
+          this.opDeck = cards;
+        }
       }
     ],
     hacks: [

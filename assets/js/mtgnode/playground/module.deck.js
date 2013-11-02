@@ -25,6 +25,11 @@
 
     // Emettor
     //---------
+    if (side === 'my') {
+
+      // Drawing a card
+
+    }
 
     // Receptor
     //----------
@@ -35,6 +40,9 @@
       $emplacement.append(dummy);
     }
 
+    this.triggers.events[side+'DeckUpdated'] = function(d) {
+      console.log(d.get(side+'Deck'));
+    }
 
   }
 
