@@ -11,7 +11,10 @@
 // Index
 //-------
 exports.playground = function(req, res) {
-  res.view('playground/playground', {id: req.param('id')});
+  res.view('playground/playground', {
+    gid: req.param('id'),
+    uid: req.session.user.id
+  });
 }
 
 // Connection
@@ -48,11 +51,18 @@ exports.connect = function(req, res) {
       }
 
       g.save(function(err, game) {
-        res.json({player: 1});
 
         // Fake game start
+        res.json({player: 1});
+
         if (g.debug)
-          Game.publishUpdate(gid, {start: true, game: game });
+          Game.publishUpdate(gid, {
+            head: 'startGame',
+            body: {
+              start: true,
+              game: game
+            }
+          });
       });
     }
 
@@ -70,8 +80,15 @@ exports.connect = function(req, res) {
       g.save(function(err, game) {
 
         // Every player is connected, sending back game information
-        Game.publishUpdate(gid, {start: true, game: game });
         res.json({player: 2});
+
+        Game.publishUpdate(gid, {
+          head: 'startGame',
+          body: {
+            start: true,
+            game: game
+          }
+        });
       });
     }
 

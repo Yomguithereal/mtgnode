@@ -21,16 +21,14 @@ module.exports = {
       // Deleting useless games
       games.map(function(game, index) {
 
-        if (Game.subscribers(game.id).length === 0 && !game.empty()) {
+        if (Game.subscribers(game.id).length === 0) {
 
-          game.destroy();
+          game.destroy(function(){});
           Game.publishDestroy(game.id);
           games.remove(index);
         }
       });
 
-      // TODO: delete game from list when game is full and client
-      // was already connected
       // Sending games back to client
       res.json(games.filter(function(g){
         return !g.full();

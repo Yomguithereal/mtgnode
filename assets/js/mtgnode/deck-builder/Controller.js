@@ -177,7 +177,7 @@
   var __rightTemplate = new CardTemplate('rightcard');
 
   // Left Panel
-  //==============
+  //============
   function LeftPanel(){
     domino.module.call(this);
 
@@ -188,7 +188,7 @@
     var $panel = $('#left_panel');
 
     // Emettor
-    //------------
+    //---------
     $set_select.change(function(){
       var set = $(this).val();
 
@@ -212,7 +212,7 @@
   }
 
   // Right Panel
-  //==============
+  //=============
   function RightPanel(){
     domino.module.call(this);
 
@@ -223,7 +223,7 @@
     var $panel = $("#right_panel");
 
     // Emettor
-    //------------
+    //---------
     $deck_select.change(function(){
       var deck = $(this).val();
       var name = $(this).children(':selected').text();
@@ -237,7 +237,7 @@
     });
 
     // Receptor
-    //------------
+    //----------
     this.triggers.events['deckCardsUpdated'] = function(d){
       $panel.empty();
       d.get('deckCards').forEach(function(card, index){
@@ -247,7 +247,7 @@
   }
 
   // Controls
-  //===========
+  //==========
   function Controls(){
     domino.module.call(this);
 
@@ -259,7 +259,7 @@
     var $delete_deck = $("#delete_deck_modal_confirm");
 
     // Emettor
-    //------------
+    //---------
     $deck_name.change(function(){
       _this.dispatchEvent('updateDeckName', {deckName: $(this).val()});
     });
@@ -273,7 +273,7 @@
     });
 
     // Receptor
-    //------------
+    //----------
     this.triggers.events['deckCardsUpdated'] = function(d){
       $counter.text(d.get('deckCards').length);
     }
@@ -284,7 +284,7 @@
   }
 
   // Launching
-  //==============
+  //===========
 
   // Instanciating Modules
   var leftPanel = controller.addModule(LeftPanel);

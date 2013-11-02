@@ -4,9 +4,25 @@
       {
         "username": "Yomgui",
         "password": "test",
-        "decks": [],
+        "decks": [
+          {
+            "cards": [
+              233,
+              140,
+              49,
+              279,
+              279,
+              279,
+              279,
+              279,
+              279
+            ],
+            "name": "The Mighty Deck",
+            "id": "51e7a65ff7abdb03fed1657c9f9daac2"
+          }
+        ],
         "createdAt": "2013-10-31T13:13:12.997Z",
-        "updatedAt": "2013-10-31T13:13:12.997Z",
+        "updatedAt": "2013-11-02T13:34:30.243Z",
         "id": 1
       },
       {

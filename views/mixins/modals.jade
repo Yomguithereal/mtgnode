@@ -15,10 +15,10 @@ mixin confirm_modal(id, title, text, status, no, yes)
 
 // Deck choice modal
 mixin deck_choice_modal()
-	div.modal.hide
+	div#deck_choice_modal.modal.hide
 		div.modal-header
 			h3 Choose your deck
 		div.modal-body
 			select#deck_select
 		div.modal-footer
-			button.btn Select this deck
+			button#deck_validate.btn Select this deck
