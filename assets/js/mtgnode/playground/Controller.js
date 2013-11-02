@@ -175,6 +175,28 @@
             }
           });
         }
+      },
+      {
+        triggers: 'updateMyHitpoints',
+        method: function(e) {
+          var hp = this.get('myHitpoints');
+
+          if (e.data.operation)
+            this.myHitpoints = hp + 1;
+          else
+            this.myHitpoints = hp - 1;
+        }
+      },
+      {
+        triggers: 'updateOpHitpoints',
+        method: function(e) {
+          var hp = this.get('opHitpoints');
+
+          if (e.data.operation)
+            this.opHitpoints = hp + 1;
+          else
+            this.opHitpoints = hp - 1;
+        }
       }
     ]
   });
@@ -216,6 +238,8 @@
     opDeck: controller.addModule(DeckModule, ['op']),
 
     // Interface Modules
+    // TODO: initialize those modules later
+    // encapsulate them in another module?
     myHelpers: controller.addModule(InterfaceModule, ['my']),
     opHelpers: controller.addModule(InterfaceModule, ['op'])
   };

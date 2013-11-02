@@ -17,8 +17,8 @@
     domino.module.call(this);
     var _this = this;
 
-    var _area = Helpers.getArea(side);
-    var _template = new CardTemplate(side);
+    var _area = Helpers.getArea(side),
+        _template = new CardTemplate(side);
 
     // Selectors
     var $emplacement = $('#'+_area+'_deck');
