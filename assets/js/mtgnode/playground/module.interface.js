@@ -61,11 +61,37 @@
 
       $deck_counter.text(count);
     }
-
-
   }
+
+  // Interface Hacks
+  //=================
+  var _hacks = [
+    {
+      triggers: 'updateMyHitpoints',
+      method: function(e) {
+        var hp = this.get('myHitpoints');
+
+        if (e.data.operation)
+          this.myHitpoints = hp + 1;
+        else
+          this.myHitpoints = hp - 1;
+      }
+    },
+    {
+      triggers: 'updateOpHitpoints',
+      method: function(e) {
+        var hp = this.get('opHitpoints');
+
+        if (e.data.operation)
+          this.opHitpoints = hp + 1;
+        else
+          this.opHitpoints = hp - 1;
+      }
+    }
+  ];
 
   // Exporting
   //===========
   window.InterfaceModule = InterfaceModule;
+  window.interfaceHacks = _hacks;
 })(jQuery, window);

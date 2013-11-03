@@ -50,9 +50,37 @@
     }
   }
 
+
+  // Modals Hacks
+  //==============
+  var _hacks = [
+    {
+      triggers: 'myDeckSelected',
+      method: function(e) {
+        this.request('getMyDeckCards', {
+          shortcuts: {
+            id: e.data
+          }
+        });
+      }
+    },
+    {
+      triggers: 'opDeckSelected',
+      method: function(e) {
+        this.request('getOpDeckCards', {
+          shortcuts: {
+            id: e.data
+          }
+        });
+      }
+    }
+  ];
+
   // Exporting
   //===========
   window.Modals = {
     deckChoice: DeckChoiceModule
-  }
+  };
+
+  window.modalsHacks = _hacks;
 })(jQuery, window);

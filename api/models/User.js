@@ -47,10 +47,12 @@ module.exports = {
   updateDeck: function(user, deck, callback){
 
     // Searching
-    var update_id = _.find(user.decks, function(deck){
-      return deck.id === deck.id;
-    }).id;
-    user.decks[update_id].cards = deck.cards;
+    for (var i in user.decks) {
+      if (user.decks[i].id === deck.id) {
+        user.decks[i].cards = deck.cards;
+        break;
+      }
+    }
 
     // Updating
     this.update({id: user.id}, {decks: user.decks}, function(err, users){

@@ -28,7 +28,9 @@
     if (side === 'my') {
 
       // Drawing a card
-
+      $emplacement.on('click', '.card-dummy', function(){
+        _this.dispatchEvent('myDrawCard');
+      });
     }
 
     // Receptor
@@ -40,13 +42,32 @@
       $emplacement.append(dummy);
     }
 
-    this.triggers.events[side+'DeckUpdated'] = function(d) {
-      console.log(d.get(side+'Deck'));
-    }
-
   }
+
+
+  // Deck Hacks
+  //============
+  var _hacks = [
+    {
+      triggers: 'myDrawCard',
+      method: function(e) {
+        var deck = this.get('myDeck');
+
+        // Finding first deck card
+        var card_id = _.find(deck, function(c) {
+          return c.flag === 'in-deck';
+        }).id;
+
+        // Modifying card and send it to hand
+        deck[card_id].flag = 'in-hand';
+
+        this.dispatchEvent('myCardDrawn', card_id);
+      }
+    }
+  ];
 
   // Exporting
   //===========
   window.DeckModule = DeckModule;
+  window.deckHacks = _hacks;
 })(jQuery, window);
