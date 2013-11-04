@@ -21,7 +21,8 @@
         _template = new CardTemplate(side);
 
     // Selectors
-    var $emplacement = $('#'+_area+'_hand');
+    var $emplacement = $('#'+_area+'_hand'),
+        $deck = $('#'+_area+'_deck');
 
     // Emettor
     //---------
@@ -34,8 +35,8 @@
     //----------
 
     // Drawing Card
-    this.triggers.events[side+'DrawCard'] = function(d, e) {
-      console.log('ici');
+    this.triggers.events[side+'HandUpdated'] = function(d, e) {
+      console.log(d.get(side+'Hand'));
     }
 
   }

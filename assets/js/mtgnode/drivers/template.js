@@ -33,10 +33,11 @@
 			}
 
 			var data = {
-				id_prefix: this._prefix
-				,number: index
-				,multiverseid: card.multiverseid
-				,src: this._driver.getUrl(card)
+				id_prefix: this._prefix,
+				number: index,
+				multiverseid: card.multiverseid,
+				src: this._driver.getUrl(card),
+				side: this._prefix
 			}
 			return Mustache.to_html(this._template, data);
 		}
