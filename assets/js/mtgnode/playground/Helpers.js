@@ -9,7 +9,7 @@
 */
 
 ;(function($, w, undefined){
-  "use strict";
+  'use strict';
 
   // Methods
   //=========
@@ -45,11 +45,13 @@
 
     // Finding first deck card
     var card = fromModel.shift();
-    toModel.push(card);
+    toModel.unshift(card);
 
     // Updating model
     d[from] = fromModel;
     d[to] = toModel;
+
+    return card;
   }
 
   // Exporting

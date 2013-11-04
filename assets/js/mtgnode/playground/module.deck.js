@@ -51,7 +51,8 @@
     {
       triggers: 'myDrawCard',
       method: function(e) {
-        Helpers.fromTo(this, 'myDeck', 'myHand');
+        var card = Helpers.fromTo(this, 'myDeck', 'myHand');
+        this.dispatchEvent('myCardDrawn', card);
       }
     }
   ];

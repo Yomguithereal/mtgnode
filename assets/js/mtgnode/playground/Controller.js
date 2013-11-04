@@ -146,8 +146,8 @@
 
   // Widgets
   $('#card_viewer_widget').cardViewerWidget({
-    container: '#deck_builder_container',
-    cards: '.card-min'
+    container: '#game_block',
+    cards: '.card-min > img.front-side'
   });
 
   // Modules
