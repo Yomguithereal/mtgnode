@@ -11,55 +11,55 @@ block body
 			div#top_helper_block
 				div.life-block
 					button.btn.playe2.lose-life.update-life(type='button') -
-					span.life-counter.player2 20
-					button.btn.player2.gain-life.update-life(type='button') +
-				div.message-receiver.player2 &nbsp;
+					span.life-counter 20
+					button.btn.gain-life.update-life(type='button') +
+				div.message-receiver &nbsp;
 				div.turn-block
-					button.btn.player2.turn-indicator(type='button') &nbsp;
-				div.counters.player2
+					button.btn.turn-indicator(type='button') &nbsp;
+				div.counters
 					div.btn-group
 						button.btn(type='button') Deck
-						button.btn.deck-counter.player2(type='button') 0
+						button.btn.deck-counter(type='button') 0
 					div.btn-group
 						button.btn(type='button') Hand
-						button.btn.hand-counter.player2(type='button') 0
+						button.btn.hand-counter(type='button') 0
 					div.btn-group
 						button.btn(type='button') Graveyard
-						button.btn.graveyard-counter.player2(type='button') 0
+						button.btn.graveyard-counter(type='button') 0
 			mixin card_viewer_widget()
 			div#bottom_helper_block
 				div.life-block
-					button.btn.player2.lose-life.update-life(type='button') -
+					button.btn.lose-life.update-life(type='button') -
 					span(class='life-counter player1') 20
-					button.btn.player1.gain-life.update-life(type='button') +
-				div.message-receiver.player1 &nbsp;
+					button.btn.gain-life.update-life(type='button') +
+				div.message-receiver &nbsp;
 				div.turn-block
 					button.btn.turn-indicator(type='button') &nbsp;
-				div.counters.player1
+				div.counters
 					div.btn-group
 						button.btn(type='button') Deck
-						button.btn.deck-counter.player1(type='button') 0
+						button.btn.deck-counter(type='button') 0
 					div.btn-group
 						button.btn(type='button') Hand
-						button.btn.hand-counter.player1(type='button') 0
+						button.btn.hand-counter(type='button') 0
 					div.btn-group
 						button.btn(type='button') Graveyard
-						button.btn.graveyard-counter.player1(type='button') 0
+						button.btn.graveyard-counter(type='button') 0
 		div#game_block.game-area
-			div#top_game_block.player2.player-side
-				div#top_handlogic.deck-and-hand.player2
-					div#top_exile.exile-emplacement.player2
-					div#top_graveyard.graveyard-emplacement.player2
-					div#top_deck.deck-emplacement.player2
-					div#top_hand.hand-emplacement.player2
-				div#top_game_zone.game-emplacement.player2
-			div#bottom_game_block.player1.player-side
-				div#bottom_game_zone.game-emplacement.player1
-				div#bottom_handlogic.deck-and-hand.player1
-					div#bottom_exile.exile-emplacement.player1
-					div#bottom_graveyard.graveyard-emplacement.player1
-					div#bottom_deck.deck-emplacement.player1
-					div#bottom_hand.hand-emplacement.player1
+			div#top_game_block.player-side
+				div#top_handlogic.deck-and-hand
+					div#top_exile.exile-emplacement
+					div#top_graveyard.graveyard-emplacement
+					div#top_deck.deck-emplacement
+					div#top_hand.hand-emplacement
+				div#top_game_zone.game-emplacement
+			div#bottom_game_block.player-side
+				div#bottom_game_zone.game-emplacement
+				div#bottom_handlogic.deck-and-hand
+					div#bottom_exile.exile-emplacement
+					div#bottom_graveyard.graveyard-emplacement
+					div#bottom_deck.deck-emplacement
+					div#bottom_hand.hand-emplacement
 
 // Modals
 block modals
