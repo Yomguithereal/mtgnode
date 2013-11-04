@@ -54,6 +54,30 @@
         value: [],
         dispatch: 'myDeckUpdated'
       },
+      {
+        id: 'myHand',
+        type: 'array',
+        value: [],
+        dispatch: 'myHandUpdated'
+      },
+      {
+        id: 'myBattlefield',
+        type: 'array',
+        value: [],
+        dispatch: 'myBattlefieldUpdated'
+      },
+      {
+        id: 'myGraveyard',
+        type: 'array',
+        value: [],
+        dispatch: 'myGraveyardUpdated'
+      },
+      {
+        id: 'myExile',
+        type: 'array',
+        value: [],
+        dispatch: 'myExileUpdated'
+      },
 
       // Opponent
       {
@@ -83,6 +107,30 @@
         type: 'array',
         value: [],
         dispatch: 'opDeckUpdated'
+      },
+      {
+        id: 'opHand',
+        type: 'array',
+        value: [],
+        dispatch: 'opHandUpdated'
+      },
+      {
+        id: 'opBattlefield',
+        type: 'array',
+        value: [],
+        dispatch: 'opBattlefieldUpdated'
+      },
+      {
+        id: 'opGraveyard',
+        type: 'array',
+        value: [],
+        dispatch: 'opGraveyardUpdated'
+      },
+      {
+        id: 'opExile',
+        type: 'array',
+        value: [],
+        dispatch: 'opExileUpdated'
       }
     ];
 
