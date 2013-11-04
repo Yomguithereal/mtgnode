@@ -9,7 +9,7 @@
 */
 
 ;(function($, w, undefined){
-  "use strict";
+  'use strict';
 
   var _properties = [
 

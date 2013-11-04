@@ -34,14 +34,19 @@
     //----------
 
     // Drawing Card
-    this.triggers.events[side+'CardDrawn'] = function(d, e) {
-      var card = d.get(side+'Deck')[e.data];
-      console.log(card);
+    this.triggers.events[side+'DrawCard'] = function(d, e) {
+      console.log('ici');
     }
 
   }
 
+
+  // Deck Hacks
+  //============
+  var _hacks = [];
+
   // Exporting
   //===========
   window.HandModule = HandModule;
+  window.handHacks = _hacks;
 })(jQuery, window);

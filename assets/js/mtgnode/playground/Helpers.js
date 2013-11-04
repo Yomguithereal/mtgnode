@@ -17,24 +17,40 @@
     return (side === 'my') ? 'bottom' : 'top';
   }
 
-  function _flag(cards) {
+  var _templates = {
+    my: new CardTemplate('my'),
+    op: new CardTemplate('op')
+  }
+
+  function _getTemplate(side) {
+    return _templates[side];
+  }
+
+  function _flag(cards, side) {
     return cards.map(function(c, i) {
+
+      // Unique card id
       c.id = i;
-      c.flag = 'in-deck';
+
+      // Card html
+      c.html = _templates[side].render(c, c.id);
       return c;
     });
   }
 
-  function _inFlagCards(cards, flag) {
-    return cards.filter(function(c) {
-      return c.flag === flag;
-    });
-  }
+  function _fromTo(d, from, to) {
 
-  function _inDeckCards(cards) {
-    return _inFlagCards(cards, 'in-deck');
-  }
+    var fromModel = d.get(from);
+    var toModel = d.get(to);
 
+    // Finding first deck card
+    var card = fromModel.shift();
+    toModel.push(card);
+
+    // Updating model
+    d[from] = fromModel;
+    d[to] = toModel;
+  }
 
   // Exporting
   //===========
@@ -42,9 +58,8 @@
 
     // Misc
     getArea: _getArea,
+    getTemplate: _getTemplate,
     flag: _flag,
-
-    // Filters
-    inDeckCards: _inDeckCards
+    fromTo: _fromTo
   };
 })(jQuery, window);

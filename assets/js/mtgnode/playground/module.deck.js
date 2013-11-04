@@ -18,7 +18,7 @@
     var _this = this;
 
     var _area = Helpers.getArea(side),
-        _template = new CardTemplate(side);
+        _template = Helpers.getTemplate(side);
 
     // Selectors
     var $emplacement = $('#'+_area+'_deck');
@@ -51,17 +51,7 @@
     {
       triggers: 'myDrawCard',
       method: function(e) {
-        var deck = this.get('myDeck');
-
-        // Finding first deck card
-        var card_id = _.find(deck, function(c) {
-          return c.flag === 'in-deck';
-        }).id;
-
-        // Modifying card and send it to hand
-        deck[card_id].flag = 'in-hand';
-
-        this.dispatchEvent('myCardDrawn', card_id);
+        Helpers.fromTo(this, 'myDeck', 'myHand');
       }
     }
   ];

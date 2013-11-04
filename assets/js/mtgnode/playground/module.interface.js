@@ -24,9 +24,10 @@
         $life_counter = $block.find('.life-counter'),
         $update_life = $block.find('.update-life');
 
-    var $deck_counter = $block.find('.deck-counter'),
-        $hand_counter = $block.find('.hand-counter'),
-        $graveyard_counter = $block.find('.graveyard-counter');
+    var $counters = {};
+    $counters.Deck = $block.find('.deck-counter'),
+    $counters.Hand = $block.find('.hand-counter'),
+    $counters.Graveyard = $block.find('.graveyard-counter');
 
 
     // Emettor
@@ -54,13 +55,13 @@
       $life_counter.text(d.get(side+'Hitpoints'));
     }
 
-    // Updating deck counter
-    // TODO: refine when better methods
-    this.triggers.events[side+'DeckUpdated'] = function(d) {
-      var count = Helpers.inDeckCards(d.get(side+'Deck')).length;
-
-      $deck_counter.text(count);
-    }
+    // Updating counters
+    var models = ['Deck', 'Hand'];
+    models.map(function(m) {
+      _this.triggers.events[side+m+'Updated'] = function(d) {
+        $counters[m].text(d.get(side+m).length);
+      }
+    });
   }
 
   // Interface Hacks

@@ -78,7 +78,8 @@
   var _hacks = basicHacks
     .concat(interfaceHacks)
     .concat(modalsHacks)
-    .concat(deckHacks);
+    .concat(deckHacks)
+    .concat(handHacks);
 
   var controller = new domino({
     name: 'PlaygroundController',
@@ -91,7 +92,7 @@
         success: function(cards) {
 
           // Flag and index
-          Helpers.flag(cards);
+          Helpers.flag(cards, 'my');
           this.myDeck = _.shuffle(cards);
         }
       },
@@ -101,7 +102,7 @@
         success: function(cards) {
 
           // Flag and index
-          Helpers.flag(cards);
+          Helpers.flag(cards, 'op');
           this.opDeck = cards;
         }
       }
