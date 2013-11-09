@@ -38,7 +38,22 @@
     //---------
     if (_side === 'my') {
 
+      // Droppable
+      $emplacement.droppable({
+        tolerance: 'fit',
+        drop: function(e, ui) {
+          var $card = $(ui.draggable);
 
+          if ($card.hasClass('in-hand')) {
+
+            // Reorganizing hand
+            _this.reorganize();
+            _this.dispatchEvent('sendRealtimeMessage', {
+              head: 'opReorganizeHand'
+            });
+          }
+        }
+      });
     }
 
     // Receptor
@@ -83,6 +98,11 @@
           });
         });
       }
+    }
+
+    // Opponent reorganizes his hand
+    this.triggers.events[_side+'ReorganizeHand'] = function(d, e) {
+      _this.reorganize();
     }
 
     // Helpers
