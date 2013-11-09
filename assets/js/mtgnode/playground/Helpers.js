@@ -11,15 +11,19 @@
 ;(function($, w, undefined){
   'use strict';
 
+  // Cached Properties
+  //===================
+  var _templates = {
+    my: new CardTemplate('my'),
+    op: new CardTemplate('op')
+  };
+
+  var _maxZ = 30;
+
   // Methods
   //=========
   function _getArea(side) {
     return (side === 'my') ? 'bottom' : 'top';
-  }
-
-  var _templates = {
-    my: new CardTemplate('my'),
-    op: new CardTemplate('op')
   }
 
   function _getTemplate(side) {
@@ -63,6 +67,11 @@
     return card;
   }
 
+  function _updateZ($card) {
+    _maxZ += 1;
+    $card.css('z-index', _maxZ);
+  }
+
   // Exporting
   //===========
   window.Helpers = {
@@ -71,6 +80,7 @@
     getArea: _getArea,
     getTemplate: _getTemplate,
     flag: _flag,
-    fromTo: _fromTo
+    fromTo: _fromTo,
+    updateZ: _updateZ
   };
 })(jQuery, window);

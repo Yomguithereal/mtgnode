@@ -82,7 +82,7 @@
         var to_position = _this.left + (_this.offset*i);
 
         // Updating z-index
-        // self.helper.update_zindex($(this));
+        Helpers.updateZ($(this));
 
         // Animating the card
         $(this).animate({

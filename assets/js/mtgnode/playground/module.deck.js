@@ -41,7 +41,6 @@
       var dummy = _template.renderDummy();
       $emplacement.append(dummy);
     }
-
   }
 
 
