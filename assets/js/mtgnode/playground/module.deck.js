@@ -13,22 +13,22 @@
 
   // Deck Module
   //=============
-  function DeckModule(side) {
+  function DeckModule(_side) {
     domino.module.call(this);
     var _this = this;
 
-    var _area = Helpers.getArea(side),
-        _template = Helpers.getTemplate(side);
+    var _area = Helpers.getArea(_side),
+        _template = Helpers.getTemplate(_side);
 
     // Selectors
     var $emplacement = $('#'+_area+'_deck');
 
     // Emettor
     //---------
-    if (side === 'my') {
+    if (_side === 'my') {
 
       // Drawing a card
-      $emplacement.on('click', '.card-dummy', function(){
+      $emplacement.on('click', '.card-dummy', function() {
         _this.dispatchEvent('myDrawCard');
       });
     }
@@ -37,7 +37,7 @@
     //----------
 
     // Receiving cards
-    this.triggers.events[side+'DeckSelected'] = function(d) {
+    this.triggers.events[_side+'DeckSelected'] = function(d) {
       var dummy = _template.renderDummy();
       $emplacement.append(dummy);
     }
@@ -53,6 +53,17 @@
       method: function(e) {
         var card = Helpers.fromTo(this, 'myDeck', 'myHand');
         this.dispatchEvent('myCardDrawn', card);
+        this.dispatchEvent('sendRealtimeMessage', {
+          head: 'opDrawCard',
+          body: card.id
+        });
+      }
+    },
+    {
+      triggers: 'opDrawCard',
+      method: function(e) {
+        var card = Helpers.fromTo(this, 'opDeck', 'opHand', e.data);
+        this.dispatchEvent('opCardDrawn', card);
       }
     }
   ];

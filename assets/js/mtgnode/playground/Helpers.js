@@ -38,13 +38,22 @@
     });
   }
 
-  function _fromTo(d, from, to) {
+  function _fromTo(d, from, to, id) {
 
     var fromModel = d.get(from);
     var toModel = d.get(to);
 
     // Finding first deck card
-    var card = fromModel.shift();
+    if (id === undefined) {
+      var card = fromModel.shift();
+    }
+    else {
+      var i = _.findIndex(fromModel, function(c) {
+        return c.id === id;
+      });
+      var card = fromModel.splice(i, 1)[0];
+    }
+
     toModel.unshift(card);
 
     // Updating model

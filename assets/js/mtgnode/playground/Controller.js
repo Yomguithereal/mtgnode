@@ -34,7 +34,7 @@
             id: this.get('gameId'),
             debug: this.get('debug'),
             head: e.data.head,
-            body: e.data.body
+            body: e.data.body || null
           }
         );
       }

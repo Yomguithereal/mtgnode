@@ -6,7 +6,7 @@ mixin deckBuilderCardTemplate()
 
 mixin playgroundCardTemplate()
 	script#tpl_card(type='text/html')
-		div(id='{{id_prefix}}_{{number}}', side='{{side}}', class='{{side}} card-min draggable in-hand flipped')
+		div(id='{{id_prefix}}_{{number}}', side='{{side}}', class='{{side}} card-min draggable in-hand flipped hide')
 			img.back-side(src='/images/card-back.jpeg')
 			img.front-side(index="{{number}}", src='{{src}}')
 
