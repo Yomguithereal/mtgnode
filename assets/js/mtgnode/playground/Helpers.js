@@ -44,8 +44,12 @@
 
   function _fromTo(d, from, to, id) {
 
-    var fromModel = d.get(from);
-    var toModel = d.get(to);
+    var fromModel = d.get(from),
+        toModel = d.get(to);
+
+    // Returning false if the model is empty
+    if (fromModel.length === 0)
+      return false;
 
     // Finding first deck card
     if (id === undefined) {
