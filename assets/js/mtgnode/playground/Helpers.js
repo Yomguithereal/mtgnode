@@ -22,14 +22,18 @@
 
   // Methods
   //=========
+
+  // Getting top or bottom
   function _getArea(side) {
     return (side === 'my') ? 'bottom' : 'top';
   }
 
+  // Getting your side's template engine
   function _getTemplate(side) {
     return _templates[side];
   }
 
+  // Adding some properties to deck cards
   function _flag(cards, side) {
     return cards.map(function(c, i) {
 
@@ -42,6 +46,7 @@
     });
   }
 
+  // Moving a card from a model to another
   function _fromTo(d, from, to, id) {
 
     var fromModel = d.get(from),
@@ -71,10 +76,31 @@
     return card;
   }
 
+  // Updating the zindex of a selected card
   function _updateZ($card) {
     _maxZ += 1;
     $card.css('z-index', _maxZ);
   }
+
+  // Registering a card as draggable
+  function _registerDraggable($card, drag_func) {
+    var snap_zone = [
+      '.hand-emplacement.mine',
+      '.game-emplacement.mine',
+      '.graveyard-emplacement.mine',
+      '.exile-emplacement.mine'
+    ];
+
+    $card.draggable({
+      containment: '.game-area',
+      snap: snap_zone.join(', '),
+      grid: [10, 10],
+      drag: drag_func
+    });
+
+    $card.draggable('enable');
+  }
+
 
   // Exporting
   //===========
@@ -85,6 +111,7 @@
     getTemplate: _getTemplate,
     flag: _flag,
     fromTo: _fromTo,
-    updateZ: _updateZ
+    updateZ: _updateZ,
+    registerDraggable: _registerDraggable
   };
 })(jQuery, window);

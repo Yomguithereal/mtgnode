@@ -52,10 +52,10 @@ block body
 					div#top_graveyard.graveyard-emplacement.top
 					div#top_deck.deck-emplacement.top
 					div#top_hand.hand-emplacement.top
-				div#top_game_zone.game-emplacement.top
+				div#top_game_zone.game-emplacement.top.valid-drag-zone
 			div#bottom_game_block.bottom.player-side
-				div#bottom_game_zone.game-emplacement.bottom
-				div#bottom_handlogic.deck-and-hand.bottom
+				div#bottom_game_zone.game-emplacement.bottom.valid-drag-zone
+				div#bottom_handlogic.deck-and-hand.bottom.valid-drag-zone
 					div#bottom_exile.exile-emplacement.bottom
 					div#bottom_graveyard.graveyard-emplacement.bottom
 					div#bottom_deck.deck-emplacement.bottom
@@ -81,4 +81,5 @@ block contextual_js
 	script(type="text/javascript", src="/js/mtgnode/playground/module.modals.js")
 	script(type="text/javascript", src="/js/mtgnode/playground/module.deck.js")
 	script(type="text/javascript", src="/js/mtgnode/playground/module.hand.js")
+	script(type="text/javascript", src="/js/mtgnode/playground/module.battlefield.js")
 	script(type="text/javascript", src="/js/mtgnode/playground/Controller.js")

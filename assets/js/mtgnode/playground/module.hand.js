@@ -1,6 +1,6 @@
 /*
 | -------------------------------------------------------------------
-|  MTGNode Playground DHandeck Module
+|  MTGNode Playground Hand Module
 | -------------------------------------------------------------------
 |
 |
@@ -52,6 +52,7 @@
       $game_area.append(card.html);
       var $card = $(_identifier+card.id);
 
+      // Position
       var p = {left: $deck.position().left};
       p[_area] = 0;
       $card.css(p);
@@ -59,9 +60,28 @@
       // Animating cards
       _this.reorganize();
 
-      // Flipping card if mine
+      // Flipping card if mine and make draggable
       if (_side === 'my') {
         $card.removeClass('flipped');
+        Helpers.registerDraggable($card, function(e, ui) {
+          var $card = $(ui.helper);
+
+          // Updating z index
+          Helpers.updateZ($card);
+
+          // Retrieving position and sending to opponent
+          var pos = {
+            left: ui.position.left,
+            top: ui.position.top,
+            zindex: $card.css('z-index'),
+            id: $card.attr('number')
+          };
+
+          _this.dispatchEvent('sendRealtimeMessage', {
+            head: 'opCardDragged',
+            body: pos
+          });
+        });
       }
     }
 

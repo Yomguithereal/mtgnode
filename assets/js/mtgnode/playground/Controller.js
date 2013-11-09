@@ -79,7 +79,8 @@
     .concat(interfaceHacks)
     .concat(modalsHacks)
     .concat(deckHacks)
-    .concat(handHacks);
+    .concat(handHacks)
+    .concat(battlefieldHacks);
 
   var controller = new domino({
     name: 'PlaygroundController',
@@ -135,6 +136,8 @@
       _modules.opDeck = controller.addModule(DeckModule, ['op']);
       _modules.myHand = controller.addModule(HandModule, ['my']);
       _modules.opHand = controller.addModule(HandModule, ['op']);
+      _modules.myBattlefield = controller.addModule(BattlefieldModule, ['my']);
+      _modules.opBattlefield = controller.addModule(BattlefieldModule, ['op']);
       _modules.myHelpers = controller.addModule(InterfaceModule, ['my']);
       _modules.opHelpers = controller.addModule(InterfaceModule, ['op']);
     }
