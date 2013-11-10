@@ -61,13 +61,12 @@
       var card = fromModel.shift();
     }
     else {
-      var i = _.findIndex(fromModel, function(c) {
+      var card = _.remove(fromModel, function(c) {
         return c.id === id;
-      });
-      var card = fromModel.splice(i, 1)[0];
+      })[0];
     }
 
-    toModel.unshift(card);
+    toModel.push(card);
 
     // Updating model
     d[from] = fromModel;

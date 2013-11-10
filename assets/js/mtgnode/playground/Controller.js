@@ -28,13 +28,17 @@
     {
       triggers: 'sendRealtimeMessage',
       method: function(e) {
+        var body = null;
+        if (e.data.body !== undefined)
+          body = e.data.body;
+
         socket.post(
           '/realtime/message',
           {
             id: this.get('gameId'),
             debug: this.get('debug'),
             head: e.data.head,
-            body: e.data.body || null
+            body: body
           }
         );
       }
@@ -89,7 +93,9 @@
     services: [
       {
         id: 'getMyDeckCards',
-        url: '/ajax/playground/deck/:id',
+        url: '/cards',
+        type: 'POST',
+        dataType: 'json',
         success: function(cards) {
 
           // Flag and index
@@ -99,7 +105,9 @@
       },
       {
         id: 'getOpDeckCards',
-        url: '/ajax/playground/deck/:id',
+        url: '/cards',
+        type: 'POST',
+        dataType: 'json',
         success: function(cards) {
 
           // Flag and index
@@ -115,7 +123,6 @@
   //====================
   function RealtimeBootstrap() {
     domino.module.call(this);
-
     var _this = this;
 
     socket.on('message', function(m) {

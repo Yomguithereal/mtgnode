@@ -50,16 +50,23 @@
     }
   }
 
-
+  // TODO: pass only the deck cards id to the server
   // Modals Hacks
   //==============
   var _hacks = [
     {
       triggers: 'myDeckSelected',
       method: function(e) {
+        var decks = this.get('myUser').decks;
+        var cards = _.find(decks, function(d) {
+          return d.id === e.data;
+        }).cards;
+
         this.request('getMyDeckCards', {
-          shortcuts: {
-            id: e.data
+          data: {
+            deck: JSON.stringify({
+              cards: cards
+            })
           }
         });
       }
@@ -67,9 +74,16 @@
     {
       triggers: 'opDeckSelected',
       method: function(e) {
+        var decks = this.get('opUser').decks;
+        var cards = _.find(decks, function(d) {
+          return d.id === e.data;
+        }).cards;
+
         this.request('getOpDeckCards', {
-          shortcuts: {
-            id: e.data
+          data: {
+            deck: JSON.stringify({
+              cards: cards
+            })
           }
         });
       }

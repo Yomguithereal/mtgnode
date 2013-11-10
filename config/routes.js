@@ -48,12 +48,12 @@ module.exports.routes = {
   // Playground Routes
   ,'/playground/:id': {controller: 'PlaygroundController', action: 'playground'}
   ,'/playground/connect/:id': {controller: 'PlaygroundController', action: 'connect'}
-  ,'/ajax/playground/deck/:id': {controller: 'PlaygroundController', action: 'deck'}
   ,'/realtime/message': {controller: 'PlaygroundController', action: 'message'}
 
   // Card Rest
   ,'/card/:id': {controller: 'CardController', action: 'get'}
   ,'/card/set/:id': {controller: 'CardController', action: 'set'}
+  ,'POST /cards': {controller: 'CardController', action: 'batch'}
 
   // Game Routes
   ,'/game/get_and_clean': {controller: 'GameController', action: 'get_and_clean'}

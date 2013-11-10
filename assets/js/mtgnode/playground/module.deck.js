@@ -74,14 +74,16 @@
         this.dispatchEvent('myCardDrawn', card);
         this.dispatchEvent('sendRealtimeMessage', {
           head: 'opDrawCard',
-          body: card.id
+          body: {
+            id: card.id
+          }
         });
       }
     },
     {
       triggers: 'opDrawCard',
       method: function(e) {
-        var card = Helpers.fromTo(this, 'opDeck', 'opHand', e.data);
+        var card = Helpers.fromTo(this, 'opDeck', 'opHand', e.data.id);
         this.dispatchEvent('opCardDrawn', card);
       }
     }

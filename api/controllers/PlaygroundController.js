@@ -101,19 +101,6 @@ exports.connect = function(req, res) {
   });
 }
 
-// Deck Selection
-//----------------
-exports.deck = function(req, res) {
-
-  // Sending back the cards
-  var cards = DeckModel.getCards(
-    req.session.user,
-    req.param('id')
-  );
-
-  res.json(cards);
-}
-
 // Messaging
 //-----------
 exports.message = function(req, res) {

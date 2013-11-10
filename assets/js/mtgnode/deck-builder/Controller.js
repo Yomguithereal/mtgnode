@@ -146,7 +146,7 @@
                 cards: cardsToMultiverseIdArray(deckCards),
                 name: this.get('deckName'),
                 id: this.get('deckId')
-              }),
+              })
             }
           });
         }
