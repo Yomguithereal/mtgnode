@@ -28,7 +28,9 @@
     // Properties
     //------------
     this.cards = '.card-min.in-graveyard.'+_side;
-    this.top = (_area === 'top') ? 0 : $game_area.height() - $emplacement.height();
+    this.top = (_area === 'top') ?
+      0 :
+      $game_area.height() - $emplacement.height();
 
 
     // Emettor
@@ -37,7 +39,7 @@
 
       // Dropping card in game
       $emplacement.droppable({
-        tolerance: 'touch',
+        tolerance: 'pointer',
         drop: function(e, ui) {
           var $card = $(ui.draggable);
 

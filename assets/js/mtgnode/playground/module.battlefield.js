@@ -47,6 +47,17 @@
           }
         }
       });
+
+      // Tapping a card
+      $game_area.on('click', this.cards, function() {
+        $(this).toggleClass('tapped');
+        _this.dispatchEvent('sendRealtimeMessage', {
+          head: 'opTappedCard',
+          body: {
+            id: +$(this).attr('number')
+          }
+        })
+      });
     }
 
     // Receptor
@@ -77,6 +88,12 @@
       _this.dispatchEvent('sendRealtimeMessage', {
         head: _side+'ReorganizeHand'
       });
+    }
+
+    // Card Tapped
+    this.triggers.events[_side+'TappedCard'] = function(d, e) {
+      var $card = _cardSelector(e.data.id);
+      $card.toggleClass('tapped');
     }
   }
 
