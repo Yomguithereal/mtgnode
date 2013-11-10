@@ -84,12 +84,13 @@
   // Deck Hacks
   //============
   var _hacks = [];
-  _hacks = _hacks.concat(Helpers.fromToHacks(
-    'Hand',
-    'Battlefield',
-    'PlayCard',
-    'PlayedCard'
-  ));
+  _hacks = _hacks
+    .concat(Helpers.fromToHacks(
+      'Hand',
+      'Battlefield',
+      'PlayCard',
+      'PlayedCard'
+    ));
 
   // Exporting
   //===========

@@ -24,6 +24,7 @@
     // Selectors
     var $emplacement = $('#'+_area+'_deck');
 
+
     // Emettor
     //---------
     if (_side === 'my') {

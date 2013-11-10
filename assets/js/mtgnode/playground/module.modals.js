@@ -50,7 +50,6 @@
     }
   }
 
-  // TODO: pass only the deck cards id to the server
   // Modals Hacks
   //==============
   var _hacks = [
