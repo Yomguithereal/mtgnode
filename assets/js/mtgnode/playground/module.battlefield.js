@@ -18,7 +18,7 @@
     var _this = this;
 
     var _area = Helpers.getArea(_side),
-        _identifier = '#'+_side+'_',
+        _cardSelector = Helpers.getCardSelectorFunc(_side),
         _template = new CardTemplate(_side);
 
     // Selectors
@@ -54,7 +54,7 @@
 
     // Opponent dragged a card
     this.triggers.events[_side+'CardDragged'] = function(d, e) {
-      var $card = $('#op_'+e.data.id);
+      var $card = _cardSelector(e.data.id);
 
       $card.css({
         top: _this.height - e.data.top - $card.height(),
@@ -65,7 +65,7 @@
 
     // Card Played
     this.triggers.events[_side+'PlayedCard'] = function(d, e) {
-      var $card = $('#'+_side+'_'+e.data.id);
+      var $card = _cardSelector(e.data.id);
 
       $card.removeClass('in-hand');
       $card.addClass('in-game');
@@ -83,33 +83,13 @@
 
   // Deck Hacks
   //============
-  var _hacks = [
-    {
-      triggers: 'myPlayCard',
-      method: function(e) {
-        var card = Helpers.fromTo(this, 'myHand', 'myBattlefield', e.data.id);
-
-        this.dispatchEvent('myPlayedCard', {
-          id: card.id
-        });
-        this.dispatchEvent('sendRealtimeMessage', {
-          head: 'opPlayCard',
-          body: {
-            id: card.id
-          }
-        });
-      }
-    },
-    {
-      triggers: 'opPlayCard',
-      method: function(e) {
-        var card = Helpers.fromTo(this, 'opHand', 'opBattlefield', e.data.id);
-        this.dispatchEvent('opPlayedCard', {
-          id: card.id
-        });
-      }
-    }
-  ];
+  var _hacks = [];
+  _hacks = _hacks.concat(Helpers.fromToHacks(
+    'Hand',
+    'Battlefield',
+    'PlayCard',
+    'PlayedCard'
+  ));
 
   // Exporting
   //===========

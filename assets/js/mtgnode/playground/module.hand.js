@@ -18,7 +18,7 @@
     var _this = this;
 
     var _area = Helpers.getArea(_side),
-        _identifier = '#'+_side+'_',
+        _cardSelector = Helpers.getCardSelectorFunc(_side),
         _template = new CardTemplate(_side);
 
     // Selectors
@@ -74,7 +74,7 @@
 
       // Adding card in dom
       $game_area.append(card.html);
-      var $card = $(_identifier+card.id);
+      var $card = _cardSelector(card.id);
 
       // Position
       $card.css({
@@ -117,7 +117,7 @@
 
     // Backing a card
     this.triggers.events[_side+'BackedCard'] = function(d, e) {
-      var $card = $('#'+_side+'_'+e.data.id);
+      var $card = _cardSelector(e.data.id);
 
       $card.removeClass('in-game');
       $card.addClass('in-hand');
@@ -161,28 +161,14 @@
   // Deck Hacks
   //============
 
-  // TODO: find a way to abstract those kind of hacks
-  var _hacks = [
-    {
-      triggers: 'myBackingCard',
-      method: function(e) {
-        var card = Helpers.fromTo(this, 'myBattlefield', 'myHand', e.data.id);
-
-        this.dispatchEvent('myBackedCard', {id: card.id});
-        this.dispatchEvent('sendRealtimeMessage', {
-          head: 'opBackingCard',
-          body: {id: card.id}
-        });
-      }
-    },
-    {
-      triggers: 'opBackingCard',
-      method: function(e) {
-        var card = Helpers.fromTo(this, 'opBattlefield', 'opHand', e.data.id);
-        this.dispatchEvent('opBackedCard', {id: card.id});
-      }
-    }
-  ];
+  var _hacks = [];
+  _hacks = _hacks
+    .concat(Helpers.fromToHacks(
+      'Battlefield',
+      'Hand',
+      'BackingCard',
+      'BackedCard'
+    ));
 
   // Exporting
   //===========

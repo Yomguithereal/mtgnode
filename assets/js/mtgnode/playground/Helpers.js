@@ -28,6 +28,13 @@
     return (side === 'my') ? 'bottom' : 'top';
   }
 
+  // Getting identifier function
+  function _getCardSelectorFunc(side) {
+    return function(id) {
+      return $('#'+side+'_'+id);
+    }
+  }
+
   // Getting your side's template engine
   function _getTemplate(side) {
     return _templates[side];
@@ -75,6 +82,40 @@
     return card;
   }
 
+  // Generating From To hacks
+  function _fromToHacks(from, to, e1, e2) {
+    return [
+      {
+        triggers: 'my'+e1,
+        method: function(e) {
+          var card = _fromTo(this, 'my'+from, 'my'+to, e.data.id);
+
+          if (!card)
+            return false;
+
+          this.dispatchEvent('my'+e2, {
+            id: card.id
+          });
+          this.dispatchEvent('sendRealtimeMessage', {
+            head: 'op'+e1,
+            body: {
+              id: card.id
+            }
+          });
+        }
+      },
+      {
+        triggers: 'op'+e1,
+        method: function(e) {
+          var card = _fromTo(this, 'op'+from, 'op'+to, e.data.id);
+          this.dispatchEvent('op'+e2, {
+            id: card.id
+          });
+        }
+      }
+    ];
+  }
+
   // Updating the zindex of a selected card
   function _updateZ($card) {
     _maxZ += 1;
@@ -105,11 +146,17 @@
   //===========
   window.Helpers = {
 
-    // Misc
+    // Modules pieces
     getArea: _getArea,
     getTemplate: _getTemplate,
+    getCardSelectorFunc: _getCardSelectorFunc,
+
+    // Quick interaction with domino
     flag: _flag,
     fromTo: _fromTo,
+    fromToHacks: _fromToHacks,
+
+    // Dom manipulation
     updateZ: _updateZ,
     registerDraggable: _registerDraggable
   };
