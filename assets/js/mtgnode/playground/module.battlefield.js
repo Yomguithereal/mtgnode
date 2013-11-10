@@ -36,7 +36,7 @@
 
       // Dropping card in game
       $battlefield.droppable({
-        tolerance: 'fit',
+        tolerance: 'intersect',
         drop: function(e, ui) {
           var $card = $(ui.draggable);
 

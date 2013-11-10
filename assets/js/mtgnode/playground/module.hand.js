@@ -41,7 +41,7 @@
 
       // Droppable
       $emplacement.droppable({
-        tolerance: 'touch',
+        tolerance: 'intersect',
         drop: function(e, ui) {
           var $card = $(ui.draggable);
 
@@ -51,6 +51,14 @@
             _this.reorganize();
             _this.dispatchEvent('sendRealtimeMessage', {
               head: 'opReorganizeHand'
+            });
+          }
+
+          else if ($card.hasClass('in-game')) {
+
+            // Backing card from game
+            _this.dispatchEvent(_side+'BackingCard', {
+              id: +$card.attr('number')
             });
           }
         }
@@ -107,6 +115,20 @@
       _this.reorganize();
     }
 
+    // Backing a card
+    this.triggers.events[_side+'BackedCard'] = function(d, e) {
+      var $card = $('#'+_side+'_'+e.data.id);
+
+      $card.removeClass('in-game');
+      $card.addClass('in-hand');
+
+      if (_side === 'op') {
+        $card.addClass('flipped');
+      }
+
+      _this.reorganize();
+    }
+
     // Helpers
     //---------
     this.reorganize = function() {
@@ -138,7 +160,29 @@
 
   // Deck Hacks
   //============
-  var _hacks = [];
+
+  // TODO: find a way to abstract those kind of hacks
+  var _hacks = [
+    {
+      triggers: 'myBackingCard',
+      method: function(e) {
+        var card = Helpers.fromTo(this, 'myBattlefield', 'myHand', e.data.id);
+
+        this.dispatchEvent('myBackedCard', {id: card.id});
+        this.dispatchEvent('sendRealtimeMessage', {
+          head: 'opBackingCard',
+          body: {id: card.id}
+        });
+      }
+    },
+    {
+      triggers: 'opBackingCard',
+      method: function(e) {
+        var card = Helpers.fromTo(this, 'opBattlefield', 'opHand', e.data.id);
+        this.dispatchEvent('opBackedCard', {id: card.id});
+      }
+    }
+  ];
 
   // Exporting
   //===========
