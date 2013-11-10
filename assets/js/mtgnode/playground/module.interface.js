@@ -28,6 +28,8 @@
     $counters.Deck = $block.find('.deck-counter'),
     $counters.Hand = $block.find('.hand-counter'),
     $counters.Graveyard = $block.find('.graveyard-counter');
+    $counters.Battlefield = $block.find('.battlefield-counter');
+    $counters.Exile = $block.find('.exile-counter');
 
 
     // Emettor
@@ -56,7 +58,7 @@
     }
 
     // Updating counters
-    var models = ['Deck', 'Hand'];
+    var models = ['Deck', 'Hand', 'Battlefield', 'Exile', 'Graveyard'];
     models.map(function(m) {
       _this.triggers.events[side+m+'Updated'] = function(d) {
         $counters[m].text(d.get(side+m).length);
