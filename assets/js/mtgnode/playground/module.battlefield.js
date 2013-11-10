@@ -85,9 +85,7 @@
         $card.removeClass('flipped');
       }
 
-      _this.dispatchEvent('sendRealtimeMessage', {
-        head: _side+'ReorganizeHand'
-      });
+      _this.dispatchEvent(_side+'ReorganizeHand');
     }
 
     // Card Tapped

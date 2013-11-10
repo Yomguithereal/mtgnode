@@ -39,7 +39,7 @@
 
       // Dropping card in game
       $emplacement.droppable({
-        tolerance: 'pointer',
+        tolerance: 'intersect',
         drop: function(e, ui) {
           var $card = $(ui.draggable);
 
@@ -65,6 +65,9 @@
     // Helpers
     //---------
     this.slurp = function($card) {
+      $card.removeClass('in-game tapped');
+      $card.addClass('in-graveyard');
+
       $card.animate({
         left: $emplacement.position().left,
         top: this.top

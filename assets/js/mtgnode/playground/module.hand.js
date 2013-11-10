@@ -119,7 +119,7 @@
     this.triggers.events[_side+'BackedCard'] = function(d, e) {
       var $card = _cardSelector(e.data.id);
 
-      $card.removeClass('in-game');
+      $card.removeClass('in-game tapped');
       $card.addClass('in-hand');
 
       if (_side === 'op') {
@@ -161,7 +161,11 @@
   // Deck Hacks
   //============
 
-  var _hacks = [];
+  var _hacks = [
+    {
+      triggers: ['myReorganizeHand', 'opReorganizeHand']
+    }
+  ];
   _hacks = _hacks
     .concat(Helpers.fromToHacks(
       'Battlefield',

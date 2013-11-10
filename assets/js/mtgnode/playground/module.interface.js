@@ -13,11 +13,11 @@
 
   // Deck Module
   //=============
-  function InterfaceModule(side) {
+  function InterfaceModule(_side) {
     domino.module.call(this);
     var _this = this;
 
-    var _area = Helpers.getArea(side);
+    var _area = Helpers.getArea(_side);
 
     // Selectors
     var $block = $('#'+_area+'_helper_block'),
@@ -35,7 +35,7 @@
     // Emettor
     //---------
 
-    if (side === 'my') {
+    if (_side === 'my') {
 
       // Updating life
       $update_life.click(function(){
@@ -53,15 +53,15 @@
     //----------
 
     // Updating life
-    this.triggers.events[side+'HitpointsUpdated'] = function(d) {
-      $life_counter.text(d.get(side+'Hitpoints'));
+    this.triggers.events[_side+'HitpointsUpdated'] = function(d) {
+      $life_counter.text(d.get(_side+'Hitpoints'));
     }
 
     // Updating counters
     var models = ['Deck', 'Hand', 'Battlefield', 'Exile', 'Graveyard'];
     models.map(function(m) {
-      _this.triggers.events[side+m+'Updated'] = function(d) {
-        $counters[m].text(d.get(side+m).length);
+      _this.triggers.events[_side+m+'Updated'] = function(d) {
+        $counters[m].text(d.get(_side+m).length);
       }
     });
   }

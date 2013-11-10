@@ -33,7 +33,7 @@ module.exports = (function () {
         },
 
         // File path for disk file output
-        filePath: 'db/disk.db',
+        filePath: 'db/disk.json',
 
         registerCollection: function (collection, cb) {
 
@@ -59,7 +59,7 @@ module.exports = (function () {
         },
 
         drop: function (collectionName, cb) {
-            
+
             delete data[collectionName];
             delete schema[collectionName];
             delete counters[collectionName];
@@ -91,7 +91,7 @@ module.exports = (function () {
 
                 if (attrDef.unique) {
                     for (var index in data[collectionName]) {
-                        
+
                         // Ignore uniquness check on undefined values
                         // ('required' check is taken care of in waterline core)
                         if (_.isUndefined(values[attrName])) {
