@@ -22,7 +22,8 @@
         _template = new CardTemplate(_side);
 
     // Selectors
-    var $game_area = $('.game-area');
+    var $game_area = $('.game-area'),
+        $battlefield = $('.game-emplacement');
 
     // Properties
     //------------
@@ -34,7 +35,8 @@
     if (_side === 'my') {
 
       // Dropping card in game
-      $game_area.droppable({
+      $battlefield.droppable({
+        tolerance: 'fit',
         drop: function(e, ui) {
           var $card = $(ui.draggable);
 
@@ -71,6 +73,10 @@
       if (_side === 'op') {
         $card.removeClass('flipped');
       }
+
+      _this.dispatchEvent('sendRealtimeMessage', {
+        head: _side+'ReorganizeHand'
+      });
     }
   }
 

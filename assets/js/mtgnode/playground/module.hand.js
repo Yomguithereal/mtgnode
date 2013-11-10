@@ -33,6 +33,7 @@
     this.cards = '.card-min.in-hand.'+_side;
     this.width = $emplacement.width();
     this.left = $emplacement.position().left;
+    this.top = (_area === 'top') ? 0 : $game_area.height() - $deck.height();
 
     // Emettor
     //---------
@@ -40,7 +41,7 @@
 
       // Droppable
       $emplacement.droppable({
-        tolerance: 'fit',
+        tolerance: 'touch',
         drop: function(e, ui) {
           var $card = $(ui.draggable);
 
@@ -68,9 +69,10 @@
       var $card = $(_identifier+card.id);
 
       // Position
-      var p = {left: $deck.position().left};
-      p[_area] = 0;
-      $card.css(p);
+      $card.css({
+        left: $deck.position().left,
+        top: _this.top
+      });
 
       // Animating cards
       _this.reorganize();
@@ -126,7 +128,8 @@
 
         // Animating the card
         $(this).animate({
-          left: to_position
+          left: to_position,
+          top: _this.top
         }, 'fast');
       });
     }

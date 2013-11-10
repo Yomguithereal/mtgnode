@@ -84,10 +84,10 @@
   // Registering a card as draggable
   function _registerDraggable($card, drag_func) {
     var snap_zone = [
-      '.hand-emplacement.mine',
-      '.game-emplacement.mine',
-      '.graveyard-emplacement.mine',
-      '.exile-emplacement.mine'
+      '.hand-emplacement.bottom',
+      '.game-emplacement.bottom',
+      '.graveyard-emplacement.bottom',
+      '.exile-emplacement.bottom'
     ];
 
     $card.draggable({
