@@ -343,9 +343,9 @@ BODY{
   position: absolute;
   .transform-transition(0.3s);
   .preserve-3d();
-  .perspective(100);
+  .perspective(1000);
 
-  .transform(rotateY(0deg) translate3d(0,0,0));
+  // .transform(rotateY(0deg) translate3d(0,0,0));
 
   // Tapped Card
   &.tapped{
@@ -375,7 +375,7 @@ BODY{
 
   // Flipped
   &.flipped{
-    .transform(rotateY(-180deg) translate3d(0,0,0));
+    .transform(rotateY(180deg));
   }
 }
 
@@ -398,14 +398,30 @@ BODY{
 }
 
 .front-side, .back-side{
-  .transform(rotateZ(0px) translate3d(0,0,0));
-  // .backface-visibility(hidden);
+  // .transform(rotateZ(0px) translate3d(0,0,0));
+  .backface-visibility(hidden);
   display:block;
+
+  &.my{
+    .transform(translateZ(0px));
+  }
+
+  &.op{
+    .transform(translateZ(0px) rotateZ(180deg));
+  }
 }
 
 .back-side{
-  .transform(rotateY(180deg) translateZ(1px) translate3d(0,0,0));
+  // .transform(rotateY(180deg) translateZ(1px) translate3d(0,0,0));
   border:1px solid black;
+
+  &.my{
+    .transform(rotateY(180deg) translateZ(1px));
+  }
+
+  &.op{
+    .transform(rotateY(180deg) translateZ(1px) rotateZ(180deg));
+  }
 }
 
 .front-side{

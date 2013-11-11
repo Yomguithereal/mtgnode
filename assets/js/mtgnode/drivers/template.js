@@ -43,7 +43,7 @@
 		}
 
 		this.renderDummy = function(){
-			return Mustache.to_html(this._dummyTemplate);
+			return Mustache.to_html(this._dummyTemplate, {side: this._prefix});
 		}
 	}
 
