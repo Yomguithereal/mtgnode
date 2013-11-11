@@ -43,8 +43,16 @@
         drop: function(e, ui) {
           var $card = $(ui.draggable);
 
+          // From Game
           if ($card.hasClass('in-game')) {
             _this.dispatchEvent('myBuryCard', {
+              id: +$card.attr('number')
+            });
+          }
+
+          // From Hand
+          else if ($card.hasClass('in-hand')) {
+            _this.dispatchEvent('myDiscardCard', {
               id: +$card.attr('number')
             });
           }
@@ -55,17 +63,23 @@
     // Receptor
     //----------
 
-    // From game to graveyard
-    this.triggers.events[_side+'BuriedCard'] = function (d, e) {
-      var $card = _cardSelector(e.data.id);
-      _this.slurp($card);
+    // From Battlefield to Graveyard
+    this.triggers.events[_side+'BuriedCard'] = function(d, e) {
+      _this.slurp(e.data.id);
     }
 
+    // From Hand to Graveyard
+    this.triggers.events[_side+'DiscardedCard'] = function(d, e) {
+      _this.slurp(e.data.id);
+      _this.dispatchEvent(_side+'ReorganizeHand');
+    }
 
     // Helpers
     //---------
-    this.slurp = function($card) {
-      $card.removeClass('in-game tapped');
+    this.slurp = function(id) {
+      var $card = _cardSelector(id);
+
+      $card.removeClass('in-game in-hand tapped');
       $card.addClass('in-graveyard');
 
       $card.animate({
@@ -85,6 +99,12 @@
       'Graveyard',
       'BuryCard',
       'BuriedCard'
+    ))
+    .concat(Helpers.fromToHacks(
+      'Hand',
+      'Graveyard',
+      'DiscardCard',
+      'DiscardedCard'
     ));
 
   // Exporting
