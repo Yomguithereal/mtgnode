@@ -53,18 +53,26 @@
             });
           }
 
-          // Backing Card
-          else if ($card.hasClass('in-game')) {
-            _this.dispatchEvent(_side+'BackingCard', {
-              id: +$card.attr('number')
-            });
-          }
+          // Interactions
+          var interactions = [
+            {
+              class: 'in-game',
+              event: 'myBackCard'
+            },
+            {
+              class: 'in-graveyard',
+              event: 'myLootCard'
+            }
+          ];
 
-          // Looting card
-          else if ($card.hasClass('in-graveyard')) {
-            _this.dispatchEvent(_side+'LootingCard', {
-              id: +$card.attr('number')
-            });
+          for (var i = 0; i < interactions.length; i++) {
+            if ($card.hasClass(interactions[i].class)) {
+              _this.dispatchEvent(interactions[i].event, {
+                id: +$card.attr('number')
+              });
+
+              break;
+            }
           }
         }
       });
@@ -178,13 +186,13 @@
     .concat(Helpers.fromToHacks(
       'Battlefield',
       'Hand',
-      'BackingCard',
+      'BackCard',
       'BackedCard'
     ))
     .concat(Helpers.fromToHacks(
       'Graveyard',
       'Hand',
-      'LootingCard',
+      'LootCard',
       'LootedCard'
     ));
 

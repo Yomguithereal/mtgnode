@@ -40,18 +40,26 @@
         drop: function(e, ui) {
           var $card = $(ui.draggable);
 
-          // Playing Card
-          if ($card.hasClass('in-hand')) {
-            _this.dispatchEvent('myPlayCard', {
-              id: +$card.attr('number')
-            });
-          }
+          // Interactions
+          var interactions = [
+            {
+              class: 'in-graveyard',
+              event: 'myResurrectCard'
+            },
+            {
+              class: 'in-hand',
+              event: 'myPlayCard'
+            }
+          ];
 
-          // Resurrecting Card
-          if ($card.hasClass('in-graveyard')) {
-            _this.dispatchEvent('myResurrectCard', {
-              id: +$card.attr('number')
-            });
+          for (var i = 0; i < interactions.length; i++) {
+            if ($card.hasClass(interactions[i].class)) {
+              _this.dispatchEvent(interactions[i].event, {
+                id: +$card.attr('number')
+              });
+
+              break;
+            }
           }
         }
       });

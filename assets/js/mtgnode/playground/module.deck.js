@@ -38,7 +38,7 @@
     // Receptor
     //----------
 
-    // Receiving cards
+    // Deck selected
     this.triggers.events[_side+'DeckSelected'] = function(d) {
       $emplacement.append(_dummy);
     }

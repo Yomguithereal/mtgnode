@@ -43,18 +43,26 @@
         drop: function(e, ui) {
           var $card = $(ui.draggable);
 
-          // From Game
-          if ($card.hasClass('in-game')) {
-            _this.dispatchEvent('myBuryCard', {
-              id: +$card.attr('number')
-            });
-          }
+          // Interactions
+          var interactions = [
+            {
+              class: 'in-game',
+              event: 'myBuryCard'
+            },
+            {
+              class: 'in-hand',
+              event: 'myDiscardCard'
+            }
+          ];
 
-          // From Hand
-          else if ($card.hasClass('in-hand')) {
-            _this.dispatchEvent('myDiscardCard', {
-              id: +$card.attr('number')
-            });
+          for (var i = 0; i < interactions.length; i++) {
+            if ($card.hasClass(interactions[i].class)) {
+              _this.dispatchEvent(interactions[i].event, {
+                id: +$card.attr('number')
+              });
+
+              break;
+            }
           }
         }
       });

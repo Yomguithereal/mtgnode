@@ -43,19 +43,31 @@
         drop: function(e, ui) {
           var $card = $(ui.draggable);
 
-          // // From Game
-          // if ($card.hasClass('in-game')) {
-          //   _this.dispatchEvent('myBuryCard', {
-          //     id: +$card.attr('number')
-          //   });
-          // }
+          // Interactions
+          var interactions = [
+            {
+              class: 'in-game',
+              event: 'myExileCard'
+            },
+            {
+              class: 'in-hand',
+              event: 'myAnnihilateCard'
+            },
+            {
+              class: 'in-graveyard',
+              event: 'myCremateCard'
+            }
+          ];
 
-          // // From Hand
-          // else if ($card.hasClass('in-hand')) {
-          //   _this.dispatchEvent('myDiscardCard', {
-          //     id: +$card.attr('number')
-          //   });
-          // }
+          for (var i = 0; i < interactions.length; i++) {
+            if ($card.hasClass(interactions[i].class)) {
+              _this.dispatchEvent(interactions[i].event, {
+                id: +$card.attr('number')
+              });
+
+              break;
+            }
+          }
         }
       });
     }
@@ -63,16 +75,19 @@
     // Receptor
     //----------
 
-    // // From Battlefield to Graveyard
-    // this.triggers.events[_side+'BuriedCard'] = function(d, e) {
-    //   _this.slurp(e.data.id);
-    // }
+    // From Battlefield to Exile
+    function standardSlurp(d, e) {
+      _this.slurp(e.data.id);
+    }
 
-    // // From Hand to Graveyard
-    // this.triggers.events[_side+'DiscardedCard'] = function(d, e) {
-    //   _this.slurp(e.data.id);
-    //   _this.dispatchEvent(_side+'ReorganizeHand');
-    // }
+    this.triggers.events[_side+'ExiledCard'] = standardSlurp;
+    this.triggers.events[_side+'CremateCard'] = standardSlurp;
+
+    // From Hand to Exile
+    this.triggers.events[_side+'AnnihilatedCard'] = function(d, e) {
+      _this.slurp(e.data.id);
+      _this.dispatchEvent(_side+'ReorganizeHand');
+    }
 
     // Helpers
     //---------
@@ -93,6 +108,25 @@
   // Deck Hacks
   //============
   var _hacks = [];
+  _hacks = _hacks
+    .concat(Helpers.fromToHacks(
+      'Battlefield',
+      'Exile',
+      'ExileCard',
+      'ExiledCard'
+    ))
+    .concat(Helpers.fromToHacks(
+      'Hand',
+      'Exile',
+      'AnnihilateCard',
+      'AnnihilatedCard'
+    ))
+    .concat(Helpers.fromToHacks(
+      'Graveyard',
+      'Exile',
+      'CremateCard',
+      'CrematedCard'
+    ));
 
   // Exporting
   //===========
