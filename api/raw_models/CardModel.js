@@ -63,6 +63,13 @@ function CardModel(){
       return card;
     });
   }
+
+  // Search by card name
+  this.searchByName = function(name) {
+    return _cards.filter(function(c) {
+      return ~c.name.toLowerCase().indexOf(name.toLowerCase());
+    });
+  }
 }
 
 // Exporting

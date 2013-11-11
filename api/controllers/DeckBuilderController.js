@@ -7,8 +7,9 @@
 | Author : Yomguithereal
 | Version : 1.0
 */
-var SetModel = require('../raw_models/SetModel');
-var DeckModel = require('../raw_models/DeckModel');
+var CardModel = require('../raw_models/CardModel'),
+    SetModel = require('../raw_models/SetModel'),
+    DeckModel = require('../raw_models/DeckModel');
 
 // Index
 //------
@@ -38,6 +39,14 @@ exports.deck_cards = function(req, res){
 
   // Sending back the cards
   res.json(DeckModel.getCards(req.session.user, req.param('id')));
+}
+
+// Search cards
+//-------------
+exports.search = function(req, res) {
+
+  // Sending back the cards
+  res.json(CardModel.searchByName(req.param('query')));
 }
 
 // Save a deck

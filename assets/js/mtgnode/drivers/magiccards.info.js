@@ -118,7 +118,7 @@
     'RTR': 'rtr',
     'CMA': 'cma',
     'GTC': 'gtc',
-    'SVT': 'svt',
+    'SVT': 'ddk',
     'DGM': 'dgm',
     'MMA': 'mma',
     'M14': 'm14',

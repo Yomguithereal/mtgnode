@@ -9,7 +9,7 @@
 */
 
 ;(function($, w, domino, CardTemplate, undefined){
-  "use strict";
+  'use strict';
 
   // Domino Settings
   //=================
@@ -79,6 +79,12 @@
         url: '/ajax/deck-builder/deck/:deck_id'
       },
       {
+        id: 'searchCards',
+        setter: 'viewedCards',
+        url: '/ajax/deck-builder/search',
+        type: 'GET'
+      },
+      {
         id: 'saveDeck',
         url: '/ajax/deck-builder/save_deck',
         type: 'POST',
@@ -93,46 +99,56 @@
     ,hacks: [
       {
         triggers: 'setSelected',
-        method: function(event){
+        method: function(e) {
           this.request('getSetCards', {
             shortcuts: {
-              set: event.data
+              set: e.data
+            }
+          });
+        }
+      },
+      {
+        triggers: 'queryDone',
+        method: function(e) {
+          this.request('searchCards', {
+            data: {
+              query: e.data
             }
           });
         }
       },
       {
         triggers: 'deckSelected',
-        method: function(event){
+        method: function(e) {
           this.request('getDeckCards', {
             shortcuts: {
-              deck_id: event.data.deck
+              deck_id: e.data.deck
             }
           });
-          this.deckId = event.data.deck;
-          this.deckName = event.data.name;
+          this.deckId = e.data.deck;
+          this.deckName = e.data.name;
         }
       },
       {
         triggers: 'deckCardAdded',
-        method: function(event){
+        method: function(e) {
           var deckCards = this.get('deckCards');
-          var addedCard = this.get('viewedCards')[event.data];
+          var addedCard = this.get('viewedCards')[e.data];
           deckCards.push(addedCard);
           this.deckCards = deckCards;
         }
       },
       {
         triggers: 'deckCardRemoved',
-        method: function(event){
+        method: function(e) {
           var deckCards = this.get('deckCards');
-          deckCards.splice(event.data, 1);
+          deckCards.splice(e.data, 1);
           this.deckCards = deckCards;
         }
       },
       {
         triggers: 'saveDeck',
-        method: function(event){
+        method: function(e) {
 
           // Need to do it ?
           var deckCards = this.get('deckCards');
@@ -153,7 +169,7 @@
       },
       {
         triggers: 'deleteDeck',
-        method: function(event){
+        method: function(e) {
 
           // Need to do it?
           var deckId = this.get('deckId');
@@ -184,7 +200,7 @@
     // Variables
     var _this = this;
     var cards = '.card-min-deckbuilder';
-    var $set_select = $("#set_select");
+    var $set_select = $('#set_select');
     var $panel = $('#left_panel');
 
     // Emettor
@@ -220,7 +236,7 @@
     var _this = this;
     var cards = '.card-min-deckbuilder';
     var $deck_select = $('#deck_select');
-    var $panel = $("#right_panel");
+    var $panel = $('#right_panel');
 
     // Emettor
     //---------
@@ -252,34 +268,45 @@
     domino.module.call(this);
 
     // Variables
-    var _this = this;
-    var $counter = $("#card_counter");
-    var $deck_name = $("#deck_name");
-    var $save_deck = $("#save_deck");
-    var $delete_deck = $("#delete_deck_modal_confirm");
+    var _this = this,
+        $counter = $('#card_counter'),
+        $deck_name = $('#deck_name'),
+        $save_deck = $('#save_deck'),
+        $delete_deck = $('#delete_deck_modal_confirm'),
+        $search = $('#card_search_button'),
+        $query = $('#card_search');
 
     // Emettor
     //---------
-    $deck_name.change(function(){
+    $deck_name.change(function() {
       _this.dispatchEvent('updateDeckName', {deckName: $(this).val()});
     });
 
-    $save_deck.click(function(){
+    $save_deck.click(function() {
       _this.dispatchEvent('saveDeck');
     });
 
-    $delete_deck.click(function(){
+    $delete_deck.click(function() {
       _this.dispatchEvent('deleteDeck');
+    });
+
+    $search.click(function() {
+      $search.button('loading');
+      _this.dispatchEvent('queryDone', $query.val());
     });
 
     // Receptor
     //----------
-    this.triggers.events['deckCardsUpdated'] = function(d){
+    this.triggers.events['deckCardsUpdated'] = function(d) {
       $counter.text(d.get('deckCards').length);
     }
 
-    this.triggers.events['deckNameUpdated'] = function(d){
+    this.triggers.events['deckNameUpdated'] = function(d) {
       $deck_name.val(d.get('deckName'));
+    }
+
+    this.triggers.events['viewedCardsUpdated'] = function(d) {
+      $search.button('reset');
     }
   }
 

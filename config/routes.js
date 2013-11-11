@@ -40,6 +40,7 @@ module.exports.routes = {
 
   // Deck Builder Routes
   ,'/deck-builder': { controller: 'DeckBuilderController', action: 'builder' }
+  ,'/ajax/deck-builder/search': {controller: 'DeckBuilderController', action: 'search'}
   ,'/ajax/deck-builder/set/:id': { controller: 'DeckBuilderController', action: 'set_cards' }
   ,'/ajax/deck-builder/deck/:id': { controller: 'DeckBuilderController', action: 'deck_cards'}
   ,'/ajax/deck-builder/save_deck': { controller: 'DeckBuilderController', action: 'save_deck'}
