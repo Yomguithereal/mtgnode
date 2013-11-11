@@ -40,8 +40,16 @@
         drop: function(e, ui) {
           var $card = $(ui.draggable);
 
+          // Playing Card
           if ($card.hasClass('in-hand')) {
             _this.dispatchEvent('myPlayCard', {
+              id: +$card.attr('number')
+            });
+          }
+
+          // Resurrecting Card
+          if ($card.hasClass('in-graveyard')) {
+            _this.dispatchEvent('myResurrectCard', {
               id: +$card.attr('number')
             });
           }
@@ -93,6 +101,13 @@
       var $card = _cardSelector(e.data.id);
       $card.toggleClass('tapped');
     }
+
+    // Card Resurrected
+    this.triggers.events[_side+'ResurrectedCard'] = function(d, e) {
+      var $card = _cardSelector(e.data.id);
+      $card.removeClass('in-graveyard');
+      $card.addClass('in-game');
+    }
   }
 
 
@@ -105,6 +120,12 @@
       'Battlefield',
       'PlayCard',
       'PlayedCard'
+    ))
+    .concat(Helpers.fromToHacks(
+      'Graveyard',
+      'Battlefield',
+      'ResurrectCard',
+      'ResurrectedCard'
     ));
 
   // Exporting

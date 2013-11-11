@@ -79,7 +79,7 @@
     this.slurp = function(id) {
       var $card = _cardSelector(id);
 
-      $card.removeClass('in-game in-hand tapped');
+      $card.removeClass('in-game in-hand in-exile in-deck tapped flipped');
       $card.addClass('in-graveyard');
 
       $card.animate({

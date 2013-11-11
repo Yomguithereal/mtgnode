@@ -45,19 +45,24 @@
         drop: function(e, ui) {
           var $card = $(ui.draggable);
 
+          // False alarm
           if ($card.hasClass('in-hand')) {
-
-            // Reorganizing hand
             _this.reorganize();
             _this.dispatchEvent('sendRealtimeMessage', {
               head: 'opReorganizeHand'
             });
           }
 
+          // Backing Card
           else if ($card.hasClass('in-game')) {
-
-            // Backing card from game
             _this.dispatchEvent(_side+'BackingCard', {
+              id: +$card.attr('number')
+            });
+          }
+
+          // Looting card
+          else if ($card.hasClass('in-graveyard')) {
+            _this.dispatchEvent(_side+'LootingCard', {
               id: +$card.attr('number')
             });
           }
@@ -115,11 +120,11 @@
       _this.reorganize();
     }
 
-    // Backing a card
-    this.triggers.events[_side+'BackedCard'] = function(d, e) {
+    // Backing a card or Looting a card
+    function translatingCard(d, e) {
       var $card = _cardSelector(e.data.id);
 
-      $card.removeClass('in-game tapped');
+      $card.removeClass('in-game in-graveyard in-exile tapped');
       $card.addClass('in-hand');
 
       if (_side === 'op') {
@@ -128,6 +133,9 @@
 
       _this.reorganize();
     }
+
+    this.triggers.events[_side+'BackedCard'] = translatingCard;
+    this.triggers.events[_side+'LootedCard'] = translatingCard;
 
     // Helpers
     //---------
@@ -172,6 +180,12 @@
       'Hand',
       'BackingCard',
       'BackedCard'
+    ))
+    .concat(Helpers.fromToHacks(
+      'Graveyard',
+      'Hand',
+      'LootingCard',
+      'LootedCard'
     ));
 
   // Exporting
