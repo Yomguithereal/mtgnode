@@ -18,24 +18,24 @@ function CardModel(){
 
   // Properties
   //------------
-  var self = this;
-  this._cards = require('../../db/AllCards.json');
+  var _this = this,
+      _cards = require('../../db/AllCards.json');
 
 
   // Utilities
   //-----------
 
   // Get card by Id
-  this.get = function(id){
-    return _.find(this._cards, function(card){
+  this.get = function(id) {
+    return _.find(_cards, function(card) {
       return card.multiverseid === id;
     });
   }
 
   // Search card by criteria
-  this.getBy = function(criteria){
-    return this._cards.filter(function(card){
-      return Object.keys(criteria).filter(function(key){
+  this.getBy = function(criteria) {
+    return _cards.filter(function(card) {
+      return Object.keys(criteria).filter(function(key) {
 
         // TODO :: If Array
         // TODO :: If fuzzy
@@ -47,10 +47,20 @@ function CardModel(){
 
   // Batch search card by array
   this.getByIdArray = function(card_array){
-    return this._cards.filter(function(card){
-      return card_array.filter(function(id){
-        return card.multiverseid === id;
-      }).length > 0;
+    var index = {};
+
+    return card_array.map(function(id) {
+      if (id in index) {
+        var card = index[id];
+      }
+      else{
+        var card = _.find(_cards, function(c) {
+          return c.multiverseid === id;
+        });
+        index[id] = card;
+      }
+
+      return card;
     });
   }
 }
