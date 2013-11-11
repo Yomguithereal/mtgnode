@@ -85,7 +85,8 @@
     .concat(deckHacks)
     .concat(handHacks)
     .concat(battlefieldHacks)
-    .concat(graveyardHacks);
+    .concat(graveyardHacks)
+    .concat(exileHacks);
 
   var controller = new domino({
     name: 'PlaygroundController',
@@ -140,16 +141,19 @@
     this.triggers.events['delayedModules'] = function(d) {
 
       // Registering game modules
-      _modules.myDeck = controller.addModule(DeckModule, ['my']);
-      _modules.opDeck = controller.addModule(DeckModule, ['op']);
-      _modules.myHand = controller.addModule(HandModule, ['my']);
-      _modules.opHand = controller.addModule(HandModule, ['op']);
-      _modules.myBattlefield = controller.addModule(BattlefieldModule, ['my']);
-      _modules.opBattlefield = controller.addModule(BattlefieldModule, ['op']);
-      _modules.myGraveyard = controller.addModule(GraveyardModule, ['my']);
-      _modules.opGraveyard = controller.addModule(GraveyardModule, ['op']);
-      _modules.myHelpers = controller.addModule(InterfaceModule, ['my']);
-      _modules.opHelpers = controller.addModule(InterfaceModule, ['op']);
+      var modulesToRegister = [
+        DeckModule,
+        HandModule,
+        BattlefieldModule,
+        GraveyardModule,
+        ExileModule,
+        InterfaceModule
+      ];
+
+      modulesToRegister.map(function(r) {
+        _modules['my'+r.name] = controller.addModule(r, ['my']);
+        _modules['op'+r.name] = controller.addModule(r, ['op']);
+      });
     }
   }
 
