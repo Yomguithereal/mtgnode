@@ -142,8 +142,8 @@
       _this.reorganize();
     }
 
-    this.triggers.events[_side+'BackedCard'] = translatingCard;
-    this.triggers.events[_side+'LootedCard'] = translatingCard;
+    this.triggers.events[_side+'BackCard'] = translatingCard;
+    this.triggers.events[_side+'LootCard'] = translatingCard;
 
     // Helpers
     //---------
@@ -186,14 +186,12 @@
     .concat(Helpers.fromToHacks(
       'Battlefield',
       'Hand',
-      'BackCard',
-      'BackedCard'
+      'BackCard'
     ))
     .concat(Helpers.fromToHacks(
       'Graveyard',
       'Hand',
-      'LootCard',
-      'LootedCard'
+      'LootCard'
     ));
 
   // Exporting

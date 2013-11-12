@@ -80,11 +80,11 @@
       _this.slurp(e.data.id);
     }
 
-    this.triggers.events[_side+'ExiledCard'] = standardSlurp;
+    this.triggers.events[_side+'ExileCard'] = standardSlurp;
     this.triggers.events[_side+'CremateCard'] = standardSlurp;
 
     // From Hand to Exile
-    this.triggers.events[_side+'AnnihilatedCard'] = function(d, e) {
+    this.triggers.events[_side+'AnnihilateCard'] = function(d, e) {
       _this.slurp(e.data.id);
       _this.dispatchEvent(_side+'ReorganizeHand');
     }
@@ -112,20 +112,17 @@
     .concat(Helpers.fromToHacks(
       'Battlefield',
       'Exile',
-      'ExileCard',
-      'ExiledCard'
+      'ExileCard'
     ))
     .concat(Helpers.fromToHacks(
       'Hand',
       'Exile',
-      'AnnihilateCard',
-      'AnnihilatedCard'
+      'AnnihilateCard'
     ))
     .concat(Helpers.fromToHacks(
       'Graveyard',
       'Exile',
-      'CremateCard',
-      'CrematedCard'
+      'CremateCard'
     ));
 
   // Exporting

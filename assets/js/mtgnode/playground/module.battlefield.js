@@ -91,7 +91,7 @@
     }
 
     // Card Played
-    this.triggers.events[_side+'PlayedCard'] = function(d, e) {
+    this.triggers.events[_side+'PlayCard'] = function(d, e) {
       var $card = _cardSelector(e.data.id);
 
       $card.removeClass('in-hand');
@@ -111,7 +111,7 @@
     }
 
     // Card Resurrected
-    this.triggers.events[_side+'ResurrectedCard'] = function(d, e) {
+    this.triggers.events[_side+'ResurrectCard'] = function(d, e) {
       var $card = _cardSelector(e.data.id);
       $card.removeClass('in-graveyard');
       $card.addClass('in-game');
@@ -126,14 +126,12 @@
     .concat(Helpers.fromToHacks(
       'Hand',
       'Battlefield',
-      'PlayCard',
-      'PlayedCard'
+      'PlayCard'
     ))
     .concat(Helpers.fromToHacks(
       'Graveyard',
       'Battlefield',
-      'ResurrectCard',
-      'ResurrectedCard'
+      'ResurrectCard'
     ));
 
   // Exporting

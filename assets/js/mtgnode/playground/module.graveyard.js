@@ -72,12 +72,12 @@
     //----------
 
     // From Battlefield to Graveyard
-    this.triggers.events[_side+'BuriedCard'] = function(d, e) {
+    this.triggers.events[_side+'BuryCard'] = function(d, e) {
       _this.slurp(e.data.id);
     }
 
     // From Hand to Graveyard
-    this.triggers.events[_side+'DiscardedCard'] = function(d, e) {
+    this.triggers.events[_side+'DiscardCard'] = function(d, e) {
       _this.slurp(e.data.id);
       _this.dispatchEvent(_side+'ReorganizeHand');
     }
@@ -105,14 +105,12 @@
     .concat(Helpers.fromToHacks(
       'Battlefield',
       'Graveyard',
-      'BuryCard',
-      'BuriedCard'
+      'BuryCard'
     ))
     .concat(Helpers.fromToHacks(
       'Hand',
       'Graveyard',
-      'DiscardCard',
-      'DiscardedCard'
+      'DiscardCard'
     ));
 
   // Exporting

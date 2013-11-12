@@ -83,21 +83,18 @@
   }
 
   // Generating From To hacks
-  function _fromToHacks(from, to, e1, e2) {
+  function _fromToHacks(from, to, eventName) {
     return [
       {
-        triggers: 'my'+e1,
+        triggers: 'my'+eventName,
         method: function(e) {
           var card = _fromTo(this, 'my'+from, 'my'+to, e.data.id);
 
           if (!card)
             return false;
 
-          this.dispatchEvent('my'+e2, {
-            id: card.id
-          });
           this.dispatchEvent('sendRealtimeMessage', {
-            head: 'op'+e1,
+            head: 'op'+eventName,
             body: {
               id: card.id
             }
@@ -105,12 +102,9 @@
         }
       },
       {
-        triggers: 'op'+e1,
+        triggers: 'op'+eventName,
         method: function(e) {
           var card = _fromTo(this, 'op'+from, 'op'+to, e.data.id);
-          this.dispatchEvent('op'+e2, {
-            id: card.id
-          });
         }
       }
     ];
