@@ -11,16 +11,18 @@ block body
 			div#top_helper_block
 				p Choose a Set
 				mixin set_select(sets)
-				div.input-append
-					input#card_search(type='text')
-					button#card_search_button.active_enter(type='button', class='btn', data-loading-text='Searching...') Search
+				div.input-group
+					input#card_search.form-control(type='text')
+					span.input-group-btn
+						button#card_search_button.active_enter.btn.btn-default(type='button', data-loading-text='Searching...') Search
 			mixin card_viewer_widget()
 			div#bottom_helper_block
 				mixin deck_select(decks)
 				p Choosen Deck
-					div.input-append
-						input#deck_name(type='text', value='')
-						button#card_counter.btn(type='button') 0
+					div.input-group
+						input#deck_name.form-control(type='text', value='')
+						span.input-group-btn
+							button#card_counter.btn.btn-default(type='button') 0
 				div.btn-group
 					button#delete_deck(type='button', class='btn btn-danger', data-toggle='modal', href='#delete_deck_modal') Delete Deck
 					button#save_deck(type='button', class='btn btn-info') Save Deck

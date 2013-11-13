@@ -6,16 +6,10 @@ block body
     div.alert.alert-error.hide
         button.close(data-dismiss='alert') &times;
         strong Unauthorized Attempt!
-    input(type='text', placeholder='Username', id='username')
+    button.btn.btn-default.override-connect(type='button', username='Yomgui', password='test') Connect as Yomgui
     br
-    input(type='password', placeholder='Password', id='password')
+    button.btn.btn-default.override-connect(type='button', username='Nibor', password='test') Connect as Nibor
     br
-    button(type='button', class='btn', id='connect') Connect
-    br
-    button(type='button', class='btn override-connect', username='Yomgui', password='test') Connect as Yomgui
-    br
-    button(type='button', class='btn override-connect', username='Nibor', password='test') Connect as Nibor
-    br
-    button(type='button', class='btn override-connect', username='Starla', password='test') Connect as Starla
+    button.btn.btn-default.override-connect(type='button', username='Starla', password='test') Connect as Starla
 block contextual_js
     script(type="text/javascript", src="/js/mtgnode/simple/Login.js")

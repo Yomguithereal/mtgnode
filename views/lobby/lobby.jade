@@ -11,15 +11,17 @@ block body
 		div.well
 			ul#game_list
 		div
-			a.btn(href='#host_game_modal', data-toggle='modal') Host Game
-		div#host_game_modal.modal.hide.fade
-			div.modal-header
-				h3 Host a Game
-			div.modal-body
-				input#host_game_name(type='text')
-			div.modal-footer
-				button.btn(type='button', data-dismiss='modal', aria-hidden='true') Close
-				button.btn.btn-info(type='button', id='host_game') Start
+			a.btn.btn-default(href='#host_game_modal', data-toggle='modal') Host Game
+		div#host_game_modal.modal.fade
+			div.modal-dialog
+				div.modal-content
+					div.modal-header
+						h3 Host a Game
+					div.modal-body
+						input#host_game_name.form-control(type='text')
+					div.modal-footer
+						button.btn(type='button', data-dismiss='modal', aria-hidden='true') Close
+						button.btn.btn-info(type='button', id='host_game') Start
 
 block contextual_js
 	script(type="text/javascript", src="/js/mtgnode/simple/Lobby.js")

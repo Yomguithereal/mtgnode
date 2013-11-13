@@ -5,20 +5,24 @@ mixin confirm_modal(id, title, text, status, no, yes)
 	- status = status || 'danger'
 	- no = no || 'No'
 	- yes = yes || 'Yes'
-	div.modal.hide.fade(id=id)
-		div.modal-header
-			h3= title
-		div.modal-body= text
-		div.modal-footer
-			button(type='button', class='btn', data-dismiss='modal', aria-hidden='true')= no
-			button(type='button', class="btn btn-#{status}", id="#{id}_confirm")= yes
+	div.modal.fade(id=id)
+		div.modal-dialog
+			div.modal-content
+				div.modal-header
+					h3= title
+				div.modal-body= text
+				div.modal-footer
+					button(type='button', class='btn', data-dismiss='modal', aria-hidden='true')= no
+					button(type='button', class="btn btn-#{status}", id="#{id}_confirm")= yes
 
 // Deck choice modal
 mixin deck_choice_modal()
-	div#deck_choice_modal.modal.hide
-		div.modal-header
-			h3 Choose your deck
-		div.modal-body
-			select#deck_select
-		div.modal-footer
-			button#deck_validate.btn Select this deck
+	div#deck_choice_modal.modal.fade
+		div.modal-dialog
+			div.modal-content
+				div.modal-header
+					h3 Choose your deck
+				div.modal-body
+					select#deck_select.form-control
+				div.modal-footer
+					button#deck_validate.btn Select this deck
