@@ -69,6 +69,7 @@
       // Contextual Menu
       $menu.contextualize({
         selector: '#'+_area+'_deck',
+        position: 'top',
         actions: {
           drawHand: function() {
 

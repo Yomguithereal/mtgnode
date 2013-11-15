@@ -13,7 +13,8 @@
   // Create the defaults once
   var pluginName = "contextualize";
   var defaults = {
-    container : '#context_menu'
+    container: '#context_menu',
+    position: 'bottom'
   };
 
   // Actual Constructor
@@ -36,12 +37,16 @@
 
         // Preventing default behaviour
         e.preventDefault();
-        console.log(e);
+
         // Making the context menu appear
+        var top = (_this.settings.position === 'bottom') ?
+          e.pageY :
+          e.pageY - _this.$selector.height();
+
         _this.$selector.css({
           display: 'block',
           left: e.pageX,
-          top: e.pageY - _this.$selector.height()
+          top: top
         });
 
         return false;
