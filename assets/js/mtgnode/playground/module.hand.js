@@ -43,9 +43,19 @@
       $emplacement.droppable({
         tolerance: 'intersect',
         drop: function(e, ui) {
+          var $card = $(ui.draggable);
 
+          // False alarm
+          if ($card.hasClass('in-hand')) {
+            _this.reorganize();
+            _this.dispatchEvent('sendRealtimeMessage', {
+              head: 'opReorganizeHand'
+            });
+          }
+
+          // Standard Events
           Helpers.dropEvents({
-            card: $(ui.draggable),
+            card: $card,
             domino: _this,
             interactions: [
               {

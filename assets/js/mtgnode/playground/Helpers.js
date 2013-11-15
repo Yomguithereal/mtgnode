@@ -76,7 +76,7 @@
     if (fromModel.length === 0)
       return false;
 
-    // Finding first deck card
+    // Finding first card
     if (id === undefined) {
       var card = fromModel.shift();
     }
@@ -86,7 +86,7 @@
       })[0];
     }
 
-    toModel.push(card);
+    toModel.unshift(card);
 
     // Updating model
     d[from] = fromModel;

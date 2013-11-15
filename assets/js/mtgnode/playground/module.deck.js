@@ -19,6 +19,7 @@
 
     var _area = Helpers.getArea(_side),
         _template = Helpers.getTemplate(_side),
+        _cardSelector = Helpers.getCardSelectorFunc(_side),
         _dummy = _template.renderDummy();
 
     // Selectors
@@ -33,6 +34,36 @@
       // Drawing a card
       $emplacement.on('click', '.card-dummy', function() {
         _this.dispatchEvent('myDrawCard');
+      });
+
+      // Dropping a card on deck
+      $emplacement.droppable({
+        tolerance: 'intersect',
+        drop: function(e, ui) {
+
+          Helpers.dropEvents({
+            card: $(ui.draggable),
+            domino: _this,
+            interactions: [
+              {
+                class: 'in-hand',
+                event: 'myDeckenCard'
+              },
+              {
+                class: 'in-game',
+                event: 'myTopCard'
+              },
+              {
+                class: 'in-graveyard',
+                event: 'mySaveCard'
+              },
+              {
+                class: 'in-exile',
+                event: 'myStrangeCard'
+              }
+            ]
+          });
+        }
       });
 
       // Contextual Menu
@@ -75,6 +106,35 @@
         }
       }
     }
+
+    // Back to deck
+    this.triggers.events[_side+'DeckenCard'] = function(d, e) {
+      _this.slurp(e.data.id);
+      _this.dispatchEvent(_side+'ReorganizeHand');
+    }
+
+    function standardSlurp(d, e) {
+      _this.slurp(e.data.id);
+    }
+
+    this.triggers.events[_side+'TopCard'] = standardSlurp;
+    this.triggers.events[_side+'SaveCard'] = standardSlurp;
+    this.triggers.events[_side+'StrangeCard'] = standardSlurp;
+
+    // Helpers
+    //---------
+    this.slurp = function(id) {
+      var $card = _cardSelector(id);
+
+      $card.removeClass('in-game in-hand in-exile in-graveyard tapped flipped');
+
+      $card.animate({
+        left: $emplacement.position().left,
+        top: this.top
+      }, 'fast');
+
+      $card.remove();
+    }
   }
 
 
@@ -106,6 +166,28 @@
       }
     }
   ];
+
+  _hacks = _hacks
+    .concat(Helpers.fromToHacks(
+      'Hand',
+      'Deck',
+      'DeckenCard'
+    ))
+    .concat(Helpers.fromToHacks(
+      'Battlefield',
+      'Deck',
+      'TopCard'
+    ))
+    .concat(Helpers.fromToHacks(
+      'Graveyard',
+      'Deck',
+      'SaveCard'
+    ))
+    .concat(Helpers.fromToHacks(
+      'Exile',
+      'Deck',
+      'StrangeCard'
+    ));
 
   // Exporting
   //===========
