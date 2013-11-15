@@ -71,6 +71,10 @@
 
     // Emettor
     //---------
+    $(document).click(function() {
+      $body.empty();
+    });
+
     $choice.click(function() {
       var cards = [],
           model = $(this).attr('model');

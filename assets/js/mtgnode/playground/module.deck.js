@@ -81,6 +81,9 @@
           },
           searchCards: function() {
             _this.dispatchEvent('searchCards', 'myDeck');
+          },
+          shuffle: function() {
+            _this.dispatchEvent('myShuffleDeck');
           }
         }
       });
@@ -171,6 +174,13 @@
       method: function(e) {
         var card = Helpers.fromTo(this, 'opDeck', 'opHand', e.data.id);
         this.dispatchEvent('opCardDrawn', card);
+      }
+    },
+    {
+      triggers: 'myShuffleDeck',
+      method: function(e) {
+        var deck = this.get('myDeck');
+        this.myDeck = _.shuffle(deck);
       }
     }
   ];
