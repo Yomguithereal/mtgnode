@@ -56,10 +56,18 @@
   // Droping events
   function _dropEvents(params) {
     for (var i = 0; i < params.interactions.length; i++) {
+
+      // Checking every interaction until one is found
       if (params.card.hasClass(params.interactions[i].class)) {
+
+        // Dispatching domino event
         params.domino.dispatchEvent(params.interactions[i].event, {
           id: +params.card.attr('number')
         });
+
+        // Triggering Callback if any
+        if (params.interactions[i].callback !== undefined)
+          params.interactions[i].callback();
 
         break;
       }

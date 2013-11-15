@@ -39,9 +39,10 @@
       $battlefield.droppable({
         tolerance: 'intersect',
         drop: function(e, ui) {
+          var $card = $(ui.draggable);
 
           Helpers.dropEvents({
-            card: $(ui.draggable),
+            card: $card,
             domino: _this,
             interactions: [
               {
@@ -58,6 +59,28 @@
               }
             ]
           });
+
+          // If card is a land, we reorganize land z-indexes
+          if ($card.hasClass('land')) {
+            var zIndexes = [],
+                lands = [];
+
+            $('.land.in-game').each(function() {
+              zIndexes.push($(this).css('z-index'));
+              lands.push($(this));
+            });
+
+            // Sorting
+            zIndexes = zIndexes.sort(function(a, b) { return a - b; });
+            lands = lands.sort(function(a, b) {
+              return a.position().top - b.position().top;
+            });
+
+            // Recomputing z-index
+            lands.map(function(l, i) {
+              l.css('z-index', zIndexes[i]);
+            });
+          }
         }
       });
 
