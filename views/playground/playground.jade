@@ -2,6 +2,7 @@ extends ../layout
 include ../mixins/card_drivers
 include ../mixins/modals
 include ../mixins/selects
+include ../mixins/context_menus
 include ../mixins/widgets
 include ../templates/cards
 
@@ -9,52 +10,52 @@ block body
 	div#mainframe.clearfix
 		div#helper_block
 			div#top_helper_block
-				div.life-block
-					button.btn.btn-default.playe2.lose-life.update-life(type='button') -
-					span.life-counter.top 20
-					button.btn.btn-default.top.gain-life.update-life(type='button') +
+				div.life-block.btn-group
+					button.btn.btn-default.lose-life.update-life.top(type='button') -
+					button.btn.btn-default.life-counter.top(type='button') 20
+					button.btn.btn-default.gain-life.update-life.top(type='button') +
 				div.message-receiver.top &nbsp;
 				div.turn-block
 					button.btn.btn-default.top.turn-indicator(type='button') &nbsp;
 				div.counters.top
-					div.btn.btn-group
+					div.btn-group
 						button.btn.btn-default.btn-xs(type='button') Deck
 						button.btn.btn-default.btn-xs.deck-counter.top(type='button') 0
-					div.btn.btn-group
+					div.btn-group
 						button.btn.btn-default.btn-xs(type='button') Hand
 						button.btn.btn-default.btn-xs.hand-counter.top(type='button') 0
-					div.btn.btn-group
+					div.btn-group
 						button.btn.btn-default.btn-xs(type='button') Graveyard
 						button.btn.btn-default.btn-xs.graveyard-counter.top(type='button') 0
-					div.btn.btn-group
+					div.btn-group
 						button.btn.btn-default.btn-xs(type='button') Battlefield
 						button.btn.btn-default.btn-xs.battlefield-counter.top(type='button') 0
-					div.btn.btn-group
+					div.btn-group
 						button.btn.btn-default.btn-xs(type='button') Exile
 						button.btn.btn-default.btn-xs.exile-counter.top(type='button') 0
 			mixin card_viewer_widget()
 			div#bottom_helper_block
-				div.life-block
+				div.life-block.btn-group
 					button.btn.btn-default.top.lose-life.update-life(type='button') -
-					span(class='life-counter player1') 20
+					button.btn.btn-default.life-counter.top(type='button') 20
 					button.btn.btn-default.bottom.gain-life.update-life(type='button') +
 				div.message-receiver.bottom &nbsp;
 				div.turn-block
 					button.btn.btn-default.turn-indicator(type='button') &nbsp;
 				div.counters.bottom
-					div.btn.btn-group
+					div.btn-group
 						button.btn.btn-default.btn-xs(type='button') Deck
 						button.btn.btn-default.btn-xs.deck-counter.bottom(type='button') 0
-					div.btn.btn-group
+					div.btn-group
 						button.btn.btn-default.btn-xs(type='button') Hand
 						button.btn.btn-default.btn-xs.hand-counter.bottom(type='button') 0
-					div.btn.btn-group
+					div.btn-group
 						button.btn.btn-default.btn-xs(type='button') Graveyard
 						button.btn.btn-default.btn-xs.graveyard-counter.bottom(type='button') 0
-					div.btn.btn-group
+					div.btn-group
 						button.btn.btn-default.btn-xs(type='button') Battlefield
 						button.btn.btn-default.btn-xs.battlefield-counter.bottom(type='button') 0
-					div.btn.btn-group
+					div.btn-group
 						button.btn.btn-default.btn-xs(type='button') Exile
 						button.btn.btn-default.btn-xs.exile-counter.bottom(type='button') 0
 		div#game_block.game-area
@@ -73,9 +74,11 @@ block body
 					div#bottom_deck.deck-emplacement.bottom
 					div#bottom_hand.hand-emplacement.bottom
 
-// Modals
 block modals
 	mixin deck_choice_modal()
+
+block context_menus
+	mixin battlefield_context_menu()
 
 block templates
 	mixin playgroundCardTemplate()
@@ -86,6 +89,7 @@ block dom_constants
 block contextual_js
 	mixin load_driver()
 	script(type="text/javascript", src="/js/mtgnode/widgets/CardViewer.js")
+	script(type="text/javascript", src="/js/mtgnode/widgets/ContextMenu.js")
 	script(type="text/javascript", src="/js/mtgnode/playground/Helpers.js")
 	script(type="text/javascript", src="/js/mtgnode/playground/Properties.js")
 	script(type="text/javascript", src="/js/mtgnode/playground/module.start.js")

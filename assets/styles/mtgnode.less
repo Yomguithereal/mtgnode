@@ -22,11 +22,11 @@
   transform: @arguments;
 }
 
-.rotation(@deg){
+.rotation(@deg) {
   .transform(rotate(@deg));
 }
 
-.rotate-3d(@arg1, @arg2, @arg3, @arg4){
+.rotate-3d(@arg1, @arg2, @arg3, @arg4) {
   -webkit-transform: rotate3d(@arg1, @arg2, @arg3, @arg4) translate3d(0,0,0);
   -moz-transform: rotate3d(@arg1, @arg2, @arg3, @arg4) translate3d(0,0,0);
   -ms-transform: rotate3d(@arg1, @arg2, @arg3, @arg4) translate3d(0,0,0);
@@ -48,7 +48,7 @@
   transition: transform @duration @ease;
 }
 
-.transform-origin(@origin){
+.transform-origin(@origin) {
   -webkit-transform-origin: @origin;
   -moz-transform-origin: @origin;
   transform-origin: @origin;
@@ -56,7 +56,7 @@
   -ms-transform-origin: @origin;
 }
 
-.preserve-3d(){
+.preserve-3d() {
   -webkit-transform-style: preserve-3d;
   -moz-transform-style: preserve-3d;
   transform-style: preserve-3d;
@@ -64,7 +64,7 @@
   -ms-transform-style: preserve-3d;
 }
 
-.perspective(@distance){
+.perspective(@distance) {
   -webkit-perspective: @distance;
   -moz-perspective: @distance;
   perspective: @distance;
@@ -72,7 +72,7 @@
   -ms-perspective: @distance;
 }
 
-.backface-visibility(@visibility){
+.backface-visibility(@visibility) {
   -webkit-backface-visibility: @visibility;
   -moz-backface-visibility: @visibility;
   backface-visibility: @visibility;
@@ -80,7 +80,7 @@
   -ms-backface-visibility: @visibility;
 }
 
-.box-sizing(@property:border-box){
+.box-sizing(@property:border-box) {
   box-sizing:@property;
   -moz-box-sizing:@property;
   -webkit-box-sizing:@property;
@@ -141,11 +141,11 @@
 | -------------------------------------------------------------------
 */
 
-BODY{
+BODY {
   margin:0px;
 }
 
-#mainframe{
+#mainframe {
   margin: 0px auto;
   margin-top:10px;
   padding:0px;
@@ -153,7 +153,7 @@ BODY{
   min-height:760px;
 }
 
-#helper_block{
+#helper_block {
   width: @playground-left-panel-width;
   margin:0px;
   height:760px;
@@ -162,23 +162,23 @@ BODY{
   border-right:none;
 }
 
-#top_helper_block, #bottom_helper_block{
+#top_helper_block, #bottom_helper_block {
   height:200px;
 }
 
-#top_helper_block{
+#top_helper_block {
   border-bottom : 1px solid black;
 }
 
-#bottom_helper_block{
+#bottom_helper_block {
   border-top : 1px solid black;
 }
 
-#card_viewer_block{
+#card_viewer_block {
   height:@card-viewer-height;
 }
 
-#deck_builder_container{
+#deck_builder_container {
   width: 974px;
   margin: 0px;
   height:760px;
@@ -186,7 +186,7 @@ BODY{
   border:1px solid black;
 }
 
-#left_panel{
+#left_panel {
   border-right:1px solid black;
   float:left;
   width:500px;
@@ -194,7 +194,7 @@ BODY{
   overflow-y:scroll;
 }
 
-#right_panel{
+#right_panel {
   float:right;
   width:470px;
   height:100%;
@@ -202,129 +202,135 @@ BODY{
   overflow-y:scroll;
 }
 
-#game_block{
+#game_block {
   width: 974px;
   margin-left: @playground-left-panel-width;
   height:760px;
   border:1px solid black;
 }
 
-.game-area{
+.game-area {
   position : relative;
 }
 
-#top_game_block{
+#top_game_block {
   height: 380px;
   position: relative;
 }
 
-#bottom_game_block{
+#bottom_game_block {
   height: 379px;
   border-top:1px solid black;
   position: relative;
 }
 
 #top_game_block.opponent,
-#bottom_game_block.opponent{
+#bottom_game_block.opponent {
   background-color: #cccccc;
 }
 
-.deck-and-hand{
+.deck-and-hand {
   position:absolute;
   width:974px;
   height:@card-min-height;
 
-  &.top{
+  &.top {
     top:0px;
     border-bottom:1px solid black;
   }
 
-  &.bottom{
+  &.bottom {
     bottom:0px;
     border-top: 1px solid black;
   }
 }
 
-.hand-emplacement{
+.hand-emplacement {
   height:@card-min-height;
   width: @hand-width;
   position: absolute;
   left: (@card-min-width + 1) * 3;
 }
 
-.exile-emplacement{
+.exile-emplacement {
   width:@card-min-width;
   height:@card-min-height;
   position: absolute;
   left: 0px;
 
-  &.top{
+  &.top {
     border-right:1px solid black;
   }
 
-  &.bottom{
+  &.bottom {
     bottom:0px;
     border-right:1px solid black;
     border-top:1px solid black;
   }
 }
 
-.deck-emplacement{
+.deck-emplacement {
   width:@card-min-width;
   height:@card-min-height;
   position: absolute;
   left: (@card-min-width + 1) * 2;
 
-  &.top{
+  &.top {
     border-right:1px solid black;
   }
 
-  &.bottom{
+  &.bottom {
     bottom:0px;
     border-right:1px solid black;
     border-top:1px solid black;
   }
 }
 
-.graveyard-emplacement{
+.graveyard-emplacement {
   width:@card-min-width;
   height:@card-min-height;
   position: absolute;
   left: (@card-min-width + 1);
 
-  &.top{
+  &.top {
     border-bottom: 1px solid black;
     border-right: 1px solid black;
   }
 
-  &.bottom{
+  &.bottom  {
     bottom:0px;
     border-top:1px solid black;
     border-right:1px solid black;
   }
 }
 
-.game-emplacement{
+.game-emplacement {
   height:268px;
   width:974px;
   position:absolute;
   z-index:10;
 }
 
-#top_game_zone{
+#top_game_zone {
   bottom:0px;
 }
 
-.card-container{
+.context-menu {
+  position: absolute;
+  display:none;
+  z-index: 10000;
+}
+
+.card-container {
   position:absolute;
   top:0px;
   left:0px;
 }
 
-.valid{
+.valid {
   color:green;
 }
-.error{
+.error {
   color:red;
 }
 
@@ -334,7 +340,7 @@ BODY{
 | -------------------------------------------------------------------
 */
 
-.card-min{
+.card-min {
   width:@card-min-width;
   height:@card-min-height;
   cursor:pointer;
@@ -348,99 +354,99 @@ BODY{
   // .transform(rotateY(0deg) translate3d(0,0,0));
 
   // Tapped Card
-  &.tapped{
+  &.tapped {
     .transform(rotate(90deg) scale(1) translate3d(0,0,0));
   }
 
   // In deck card
-  &.in-deck{
+  &.in-deck {
     top:0px;
   }
 
   // In hand card
-  &.in-hand{
+  &.in-hand {
 
   }
 
   // In game card
-  &.in-game{
+  &.in-game {
     .box-shadow(@card-shadow);
   }
 
 
   // Deck builder
-  &.deck-builder{
+  &.deck-builder {
     position:relative;
   }
 
   // Flipped
-  &.flipped{
+  &.flipped {
     .transform(rotateY(180deg));
   }
 }
 
-.card-min-deckbuilder{
+.card-min-deckbuilder {
   width:@card-min-width;
   height:@card-min-height;
   cursor:pointer;
 }
 
-.card-search{
+.card-search {
   width:@card-min-width;
   height:@card-min-height;
   cursor:pointer;
   margin:8px;
   border:2px solid transparent;
 
-  &.selected{
+  &.selected {
     border:2px solid blue;
   }
 }
 
-.front-side, .back-side{
+.front-side, .back-side {
   // .transform(rotateZ(0px) translate3d(0,0,0));
   .backface-visibility(hidden);
   display:block;
 
-  &.my{
+  &.my {
     .transform(translateZ(0px));
   }
 
-  &.op{
+  &.op {
     .transform(translateZ(0px) rotateZ(180deg));
   }
 }
 
-.back-side{
+.back-side {
   // .transform(rotateY(180deg) translateZ(1px) translate3d(0,0,0));
   border:1px solid black;
 
-  &.my{
+  &.my {
     .transform(rotateY(180deg) translateZ(1px));
   }
 
-  &.op{
+  &.op {
     .transform(rotateY(180deg) translateZ(1px) rotateZ(180deg));
   }
 }
 
-.front-side{
+.front-side {
   margin-top:-(@card-min-height)-1;
   margin-left:1px;
 }
 
 
-.card-min img{
+.card-min img {
   width:@card-min-width;
   height:@card-min-height;
   .rounded(4px);
 }
 
-.card-dummy{
+.card-dummy {
   z-index: 1000;
 }
 
-#card_viewer_widget{
+#card_viewer_widget {
   width: @card-viewer-width;
   height: @card-viewer-height;
 }

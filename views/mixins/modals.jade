@@ -1,6 +1,6 @@
-// Bootstrap Modal Mixins
+//- Bootstrap Modal Mixins
 
-// Simple confirmation modals
+//- Simple confirmation modals
 mixin confirm_modal(id, title, text, status, no, yes)
 	- status = status || 'danger'
 	- no = no || 'No'
@@ -15,7 +15,7 @@ mixin confirm_modal(id, title, text, status, no, yes)
 					button(type='button', class='btn', data-dismiss='modal', aria-hidden='true')= no
 					button(type='button', class="btn btn-#{status}", id="#{id}_confirm")= yes
 
-// Deck choice modal
+//- Deck choice modal
 mixin deck_choice_modal()
 	div#deck_choice_modal.modal.fade
 		div.modal-dialog

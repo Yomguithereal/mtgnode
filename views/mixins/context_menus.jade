@@ -1,0 +1,10 @@
+//- Contextual Menus
+
+mixin battlefield_context_menu()
+	div#battlefield_context_menu.dropdown.clearfix.context-menu
+		ul.dropdown-menu(role='menu', aria-labelledby='battlefield_context_menu', style='display:block; position:static; margin-bottom:5px;')
+			li
+				a(data-action='untapAll', href='#', tabindex='-1') Untap All
+			li.divider
+			li
+				a(data-action='action2', href='#', tabindex='-1') Action 2

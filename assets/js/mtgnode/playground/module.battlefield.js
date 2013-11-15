@@ -23,7 +23,8 @@
 
     // Selectors
     var $game_area = $('.game-area'),
-        $battlefield = $('.game-emplacement');
+        $battlefield = $('.game-emplacement'),
+        $menu = $('#battlefield_context_menu');
 
     // Properties
     //------------
@@ -73,6 +74,14 @@
             id: +$(this).attr('number')
           }
         })
+      });
+
+      // Contextual Menu
+      $menu.contextualize({
+        selector: '.game-emplacement.'+_area,
+        callback: function(a) {
+          console.log(a);
+        }
       });
     }
 
