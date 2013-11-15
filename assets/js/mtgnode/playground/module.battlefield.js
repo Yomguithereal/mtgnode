@@ -79,8 +79,18 @@
       // Contextual Menu
       $menu.contextualize({
         selector: '.game-emplacement.'+_area,
-        callback: function(a) {
-          console.log(a);
+        actions: {
+          untapAll: function() {
+
+            // Preventing if unnecessary
+            if ($(_this.cards+'.tapped').length === 0)
+              return false;
+
+            _this.dispatchEvent('myUntapAll');
+            _this.dispatchEvent('sendRealtimeMessage', {
+              head: 'opUntapAll'
+            });
+          }
         }
       });
     }
@@ -119,6 +129,12 @@
       $card.toggleClass('tapped');
     }
 
+    // All Cards Tapped
+    this.triggers.events[_side+'UntapAll'] = function(d, e) {
+      var $cards = $(_this.cards);
+      $cards.removeClass('tapped');
+    }
+
     // Card Resurrected
     this.triggers.events[_side+'ResurrectCard'] = function(d, e) {
       var $card = _cardSelector(e.data.id);
@@ -130,7 +146,14 @@
 
   // Deck Hacks
   //============
-  var _hacks = [];
+  var _hacks = [
+    {
+      triggers: 'myUntapAll'
+    },
+    {
+      triggers: 'opUntapAll'
+    }
+  ];
   _hacks = _hacks
     .concat(Helpers.fromToHacks(
       'Hand',

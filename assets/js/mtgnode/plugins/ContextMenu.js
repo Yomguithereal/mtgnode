@@ -55,7 +55,10 @@
 
         // Getting action and trigger callback
         var action = $(this).attr('data-action');
-        _this.settings.callback(action);
+
+        if (_this.settings.actions[action] !== undefined)
+          _this.settings.actions[action]();
+
 
         // Closing menu
         _this.$selector.hide();
