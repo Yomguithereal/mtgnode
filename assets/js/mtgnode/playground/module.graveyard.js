@@ -53,6 +53,10 @@
               {
                 class: 'in-hand',
                 event: 'myDiscardCard'
+              },
+              {
+                class: 'in-exile',
+                event: 'myPoorCard'
               }
             ]
           });
@@ -63,10 +67,12 @@
     // Receptor
     //----------
 
-    // From Battlefield to Graveyard
-    this.triggers.events[_side+'BuryCard'] = function(d, e) {
+    // From Battlefield or Exile to Graveyard
+    function standardSlurp(d, e) {
       _this.slurp(e.data.id);
     }
+    this.triggers.events[_side+'BuryCard'] = standardSlurp;
+    this.triggers.events[_side+'PoorCard'] = standardSlurp;
 
     // From Hand to Graveyard
     this.triggers.events[_side+'DiscardCard'] = function(d, e) {
@@ -103,6 +109,11 @@
       'Hand',
       'Graveyard',
       'DiscardCard'
+    ))
+    .concat(Helpers.fromToHacks(
+      'Exile',
+      'Graveyard',
+      'PoorCard'
     ));
 
   // Exporting

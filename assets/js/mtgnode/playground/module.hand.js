@@ -55,6 +55,10 @@
               {
                 class: 'in-graveyard',
                 event: 'myLootCard'
+              },
+              {
+                class: 'in-exile',
+                event: 'myWishCard'
               }
             ]
           });
@@ -128,6 +132,7 @@
 
     this.triggers.events[_side+'BackCard'] = translatingCard;
     this.triggers.events[_side+'LootCard'] = translatingCard;
+    this.triggers.events[_side+'WishCard'] = translatingCard;
 
     // Helpers
     //---------
@@ -176,6 +181,11 @@
       'Graveyard',
       'Hand',
       'LootCard'
+    ))
+    .concat(Helpers.fromToHacks(
+      'Exile',
+      'Hand',
+      'WishCard'
     ));
 
   // Exporting
