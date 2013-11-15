@@ -171,6 +171,7 @@
       triggers: ['myReorganizeHand', 'opReorganizeHand']
     }
   ];
+
   _hacks = _hacks
     .concat(Helpers.fromToHacks(
       'Battlefield',

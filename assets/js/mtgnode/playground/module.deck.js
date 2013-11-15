@@ -22,7 +22,8 @@
         _dummy = _template.renderDummy();
 
     // Selectors
-    var $emplacement = $('#'+_area+'_deck');
+    var $emplacement = $('#'+_area+'_deck'),
+        $menu = $('#deck_context_menu');
 
 
     // Emettor
@@ -32,6 +33,22 @@
       // Drawing a card
       $emplacement.on('click', '.card-dummy', function() {
         _this.dispatchEvent('myDrawCard');
+      });
+
+      // Contextual Menu
+      $menu.contextualize({
+        selector: '#'+_area+'_deck',
+        actions: {
+          drawHand: function() {
+
+            // TODO: this is dirty!
+            for(var i = 0; i < 7; i++) {
+              setTimeout(function() {
+                _this.dispatchEvent('myDrawCard');
+              }, i * 200);
+            }
+          }
+        }
       });
     }
 
