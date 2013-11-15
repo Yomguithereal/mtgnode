@@ -36,12 +36,12 @@
 
         // Preventing default behaviour
         e.preventDefault();
-
+        console.log(e);
         // Making the context menu appear
         _this.$selector.css({
           display: 'block',
           left: e.pageX,
-          top: e.pageY
+          top: e.pageY - _this.$selector.height()
         });
 
         return false;
