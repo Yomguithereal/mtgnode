@@ -78,6 +78,9 @@
                 _this.dispatchEvent('myDrawCard');
               }, i * 200);
             }
+          },
+          searchCards: function() {
+            _this.dispatchEvent('searchCards', 'myDeck');
           }
         }
       });
@@ -144,7 +147,12 @@
     {
       triggers: 'myDrawCard',
       method: function(e) {
-        var card = Helpers.fromTo(this, 'myDeck', 'myHand');
+        var card;
+
+        if (e.data.id !== undefined)
+          card = Helpers.fromTo(this, 'myDeck', 'myHand', e.data.id);
+        else
+          card = Helpers.fromTo(this, 'myDeck', 'myHand');
 
         if (!card)
           return false;

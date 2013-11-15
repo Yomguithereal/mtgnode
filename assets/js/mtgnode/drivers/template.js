@@ -19,8 +19,13 @@
     this._prefix = id_prefix || 'card';
     this._index = -1;
     this._driver = Driver;
-    this._template = $('#tpl_card').html();
-    this._dummyTemplate = $('#tpl_dummy_card').html();
+
+    // Templates
+    this._templates = {
+      standard: $('#tpl_card').html(),
+      dummy: $('#tpl_dummy_card').html(),
+      search: $('#tpl_search_card').html()
+    }
 
     // Methods
     this.render = function(card, index_override){
@@ -46,11 +51,18 @@
       else if (~card.types.indexOf('Enchantment'))
         data.type = 'enchantment';
 
-      return Mustache.to_html(this._template, data);
+      return Mustache.to_html(this._templates.standard, data);
     }
 
-    this.renderDummy = function(){
-      return Mustache.to_html(this._dummyTemplate, {side: this._prefix});
+    this.renderDummy = function() {
+      return Mustache.to_html(this._templates.dummy, {side: this._prefix});
+    }
+
+    this.renderSearch = function(card, index_override) {
+      return Mustache.to_html(this._templates.search, {
+        number: index_override,
+        src: this._driver.getUrl(card)
+      });
     }
   }
 

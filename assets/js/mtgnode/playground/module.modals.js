@@ -50,6 +50,64 @@
     }
   }
 
+  // Card Search
+  //=============
+  function CardSearchModule() {
+    domino.module.call(this);
+    var _this = this;
+
+    // Selectors
+    var $modal = $('#card_choice_modal'),
+        $body = $modal.find('.modal-body'),
+        $choice = $('#card_choice_validate');
+
+    // Properties
+    this.cards = '.card-search';
+
+    // Card Selection
+    $body.on('click', this.cards, function() {
+      $(this).toggleClass('selected');
+    });
+
+    // Emettor
+    //---------
+    $choice.click(function() {
+      var cards = [],
+          model = $(this).attr('model');
+
+      $(_this.cards+'.selected').each(function() {
+        cards.push(+$(this).attr('index'));
+      });
+
+      if (model === 'myDeck') {
+        cards.map(function(id) {
+          _this.dispatchEvent('myDrawCard', {id: id});
+        });
+      }
+
+      $modal.modal('hide');
+      $body.empty();
+    });
+
+
+    // Receptor
+    //----------
+    this.triggers.events['searchCards'] = function(d, e) {
+      var cards = d.get(e.data);
+
+      // Populating search
+      cards.map(function(c) {
+        $body.append(c.search_html);
+      });
+
+      $choice.attr('model', e.data);
+
+      // Showing
+      $modal.modal('show');
+    }
+
+  }
+
   // Modals Hacks
   //==============
   var _hacks = [
@@ -86,13 +144,17 @@
           }
         });
       }
+    },
+    {
+      triggers: 'searchCards'
     }
   ];
 
   // Exporting
   //===========
   window.Modals = {
-    deckChoice: DeckChoiceModule
+    deckChoice: DeckChoiceModule,
+    cardSearch: CardSearchModule
   };
 
   window.modalsHacks = _hacks;

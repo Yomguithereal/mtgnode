@@ -172,5 +172,6 @@
   _modules.start = controller.addModule(StartModule);
   _modules.delayed = controller.addModule(DelayedModules);
   _modules.deckChoice = controller.addModule(Modals.deckChoice);
+  _modules.cardSearch = controller.addModule(Modals.cardSearch);
 
 })(jQuery, window, domino);

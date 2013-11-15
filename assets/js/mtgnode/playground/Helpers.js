@@ -50,6 +50,7 @@
 
       // Card html
       c.html = _templates[side].render(c, c.id);
+      c.search_html = _templates[side].renderSearch(c, c.id);
       return c;
     });
   }
@@ -135,12 +136,13 @@
   // Updating the zindex of a selected card
   function _updateZ($card) {
 
-    if (!$card.hasClass('enchantment')) {
-      _maxZ += 1;
-      $card.css('z-index', _maxZ);
+    if ($card.hasClass('enchantment') &&
+        $card.hasClass('ui-draggable-dragging')) {
+      $card.css('z-index', _baseZ);
     }
     else {
-      $card.css('z-index', _baseZ);
+      _maxZ += 1;
+      $card.css('z-index', _maxZ);
     }
   }
 

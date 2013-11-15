@@ -4,6 +4,11 @@ mixin deckBuilderCardTemplate()
 	script#tpl_card(type='text/html')
 		img.card-min-deckbuilder(id='{{id_prefix}}_{{number}}', index="{{number}}", src='{{src}}', multiverseid='{{multiverseid}}')
 
+mixin searchCardTemplate()
+	script#tpl_search_card(type='text/html')
+		img.card-min-deckbuilder.card-search(index="{{number}}", src='{{src}}')
+
+
 mixin playgroundCardTemplate()
 	script#tpl_card(type='text/html')
 		div(id='{{id_prefix}}_{{number}}', side='{{side}}', number='{{number}}', class='{{side}} card-min draggable in-hand flipped {{type}}')
