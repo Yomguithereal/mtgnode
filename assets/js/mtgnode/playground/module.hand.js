@@ -43,37 +43,21 @@
       $emplacement.droppable({
         tolerance: 'intersect',
         drop: function(e, ui) {
-          var $card = $(ui.draggable);
 
-          // False alarm
-          if ($card.hasClass('in-hand')) {
-            _this.reorganize();
-            _this.dispatchEvent('sendRealtimeMessage', {
-              head: 'opReorganizeHand'
-            });
-          }
-
-          // Interactions
-          var interactions = [
-            {
-              class: 'in-game',
-              event: 'myBackCard'
-            },
-            {
-              class: 'in-graveyard',
-              event: 'myLootCard'
-            }
-          ];
-
-          for (var i = 0; i < interactions.length; i++) {
-            if ($card.hasClass(interactions[i].class)) {
-              _this.dispatchEvent(interactions[i].event, {
-                id: +$card.attr('number')
-              });
-
-              break;
-            }
-          }
+          Helpers.dropEvents({
+            card: $(ui.draggable),
+            domino: _this,
+            interactions: [
+              {
+                class: 'in-game',
+                event: 'myBackCard'
+              },
+              {
+                class: 'in-graveyard',
+                event: 'myLootCard'
+              }
+            ]
+          });
         }
       });
     }

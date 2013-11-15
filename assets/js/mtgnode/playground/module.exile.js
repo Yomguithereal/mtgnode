@@ -41,33 +41,25 @@
       $emplacement.droppable({
         tolerance: 'intersect',
         drop: function(e, ui) {
-          var $card = $(ui.draggable);
 
-          // Interactions
-          var interactions = [
-            {
-              class: 'in-game',
-              event: 'myExileCard'
-            },
-            {
-              class: 'in-hand',
-              event: 'myAnnihilateCard'
-            },
-            {
-              class: 'in-graveyard',
-              event: 'myCremateCard'
-            }
-          ];
-
-          for (var i = 0; i < interactions.length; i++) {
-            if ($card.hasClass(interactions[i].class)) {
-              _this.dispatchEvent(interactions[i].event, {
-                id: +$card.attr('number')
-              });
-
-              break;
-            }
-          }
+          Helpers.dropEvents({
+            card: $(ui.draggable),
+            domino: _this,
+            interactions: [
+              {
+                class: 'in-game',
+                event: 'myExileCard'
+              },
+              {
+                class: 'in-hand',
+                event: 'myAnnihilateCard'
+              },
+              {
+                class: 'in-graveyard',
+                event: 'myCremateCard'
+              }
+            ]
+          });
         }
       });
     }

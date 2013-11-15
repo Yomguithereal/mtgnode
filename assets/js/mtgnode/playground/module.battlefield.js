@@ -39,29 +39,25 @@
       $battlefield.droppable({
         tolerance: 'intersect',
         drop: function(e, ui) {
-          var $card = $(ui.draggable);
 
-          // Interactions
-          var interactions = [
-            {
-              class: 'in-graveyard',
-              event: 'myResurrectCard'
-            },
-            {
-              class: 'in-hand',
-              event: 'myPlayCard'
-            }
-          ];
-
-          for (var i = 0; i < interactions.length; i++) {
-            if ($card.hasClass(interactions[i].class)) {
-              _this.dispatchEvent(interactions[i].event, {
-                id: +$card.attr('number')
-              });
-
-              break;
-            }
-          }
+          Helpers.dropEvents({
+            card: $(ui.draggable),
+            domino: _this,
+            interactions: [
+              {
+                class: 'in-graveyard',
+                event: 'myResurrectCard'
+              },
+              {
+                class: 'in-hand',
+                event: 'myPlayCard'
+              },
+              {
+                class: 'in-exile',
+                event: 'myMiracleCard'
+              }
+            ]
+          });
         }
       });
 
@@ -135,12 +131,15 @@
       $cards.removeClass('tapped');
     }
 
-    // Card Resurrected
-    this.triggers.events[_side+'ResurrectCard'] = function(d, e) {
+    // Card Resurrected and Miracled
+    function backToGame(d, e) {
       var $card = _cardSelector(e.data.id);
-      $card.removeClass('in-graveyard');
+      $card.removeClass('in-graveyard in-exile in-hand');
       $card.addClass('in-game');
     }
+
+    this.triggers.events[_side+'ResurrectCard'] = backToGame;
+    this.triggers.events[_side+'MiracleCard'] = backToGame;
   }
 
 
@@ -164,6 +163,11 @@
       'Graveyard',
       'Battlefield',
       'ResurrectCard'
+    ))
+    .concat(Helpers.fromToHacks(
+      'Exile',
+      'Battlefield',
+      'MiracleCard'
     ));
 
   // Exporting

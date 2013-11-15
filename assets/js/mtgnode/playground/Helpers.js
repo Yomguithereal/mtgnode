@@ -53,6 +53,19 @@
     });
   }
 
+  // Droping events
+  function _dropEvents(params) {
+    for (var i = 0; i < params.interactions.length; i++) {
+      if (params.card.hasClass(params.interactions[i].class)) {
+        params.domino.dispatchEvent(params.interactions[i].event, {
+          id: +params.card.attr('number')
+        });
+
+        break;
+      }
+    }
+  }
+
   // Moving a card from a model to another
   function _fromTo(d, from, to, id) {
 
@@ -152,6 +165,7 @@
 
     // Dom manipulation
     updateZ: _updateZ,
-    registerDraggable: _registerDraggable
+    registerDraggable: _registerDraggable,
+    dropEvents: _dropEvents
   };
 })(jQuery, window);
