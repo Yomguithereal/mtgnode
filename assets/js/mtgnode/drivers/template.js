@@ -43,6 +43,8 @@
       // Contextual Classes
       if (~card.types.indexOf('Land'))
         data.type = 'land';
+      else if (~card.types.indexOf('Enchantment'))
+        data.type = 'enchantment';
 
       return Mustache.to_html(this._template, data);
     }

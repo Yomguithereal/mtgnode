@@ -18,7 +18,8 @@
     op: new CardTemplate('op')
   };
 
-  var _maxZ = 30;
+  var _baseZ = 30,
+      _maxZ = 30;
 
   // Methods
   //=========
@@ -133,8 +134,14 @@
 
   // Updating the zindex of a selected card
   function _updateZ($card) {
-    _maxZ += 1;
-    $card.css('z-index', _maxZ);
+
+    if (!$card.hasClass('enchantment')) {
+      _maxZ += 1;
+      $card.css('z-index', _maxZ);
+    }
+    else {
+      $card.css('z-index', _baseZ);
+    }
   }
 
   // Registering a card as draggable

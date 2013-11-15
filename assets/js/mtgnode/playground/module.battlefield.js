@@ -65,9 +65,10 @@
             var zIndexes = [],
                 lands = [];
 
-            $('.land.in-game').each(function() {
+            $('.land.in-game.my').each(function() {
+              var card = $(this);
               zIndexes.push($(this).css('z-index'));
-              lands.push($(this));
+              lands.push(card);
             });
 
             // Sorting
