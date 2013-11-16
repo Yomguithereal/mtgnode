@@ -71,9 +71,6 @@
 
     // Emettor
     //---------
-    $(document).click(function() {
-      $body.empty();
-    });
 
     $choice.click(function() {
       var cards = [],
@@ -98,6 +95,8 @@
     //----------
     this.triggers.events['searchCards'] = function(d, e) {
       var cards = d.get(e.data);
+
+      $body.empty();
 
       // Populating search
       cards.map(function(c) {

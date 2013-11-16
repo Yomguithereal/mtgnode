@@ -23,7 +23,8 @@
 
     // Selectors
     var $game_area = $('#game_block'),
-        $emplacement = $('#'+_area+'_graveyard');
+        $emplacement = $('#'+_area+'_graveyard'),
+        $menu = $('#graveyard_context_menu');
 
     // Properties
     //------------
@@ -60,6 +61,17 @@
               }
             ]
           });
+        }
+      });
+
+      // Contextual Menu
+      $menu.contextualize({
+        selector: this.cards,
+        position: 'top',
+        actions: {
+          searchCards: function() {
+            _this.dispatchEvent('searchCards', 'myGraveyard');
+          }
         }
       });
     }
