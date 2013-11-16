@@ -80,11 +80,14 @@
         cards.push(+$(this).attr('index'));
       });
 
-      if (model === 'myDeck') {
-        cards.map(function(id) {
-          _this.dispatchEvent('myDrawCard', {id: id});
-        });
-      }
+      var events = {
+        myDeck: 'myDrawCard',
+        myGraveyard: 'myLootCard'
+      };
+
+      cards.map(function(id) {
+        _this.dispatchEvent(events[model], {id: id});
+      });
 
       $modal.modal('hide');
       $body.empty();
