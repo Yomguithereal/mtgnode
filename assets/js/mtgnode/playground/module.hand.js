@@ -24,7 +24,8 @@
     // Selectors
     var $game_area = $('#game_block'),
         $emplacement = $('#'+_area+'_hand'),
-        $deck = $('#'+_area+'_deck');
+        $deck = $('#'+_area+'_deck'),
+        $menu = $('#hand_context_menu');
 
     // Properties
     //------------
@@ -72,6 +73,17 @@
               }
             ]
           });
+        }
+      });
+
+      // Contextual Menu
+      $menu.contextualize({
+        selector: this.cards + ', #'+_area+'_hand',
+        position: 'top',
+        actions: {
+          revealHand: function() {
+            console.log('revealing hand...')
+          }
         }
       });
     }

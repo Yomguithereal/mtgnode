@@ -82,7 +82,8 @@
 
       var events = {
         myDeck: 'myDrawCard',
-        myGraveyard: 'myLootCard'
+        myGraveyard: 'myLootCard',
+        myExile: 'myWishCard'
       };
 
       cards.map(function(id) {

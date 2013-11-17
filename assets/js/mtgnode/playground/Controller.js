@@ -147,14 +147,42 @@
         BattlefieldModule,
         GraveyardModule,
         ExileModule,
-        InterfaceModule
+        InterfaceModules.counters
       ];
 
       modulesToRegister.map(function(r) {
         _modules['my'+r.name] = controller.addModule(r, ['my']);
         _modules['op'+r.name] = controller.addModule(r, ['op']);
       });
-    }
+
+      // Complex Modules
+      ['my', 'op'].map(function(side) {
+
+        // Hitpoints
+        _modules[side + 'HipointsCounter'] = controller.addModule(
+          InterfaceModules.points, [
+            side,
+            'Hitpoints',
+            {
+              counter: '.life-counter',
+              updater: '.update-life'
+            }
+          ]
+        );
+
+        // Infection
+        _modules[side + 'InfectionCounter'] = controller.addModule(
+          InterfaceModules.points, [
+            side,
+            'Infection',
+            {
+              counter: '.infect-counter',
+              updater: '.update-infect'
+            }
+          ]
+        );
+      });
+     }
   }
 
 

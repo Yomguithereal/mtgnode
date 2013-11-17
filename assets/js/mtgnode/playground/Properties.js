@@ -43,6 +43,12 @@
         dispatch: 'myHitpointsUpdated'
       },
       {
+        id: 'myInfection',
+        type: 'number',
+        value: 0,
+        dispatch: 'myInfectionUpdated'
+      },
+      {
         id: 'myTurn',
         type: 'boolean',
         value: false,
@@ -95,6 +101,12 @@
         type: 'number',
         value: 20,
         dispatch: 'opHitpointsUpdated'
+      },
+      {
+        id: 'opInfection',
+        type: 'number',
+        value: 0,
+        dispatch: 'opInfectionUpdated'
       },
       {
         id: 'opTurn',

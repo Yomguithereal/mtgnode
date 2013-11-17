@@ -11,9 +11,13 @@ block body
 		div#helper_block
 			div#top_helper_block
 				div.life-block.btn-group
-					button.btn.btn-default.lose-life.update-life.top(type='button') -
+					button.btn.btn-default.lose.update-life.top(type='button') -
 					button.btn.btn-default.life-counter.top(type='button') 20
-					button.btn.btn-default.gain-life.update-life.top(type='button') +
+					button.btn.btn-default.gain.update-life.top(type='button') +
+				div.infect-block.btn-group
+					button.btn.btn-default.lose.update-infect.top(type='button') -
+					button.btn.btn-default.infect-counter.top(type='button') 0
+					button.btn.btn-default.gain.update-infect.top(type='button') +
 				div.message-receiver.top &nbsp;
 				div.turn-block
 					button.btn.btn-default.top.turn-indicator(type='button') &nbsp;
@@ -36,9 +40,13 @@ block body
 			mixin card_viewer_widget()
 			div#bottom_helper_block
 				div.life-block.btn-group
-					button.btn.btn-default.top.lose-life.update-life(type='button') -
+					button.btn.btn-default.top.lose.update-life(type='button') -
 					button.btn.btn-default.life-counter.top(type='button') 20
-					button.btn.btn-default.bottom.gain-life.update-life(type='button') +
+					button.btn.btn-default.bottom.gain.update-life(type='button') +
+				div.infect-block.btn-group
+					button.btn.btn-default.lose.update-infect.bottom(type='button') -
+					button.btn.btn-default.infect-counter.bottom(type='button') 0
+					button.btn.btn-default.gain.update-infect.bottom(type='button') +
 				div.message-receiver.bottom &nbsp;
 				div.turn-block
 					button.btn.btn-default.turn-indicator(type='button') &nbsp;
@@ -81,7 +89,9 @@ block modals
 block context_menus
 	mixin battlefield_context_menu()
 	mixin deck_context_menu()
+	mixin hand_context_menu()
 	mixin graveyard_context_menu()
+	mixin exile_context_menu()
 
 block templates
 	mixin playgroundCardTemplate()

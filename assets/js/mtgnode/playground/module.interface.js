@@ -1,6 +1,6 @@
 /*
 | -------------------------------------------------------------------
-|  MTGNode Playground Interface Module
+| MTGNode Playground Interface Module
 | -------------------------------------------------------------------
 |
 |
@@ -11,18 +11,15 @@
 ;(function($, w, undefined){
   "use strict";
 
-  // Deck Module
-  //=============
-  function InterfaceModule(_side) {
+  // Card Counters Module
+  //======================
+  function CountersModule(_side) {
     domino.module.call(this);
-    var _this = this;
-
-    var _area = Helpers.getArea(_side);
+    var _this = this,
+        _area = Helpers.getArea(_side);
 
     // Selectors
-    var $block = $('#'+_area+'_helper_block'),
-        $life_counter = $block.find('.life-counter'),
-        $update_life = $block.find('.update-life');
+    var $block = $('#'+_area+'_helper_block');
 
     var $counters = {};
     $counters.Deck = $block.find('.deck-counter'),
@@ -31,31 +28,8 @@
     $counters.Battlefield = $block.find('.battlefield-counter');
     $counters.Exile = $block.find('.exile-counter');
 
-
-    // Emettor
-    //---------
-
-    if (_side === 'my') {
-
-      // Updating life
-      $update_life.click(function(){
-        var o = $(this).hasClass('gain-life');
-
-        _this.dispatchEvent('updateMyHitpoints', {operation: o});
-        _this.dispatchEvent('sendRealtimeMessage', {
-          head: 'updateOpHitpoints',
-          body: {operation: o}
-        });
-      });
-    }
-
     // Receptor
     //----------
-
-    // Updating life
-    this.triggers.events[_side+'HitpointsUpdated'] = function(d) {
-      $life_counter.text(d.get(_side+'Hitpoints'));
-    }
 
     // Updating counters
     var models = ['Deck', 'Hand', 'Battlefield', 'Exile', 'Graveyard'];
@@ -66,35 +40,82 @@
     });
   }
 
+  // Hitpoints and Infection Module
+  //================================
+  function PointsModule(_side, _property, params) {
+    domino.module.call(this);
+    var _this = this,
+        _area = Helpers.getArea(_side);
+
+    // Selectors
+    var $block = $('#'+_area+'_helper_block'),
+        $counter = $block.find(params.counter),
+        $updater = $block.find(params.updater);
+
+    // Emettor
+    //---------
+
+    if (_side === 'my') {
+
+      // Updating Points
+      $updater.click(function(){
+        var o = $(this).hasClass('gain');
+
+        _this.dispatchEvent('myUpdatePoints', {
+          property: _property,
+          operation: o
+        });
+        _this.dispatchEvent('sendRealtimeMessage', {
+          head: 'opUpdatePoints',
+          body: {
+            property: _property,
+            operation: o
+          }
+        });
+      });
+    }
+
+    // Receptor
+    //----------
+
+    // Updating points
+    this.triggers.events[_side+_property+'Updated'] = function(d) {
+      $counter.text(d.get(_side+_property));
+    }
+  }
+
   // Interface Hacks
   //=================
   var _hacks = [
     {
-      triggers: 'updateMyHitpoints',
+      triggers: 'myUpdatePoints',
       method: function(e) {
-        var hp = this.get('myHitpoints');
+        var points = this.get('my' + e.data.property);
 
         if (e.data.operation)
-          this.myHitpoints = hp + 1;
+          this['my' + e.data.property] = points + 1;
         else
-          this.myHitpoints = hp - 1;
+          this['my' + e.data.property] = points - 1;
       }
     },
     {
-      triggers: 'updateOpHitpoints',
+      triggers: 'opUpdatePoints',
       method: function(e) {
-        var hp = this.get('opHitpoints');
+        var points = this.get('op' + e.data.property);
 
         if (e.data.operation)
-          this.opHitpoints = hp + 1;
+          this['op' + e.data.property] = points + 1;
         else
-          this.opHitpoints = hp - 1;
+          this['op' + e.data.property] = points - 1;
       }
     }
   ];
 
   // Exporting
   //===========
-  window.InterfaceModule = InterfaceModule;
+  window.InterfaceModules = {
+    counters: CountersModule,
+    points: PointsModule
+  };
   window.interfaceHacks = _hacks;
 })(jQuery, window);
