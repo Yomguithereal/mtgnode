@@ -29,6 +29,11 @@
 
     // Properties
     //------------
+
+    // Status
+    this.revealed = false;
+
+    // Position info
     this.baseOffset = 77;
     this.offset = this.baseOffset;
     this.cards = '.card-min.in-hand.'+_side;
@@ -82,7 +87,9 @@
         position: 'top',
         actions: {
           revealHand: function() {
-            console.log('revealing hand...')
+            _this.dispatchEvent('sendRealtimeMessage', {
+              head: 'opRevealHand'
+            });
           }
         }
       });
@@ -131,6 +138,12 @@
           });
         });
       }
+      else {
+
+        // If hand is revealed
+        if (_this.revealed)
+          $card.removeClass('flipped');
+      }
     }
 
     // Opponent reorganizes his hand
@@ -155,6 +168,23 @@
     this.triggers.events[_side+'BackCard'] = translatingCard;
     this.triggers.events[_side+'LootCard'] = translatingCard;
     this.triggers.events[_side+'WishCard'] = translatingCard;
+
+    // Revealing Hand
+    this.triggers.events[_side+'RevealHand'] = function(d, e) {
+
+      // State
+      _this.revealed = !_this.revealed;
+
+      // Contextual
+      var $action = $menu.find('[data-action="revealHand"]');
+      if (_this.revealed)
+        $action.text('Conceal hand');
+      else
+        $action.text('Reveal hand');
+
+      // Actually Revealing cards
+      $(_this.cards).toggleClass('flipped');
+    }
 
     // Helpers
     //---------
@@ -190,7 +220,12 @@
 
   var _hacks = [
     {
-      triggers: ['myReorganizeHand', 'opReorganizeHand']
+      triggers: [
+        'myReorganizeHand',
+        'opReorganizeHand',
+        'myRevealHand',
+        'opRevealHand'
+      ]
     }
   ];
 
