@@ -12,9 +12,10 @@ The application is still pretty ugly and basic but does
 the job.
 
 ##Warning
-You should use a modern web browser (Chrome, Firefox and Safari would do the trick -- forget right away
+You should use a modern web browser (Chrome, Firefox and Safari would do the trick - forget right away
 about Internet Explorer you fool). You should also use a quite modern computer since the game makes use
-of 3D rotations and will not render the game correctly otherwise. I will develop fallbacks later on.
+of 3D rotations and since a old computer will not render the game correctly otherwise.
+I will develop fallbacks later on.
 
 Also, note that this application is not secured in any way and should not be used to launch a server on the
 Internet. I recommend its use through LAN only.
