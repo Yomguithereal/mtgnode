@@ -47,6 +47,14 @@ Then, access the login page through and click on the relevant button to log in.
 localhost:3000
 ```
 
+If you want other people to connect to your server (on a LAN, typically), just give them your local IP address
+and let them type it on their browser with port 3000.
+
+```bash
+#Example
+192.168.1.13:3000
+```
+
 ##Pages
 Once connected, you have access to four differents locations.
 
