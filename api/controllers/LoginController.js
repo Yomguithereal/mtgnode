@@ -14,8 +14,12 @@ exports.login = function(req, res){
   // Killing last session
   req.session.authenticated = false;
 
-  // Rendering the view
-  res.view('login/login');
+  // Fetching every users
+  User.find({}, function(err, users) {
+
+    // Rendering the view
+    res.view('login/login', {users: users});
+  });
 }
 
 // Ajax Connection Attempt

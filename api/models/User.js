@@ -12,7 +12,10 @@ module.exports = {
 
   attributes: {
     username: 'String',
-    password: 'String',
+    password: {
+      type: 'String',
+      defaultsTo: 'test'
+    },
     decks: {
       type: 'Array',
       defaultsTo: []
