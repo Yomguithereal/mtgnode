@@ -1,6 +1,6 @@
 #Magic the Gathering for Node.js
 
-Version 0.0.2
+Version 0.2
 
 ##About
 MTG Node is a personal experiment with node.js and socket.io. My intention is to create a simple

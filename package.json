@@ -1,7 +1,7 @@
 {
   "name": "mtgnode",
   "private": true,
-  "version": "0.0.2",
+  "version": "0.2.0",
   "description": "Realtime application for Magic the Gathering.",
   "dependencies": {
     "sails": "0.9.7",
