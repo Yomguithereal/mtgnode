@@ -3,10 +3,11 @@ include ../mixins/card_drivers
 include ../mixins/modals
 include ../mixins/selects
 include ../mixins/context_menus
-include ../mixins/widgets
+include ../mixins/plugins
 include ../templates/cards
 
 block body
+	mixin chat_widget()
 	div#mainframe.clearfix
 		div#helper_block
 			div#top_helper_block
@@ -19,8 +20,6 @@ block body
 					button.btn.btn-default.infect-counter.top(type='button') 0
 					button.btn.btn-default.gain.update-infect.top(type='button') +
 				div.message-receiver.top &nbsp;
-				div.turn-block
-					button.btn.btn-default.top.turn-indicator(type='button') &nbsp;
 				div.counters.top
 					div.btn-group
 						button.btn.btn-default.btn-xs(type='button') Deck
@@ -48,8 +47,6 @@ block body
 					button.btn.btn-default.infect-counter.bottom(type='button') 0
 					button.btn.btn-default.gain.update-infect.bottom(type='button') +
 				div.message-receiver.bottom &nbsp;
-				div.turn-block
-					button.btn.btn-default.turn-indicator(type='button') &nbsp;
 				div.counters.bottom
 					div.btn-group
 						button.btn.btn-default.btn-xs(type='button') Deck
@@ -66,6 +63,9 @@ block body
 					div.btn-group
 						button.btn.btn-default.btn-xs(type='button') Exile
 						button.btn.btn-default.btn-xs.exile-counter.bottom(type='button') 0
+				div.chat
+					br
+					button#chat_trigger.btn.btn-primary(type='button') Chat
 		div#game_block.game-area
 			div#top_game_block.top.player-side
 				div#top_handlogic.deck-and-hand.top

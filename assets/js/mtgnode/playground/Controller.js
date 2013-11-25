@@ -155,6 +155,9 @@
         _modules['op'+r.name] = controller.addModule(r, ['op']);
       });
 
+      // Chat
+      _modules.chat = controller.addModule(InterfaceModules.chat);
+
       // Complex Modules
       ['my', 'op'].map(function(side) {
 

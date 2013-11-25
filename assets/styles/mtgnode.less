@@ -124,7 +124,7 @@
 // Layout
 @playground-left-panel-width: 250px;
 @hand-width: 737px;
-
+@modal-zindex: 1040;
 
 // Cards
 @card-min-width : 78px;
@@ -318,7 +318,7 @@ BODY {
 .context-menu {
   position: absolute;
   display:none;
-  z-index: 10000;
+  z-index: @modal-zindex - 2;
 }
 
 .modal-body-search {
@@ -338,6 +338,23 @@ BODY {
 }
 .error {
   color:red;
+}
+
+#chat_container {
+  position: absolute;
+  z-index: @modal-zindex - 1;
+}
+
+#chat_container > .modal-content{
+  width: 300px;
+  height: 230px;
+  cursor: pointer;
+}
+
+#chat_messages {
+  height: 130px;
+  overflow-y: scroll;
+  font-size: 12px;
 }
 
 /*
@@ -449,7 +466,7 @@ BODY {
 }
 
 .card-dummy {
-  z-index: 1000;
+  z-index: @modal-zindex - 3;
 }
 
 .card-min-deckbuilder.card-search.selected {
