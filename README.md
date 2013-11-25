@@ -65,4 +65,4 @@ You also have access to some contextual actions with your right click.
 	node
 	socket.io
 	sails
-	[domino](dominojs.org)
+	domino
