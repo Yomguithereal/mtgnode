@@ -22,5 +22,5 @@ $(document).ready(function(){
   var flag = location.href.split('?')[1];
 
   if (flag === 'unauthorized')
-    $('.alert').removeClass('fade');
+    $('.alert').removeClass('hide');
 });

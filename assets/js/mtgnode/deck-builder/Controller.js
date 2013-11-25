@@ -320,7 +320,7 @@
       var count = d.get('viewedCards').length;
 
       $alert.addClass('alert-success');
-      $alert.removeClass('fade alert-danger');
+      $alert.removeClass('hide alert-danger');
       $alert.children('.message').text(count + ' cards found.');
 
       $search.button('reset');
