@@ -58,13 +58,13 @@ exports.save_deck = function(req, res){
   if(deck.id === undefined){
     User.addDeck(req.session.user, deck, function(updated_user){
       req.session.user = updated_user;
-      res.json({result: "success"});
+      res.json({result: 'success'});
     });
   }
   else{
     User.updateDeck(req.session.user, deck, function(updated_user){
       req.session.user = updated_user;
-      res.json({result: "success"});
+      res.json({result: 'success'});
     });
   }
 }
@@ -74,6 +74,6 @@ exports.save_deck = function(req, res){
 exports.delete_deck = function(req, res){
   User.deleteDeck(req.session.user, req.param('deck_id'), function(updated_user){
     req.session.user = updated_user;
-    res.json({result: "success"});
+    res.json({result: 'success'});
   });
 }

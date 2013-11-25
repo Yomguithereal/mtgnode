@@ -89,6 +89,7 @@
     'ARB': 'arb',
     'M10': 'm10',
     'V09': 'fve',
+    'HOP': 'pch',
     'ZEN': 'zen',
     'DDD': 'gvl',
     'H09': 'pds',
@@ -122,7 +123,8 @@
     'DGM': 'dgm',
     'MMA': 'mma',
     'M14': 'm14',
-    'THS': 'ths'
+    'THS': 'ths',
+    'PC2': 'pc2'
   }
 
   // Driver

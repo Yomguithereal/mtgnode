@@ -37,13 +37,13 @@ module.exports = {
 
     // Setting Id
     var md5 = crypto.createHash('md5');
-    md5.update(deck.name+new Date().toISOString())
+    md5.update(deck.name + new Date().toISOString())
     deck.id = md5.digest('hex');
     decks.push(deck);
 
     // Updating
     this.update({id: user.id}, {decks: decks}, function(err, users){
-      callback(users[0]);
+      callback(users[0], deck.id);
     });
   },
 

@@ -187,6 +187,7 @@
     ]
   });
 
+
   // Template Engine
   //=================
   var __leftTemplate = new CardTemplate('leftcard');
@@ -269,6 +270,7 @@
 
     // Variables
     var _this = this,
+        $alert = $('.alert'),
         $counter = $('#card_counter'),
         $deck_name = $('#deck_name'),
         $save_deck = $('#save_deck'),
@@ -290,9 +292,18 @@
       _this.dispatchEvent('deleteDeck');
     });
 
+    $query.keypress(function(e) {
+      if (e.which === 13)
+        $search.trigger('click');
+    });
+
     $search.click(function() {
-      $search.button('loading');
-      _this.dispatchEvent('queryDone', $query.val());
+      var query = $query.val();
+
+      if ($.trim(query) !== '') {
+        $search.button('loading');
+        _this.dispatchEvent('queryDone', $query.val());
+      }
     });
 
     // Receptor
@@ -306,6 +317,12 @@
     }
 
     this.triggers.events['viewedCardsUpdated'] = function(d) {
+      var count = d.get('viewedCards').length;
+
+      $alert.addClass('alert-success');
+      $alert.removeClass('fade alert-danger');
+      $alert.children('.message').text(count + ' cards found.');
+
       $search.button('reset');
     }
   }
