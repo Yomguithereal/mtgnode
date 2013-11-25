@@ -1,27 +1,27 @@
 extends ../layout
 
 block body
-	div#mainframe
-		p Welcome to the Lobby #{session.username}
-		br
-		a(href='/deck-builder') Deck Builder
-		br
-		a(href='/playground/debug') Game Debug
-		p Current Games :
-		div.well
-			ul#game_list
-		div
-			a.btn.btn-default(href='#host_game_modal', data-toggle='modal') Host Game
-		div#host_game_modal.modal.fade
-			div.modal-dialog
-				div.modal-content
-					div.modal-header
-						h3 Host a Game
-					div.modal-body
-						input#host_game_name.form-control(type='text')
-					div.modal-footer
-						button.btn(type='button', data-dismiss='modal', aria-hidden='true') Close
-						button.btn.btn-info(type='button', id='host_game') Start
+  div#mainframe
+    p Welcome to the Lobby #{session.username}
+    br
+    a(href='/deck-builder') Deck Builder
+    br
+    a(href='/playground/debug') Game Debug
+    p Current Games :
+    div.well
+      ul#game_list
+    div
+      a.btn.btn-default(href='#host_game_modal', data-toggle='modal') Host Game
+    div#host_game_modal.modal.fade
+      div.modal-dialog
+        div.modal-content
+          div.modal-header
+            h3 Host a Game
+          div.modal-body
+            input#host_game_name.form-control(type='text')
+          div.modal-footer
+            button.btn(type='button', data-dismiss='modal', aria-hidden='true') Close
+            button.btn.btn-info(type='button', id='host_game') Start
 
 block contextual_js
-	script(type="text/javascript", src="/js/mtgnode/simple/Lobby.js")
+  script(type="text/javascript", src="/js/mtgnode/simple/Lobby.js")
