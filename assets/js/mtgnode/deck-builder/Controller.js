@@ -19,12 +19,26 @@
     // mergeRequests: false
   });
 
-  // Domino Helpers
-  //================
-  function cardsToMultiverseIdArray(cards){
-    return cards.map(function(card){
-      return card.multiverseid;
-    });
+  // Helpers
+  //=========
+  var Helpers = {
+
+    // Formatting card return array
+    cardsToMultiverseIdArray: function(cards) {
+      return cards.map(function(card){
+        return card.multiverseid;
+      });
+    },
+
+    // Alerting function
+    $alert: $('.alert'),
+    message: function(text, status) {
+      status = status || 'success';
+
+      this.$alert.removeClass('hide alert-danger alert-success');
+      this.$alert.addClass('alert-' + status);
+      this.$alert.children('.message').text(text);
+    }
   }
 
   // Domino Instance
@@ -159,7 +173,7 @@
           this.request('saveDeck', {
             data: {
               deck: JSON.stringify({
-                cards: cardsToMultiverseIdArray(deckCards),
+                cards: Helpers.cardsToMultiverseIdArray(deckCards),
                 name: this.get('deckName'),
                 id: this.get('deckId')
               })
@@ -188,25 +202,23 @@
   });
 
 
-  // Template Engine
-  //=================
-  var __leftTemplate = new CardTemplate('leftcard');
-  var __rightTemplate = new CardTemplate('rightcard');
-
   // Left Panel
   //============
   function LeftPanel(){
     domino.module.call(this);
 
     // Variables
-    var _this = this;
-    var cards = '.card-min-deckbuilder';
-    var $set_select = $('#set_select');
-    var $panel = $('#left_panel');
+    var _this = this,
+        _template = new CardTemplate('leftcard'),
+        _cards = '.card-min-deckbuilder';
+
+    // Selectors
+    var $set_select = $('#set_select'),
+        $panel = $('#left_panel');
 
     // Emettor
     //---------
-    $set_select.change(function(){
+    $set_select.change(function() {
       var set = $(this).val();
 
       if(set != '-none-'){
@@ -214,7 +226,7 @@
       }
     });
 
-    $panel.on('click', cards, function(){
+    $panel.on('click', _cards, function(){
       _this.dispatchEvent('deckCardAdded', $(this).attr('index'));
     });
 
@@ -223,7 +235,7 @@
     this.triggers.events['viewedCardsUpdated'] = function(d){
       $panel.empty();
       d.get('viewedCards').forEach(function(card, index){
-        $panel.append(__leftTemplate.render(card, index));
+        $panel.append(_template.render(card, index));
       });
     }
   }
@@ -234,10 +246,13 @@
     domino.module.call(this);
 
     // Variables
-    var _this = this;
-    var cards = '.card-min-deckbuilder';
-    var $deck_select = $('#deck_select');
-    var $panel = $('#right_panel');
+    var _this = this,
+        _template = new CardTemplate('rightcard'),
+        _cards = '.card-min-deckbuilder';
+
+    // Selectors
+    var $deck_select = $('#deck_select'),
+        $panel = $('#right_panel');
 
     // Emettor
     //---------
@@ -249,7 +264,7 @@
       }
     });
 
-    $panel.on('click', cards, function(){
+    $panel.on('click', _cards, function(){
       _this.dispatchEvent('deckCardRemoved', $(this).attr('index'));
     });
 
@@ -258,7 +273,7 @@
     this.triggers.events['deckCardsUpdated'] = function(d){
       $panel.empty();
       d.get('deckCards').forEach(function(card, index){
-        $panel.append(__rightTemplate.render(card, index));
+        $panel.append(_template.render(card, index));
       });
     }
   }
@@ -269,8 +284,10 @@
     domino.module.call(this);
 
     // Variables
-    var _this = this,
-        $alert = $('.alert'),
+    var _this = this;
+
+    // Selectors
+    var $alert = $('.alert'),
         $counter = $('#card_counter'),
         $deck_name = $('#deck_name'),
         $save_deck = $('#save_deck'),
@@ -319,10 +336,7 @@
     this.triggers.events['viewedCardsUpdated'] = function(d) {
       var count = d.get('viewedCards').length;
 
-      $alert.addClass('alert-success');
-      $alert.removeClass('hide alert-danger');
-      $alert.children('.message').text(count + ' cards found.');
-
+      Helpers.message(count + ' cards found.', 'success');
       $search.button('reset');
     }
   }
@@ -331,9 +345,9 @@
   //===========
 
   // Instanciating Modules
-  var leftPanel = controller.addModule(LeftPanel);
-  var rightPanel = controller.addModule(RightPanel);
-  var controls = controller.addModule(Controls);
+  var leftPanel = controller.addModule(LeftPanel),
+      rightPanel = controller.addModule(RightPanel),
+      controls = controller.addModule(Controls);
 
   // Instanciating Widgets
   $('#card_viewer_widget').cardViewerWidget({
