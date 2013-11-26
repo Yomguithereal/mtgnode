@@ -5,8 +5,8 @@
  * @description :: Application users
  *
  */
-var crypto = require('crypto');
-var _ = require('lodash');
+var _ = require('lodash'),
+    crypto = require('crypto');
 
 module.exports = {
 
@@ -23,27 +23,30 @@ module.exports = {
   },
 
   authenticate: function(username, password, callback){
-    this.findOne().where({
-      username: username,
-      password: password
-    }).exec(function(err, user){
-      callback(user);
-    });
+    this.findOne(
+      {
+        username: username,
+        password: password
+      },
+      function(err, user) {
+        callback(user);
+      }
+    );
   },
 
   addDeck: function(user, deck, callback){
 
-    var decks = user.decks;
+    var decks = user.decks,
+        md5 = crypto.createHash('md5');
 
     // Setting Id
-    var md5 = crypto.createHash('md5');
     md5.update(deck.name + new Date().toISOString())
     deck.id = md5.digest('hex');
     decks.push(deck);
 
     // Updating
     this.update({id: user.id}, {decks: decks}, function(err, users){
-      callback(users[0], deck.id);
+      callback(users[0], deck);
     });
   },
 
@@ -59,14 +62,13 @@ module.exports = {
 
     // Updating
     this.update({id: user.id}, {decks: user.decks}, function(err, users){
-      callback(users[0]);
+      callback(users[0], deck);
     });
   },
 
   deleteDeck: function(user, deck_id, callback){
 
     // Kicking deck out
-
     var decks = _.reject(user.decks, function(deck){
       return deck.id === deck_id;
     });

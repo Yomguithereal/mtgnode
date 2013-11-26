@@ -35,9 +35,12 @@
     message: function(text, status) {
       status = status || 'success';
 
-      this.$alert.removeClass('hide alert-danger alert-success');
+      this.$alert.hide();
+      this.$alert.removeClass('alert-danger alert-success');
       this.$alert.addClass('alert-' + status);
+
       this.$alert.children('.message').text(text);
+      this.$alert.fadeIn();
     }
   }
 
@@ -102,7 +105,16 @@
         id: 'saveDeck',
         url: '/ajax/deck-builder/save_deck',
         type: 'POST',
-        dataType: 'json'
+        dataType: 'json',
+        success: function(m) {
+
+          // Updating deck id if necessary
+          if (m.action === 'add')
+            this.deckId = m.id;
+
+          // Dispatching
+          this.dispatchEvent('savedDeck');
+        }
       },
       {
         id: 'deleteDeck',
@@ -196,6 +208,11 @@
               deck_id: deckId
             }
           });
+
+          // Emptying deck cards
+          this.deckCards = [];
+          this.deckName = '';
+          this.deckId = undefined;
         }
       }
     ]
@@ -293,7 +310,8 @@
         $save_deck = $('#save_deck'),
         $delete_deck = $('#delete_deck_modal_confirm'),
         $search = $('#card_search_button'),
-        $query = $('#card_search');
+        $query = $('#card_search'),
+        $delete_modal = $('#delete_deck_modal');
 
     // Emettor
     //---------
@@ -307,6 +325,9 @@
 
     $delete_deck.click(function() {
       _this.dispatchEvent('deleteDeck');
+
+      $delete_modal.modal('hide');
+      Helpers.message('Deck deleted');
     });
 
     $query.keypress(function(e) {
@@ -333,10 +354,14 @@
       $deck_name.val(d.get('deckName'));
     }
 
+    this.triggers.events['savedDeck'] = function(d) {
+      Helpers.message('Deck saved');
+    }
+
     this.triggers.events['viewedCardsUpdated'] = function(d) {
       var count = d.get('viewedCards').length;
 
-      Helpers.message(count + ' cards found.', 'success');
+      Helpers.message(count + ' cards found.');
       $search.button('reset');
     }
   }
