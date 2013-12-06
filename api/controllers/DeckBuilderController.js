@@ -1,4 +1,4 @@
-  /*
+/*
 | -------------------------------------------------------------------
 |  MTGNode Deck Builder Controller
 | -------------------------------------------------------------------
@@ -47,6 +47,15 @@ exports.search = function(req, res) {
 
   // Sending back the cards
   res.json(CardModel.searchByName(req.param('query')));
+}
+
+// Parse a deck
+//-------------
+exports.parse_deck = function(req, res) {
+
+  // Sending back the cards
+  var deck = JSON.parse(req.param('deck'));
+  res.json(DeckModel.parse(deck.text, deck.format));
 }
 
 // Save a deck

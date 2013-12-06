@@ -10,8 +10,9 @@
 
 // Dependencies
 //==============
-var _ = require('lodash');
-var CardModel = require('./CardModel');
+var _ = require('lodash'),
+    parsers = require('mtg-parser');
+    CardModel = require('./CardModel');
 
 // Main Class
 //============
@@ -31,6 +32,27 @@ function DeckModel(){
     return CardModel.getByIdArray(deck.cards);
   }
 
+  // REFACTO
+  this.parse = function(text, format) {
+    var cards = [];
+
+    switch (format) {
+      case '.dec':
+        var deck = parsers.MTGOnline(text);
+
+        deck.cards.map(function(c) {
+          var potential_cards = CardModel.searchByName(c.name);
+
+          if (potential_cards.length > 0)
+            for (var i = 0; i < c.number; i++)
+              cards.push(potential_cards[0]);
+        });
+
+        break;
+    }
+
+    return cards;
+  }
 }
 
 // Exporting

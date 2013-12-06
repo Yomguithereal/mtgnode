@@ -45,6 +45,7 @@ module.exports.routes = {
   ,'/ajax/deck-builder/deck/:id': { controller: 'DeckBuilderController', action: 'deck_cards'}
   ,'/ajax/deck-builder/save_deck': { controller: 'DeckBuilderController', action: 'save_deck'}
   ,'/ajax/deck-builder/delete_deck': { controller: 'DeckBuilderController', action: 'delete_deck'}
+  ,'/ajax/deck-builder/parse_deck': { controller: 'DeckBuilderController', action: 'parse_deck'}
 
   // Playground Routes
   ,'/playground/:id': {controller: 'PlaygroundController', action: 'playground'}

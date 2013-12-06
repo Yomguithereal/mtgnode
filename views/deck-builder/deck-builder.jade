@@ -15,6 +15,7 @@ block body
           input#card_search.form-control(type='text')
           span.input-group-btn
             button#card_search_button.active_enter.btn.btn-default(type='button', data-loading-text='Searching...') Search
+        button.btn.btn-default(type='button', data-toggle='modal' href='#parse_deck_modal') Parse a Deck
         div.alert.alert-danger(style='display:none;')
           strong.message &nbsp;
       mixin card_viewer_widget()
@@ -36,6 +37,7 @@ block body
 // Modals
 block modals
   mixin confirm_modal('delete_deck_modal', 'Delete a Deck', 'Are you sure this is what you want ?')
+  mixin parse_deck_modal()
 
 block templates
   mixin deckBuilderCardTemplate()

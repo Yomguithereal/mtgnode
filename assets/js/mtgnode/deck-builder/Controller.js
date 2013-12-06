@@ -102,6 +102,13 @@
         type: 'GET'
       },
       {
+        id: 'parseDeck',
+        setter: 'deckCards',
+        url: '/ajax/deck-builder/parse_deck',
+        type: 'POST',
+        dataType: 'json'
+      },
+      {
         id: 'saveDeck',
         url: '/ajax/deck-builder/save_deck',
         type: 'POST',
@@ -214,6 +221,18 @@
           this.deckName = '';
           this.deckId = undefined;
         }
+      },
+      {
+        triggers: 'parseDeck',
+        method: function(e) {
+
+          // Calling service
+          this.request('parseDeck', {
+            data: {
+              deck: JSON.stringify(e.data)
+            }
+          });
+        }
       }
     ]
   });
@@ -307,22 +326,34 @@
     var $alert = $('.alert'),
         $counter = $('#card_counter'),
         $deck_name = $('#deck_name'),
-        $save_deck = $('#save_deck'),
+        $query = $('#card_search'),
+        $to_parse = $('#deck_to_parse'),
+        $parse_format = $('#parse_format');
+
+    // Buttons
+    var $save_deck = $('#save_deck'),
         $delete_deck = $('#delete_deck_modal_confirm'),
         $search = $('#card_search_button'),
-        $query = $('#card_search'),
-        $delete_modal = $('#delete_deck_modal');
+        $parse = $('#parse_confirm');
+
+    // Modals
+    var $delete_modal = $('#delete_deck_modal'),
+        $parse_modal = $('#parse_deck_modal');
 
     // Emettor
     //---------
+
+    // Update name
     $deck_name.change(function() {
       _this.dispatchEvent('updateDeckName', {deckName: $(this).val()});
     });
 
+    // Save the deck
     $save_deck.click(function() {
       _this.dispatchEvent('saveDeck');
     });
 
+    // Delete the deck
     $delete_deck.click(function() {
       _this.dispatchEvent('deleteDeck');
 
@@ -330,6 +361,7 @@
       Helpers.message('Deck deleted');
     });
 
+    // Search cards
     $query.keypress(function(e) {
       if (e.which === 13)
         $search.trigger('click');
@@ -342,6 +374,21 @@
         $search.button('loading');
         _this.dispatchEvent('queryDone', $query.val());
       }
+    });
+
+    // Parse a deck
+    $parse.click(function() {
+      var deck_text = $to_parse.val();
+
+      if ($.trim(deck_text) === '')
+        return false;
+
+      _this.dispatchEvent('parseDeck', {
+        text: deck_text,
+        format: $parse_format.val()
+      });
+
+      $parse_modal.modal('hide');
     });
 
     // Receptor
