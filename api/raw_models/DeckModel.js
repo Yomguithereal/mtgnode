@@ -11,7 +11,7 @@
 // Dependencies
 //==============
 var _ = require('lodash'),
-    parsers = require('mtg-parser');
+    parser = require('mtg-parser');
     CardModel = require('./CardModel');
 
 // Main Class
@@ -33,12 +33,13 @@ function DeckModel(){
   }
 
   // REFACTO
+  // Drop the switch
   this.parse = function(text, format) {
     var cards = [];
 
     switch (format) {
       case '.dec':
-        var deck = parsers.MTGOnline(text);
+        var deck = parser(text, 'mtgonline');
 
         deck.cards.map(function(c) {
           var potential_cards = CardModel.searchByName(c.name);
