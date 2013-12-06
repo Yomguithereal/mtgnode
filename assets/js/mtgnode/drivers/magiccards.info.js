@@ -124,7 +124,8 @@
     'MMA': 'mma',
     'M14': 'm14',
     'THS': 'ths',
-    'PC2': 'pc2'
+    'PC2': 'pc2',
+    'HVM': 'ddl'
   }
 
   // Driver
@@ -137,7 +138,7 @@
 
     // Methods
     this.getUrl = function(card){
-      return this._baseUrl+setConversion[card.set]+'/'+card.number+'.jpg';
+      return this._baseUrl+setConversion[card.set] + '/' + card.number + '.jpg';
     }
   }
 
