@@ -32,25 +32,23 @@ function DeckModel(){
     return CardModel.getByIdArray(deck.cards);
   }
 
-  // REFACTO
-  // Drop the switch
+  // Add message when no card is found
   this.parse = function(text, format) {
-    var cards = [];
+    var cards = [],
+        deck = parser(text, format);
 
-    switch (format) {
-      case '.dec':
-        var deck = parser(text, 'mtgonline');
+    deck.cards.map(function(c) {
+      var potential_cards;
 
-        deck.cards.map(function(c) {
-          var potential_cards = CardModel.searchByName(c.name);
+      if (c.set !== undefined)
+        potential_cards = CardModel.searchByNameAndSet(c.name, c.set);
+      else
+        potential_cards = CardModel.searchByName(c.name);
 
-          if (potential_cards.length > 0)
-            for (var i = 0; i < c.number; i++)
-              cards.push(potential_cards[0]);
-        });
-
-        break;
-    }
+      if (potential_cards.length > 0)
+        for (var i = 0; i < c.number; i++)
+          cards.push(potential_cards[0]);
+    });
 
     return cards;
   }

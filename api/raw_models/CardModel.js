@@ -70,6 +70,14 @@ function CardModel(){
       return ~c.name.toLowerCase().indexOf(name.toLowerCase());
     });
   }
+
+  // Search by card name and set
+  this.searchByNameAndSet = function(name, set) {
+    return _cards.filter(function(c) {
+      return (c.set === set &&
+              ~c.name.toLowerCase().indexOf(name.toLowerCase()));
+    });
+  }
 }
 
 // Exporting
