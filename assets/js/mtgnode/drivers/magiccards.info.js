@@ -107,7 +107,7 @@
     'CMD': 'cmd',
     'M12': 'm12',
     'V11': 'fvl',
-    'DDH': 'avn',
+    'DDH': 'ddh',
     'ISD': 'isd',
     'PD3': 'pd3',
     'DKA': 'dka',
