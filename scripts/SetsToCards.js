@@ -1,9 +1,10 @@
 // Creating a slightly different json file for cards.
 
 // Loading sets
-var fs = require('fs');
-var sets = require('../db/AllSets.json');
-var numbers = require('../db/Numbers.json');
+var _ = require('lodash'),
+    fs = require('fs'),
+    sets = require('../db/AllSets.json'),
+    numbers = require('../db/Numbers.json');
 
 // Main Loop
 var cards_array = [];
@@ -36,4 +37,5 @@ for(var set in sets){
 console.log(missing_set_numbers);
 
 // Writing in file
+cards_array.reverse();
 fs.writeFileSync('./db/AllCards.json', JSON.stringify(cards_array));

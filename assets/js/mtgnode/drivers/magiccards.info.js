@@ -119,13 +119,14 @@
     'RTR': 'rtr',
     'CMA': 'cma',
     'GTC': 'gtc',
-    'SVT': 'ddk',
+    'DDK': 'ddk',
     'DGM': 'dgm',
     'MMA': 'mma',
     'M14': 'm14',
     'THS': 'ths',
     'PC2': 'pc2',
-    'HVM': 'ddl'
+    'DDL': 'ddl',
+    'C13': 'c13'
   }
 
   // Driver

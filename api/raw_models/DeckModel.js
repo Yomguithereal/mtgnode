@@ -11,17 +11,12 @@
 // Dependencies
 //==============
 var _ = require('lodash'),
-    parser = require('mtg-parser');
+    parser = require('mtg-parser'),
     CardModel = require('./CardModel');
 
 // Main Class
 //============
 function DeckModel(){
-
-  // Properties
-  //------------
-  var self = this;
-
 
   // Methods
   //----------
