@@ -22,3 +22,14 @@ exports.batch = function(req, res) {
 exports.set = function(req, res) {
   res.json(SetModel.getCards(req.param('id')));
 }
+
+// Dump the json database
+exports.dump = function(req, res) {
+  require('fs').readFile(
+    __dirname + '/../../db/disk.json',
+    {encoding: 'utf-8'},
+    function(err, file) {
+      res.json(JSON.parse(file));
+    }
+  );
+}

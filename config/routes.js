@@ -61,6 +61,7 @@ module.exports.routes = {
   ,'/game/get_and_clean': {controller: 'GameController', action: 'get_and_clean'}
 
   // Debug Routes
+  , '/db/dump': {controller: 'CardController', action: 'dump'}
   // ,'/user/test_user': { controller: 'UserController', action: 'test_user'}
 
 
