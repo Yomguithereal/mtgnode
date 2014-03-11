@@ -11,7 +11,7 @@
 ;(function(undefined){
 
   // Equivalences
-  //--------------@
+  //--------------
   var setConversion = {
     'LEA': 'al',
     'LEB': 'be',
@@ -127,7 +127,8 @@
     'PC2': 'pc2',
     'DDL': 'ddl',
     'C13': 'c13',
-    'ARC': 'arc'
+    'ARC': 'arc',
+    'TSB': 'tsts'
   }
 
   // Driver
