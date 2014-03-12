@@ -1,0 +1,35 @@
+{
+  "data": {
+    "user": []
+  },
+  "schema": {
+    "user": {
+      "username": {
+        "type": "string"
+      },
+      "password": {
+        "type": "string",
+        "defaultsTo": "test"
+      },
+      "decks": {
+        "type": "array",
+        "defaultsTo": []
+      },
+      "id": {
+        "type": "integer",
+        "autoIncrement": true,
+        "primaryKey": true,
+        "unique": true
+      },
+      "createdAt": {
+        "type": "datetime"
+      },
+      "updatedAt": {
+        "type": "datetime"
+      }
+    }
+  },
+  "counters": {
+    "user": {}
+  }
+}
