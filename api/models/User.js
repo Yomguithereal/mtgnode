@@ -20,6 +20,8 @@ module.exports = {
     }
   },
   authenticate: function(username, password, cb) {
-    this.find({username: username, password: password}, cb);
+    this.find({username: username, password: password}, function(err, u) {
+      cb(err, u[0]);
+    });
   }
 };

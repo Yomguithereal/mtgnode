@@ -2,6 +2,7 @@ module.exports.routes = {
 
   // Basic routes
   '/': {controller: 'Login', action: 'login'},
+  '/lobby': {controller: 'Lobby', action: 'lobby'},
 
   // Card Database API
   '/card/:id': {controller: 'Card', action: 'single_card'},

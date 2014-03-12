@@ -2,7 +2,7 @@ extends ../layout
 
 block body
   div#mainframe
-    p Welcome to the Lobby #{session.username}
+    p Welcome to the Lobby #{SESSION.username}
     br
     a(href='/deck-builder') Deck Builder
     br
@@ -24,4 +24,4 @@ block body
             button.btn.btn-info(type='button', id='host_game') Start
 
 block contextual_js
-  script(type="text/javascript", src="/js/mtgnode/simple/Lobby.js")
+  script(type="text/javascript", src="/js/src/simple/lobby.js")
