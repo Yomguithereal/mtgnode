@@ -1,6 +1,23 @@
 {
   "data": {
-    "user": []
+    "user": [
+      {
+        "username": "Yomgui",
+        "password": "test",
+        "decks": [],
+        "createdAt": "2014-03-12T21:08:50.244Z",
+        "updatedAt": "2014-03-12T21:08:50.244Z",
+        "id": 1
+      },
+      {
+        "username": "Arnaud",
+        "password": "test",
+        "decks": [],
+        "createdAt": "2014-03-12T21:08:53.267Z",
+        "updatedAt": "2014-03-12T21:08:53.267Z",
+        "id": 2
+      }
+    ]
   },
   "schema": {
     "user": {
@@ -30,6 +47,8 @@
     }
   },
   "counters": {
-    "user": {}
+    "user": {
+      "id": 2
+    }
   }
 }

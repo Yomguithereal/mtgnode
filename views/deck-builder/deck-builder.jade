@@ -1,0 +1,47 @@
+extends ../layout
+include ../mixins/card_drivers
+include ../mixins/modals
+include ../mixins/selects
+include ../mixins/plugins
+include ../templates/cards
+
+block body
+  div#mainframe
+    div#helper_block
+      div#top_helper_block
+        p Choose a Set
+        mixin set_select(sets)
+        div.input-group
+          input#card_search.form-control(type='text')
+          span.input-group-btn
+            button#card_search_button.active_enter.btn.btn-default(type='button', data-loading-text='Searching...') Search
+        button.btn.btn-default(type='button', data-toggle='modal' href='#parse_deck_modal') Parse a Deck
+        div.alert.alert-danger(style='display:none;')
+          strong.message &nbsp;
+      mixin card_viewer_widget()
+      div#bottom_helper_block
+        mixin deck_select(decks)
+        p Choosen Deck
+          div.input-group
+            input#deck_name.form-control(type='text', value='')
+            span.input-group-btn
+              button#card_counter.btn.btn-default(type='button') 0
+        div.btn-group
+          button#delete_deck(type='button', class='btn btn-danger', data-toggle='modal', href='#delete_deck_modal') Delete Deck
+          button#save_deck(type='button', class='btn btn-info') Save Deck
+    div#deck_builder_container
+      div#left_panel
+      div#right_panel
+
+
+// Modals
+block modals
+  mixin confirm_modal('delete_deck_modal', 'Delete a Deck', 'Are you sure this is what you want ?')
+  mixin parse_deck_modal()
+
+block templates
+  mixin deckBuilderCardTemplate()
+block contextual_js
+  mixin load_driver()
+  script(type="text/javascript", src="/js/mtgnode/plugins/CardViewer.js")
+  script(type="text/javascript", src="/js/mtgnode/deck-builder/Controller.js")

@@ -1,0 +1,13 @@
+//- Selects
+
+mixin set_select(sets)
+  select#set_select.form-control
+    option(value='-none-')
+      each set in sets
+        option(value=set.code)= set.name
+
+mixin deck_select(decks)
+  select#deck_select.form-control
+    option(value='-none-')
+    each deck in decks
+      option(value= deck.id)= deck.name

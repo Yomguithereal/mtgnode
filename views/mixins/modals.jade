@@ -1,0 +1,54 @@
+//- Bootstrap Modal Mixins
+
+//- Simple confirmation modals
+mixin confirm_modal(id, title, text, status, no, yes)
+  - status = status || 'danger'
+  - no = no || 'No'
+  - yes = yes || 'Yes'
+  div.modal.fade(id=id)
+    div.modal-dialog
+      div.modal-content
+        div.modal-header
+          h3= title
+        div.modal-body= text
+        div.modal-footer
+          button(type='button', class='btn', data-dismiss='modal', aria-hidden='true')= no
+          button(type='button', class="btn btn-#{status}", id="#{id}_confirm")= yes
+
+//- Parse deck modal
+mixin parse_deck_modal()
+  div#parse_deck_modal.modal.fade
+    div.modal-dialog
+      div.modal-content
+        div.modal-header
+          h3 Paste your deck into the area below
+        div.modal-body
+          select#parse_format.form-control
+            option(value='mtgo') MTG Online
+            option(value='mws') Magic Workstation
+          textarea#deck_to_parse.form-control
+        div.modal-footer
+          button#parse_confirm(type='button', class="btn btn-primary") Parse
+
+//- Deck choice modal
+mixin deck_choice_modal()
+  div#deck_choice_modal.modal.fade
+    div.modal-dialog
+      div.modal-content
+        div.modal-header
+          h3 Choose your deck
+        div.modal-body
+          select#deck_select.form-control
+        div.modal-footer
+          button#deck_validate.btn Select this deck
+
+//- Card choice modal
+mixin card_choice_modal()
+  div#card_choice_modal.modal.fade
+    div.modal-dialog
+      div.modal-content
+        div.modal-header
+          h3 Pick Cards
+        div.modal-body.modal-body-search
+        div.modal-footer
+          button#card_choice_validate.btn Select those cards

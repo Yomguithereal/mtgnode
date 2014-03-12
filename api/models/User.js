@@ -18,5 +18,8 @@ module.exports = {
       type: 'Array',
       defaultsTo: []
     }
+  },
+  authenticate: function(username, password, cb) {
+    this.find({username: username, password: password}, cb);
   }
 };
