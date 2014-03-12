@@ -22,7 +22,8 @@
     "grunt-contrib-less": "~0.9.0",
     "grunt-contrib-coffee": "~0.7.0",
     "jade": "~1.3.0",
-    "lodash": "~2.4.1"
+    "lodash": "~2.4.1",
+    "mtg-parser": "~0.1.0"
   },
   "scripts": {
     "start": "node app.js",
