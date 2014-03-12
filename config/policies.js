@@ -10,14 +10,15 @@
  * For more information on policies, check out:
  * http://sailsjs.org/#documentation
  */
-
+var standard_procedure = ['authentication', 'views_globals'];
 
 module.exports.policies = {
 
   // Default policy for all controllers and actions
   // (`true` allows public access) 
   '*': true,
-  LobbyController: ['authentication', 'views_globals']
+  LobbyController: standard_procedure,
+  DeckBuilderController: standard_procedure
 
   /*
 	// Here's an example of adding some policies to a controller
