@@ -123,3 +123,4 @@ nbproject
 # File relative to mtgnode app
 ################################################
 config/mtgnode.db
+database/mtg.json
