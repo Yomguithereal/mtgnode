@@ -10,7 +10,7 @@ block body
     div#helper_block
       div#top_helper_block
         p Choose a Set
-        mixin set_select(sets)
+        +set_select(sets)
         div.input-group
           input#card_search.form-control(type='text')
           span.input-group-btn
@@ -18,9 +18,9 @@ block body
         button.btn.btn-default(type='button', data-toggle='modal' href='#parse_deck_modal') Parse a Deck
         div.alert.alert-danger(style='display:none;')
           strong.message &nbsp;
-      mixin card_viewer_widget()
+      +card_viewer_widget()
       div#bottom_helper_block
-        mixin deck_select(decks)
+        +deck_select(decks)
         p Choosen Deck
           div.input-group
             input#deck_name.form-control(type='text', value='')
@@ -36,13 +36,13 @@ block body
 
 // Modals
 block modals
-  mixin confirm_modal('delete_deck_modal', 'Delete a Deck', 'Are you sure this is what you want ?')
-  mixin parse_deck_modal()
+  +confirm_modal('delete_deck_modal', 'Delete a Deck', 'Are you sure this is what you want ?')
+  +parse_deck_modal()
 
 block templates
-  mixin deckBuilderCardTemplate()
+  +deckBuilderCardTemplate()
 
 block contextual_js
-  mixin load_driver()
+  +load_driver()
   script(type="text/javascript", src="/js/src/plugins/card_viewer.js")
   script(type="text/javascript", src="/js/src/deck-builder/controller.js")

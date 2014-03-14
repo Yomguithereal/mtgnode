@@ -7,10 +7,15 @@
    *
    * Register some global configuration.
    */
+  var _config = {
+    domino: {
+      verbose: true
+    }
+  };
 
   /**
    * Exporting
    * ----------
    */
-  utilities.pkg('mtgnode');
+  utilities.pkg('mtgnode.globals', _config);
 }).call(this);

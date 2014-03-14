@@ -12,10 +12,10 @@
   var _pkg = function(pkgName, content) {
     content = (content !== undefined) ? content : {};
 
-    return (pkgName || '').split('.').reduce(function(context, objName) {
+    return (pkgName || '').split('.').reduce(function(context, objName, i, a) {
       return (objName in context) ?
         context[objName] :
-        (context[objName] = content);
+        (context[objName] = (i === a.length - 1) ? content : {});
     }, _root);
   };
 

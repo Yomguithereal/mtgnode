@@ -27,7 +27,10 @@
 
     // Getting necessary templates
     function compile(id) {
-      return Handlebars.compile($(id).html());
+      var $tpl = $(id);
+      console.log($tpl.length);
+      if ($tpl.length)
+        return Handlebars.compile($tpl.html());
     }
     this.templates = {
       standard: compile('#tpl_card'),

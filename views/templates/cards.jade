@@ -1,4 +1,6 @@
-// Card Display Templates
+//- Card Display Templates
+
+//- TODO: script x-handlebars templates
 
 mixin deckBuilderCardTemplate()
   script#tpl_card(type='text/html')
@@ -7,7 +9,6 @@ mixin deckBuilderCardTemplate()
 mixin searchCardTemplate()
   script#tpl_search_card(type='text/html')
     img.card-min-deckbuilder.card-search(index="{{number}}", src='{{src}}')
-
 
 mixin playgroundCardTemplate()
   script#tpl_card(type='text/html')

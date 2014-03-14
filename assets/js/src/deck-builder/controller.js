@@ -7,20 +7,16 @@
 | Version : 1.0
 */
 
-;(function(undefined){
+;(function(undefined) {
   'use strict';
 
   // Domino Settings
   //=================
-  domino.settings({
-    // verbose: true,
-    // displayTime: true,
-    // mergeRequests: false
-  });
+  domino.settings(mtgnode.globals.domino);
 
-  // Helpers
+  // _helpers
   //=========
-  var Helpers = {
+  var _helpers = {
 
     // Formatting card return array
     cardsToMultiverseIdArray: function(cards) {
@@ -82,8 +78,8 @@
         label: 'Database id of the current selected deck.',
         type: 'string',
       }
-    ]
-    ,services: [
+    ],
+    services: [
       {
         id: 'getSetCards',
         setter: 'viewedCards',
@@ -127,8 +123,8 @@
         url: '/ajax/deck-builder/delete_deck',
         type: 'POST'
       }
-    ]
-    ,hacks: [
+    ],
+    hacks: [
       {
         triggers: 'setSelected',
         method: function(e) {
@@ -191,7 +187,7 @@
           this.request('saveDeck', {
             data: {
               deck: JSON.stringify({
-                cards: Helpers.cardsToMultiverseIdArray(deckCards),
+                cards: _helpers.cardsToMultiverseIdArray(deckCards),
                 name: this.get('deckName'),
                 id: this.get('deckId')
               })
@@ -239,12 +235,11 @@
 
   // Left Panel
   //============
-  function LeftPanel(){
-    domino.module.call(this);
+  function LeftPanel() {
 
     // Variables
     var _this = this,
-        _template = new CardTemplate('leftcard'),
+        _template = new mtgnode.driver('leftcard'),
         _cards = '.card-min-deckbuilder';
 
     // Selectors
@@ -277,12 +272,11 @@
 
   // Right Panel
   //=============
-  function RightPanel(){
-    domino.module.call(this);
+  function RightPanel() {
 
     // Variables
     var _this = this,
-        _template = new CardTemplate('rightcard'),
+        _template = new mtgnode.driver('rightcard'),
         _cards = '.card-min-deckbuilder';
 
     // Selectors
@@ -315,8 +309,7 @@
 
   // Controls
   //==========
-  function Controls(){
-    domino.module.call(this);
+  function Controls() {
 
     // Variables
     var _this = this;
@@ -357,7 +350,7 @@
       _this.dispatchEvent('deleteDeck');
 
       $delete_modal.modal('hide');
-      Helpers.message('Deck deleted');
+      _helpers.message('Deck deleted');
     });
 
     // Search cards
@@ -401,13 +394,13 @@
     }
 
     this.triggers.events['savedDeck'] = function(d) {
-      Helpers.message('Deck saved');
+      _helpers.message('Deck saved');
     }
 
     this.triggers.events['viewedCardsUpdated'] = function(d) {
       var count = d.get('viewedCards').length;
 
-      Helpers.message(count + ' cards found.');
+      _helpers.message(count + ' cards found.');
       $search.button('reset');
     }
   }
