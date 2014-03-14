@@ -7,7 +7,7 @@ include ../mixins/plugins
 include ../templates/cards
 
 block body
-  mixin chat_widget()
+  +chat_widget()
   div#mainframe.clearfix
     div#helper_block
       div#top_helper_block
@@ -36,7 +36,7 @@ block body
           div.btn-group
             button.btn.btn-default.btn-xs(type='button') Exile
             button.btn.btn-default.btn-xs.exile-counter.top(type='button') 0
-      mixin card_viewer_widget()
+      +card_viewer_widget()
       div#bottom_helper_block
         div.life-block.btn-group
           button.btn.btn-default.top.lose.update-life(type='button') -
@@ -83,35 +83,22 @@ block body
           div#bottom_hand.hand-emplacement.bottom
 
 block modals
-  mixin deck_choice_modal()
-  mixin card_choice_modal()
+  +deck_choice_modal()
+  +card_choice_modal()
 
 block context_menus
-  mixin battlefield_context_menu()
-  mixin deck_context_menu()
-  mixin hand_context_menu()
-  mixin graveyard_context_menu()
-  mixin exile_context_menu()
+  +battlefield_context_menu()
+  +deck_context_menu()
+  +hand_context_menu()
+  +graveyard_context_menu()
+  +exile_context_menu()
 
 block templates
-  mixin playgroundCardTemplate()
-  mixin dummyCardTemplate()
-  mixin searchCardTemplate()
+  +playgroundCardTemplate()
+  +dummyCardTemplate()
+  +searchCardTemplate()
 block dom_constants
   input#gid(type='hidden', value=gid)
   input#uid(type='hidden', value=uid)
 block contextual_js
-  mixin load_driver()
-  script(type="text/javascript", src="/js/mtgnode/plugins/CardViewer.js")
-  script(type="text/javascript", src="/js/mtgnode/plugins/ContextMenu.js")
-  script(type="text/javascript", src="/js/mtgnode/playground/Helpers.js")
-  script(type="text/javascript", src="/js/mtgnode/playground/Properties.js")
-  script(type="text/javascript", src="/js/mtgnode/playground/module.start.js")
-  script(type="text/javascript", src="/js/mtgnode/playground/module.interface.js")
-  script(type="text/javascript", src="/js/mtgnode/playground/module.modals.js")
-  script(type="text/javascript", src="/js/mtgnode/playground/module.deck.js")
-  script(type="text/javascript", src="/js/mtgnode/playground/module.hand.js")
-  script(type="text/javascript", src="/js/mtgnode/playground/module.battlefield.js")
-  script(type="text/javascript", src="/js/mtgnode/playground/module.graveyard.js")
-  script(type="text/javascript", src="/js/mtgnode/playground/module.exile.js")
-  script(type="text/javascript", src="/js/mtgnode/playground/Controller.js")
+  +load_driver()
