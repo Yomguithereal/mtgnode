@@ -7,11 +7,15 @@
    *
    * Package initializers to hack concatenation.
    */
-  var _pkg = function(pkgName) {
+  var _root = this;
+
+  var _pkg = function(pkgName, content) {
+    content = (content !== undefined) ? content : {};
+
     return (pkgName || '').split('.').reduce(function(context, objName) {
       return (objName in context) ?
         context[objName] :
-        (context[objName] = {});
+        (context[objName] = content);
     }, _root);
   };
 

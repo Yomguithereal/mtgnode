@@ -5,7 +5,7 @@
    * MTGNode Namespace
    * ==================
    *
-   * Register some global configuration and load display driver.
+   * Register some global configuration.
    */
 
   /**
