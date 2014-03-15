@@ -11,7 +11,7 @@ module.exports = {
     var card = card_library.get(req.param('id'));
 
     if (card)
-      res.json();
+      res.json(card);
     else
       res.json({error: 'inexistant card'});
   },
@@ -19,5 +19,8 @@ module.exports = {
     var batch = JSON.parse(req.param('cards'));
 
     res.json(card_library.getByIdArray(batch));
+  },
+  search: function(req, res) {
+    // TODO
   }
 };

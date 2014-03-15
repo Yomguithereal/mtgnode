@@ -14,14 +14,13 @@ module.exports = {
       type: 'String',
       defaultsTo: 'test'
     },
-    decks: {
-      type: 'Array',
-      defaultsTo: []
+    decks: function(cb) {
+      Deck.find({user_id: this.id}, cb);
     }
   },
   authenticate: function(username, password, cb) {
-    this.find({username: username, password: password}, function(err, u) {
-      cb(err, u[0]);
+    this.findOne({username: username, password: password}, function(err, u) {
+      cb(err, u);
     });
   }
 };

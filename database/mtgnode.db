@@ -1,25 +1,37 @@
 {
   "data": {
+    "deck": [],
     "user": [
       {
         "username": "Yomgui",
         "password": "test",
-        "decks": [],
-        "createdAt": "2014-03-12T21:08:50.244Z",
-        "updatedAt": "2014-03-12T21:08:50.244Z",
+        "createdAt": "2014-03-15T17:59:35.163Z",
+        "updatedAt": "2014-03-15T17:59:35.163Z",
         "id": 1
-      },
-      {
-        "username": "Arnaud",
-        "password": "test",
-        "decks": [],
-        "createdAt": "2014-03-12T21:08:53.267Z",
-        "updatedAt": "2014-03-12T21:08:53.267Z",
-        "id": 2
       }
     ]
   },
   "schema": {
+    "deck": {
+      "cards": {
+        "type": "array"
+      },
+      "user_id": {
+        "type": "integer"
+      },
+      "id": {
+        "type": "integer",
+        "autoIncrement": true,
+        "primaryKey": true,
+        "unique": true
+      },
+      "createdAt": {
+        "type": "datetime"
+      },
+      "updatedAt": {
+        "type": "datetime"
+      }
+    },
     "user": {
       "username": {
         "type": "string"
@@ -27,10 +39,6 @@
       "password": {
         "type": "string",
         "defaultsTo": "test"
-      },
-      "decks": {
-        "type": "array",
-        "defaultsTo": []
       },
       "id": {
         "type": "integer",
@@ -47,8 +55,9 @@
     }
   },
   "counters": {
+    "deck": {},
     "user": {
-      "id": 2
+      "id": 1
     }
   }
 }

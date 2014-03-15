@@ -14,8 +14,9 @@
   //=================
   domino.settings(mtgnode.globals.domino);
 
-  // _helpers
+  // Helpers
   //=========
+  var $_alert = $('.alert');
   var _helpers = {
 
     // Formatting card return array
@@ -26,16 +27,13 @@
     },
 
     // Alerting function
-    $alert: $('.alert'),
     message: function(text, status) {
-      status = status || 'success';
+      $_alert.hide();
+      $_alert.removeClass('alert-danger alert-success');
+      $_alert.addClass('alert-' + (status || 'success'));
 
-      this.$alert.hide();
-      this.$alert.removeClass('alert-danger alert-success');
-      this.$alert.addClass('alert-' + status);
-
-      this.$alert.children('.message').text(text);
-      this.$alert.fadeIn();
+      $_alert.children('.message').text(text);
+      $_alert.fadeIn();
     }
   }
 
@@ -67,47 +65,47 @@
       {
         id: 'deckName',
         label: 'Name of the current selected deck.',
-        type: 'string',
+        type: '?string',
         triggers: 'updateDeckName',
-        dispatch: 'deckNameUpdated'
+        dispatch: 'deckNameUpdated',
+        value: null
       },
 
       // Deck Id if any
       {
         id: 'deckId',
         label: 'Database id of the current selected deck.',
-        type: 'string',
+        type: '?string',
+        value: null
       }
     ],
     services: [
       {
         id: 'getSetCards',
         setter: 'viewedCards',
-        url: '/ajax/deck-builder/set/:set'
+        url: '/set/:set/cards'
       },
       {
         id: 'getDeckCards',
         setter: 'deckCards',
-        url: '/ajax/deck-builder/deck/:deck_id'
+        url: '/deck/:id'
       },
       {
         id: 'searchCards',
         setter: 'viewedCards',
-        url: '/ajax/deck-builder/search',
+        url: '/cards/search',
         type: 'GET'
       },
       {
         id: 'parseDeck',
         setter: 'deckCards',
-        url: '/ajax/deck-builder/parse_deck',
+        url: '/deck/parse',
         type: 'POST',
         dataType: 'json'
       },
       {
-        id: 'saveDeck',
-        url: '/ajax/deck-builder/save_deck',
-        type: 'POST',
-        dataType: 'json',
+        id: 'createDeck',
+        url: '/deck/create',
         success: function(m) {
 
           // Updating deck id if necessary
@@ -119,8 +117,12 @@
         }
       },
       {
+        id: 'updateDeck',
+        url: 'deck/update/:id'
+      },
+      {
         id: 'deleteDeck',
-        url: '/ajax/deck-builder/delete_deck',
+        url: '/deck/destroy/:id',
         type: 'POST'
       }
     ],
@@ -236,6 +238,7 @@
   // Left Panel
   //============
   function LeftPanel() {
+    domino.module.call(this);
 
     // Variables
     var _this = this,
@@ -273,6 +276,7 @@
   // Right Panel
   //=============
   function RightPanel() {
+    domino.module.call(this);
 
     // Variables
     var _this = this,
@@ -310,6 +314,7 @@
   // Controls
   //==========
   function Controls() {
+    domino.module.call(this);
 
     // Variables
     var _this = this;

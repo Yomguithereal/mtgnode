@@ -12,12 +12,13 @@ module.exports = {
   builder: function(req, res) {
 
     // Getting Relevant Data
-    var data = {
-      sets: set_library.getSetsInfo(),
-      decks : req.session.user.decks
-    };
-
-    // Rendering the view
-    res.view('deck-builder/deck-builder', data);
+    Deck.find({user_id: req.session.user.id}, function(err, decks) {
+     
+      // Rendering the view
+      res.view('deck-builder/deck-builder', {
+        sets: set_library.getSetsInfo(),
+        decks: decks
+      });
+    });
   }
 };

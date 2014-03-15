@@ -28,7 +28,7 @@
     // Getting necessary templates
     function compile(id) {
       var $tpl = $(id);
-      console.log($tpl.length);
+
       if ($tpl.length)
         return Handlebars.compile($tpl.html());
     }
@@ -44,7 +44,7 @@
       if (card.types !== undefined && ~card.types.indexOf('Land'))
         context.type = 'land';
       else if (card.types !== undefined && ~card.types.indexOf('Enchantment'))
-        data.type = 'enchantment';
+        context.type = 'enchantment';
 
       return context;
     }
@@ -56,7 +56,7 @@
             id_prefix: this.prefix,
             number: index,
             multiverseid: card.multiverseid,
-            src: _driver.getUrl(card),
+            src: _driver(card),
             side: this.prefix
           };
 
@@ -74,7 +74,7 @@
     this.renderSearch = function(card, index_override) {
       return this.templates.search({
         number: index_override,
-        src: _driver.getUrl(card)
+        src: _driver(card)
       });
     };
   }
