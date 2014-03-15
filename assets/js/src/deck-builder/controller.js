@@ -75,7 +75,7 @@
       {
         id: 'deckId',
         label: 'Database id of the current selected deck.',
-        type: '?string',
+        type: '?number',
         value: null
       }
     ],
@@ -87,8 +87,10 @@
       },
       {
         id: 'getDeckCards',
-        setter: 'deckCards',
-        url: '/deck/:id'
+        url: '/deck/:id/detail',
+        success: function(deck) {
+          this.deckCards = deck.cards;
+        }
       },
       {
         id: 'searchCards',
@@ -100,17 +102,18 @@
         id: 'parseDeck',
         setter: 'deckCards',
         url: '/deck/parse',
-        type: 'POST',
+        type: 'GET',
         dataType: 'json'
       },
       {
         id: 'createDeck',
         url: '/deck/create',
-        success: function(m) {
+        type: 'POST',
+        dataType: 'json',
+        contentType: 'json',
+        success: function(deck) {
 
-          // Updating deck id if necessary
-          if (m.action === 'add')
-            this.deckId = m.id;
+          this.deckId = deck.id;
 
           // Dispatching
           this.dispatchEvent('savedDeck');
@@ -118,7 +121,10 @@
       },
       {
         id: 'updateDeck',
-        url: 'deck/update/:id'
+        url: 'deck/update/:id',
+        succes: function() {
+          this.dispatchEvent('savedDeck');
+        }
       },
       {
         id: 'deleteDeck',
@@ -152,7 +158,7 @@
         method: function(e) {
           this.request('getDeckCards', {
             shortcuts: {
-              deck_id: e.data.deck
+              id: e.data.deck
             }
           });
           this.deckId = e.data.deck;
@@ -179,22 +185,23 @@
       {
         triggers: 'saveDeck',
         method: function(e) {
+          var deckCards = this.get('deckCards'),
+              deckName = this.get('deckName'),
+              deckId = this.get('deckId');
 
           // Need to do it ?
-          var deckCards = this.get('deckCards');
-          if (deckCards.length === 0 || this.get('deckName') === undefined)
+          if (deckCards.length === 0 || deckName === undefined)
             return false;
 
           // Calling service
-          this.request('saveDeck', {
-            data: {
-              deck: JSON.stringify({
-                cards: _helpers.cardsToMultiverseIdArray(deckCards),
-                name: this.get('deckName'),
-                id: this.get('deckId')
-              })
-            }
-          });
+          if (!deckId)
+            this.request('createDeck', {
+              data: {
+                user_id: USER.id,
+                name: deckName,
+                cards: _helpers.cardsToMultiverseIdArray(deckCards)
+              }
+            });
         }
       },
       {
@@ -347,7 +354,8 @@
 
     // Save the deck
     $save_deck.click(function() {
-      _this.dispatchEvent('saveDeck');
+      if ($.trim($deck_name.val()))
+        _this.dispatchEvent('saveDeck');
     });
 
     // Delete the deck

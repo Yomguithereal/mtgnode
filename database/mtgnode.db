@@ -1,12 +1,27 @@
 {
   "data": {
-    "deck": [],
+    "deck": [
+      {
+        "user_id": 1,
+        "name": "Test",
+        "cards": [
+          29781,
+          10545,
+          4527,
+          982,
+          982
+        ],
+        "createdAt": "2014-03-15T23:53:04.049Z",
+        "updatedAt": "2014-03-15T23:53:04.049Z",
+        "id": 1
+      }
+    ],
     "user": [
       {
         "username": "Yomgui",
         "password": "test",
-        "createdAt": "2014-03-15T18:43:47.462Z",
-        "updatedAt": "2014-03-15T18:43:47.462Z",
+        "createdAt": "2014-03-15T23:52:23.413Z",
+        "updatedAt": "2014-03-15T23:52:23.413Z",
         "id": 1
       }
     ]
@@ -58,7 +73,9 @@
     }
   },
   "counters": {
-    "deck": {},
+    "deck": {
+      "id": 1
+    },
     "user": {
       "id": 1
     }

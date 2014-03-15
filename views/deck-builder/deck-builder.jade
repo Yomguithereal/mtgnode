@@ -3,6 +3,7 @@ include ../mixins/card_drivers
 include ../mixins/modals
 include ../mixins/selects
 include ../mixins/plugins
+include ../mixins/exposure
 include ../templates/cards
 
 block body
@@ -42,6 +43,8 @@ block modals
 block templates
   +deckBuilderCardTemplate()
 
+block global_js
+  +user_exposure()
 block contextual_js
   +load_driver()
   script(type="text/javascript", src="/js/src/plugins/card_viewer.js")

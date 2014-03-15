@@ -18,6 +18,7 @@ module.exports.routes = {
 
   // Rest specific routes
   '/user/:id/decks': {controller: 'User', action: 'decks'},
+  '/deck/:id/detail': {controller: 'Deck', action: 'detail'},
   'POST /deck/parse': {controller: 'Deck', action: 'parse'},
 
   // Debug Routes
