@@ -138,7 +138,7 @@
   //--------
   this.currentDriver = function(card) {
     return baseUrl +
-           (setConversion[card.set] || card.set) +
+           (setConversion[card.set] || card.set.toLowerCase()) +
            '/' +
            card.number
            + '.jpg';

@@ -21,6 +21,6 @@ module.exports = {
     res.json(card_library.getByIdArray(batch));
   },
   search: function(req, res) {
-    // TODO
+    res.json(card_library.searchByName(req.param('query')));
   }
 };

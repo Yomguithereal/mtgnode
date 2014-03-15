@@ -5,8 +5,8 @@
       {
         "username": "Yomgui",
         "password": "test",
-        "createdAt": "2014-03-15T17:59:35.163Z",
-        "updatedAt": "2014-03-15T17:59:35.163Z",
+        "createdAt": "2014-03-15T18:43:47.462Z",
+        "updatedAt": "2014-03-15T18:43:47.462Z",
         "id": 1
       }
     ]
@@ -15,6 +15,9 @@
     "deck": {
       "cards": {
         "type": "array"
+      },
+      "name": {
+        "type": "string"
       },
       "user_id": {
         "type": "integer"
