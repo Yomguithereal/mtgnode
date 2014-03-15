@@ -8,6 +8,7 @@
 module.exports = {
   attributes: {
     cards: 'array',
+    name: 'string',
     user_id: 'integer'
   }
 };
