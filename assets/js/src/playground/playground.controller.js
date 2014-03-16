@@ -34,3 +34,4 @@
    */
   utilities.pkg('playground.controller', _controller);
 }).call(this);
+        

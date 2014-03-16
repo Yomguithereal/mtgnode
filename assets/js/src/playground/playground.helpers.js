@@ -7,9 +7,6 @@
    *
    */
 
-  // Global hacks
-  utilities.pkg('playground.hacks', []);
-
   // Helpers namespace
   var _helpers = {
 

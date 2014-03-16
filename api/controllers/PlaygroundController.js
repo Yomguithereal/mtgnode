@@ -8,7 +8,15 @@ module.exports = {
 
   // Index
   playground: function(req, res) {
-    res.view('playground/playground', {game_id: req.param('id')});
+
+    // Trying to find the game
+    Game.find(req.param('id'), function(err, game) {
+
+      if (!game.length)
+        res.json(404, {error: 'inexistant_room'});
+      else
+        res.view('playground/playground', {game_id: req.param('id')});
+    });
   },
 
   // Realtime connection
@@ -53,7 +61,8 @@ module.exports = {
               head: 'game.start',
               body: {
                 start: true,
-                game: game
+                game: game,
+                uid: uid
               }
             });
         });
@@ -79,7 +88,8 @@ module.exports = {
             head: 'game.start',
             body: {
               start: true,
-              game: game
+              game: game,
+              uid: uid
             }
           });
         });

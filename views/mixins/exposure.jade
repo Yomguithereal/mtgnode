@@ -5,5 +5,9 @@ mixin user_exposure()
     var USER = {id: !{SESSION.uid}};
 
 mixin game_exposure()
-  script(type="text/javascript").
-    var GAME = {id: !{game_id}};
+  - if (isNaN(+game_id))
+    script(type="text/javascript").
+      var GAME = {id: '#{game_id}'};
+  - else
+    script(type="text/javascript").
+      var GAME = {id: !{game_id}};

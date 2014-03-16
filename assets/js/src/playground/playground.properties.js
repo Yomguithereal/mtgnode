@@ -13,7 +13,7 @@
       {
         id: 'gameId',
         type: 'number|string',
-        value: 'debug'
+        value: GAME.id
       },
       {
         id: 'debug',
