@@ -18,7 +18,7 @@
       {
         id: 'debug',
         type: 'boolean',
-        value: false
+        value: DEBUG
       },
 
       // Me

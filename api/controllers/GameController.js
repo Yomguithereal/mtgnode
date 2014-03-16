@@ -15,13 +15,13 @@ module.exports = {
     Game.find(function(err, games) {
 
       // Deleting useless games
-      // games.map(function(game, i) {
-      //   if (!Game.subscribers(game.id).length) {
-      //     game.destroy();
-      //     Game.publishDestroy(game.id);
-      //     games.splice(i, 1);
-      //   }
-      // });
+      games.map(function(game, i) {
+        if (!Game.subscribers(game.id).length) {
+          Game.publishDestroy(game.id);
+          game.destroy();
+          games.splice(i, 1);
+        }
+      });
 
       // Sending games back to client
       res.json(games.filter(function(g) {

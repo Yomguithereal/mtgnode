@@ -2,18 +2,29 @@
   'use strict';
 
   /**
-   * Playground Helpers
-   * ===================
+   * Playground Hacks
+   * =================
    *
    */
-
-  // Helpers namespace
   var _hacks = [
     {
       triggers: 'game.start',
       method: function(e) {
 
-        // Updating basic info
+        // Player sides
+        var one = (e.data.game.player1.user.id === USER.id);
+        this['my-side'] = one ? 1 : 2;
+        this['op-side'] = one ? 2 : 1;
+
+        // User per side
+        this['my-user'] = e.data.game['player' + this['my-side']].user;
+        this['op-user'] = e.data.game['player' + this['op-side']].user;
+
+        // Instanciating delayed modules
+        this.dispatchEvent('modules.delayed');
+
+        // Passing to deck choice modal
+        this.dispatchEvent('deck.choice');
       }
     }
   ];
@@ -24,35 +35,3 @@
    */
   utilities.pkg('playground.hacks', _hacks);
 }).call(this);
-
-
-
-
-    // {
-    //   triggers: 'startGame',
-    //   method: function(e) {
-
-    //     // Game basic info
-    //     this.gameId = e.data.game.id;
-    //     this.debug = e.data.game.debug;
-
-    //     // Player Sides
-    //     // TODO: this is dirty!
-    //     var uid = +$('#uid').val();
-
-    //     if (e.data.game.player1.user.id === uid) {
-    //       this.mySide = 1;
-    //       this.opSide = 2;
-    //     }
-    //     else {
-    //       this.mySide = 2;
-    //       this.opSide = 1;
-    //     }
-
-    //     this.myUser = e.data.game['player'+this.mySide].user;
-    //     this.opUser = e.data.game['player'+this.opSide].user;
-
-    //     // Instanciating delayed modules
-    //     this.dispatchEvent('delayedModules');
-
-    //     // Passing to deck choice modal

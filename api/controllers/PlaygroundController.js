@@ -9,26 +9,34 @@ module.exports = {
   // Index
   playground: function(req, res) {
 
+    // Debug case-
+    if (req.param('id') === 'debug') {
+      Game.create({name: 'Debug', debug: true}, function(err, game) {
+        res.view('playground/playground', {game_id: game.id, debug: true});
+      });
+
+      return false;
+    }
+
     // Trying to find the game
     Game.find(req.param('id'), function(err, game) {
 
       if (!game.length)
         res.json(404, {error: 'inexistant_room'});
       else
-        res.view('playground/playground', {game_id: req.param('id')});
+        res.view('playground/playground', {
+          game_id: game.id
+          debug: false
+        });
     });
   },
 
   // Realtime connection
   connect: function(req, res) {
     var gid = req.param('id'),
-        uid = req.session.user.id,
-        criterion = {id: gid};
+        uid = req.session.user.id;
 
-    if (gid === 'debug')
-      criterion = {debug: true}
-
-    Game.findOne(criterion).done(function(err, g) {
+    Game.findOne(gid).done(function(err, g) {
 
       // Player 1
       if (!g.player1.connected &&

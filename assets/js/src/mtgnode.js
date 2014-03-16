@@ -12,7 +12,7 @@
       verbose: true
     },
     realtime: {
-      debug: false
+      debug: true
     }
   };
 

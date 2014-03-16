@@ -28,6 +28,12 @@
   // Basic Modules
   playground.modules = _controller.addModule(dominoRealtime.module);
 
+  // Widgets
+  $('#card_viewer_widget').cardViewerWidget({
+    container: '#game_block',
+    cards: '.card-min > img.front-side'
+  });
+
   /**
    * Exporting
    * ----------
