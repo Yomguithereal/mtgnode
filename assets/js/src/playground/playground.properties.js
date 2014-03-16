@@ -23,122 +23,122 @@
 
       // Me
       {
-        id: 'mySide',
+        id: 'my-side',
         type: 'number',
         value: 0
       },
       {
-        id: 'myUser',
+        id: 'my-user',
         type: 'object',
         value: {}
       },
       {
-        id: 'myHitpoints',
+        id: 'my-hitpoints',
         type: 'number',
         value: 20,
-        dispatch: 'myHitpointsUpdated'
+        dispatch: 'my.hitpoints.updated'
       },
       {
-        id: 'myInfection',
+        id: 'my-infection',
         type: 'number',
         value: 0,
-        dispatch: 'myInfectionUpdated'
+        dispatch: 'my.infection.updated'
       },
       {
-        id: 'myTurn',
+        id: 'my-turn',
         type: 'boolean',
         value: false,
-        dispatch: 'myTurnUpdated'
+        dispatch: 'my.turn.updated'
       },
       {
-        id: 'myDeck',
+        id: 'my-deck',
         type: 'array',
         value: [],
-        dispatch: 'myDeckUpdated'
+        dispatch: 'my.deck.updated'
       },
       {
-        id: 'myHand',
+        id: 'my-hand',
         type: 'array',
         value: [],
-        dispatch: 'myHandUpdated'
+        dispatch: 'my.hand.updated'
       },
       {
-        id: 'myBattlefield',
+        id: 'my-battlefield',
         type: 'array',
         value: [],
-        dispatch: 'myBattlefieldUpdated'
+        dispatch: 'my.battlefield.updated'
       },
       {
-        id: 'myGraveyard',
+        id: 'my-graveyard',
         type: 'array',
         value: [],
-        dispatch: 'myGraveyardUpdated'
+        dispatch: 'my.graveyard.updated'
       },
       {
-        id: 'myExile',
+        id: 'my-exile',
         type: 'array',
         value: [],
-        dispatch: 'myExileUpdated'
+        dispatch: 'my.exile.updated'
       },
 
       // Opponent
       {
-        id: 'opSide',
+        id: 'op-side',
         type: 'number',
         value: 0
       },
       {
-        id: 'opUser',
+        id: 'op-user',
         type: 'object',
         value: {}
       },
       {
-        id: 'opHitpoints',
+        id: 'op-hitpoints',
         type: 'number',
         value: 20,
-        dispatch: 'opHitpointsUpdated'
+        dispatch: 'op.hitpoints.updated'
       },
       {
-        id: 'opInfection',
+        id: 'op-infection',
         type: 'number',
         value: 0,
-        dispatch: 'opInfectionUpdated'
+        dispatch: 'op.infection.updated'
       },
       {
-        id: 'opTurn',
+        id: 'op-turn',
         type: 'boolean',
         value: false,
-        dispatch: 'opTurnUpdated'
+        dispatch: 'op.turn.updated'
       },
       {
-        id: 'opDeck',
+        id: 'op-deck',
         type: 'array',
         value: [],
-        dispatch: 'opDeckUpdated'
+        dispatch: 'op.deck.updated'
       },
       {
-        id: 'opHand',
+        id: 'op-hand',
         type: 'array',
         value: [],
-        dispatch: 'opHandUpdated'
+        dispatch: 'op.hand.updated'
       },
       {
-        id: 'opBattlefield',
+        id: 'op-battlefield',
         type: 'array',
         value: [],
-        dispatch: 'opBattlefieldUpdated'
+        dispatch: 'op.battlefield.updated'
       },
       {
-        id: 'opGraveyard',
+        id: 'op-graveyard',
         type: 'array',
         value: [],
-        dispatch: 'opGraveyardUpdated'
+        dispatch: 'op.graveyard.updated'
       },
       {
-        id: 'opExile',
+        id: 'op-exile',
         type: 'array',
         value: [],
-        dispatch: 'opExileUpdated'
+        dispatch: 'op.exile.updated'
       }
     ];
 

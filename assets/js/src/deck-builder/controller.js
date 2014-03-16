@@ -12,7 +12,7 @@
 
   // Domino Settings
   //=================
-  domino.settings(mtgnode.globals.domino);
+  domino.settings(mtgnode.config.domino);
 
   // Helpers
   //=========

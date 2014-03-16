@@ -13,5 +13,5 @@
    * Exporting
    * ----------
    */
-  utilities.pkg('playground.globals', _config);
+  utilities.pkg('playground.config', _config);
 }).call(this);

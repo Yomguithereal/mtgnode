@@ -101,8 +101,18 @@ block templates
 
 block global_js
   +user_exposure()
+  +game_exposure()
 
 block contextual_js
   +load_driver()
-  script(type="text/javascript", src="js/src/playground/playground.js")
-  script(type="text/javascript", src="js/src/playground/playground.properties.js")
+
+  //- Generic
+  script(type="text/javascript", src="/js/src/plugins/card_viewer.js")
+  script(type="text/javascript", src="/js/src/generic/realtime.js")
+
+  //- Specific
+  script(type="text/javascript", src="/js/src/playground/playground.js")
+  script(type="text/javascript", src="/js/src/playground/playground.helpers.js")
+  script(type="text/javascript", src="/js/src/playground/playground.properties.js")
+  script(type="text/javascript", src="/js/src/playground/playground.services.js")
+  script(type="text/javascript", src="/js/src/playground/playground.controller.js")

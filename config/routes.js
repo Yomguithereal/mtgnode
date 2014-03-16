@@ -4,7 +4,7 @@ module.exports.routes = {
   '/': {controller: 'Login', action: 'login'},
   '/lobby': {controller: 'Lobby', action: 'lobby'},
   '/deck-builder': {controller: 'DeckBuilder', action: 'builder'},
-  '/playground': {controller: 'Playground', action: 'playground'},
+  '/playground/:id': {controller: 'Playground', action: 'playground'},
 
   // Card Database API
   '/card/:id': {controller: 'Card', action: 'single_card'},
@@ -24,6 +24,8 @@ module.exports.routes = {
 
   // Realtime routes
   '/game/get_and_clean': {controller: 'Game', action: 'get_and_clean'},
+  '/playground/:id/connect': {controller: 'Playground', action: 'connect'},
+  '/playground/:id/message': {controller: 'Playground', action: 'message'},
 
   // Debug Routes
   '/database/dump': {controller: 'Debug', action: 'dump'}

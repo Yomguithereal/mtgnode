@@ -18,7 +18,8 @@ module.exports.policies = {
   // (`true` allows public access) 
   '*': true,
   LobbyController: standard_procedure,
-  DeckBuilderController: standard_procedure
+  DeckBuilderController: standard_procedure,
+  PlaygroundController: standard_procedure
 
   /*
 	// Here's an example of adding some policies to a controller

@@ -3,3 +3,7 @@
 mixin user_exposure()
   script(type="text/javascript").
     var USER = {id: !{SESSION.uid}};
+
+mixin game_exposure()
+  script(type="text/javascript").
+    var GAME = {id: !{game_id}};

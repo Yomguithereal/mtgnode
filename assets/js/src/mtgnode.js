@@ -20,5 +20,5 @@
    * Exporting
    * ----------
    */
-  utilities.pkg('mtgnode.globals', _config);
+  utilities.pkg('mtgnode.config', _config);
 }).call(this);
