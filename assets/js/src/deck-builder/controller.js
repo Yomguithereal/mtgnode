@@ -131,8 +131,7 @@
       },
       {
         id: 'deleteDeck',
-        url: '/deck/destroy/:id',
-        type: 'POST'
+        url: '/deck/destroy/:id'
       }
     ],
     hacks: [
@@ -224,13 +223,13 @@
 
           // Need to do it?
           var deckId = this.get('deckId');
-          if (deckId === undefined)
+          if (!deckId)
             return false;
 
           // Calling service
           this.request('deleteDeck', {
-            data: {
-              deck_id: deckId
+            shortcuts: {
+              id: deckId
             }
           });
 
