@@ -4,6 +4,7 @@ include ../mixins/modals
 include ../mixins/selects
 include ../mixins/context_menus
 include ../mixins/plugins
+include ../mixins/exposure
 include ../templates/cards
 
 block body
@@ -97,6 +98,9 @@ block templates
   +playgroundCardTemplate()
   +dummyCardTemplate()
   +searchCardTemplate()
+
+block global_js
+  +user_exposure()
 
 block contextual_js
   +load_driver()

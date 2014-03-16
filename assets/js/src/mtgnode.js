@@ -10,6 +10,9 @@
   var _config = {
     domino: {
       verbose: true
+    },
+    realtime: {
+      debug: true
     }
   };
 

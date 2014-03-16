@@ -19,7 +19,7 @@ exports.login = function(req, res) {
     // Rendering the view
     res.view('login/login', {users: users});
   });
-}
+};
 
 // Ajax Connection Attempt
 exports.authenticate = function(req, res) {
@@ -38,4 +38,4 @@ exports.authenticate = function(req, res) {
       res.json({authenticated: false});
     }
   );
-}
+};
