@@ -7,25 +7,23 @@ $(document).ready(function() {
       $game_name = $("#host_game_name"),
       $game_list = $("#game_list");
 
-
   // Events
   //-------
 
   // Fetching Games
   socket.get('/game/get_and_clean', function(games) {
-    console.log(games);
     games.forEach(function(game){
       $game_list.append(_renderListItem(game));
     });
   });
 
   // Adding and Deleting Games
-  socket.on('message', function(message) {
+  socket.on('game', function(message) {
 
     // Verb condition
-    if(message.verb == 'create')
+    if(message.verb == 'created')
       _renderListItem(message.data);
-    else if(message.verb == 'destroy')
+    else if(message.verb == 'destroyed')
       _destroyListItem(message.id);
   });
 
@@ -53,7 +51,6 @@ $(document).ready(function() {
       '" ><a href="/playground/' +
       game.id + '">' + game.name + '</a></li>');
   }
-
 
   // Destroy list item
   function _destroyListItem(id) {

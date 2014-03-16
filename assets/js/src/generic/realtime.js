@@ -53,6 +53,19 @@
     }
   };
 
+  // Firehose Debug
+  if (mtgnode.config.realtime.debug)
+    socket.get('/firehose', function() {
+
+      console.log('Firehose online...');
+
+      // Attach a listener which fires every time Sails publishes
+      // message to the firehose.
+      socket.on('firehose', function(m) {
+        console.log('FIREHOSE (debug): Sails published a message ::\n', m);
+      });
+    });
+
   /**
    * Exporting
    * ----------
