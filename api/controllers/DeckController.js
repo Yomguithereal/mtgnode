@@ -4,11 +4,12 @@
  * @description ::
  * @docs        :: http://sailsjs.org/#!documentation/controllers
  */
-var card_library = require('../libraries/Card');
+var card_library = require('../libraries/Card'),
+    deck_library = require('../libraries/Deck');
 
 module.exports = {
   parse: function(req, res) {
-    // TODO
+    res.json(deck_library.parse(req.param('text'), req.param('format')));
   },
   detail: function(req, res) {
 

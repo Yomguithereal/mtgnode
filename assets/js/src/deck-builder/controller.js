@@ -102,8 +102,9 @@
         id: 'parseDeck',
         setter: 'deckCards',
         url: '/deck/parse',
-        type: 'GET',
-        dataType: 'json'
+        type: 'POST',
+        dataType: 'json',
+        contentType: 'json'
       },
       {
         id: 'createDeck',
@@ -245,9 +246,7 @@
 
           // Calling service
           this.request('parseDeck', {
-            data: {
-              deck: JSON.stringify(e.data)
-            }
+            data: e.data
           });
         }
       }
