@@ -122,7 +122,10 @@
       {
         id: 'updateDeck',
         url: 'deck/update/:id',
-        succes: function() {
+        type: 'POST',
+        dataType: 'json',
+        contentType: 'json',
+        success: function() {
           this.dispatchEvent('savedDeck');
         }
       },
@@ -161,7 +164,7 @@
               id: e.data.deck
             }
           });
-          this.deckId = e.data.deck;
+          this.deckId = +e.data.deck;
           this.deckName = e.data.name;
         }
       },
@@ -194,6 +197,7 @@
             return false;
 
           // Calling service
+          console.log(deckId);
           if (!deckId)
             this.request('createDeck', {
               data: {
@@ -202,6 +206,16 @@
                 cards: _helpers.cardsToMultiverseIdArray(deckCards)
               }
             });
+          else
+            this.request('updateDeck', {
+              shortcuts: {
+                id: deckId
+              },
+              data: {
+                name: deckName,
+                cards: _helpers.cardsToMultiverseIdArray(deckCards)
+              }
+            })
         }
       },
       {
