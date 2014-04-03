@@ -6,11 +6,6 @@
    * =============================
    *
    */
-  var drivers = {
-    my: new mtgnode.driver('my'),
-    op: new mtgnode.driver('op')
-  };
-
   function Area(id) {
     domino.mtgnode.call(this);
     var _this = this,
@@ -18,12 +13,10 @@
 
     // Possibilities
     this.my = {
-      $area: $('#bottom_' + _name),
-      driver: drivers.my,
+      $area: $('#bottom_' + _name)
     };
     this.op = {
-      $area: $('#top_' + _name),
-      driver: drivers.op
+      $area: $('#top_' + _name)
     };
 
     // Methods

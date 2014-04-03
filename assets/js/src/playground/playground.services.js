@@ -16,7 +16,12 @@
       contentType: 'json',
       success: function(deck) {
         this['my-deck'] = deck;
-        this['my-library'] = _.shuffle(deck.cards);
+        this['my-library'] = _.shuffle(
+          playground.helpers.overloadCards(
+            playground.drivers.my,
+            deck.cards
+          )
+        );
       }
     },
     {
@@ -27,7 +32,10 @@
       contentType: 'json',
       success: function(deck) {
         this['op-deck'] = deck;
-        this['op-library'] = deck.cards;
+        this['op-library'] = playground.helpers.overloadCards(
+          playground.drivers.op,
+          deck.cards
+        );
       }
     }
   ];

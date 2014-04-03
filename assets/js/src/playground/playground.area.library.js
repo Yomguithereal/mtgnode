@@ -14,7 +14,7 @@
     playground.area.call(this, _name);
 
     // Properties
-    this.dummy = this.my.driver.renderDummy();
+    this.dummy = playground.drivers.my.renderDummy();
 
     // Emitters
     //----------

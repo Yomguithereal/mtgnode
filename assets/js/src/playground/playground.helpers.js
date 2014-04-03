@@ -19,6 +19,19 @@
     addToHacks: function(array) {
       playground.hacks = playground.hacks.concat(array);
     },
+    overloadCards: function(driver, cards) {
+      return cards.map(function(card, i) {
+
+        // Unique id
+        card.id = i;
+
+        // Html
+        card.html = driver.render(card, card.id);
+        card.search_html = driver.renderSearch(card, card.id);
+
+        return card;
+      });
+    },
     fromTo:   function (d, from, to, id) {
       var fromModel = d.get(from),
           toModel = d.get(to);
