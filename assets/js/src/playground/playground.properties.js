@@ -33,52 +33,58 @@
         value: {}
       },
       {
+        id: 'my-deck',
+        type: 'object',
+        value: [],
+        dispatch: 'my-deck.updated'
+      },
+      {
         id: 'my-hitpoints',
         type: 'number',
         value: 20,
-        dispatch: 'my.hitpoints.updated'
+        dispatch: 'my-hitpoints.updated'
       },
       {
         id: 'my-infection',
         type: 'number',
         value: 0,
-        dispatch: 'my.infection.updated'
+        dispatch: 'my-infection.updated'
       },
       {
         id: 'my-turn',
         type: 'boolean',
         value: false,
-        dispatch: 'my.turn.updated'
+        dispatch: 'my-turn.updated'
       },
       {
-        id: 'my-deck',
+        id: 'my-library',
         type: 'array',
         value: [],
-        dispatch: 'my.deck.updated'
+        dispatch: 'my-library.updated'
       },
       {
         id: 'my-hand',
         type: 'array',
         value: [],
-        dispatch: 'my.hand.updated'
+        dispatch: 'my-hand.updated'
       },
       {
         id: 'my-battlefield',
         type: 'array',
         value: [],
-        dispatch: 'my.battlefield.updated'
+        dispatch: 'my-battlefield.updated'
       },
       {
         id: 'my-graveyard',
         type: 'array',
         value: [],
-        dispatch: 'my.graveyard.updated'
+        dispatch: 'my-graveyard.updated'
       },
       {
         id: 'my-exile',
         type: 'array',
         value: [],
-        dispatch: 'my.exile.updated'
+        dispatch: 'my-exile.updated'
       },
 
       // Opponent
@@ -93,52 +99,58 @@
         value: {}
       },
       {
+        id: 'op-deck',
+        type: 'object',
+        value: {},
+        dispatch: 'op-deck.updated'
+      },
+      {
         id: 'op-hitpoints',
         type: 'number',
         value: 20,
-        dispatch: 'op.hitpoints.updated'
+        dispatch: 'op-hitpoints.updated'
       },
       {
         id: 'op-infection',
         type: 'number',
         value: 0,
-        dispatch: 'op.infection.updated'
+        dispatch: 'op-infection.updated'
       },
       {
         id: 'op-turn',
         type: 'boolean',
         value: false,
-        dispatch: 'op.turn.updated'
+        dispatch: 'op-turn.updated'
       },
       {
-        id: 'op-deck',
+        id: 'op-library',
         type: 'array',
         value: [],
-        dispatch: 'op.deck.updated'
+        dispatch: 'op-library.updated'
       },
       {
         id: 'op-hand',
         type: 'array',
         value: [],
-        dispatch: 'op.hand.updated'
+        dispatch: 'op-hand.updated'
       },
       {
         id: 'op-battlefield',
         type: 'array',
         value: [],
-        dispatch: 'op.battlefield.updated'
+        dispatch: 'op-battlefield.updated'
       },
       {
         id: 'op-graveyard',
         type: 'array',
         value: [],
-        dispatch: 'op.graveyard.updated'
+        dispatch: 'op-graveyard.updated'
       },
       {
         id: 'op-exile',
         type: 'array',
         value: [],
-        dispatch: 'op.exile.updated'
+        dispatch: 'op-exile.updated'
       }
     ];
 

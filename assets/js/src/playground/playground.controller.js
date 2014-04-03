@@ -25,8 +25,20 @@
     hacks: playground.hacks
   });
 
+  function _m(fn, args) {
+    _controller.addModule(fn, args);
+  }
+
   // Basic Modules
-  playground.modules = _controller.addModule(dominoRealtime.module);
+  playground.modules = {
+    realtime: _m(dominoRealtime.module),
+    modals: {
+      deckChoice: _m(playground.modules.modals.deckChoice)
+    }
+  };
+
+  // Connecting to the game
+  realtime.connect('/playground/' + GAME.id + '/connect');
 
   // Widgets
   $('#card_viewer_widget').cardViewerWidget({

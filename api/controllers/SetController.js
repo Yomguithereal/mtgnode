@@ -12,7 +12,7 @@ module.exports = {
         setInfo = set_library.getSetInfo(wanted_set);
 
     if (!setInfo)
-      res.json({error: 'inexistant set'});
+      res.notFound();
     else
       res.json(setInfo);
   },
@@ -25,6 +25,6 @@ module.exports = {
     if (set_library.getSetInfo(wanted_set))
       res.json(set_library.getCards(wanted_set));
     else
-      res.json({error: 'inexistant set'});
+      res.notFound();
   }
 };

@@ -32,7 +32,7 @@ mixin parse_deck_modal()
           button#parse_confirm(type='button', class="btn btn-primary") Parse
 
 //- Deck choice modal
-mixin deck_choice_modal()
+mixin deck_choice_modal(decks)
   div#deck_choice_modal.modal.fade
     div.modal-dialog
       div.modal-content
@@ -40,6 +40,8 @@ mixin deck_choice_modal()
           h3 Choose your deck
         div.modal-body
           select#deck_select.form-control
+            for deck in decks
+              option(value=deck.id, data=JSON.stringify(deck.cards))= deck.name
         div.modal-footer
           button#deck_validate.btn Select this deck
 

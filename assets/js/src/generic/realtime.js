@@ -23,9 +23,9 @@
           domino.module.call(this);
           var _this = this;
 
-          socket.on('message', function(e) {
-            if (e.verb === 'update')
-              _this.dispatchEvent('realtime.send', e.data);
+          socket.on('game', function(e) {
+            if (e.verb === 'updated')
+              _this.dispatchEvent('realtime.receive', e.data);
           });
         },
         hacks: [

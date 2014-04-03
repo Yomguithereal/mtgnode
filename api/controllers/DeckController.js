@@ -15,6 +15,12 @@ module.exports = {
 
     // Fectching deck
     Deck.findOne(req.param('id'), function(err, deck) {
+
+      if (deck === undefined) {
+        res.notFound();
+        return false;
+      }
+
       deck.cards = card_library.getByIdArray(deck.cards);
       res.json(deck);
     });

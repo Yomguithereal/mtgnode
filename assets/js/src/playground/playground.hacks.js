@@ -26,6 +26,20 @@
         // Passing to deck choice modal
         this.dispatchEvent('deck.choice');
       }
+    },
+    {
+      triggers: ['my-deck.selected', 'op-deck.selected'],
+      method: function(e) {
+        var service = (e.type === 'my-deck.selected') ?
+          'getMyDeckCards' :
+          'getOpDeckCards';
+
+        this.request(service, {
+          shortcuts: {
+            id: e.data
+          }
+        });
+      }
     }
   ];
 

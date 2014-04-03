@@ -13,7 +13,7 @@ module.exports = {
     if (card)
       res.json(card);
     else
-      res.json({error: 'inexistant card'});
+      res.notFound();
   },
   batch_cards: function(req, res) {
     var batch = JSON.parse(req.param('cards'));

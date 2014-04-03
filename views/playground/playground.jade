@@ -84,7 +84,7 @@ block body
           div#bottom_hand.hand-emplacement.bottom
 
 block modals
-  +deck_choice_modal()
+  +deck_choice_modal(decks)
   +card_choice_modal()
 
 block context_menus
@@ -116,4 +116,7 @@ block contextual_js
   script(type="text/javascript", src="/js/src/playground/playground.hacks.js")
   script(type="text/javascript", src="/js/src/playground/playground.properties.js")
   script(type="text/javascript", src="/js/src/playground/playground.services.js")
+
+  for m in ['modals']
+    script(type="text/javascript", src="/js/src/playground/playground.module." + m + ".js")
   script(type="text/javascript", src="/js/src/playground/playground.controller.js")

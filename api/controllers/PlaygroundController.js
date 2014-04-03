@@ -8,26 +8,36 @@ module.exports = {
 
   // Index
   playground: function(req, res) {
+    var uid = req.session.user.id;
 
-    // Debug case-
-    if (req.param('id') === 'debug') {
-      Game.create({name: 'Debug', debug: true}, function(err, game) {
-        res.view('playground/playground', {game_id: game.id, debug: true});
-      });
+    // Finding the player's deck
+    Deck.find({user_id: uid}, function(err, decks) {
 
-      return false;
-    }
-
-    // Trying to find the game
-    Game.find(req.param('id'), function(err, game) {
-
-      if (!game.length)
-        res.json(404, {error: 'inexistant_room'});
-      else
-        res.view('playground/playground', {
-          game_id: game.id,
-          debug: false
+      // Debug case
+      if (req.param('id') === 'debug') {
+        Game.create({name: 'Debug', debug: true}, function(err, game) {
+          res.view('playground/playground', {
+            game_id: game.id,
+            debug: true,
+            decks: decks
+          });
         });
+
+        return false;
+      }
+
+      // Trying to find the game
+      Game.find(req.param('id'), function(err, game) {
+
+        if (!game.length)
+          res.json(404, {error: 'inexistant_room'});
+        else
+          res.view('playground/playground', {
+            game_id: game.id,
+            debug: false,
+            decks: decks
+          });
+      });
     });
   },
 
