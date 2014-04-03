@@ -25,7 +25,7 @@ module.exports = {
         res.json(404, {error: 'inexistant_room'});
       else
         res.view('playground/playground', {
-          game_id: game.id
+          game_id: game.id,
           debug: false
         });
     });
