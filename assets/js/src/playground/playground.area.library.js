@@ -29,6 +29,16 @@
 
     // Receptors
     //-----------
+    this.onUpdate(function(side, card, cards) {
+      var $area = _this[side].$area;
+
+      if (!cards.length)
+        $area.empty();
+      else
+        if (!$area.children().length)
+          $area.append(dummy);
+    });
+
     this.triggers.events['deck.selected'] = function(d, e) {
 
       _this[e.data.side].$area.append(_this.dummy);

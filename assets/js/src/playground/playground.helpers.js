@@ -19,11 +19,14 @@
     addToHacks: function(array) {
       playground.hacks = playground.hacks.concat(array);
     },
-    overloadCards: function(driver, cards) {
+    overloadCards: function(driver, cards, side) {
       return cards.map(function(card, i) {
 
         // Unique id
         card.id = i;
+
+        // Side
+        card.side = side;
 
         // Html
         card.html = driver.render(card, card.id);

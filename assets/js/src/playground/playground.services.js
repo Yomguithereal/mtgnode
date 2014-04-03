@@ -19,7 +19,8 @@
         this['my-library'] = _.shuffle(
           playground.helpers.overloadCards(
             playground.drivers.my,
-            deck.cards
+            deck.cards,
+            'my'
           )
         );
       }
@@ -34,7 +35,8 @@
         this['op-deck'] = deck;
         this['op-library'] = playground.helpers.overloadCards(
           playground.drivers.op,
-          deck.cards
+          deck.cards,
+          'op'
         );
       }
     }

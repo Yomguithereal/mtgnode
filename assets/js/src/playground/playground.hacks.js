@@ -74,6 +74,9 @@
           );
         }
       }
+    },
+    {
+      triggers: 'card.dragged'
     }
   ];
 
