@@ -28,17 +28,51 @@
       }
     },
     {
-      triggers: ['my-deck.selected', 'op-deck.selected'],
+      triggers: ['deck.selected'],
       method: function(e) {
-        var service = (e.type === 'my-deck.selected') ?
+        var service = (e.data.side === 'my') ?
           'getMyDeckCards' :
           'getOpDeckCards';
 
         this.request(service, {
           shortcuts: {
-            id: e.data
+            id: e.data.id
           }
         });
+      }
+    },
+    {
+      triggers: ['card.move'],
+      method: function(e) {
+        if (e.data.side === 'my') {
+          var card = playground.helpers.fromTo(
+            this,
+            'my-' + e.data.from,
+            'my-' + e.data.to,
+            e.data.id
+          );
+
+          if (!card)
+            return false;
+
+          this.dispatchEvent('realtime.send', {
+            head: 'card.move', 
+            body: {
+              id: card.id,
+              side: 'op',
+              from: e.data.from,
+              to: e.data.to
+            }
+          });
+        }
+        else {
+          playground.helpers.fromTo(
+            this,
+            'op-' + e.data.from,
+            'op-' + e.data.to,
+            e.data.id
+          );
+        }
       }
     }
   ];

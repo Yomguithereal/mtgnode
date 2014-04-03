@@ -35,7 +35,7 @@
       {
         id: 'my-deck',
         type: 'object',
-        value: [],
+        value: {},
         dispatch: 'my-deck.updated'
       },
       {

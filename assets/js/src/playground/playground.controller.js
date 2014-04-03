@@ -29,8 +29,22 @@
     _controller.addModule(fn, args);
   }
 
+  // Delayed Modules
+  function DelayedModules() {
+    domino.module.call(this);
+
+    this.triggers.events['modules.delayed'] = function() {
+      
+      ['library', 'hand'].map(function(area) {
+        playground.modules.areas[area] = _m(playground.areas[area]);
+      });
+    };
+  }
+
   // Basic Modules
   playground.modules = {
+    areas: {},
+    delayed: _m(DelayedModules),
     realtime: _m(dominoRealtime.module),
     modals: {
       deckChoice: _m(playground.modules.modals.deckChoice)

@@ -23,8 +23,8 @@ block body
         div.message-receiver.top &nbsp;
         div.counters.top
           div.btn-group
-            button.btn.btn-default.btn-xs(type="button") Deck
-            button.btn.btn-default.btn-xs.deck-counter.top(type="button") 0
+            button.btn.btn-default.btn-xs(type="button") Library
+            button.btn.btn-default.btn-xs.library-counter.top(type="button") 0
           div.btn-group
             button.btn.btn-default.btn-xs(type="button") Hand
             button.btn.btn-default.btn-xs.hand-counter.top(type="button") 0
@@ -50,8 +50,8 @@ block body
         div.message-receiver.bottom &nbsp;
         div.counters.bottom
           div.btn-group
-            button.btn.btn-default.btn-xs(type="button") Deck
-            button.btn.btn-default.btn-xs.deck-counter.bottom(type="button") 0
+            button.btn.btn-default.btn-xs(type="button") Library
+            button.btn.btn-default.btn-xs.library-counter.bottom(type="button") 0
           div.btn-group
             button.btn.btn-default.btn-xs(type="button") Hand
             button.btn.btn-default.btn-xs.hand-counter.bottom(type="button") 0
@@ -69,18 +69,18 @@ block body
           button#chat_trigger.btn.btn-primary(type="button") Chat
     div#game_block.game-area
       div#top_game_block.top.player-side
-        div#top_handlogic.deck-and-hand.top
+        div#top_handlogic.library-and-hand.top
           div#top_exile.exile-emplacement.top
           div#top_graveyard.graveyard-emplacement.top
-          div#top_deck.deck-emplacement.top
+          div#top_library.library-emplacement.top
           div#top_hand.hand-emplacement.top
         div#top_game_zone.game-emplacement.top.valid-drag-zone
       div#bottom_game_block.bottom.player-side
         div#bottom_game_zone.game-emplacement.bottom.valid-drag-zone
-        div#bottom_handlogic.deck-and-hand.bottom.valid-drag-zone
+        div#bottom_handlogic.library-and-hand.bottom.valid-drag-zone
           div#bottom_exile.exile-emplacement.bottom
           div#bottom_graveyard.graveyard-emplacement.bottom
-          div#bottom_deck.deck-emplacement.bottom
+          div#bottom_library.library-emplacement.bottom
           div#bottom_hand.hand-emplacement.bottom
 
 block modals
@@ -116,7 +116,10 @@ block contextual_js
   script(type="text/javascript", src="/js/src/playground/playground.hacks.js")
   script(type="text/javascript", src="/js/src/playground/playground.properties.js")
   script(type="text/javascript", src="/js/src/playground/playground.services.js")
+  script(type="text/javascript", src="/js/src/playground/playground.area.js")
 
-  for m in ['modals']
-    script(type="text/javascript", src="/js/src/playground/playground.module." + m + ".js")
+  for module in ['modals']
+    script(type="text/javascript", src="/js/src/playground/playground.module." + module + ".js")
+  for area in ['library', 'hand']
+    script(type="text/javascript", src="/js/src/playground/playground.area." + area + ".js")
   script(type="text/javascript", src="/js/src/playground/playground.controller.js")

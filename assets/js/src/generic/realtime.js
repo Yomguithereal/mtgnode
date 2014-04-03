@@ -17,6 +17,19 @@
     connect: function(url, cb) {
       socket.get(url, cb);
     },
+    bootstrap: function(o) {
+      o.dispatchRealtimeEvent = function(head, body) {
+        this.dispatchEvent('realtime.send', {
+          head: head,
+          body: _.merge(body, {side: 'op'})
+        });
+      };
+
+      o.dispatchBothEvents = function(head, body) {
+        this.dispatchRealtimeEvent(head, body);
+        this.dispatchEvent(head, _.merge(body, {side: 'my'}));
+      };
+    },
     domino: function(game_id) {
       return {
         module: function() {
@@ -52,6 +65,13 @@
       };
     }
   };
+
+  // Creating the dispatchRealtimeEvent
+  if (domino !== undefined)
+    domino.mtgnode = function() {
+      domino.module.call(this);
+      _realtime.bootstrap(this);
+    }
 
   // Firehose Debug
   if (mtgnode.config.realtime.debug)

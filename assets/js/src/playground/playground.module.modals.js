@@ -9,7 +9,7 @@
    */
 
   function DeckChoiceModal() {
-    domino.module.call(this);
+    domino.mtgnode.call(this);
     var _this = this;
 
     // Selectors
@@ -23,10 +23,8 @@
 
       var deck_id = $select.val();
 
-      _this.dispatchEvent('my-deck.selected', deck_id);
-      _this.dispatchEvent('realtime.send', {
-        head: 'op-deck.selected',
-        body: deck_id
+      _this.dispatchBothEvents('deck.selected', {
+        id: deck_id
       });
 
       $modal.modal('hide');

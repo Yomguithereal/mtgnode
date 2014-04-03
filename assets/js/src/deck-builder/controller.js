@@ -268,7 +268,7 @@
     var $set_select = $('#set_select'),
         $panel = $('#left_panel');
 
-    // Emettor
+    // Emitter
     //---------
     $set_select.change(function() {
       var set = $(this).val();
@@ -306,7 +306,7 @@
     var $deck_select = $('#deck_select'),
         $panel = $('#right_panel');
 
-    // Emettor
+    // Emitter
     //---------
     $deck_select.change(function(){
       var deck = $(this).val();
@@ -356,7 +356,7 @@
     var $delete_modal = $('#delete_deck_modal'),
         $parse_modal = $('#parse_deck_modal');
 
-    // Emettor
+    // Emitter
     //---------
 
     // Update name
