@@ -10,6 +10,7 @@
 
   // Modules
   utilities.pkg('playground.modules');
+  var areas = ['library', 'hand', 'exile', 'graveyard', 'battlefield'];
 
   // Domino settings
   domino.settings(mtgnode.config.domino);
@@ -35,7 +36,7 @@
 
     this.triggers.events['modules.delayed'] = function() {
       
-      ['library', 'hand'].map(function(area) {
+      areas.map(function(area) {
         playground.modules.areas[area] = _m(playground.areas[area]);
       });
     };
