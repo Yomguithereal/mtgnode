@@ -35,6 +35,16 @@
 
     this.triggers.events['modules.delayed'] = function() {
 
+      // Points
+      playground.registers.points.my.hitpoints = _m(
+        playground.modules.points, ['hitpoints', 'my']);
+      playground.registers.points.my.infection = _m(
+        playground.modules.points, ['infection', 'my']);
+      playground.registers.points.op.hitpoints = _m(
+        playground.modules.points, ['hitpoints', 'op']);
+      playground.registers.points.op.hitpoints = _m(
+        playground.modules.points, ['infection', 'op']);
+
       // Registering areas for both my and op side and some interface
       areas.map(function(area) {
 

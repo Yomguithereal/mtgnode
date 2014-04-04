@@ -42,13 +42,15 @@
         id: 'my-hitpoints',
         type: 'number',
         value: 20,
-        dispatch: 'my-hitpoints.updated'
+        dispatch: 'my-hitpoints.updated',
+        triggers: 'my-hitpoints.update'
       },
       {
         id: 'my-infection',
         type: 'number',
         value: 0,
         dispatch: 'my-infection.updated'
+        triggers: 'my-infection.update'
       },
       {
         id: 'my-turn',
@@ -108,13 +110,15 @@
         id: 'op-hitpoints',
         type: 'number',
         value: 20,
-        dispatch: 'op-hitpoints.updated'
+        dispatch: 'op-hitpoints.updated',
+        triggers: 'op-hitpoints.update'
       },
       {
         id: 'op-infection',
         type: 'number',
         value: 0,
-        dispatch: 'op-infection.updated'
+        dispatch: 'op-infection.updated',
+        triggers: 'op-infection.update'
       },
       {
         id: 'op-turn',

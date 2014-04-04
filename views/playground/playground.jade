@@ -12,14 +12,14 @@ block body
   div#mainframe.clearfix
     div#helper_block
       div#top_helper_block
-        div.life-block.btn-group
-          button.btn.btn-default.lose.update-life.top(type="button") -
-          button.btn.btn-default.life-counter.top(type="button") 20
-          button.btn.btn-default.gain.update-life.top(type="button") +
-        div.infect-block.btn-group
-          button.btn.btn-default.lose.update-infect.top(type="button") -
-          button.btn.btn-default.infect-counter.top(type="button") 0
-          button.btn.btn-default.gain.update-infect.top(type="button") +
+        div.hitpoints-block.btn-group
+          button.btn.btn-default.lose.update-hitpoints.top(type="button") -
+          button.btn.btn-default.hitpoints-counter.top(type="button") 20
+          button.btn.btn-default.gain.update-hitpoints.top(type="button") +
+        div.infection-block.btn-group
+          button.btn.btn-default.lose.update-infection.top(type="button") -
+          button.btn.btn-default.infection-counter.top(type="button") 0
+          button.btn.btn-default.gain.update-infection.top(type="button") +
         div.message-receiver.top &nbsp;
         div.counters.top
           div.btn-group
@@ -39,14 +39,14 @@ block body
             button.btn.btn-default.btn-xs.exile-counter.top(type="button") 0
       +card_viewer_widget()
       div#bottom_helper_block
-        div.life-block.btn-group
-          button.btn.btn-default.top.lose.update-life(type="button") -
-          button.btn.btn-default.life-counter.top(type="button") 20
-          button.btn.btn-default.bottom.gain.update-life(type="button") +
-        div.infect-block.btn-group
-          button.btn.btn-default.lose.update-infect.bottom(type="button") -
-          button.btn.btn-default.infect-counter.bottom(type="button") 0
-          button.btn.btn-default.gain.update-infect.bottom(type="button") +
+        div.hitpoints-block.btn-group
+          button.btn.btn-default.top.lose.update-hitpoints(type="button") -
+          button.btn.btn-default.hitpoints-counter.top(type="button") 20
+          button.btn.btn-default.bottom.gain.update-hitpoints(type="button") +
+        div.infection-block.btn-group
+          button.btn.btn-default.lose.update-infection.bottom(type="button") -
+          button.btn.btn-default.infection-counter.bottom(type="button") 0
+          button.btn.btn-default.gain.update-infection.bottom(type="button") +
         div.message-receiver.bottom &nbsp;
         div.counters.bottom
           div.btn-group
@@ -118,7 +118,7 @@ block contextual_js
   script(type="text/javascript", src="/js/src/playground/playground.services.js")
   script(type="text/javascript", src="/js/src/playground/playground.area.js")
 
-  for module in ['modals', 'counter', 'drag']
+  for module in ['modals', 'counter', 'points','drag']
     script(type="text/javascript", src="/js/src/playground/playground.module." + module + ".js")
   for area in ['library', 'hand', 'exile', 'graveyard', 'battlefield']
     script(type="text/javascript", src="/js/src/playground/playground.area." + area + ".js")
