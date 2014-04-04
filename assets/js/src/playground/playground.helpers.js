@@ -16,9 +16,22 @@
         return typeof e === 'object' ? e : {triggers: e};
       });
     },
+
+    // Add an array of hacks to the dominio hacks
     addToHacks: function(array) {
       playground.hacks = playground.hacks.concat(_helpers.toHacks(array));
     },
+
+    // Update the z-index of a single card
+    updateZ: function($card) {
+      if ($card.hasClass('enchantment') &&
+          $card.hasClass('ui-draggable-dragging'))
+        $card.css('z-index', playground.config.maxZ);
+      else
+        $card.css('z-index', ++playground.config.maxZ);
+    },
+
+    // Overload a card array received from server with some useful properties
     overloadCards: function(driver, cards, side) {
       return cards.map(function(card, i) {
 
@@ -35,7 +48,9 @@
         return card;
       });
     },
-    fromTo:   function (d, from, to, id) {
+
+    // Transfer a card from a domino property to another
+    fromTo: function (d, from, to, id) {
       var fromModel = d.get(from),
           toModel = d.get(to);
 
@@ -49,7 +64,7 @@
       }
       else {
         var card = _.remove(fromModel, function(c) {
-          return c.id === id;
+          return c.id === +id;
         })[0];
       }
 

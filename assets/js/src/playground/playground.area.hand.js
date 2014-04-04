@@ -23,44 +23,8 @@
     this.offset = this.baseOffset;
     this.top = (side === 'op') ? 0 : $game.height() - this.$library.height();
 
-    // Helpers
-    this.makeDraggable = function($card, fn) {
-      var snap_zones = [
-        '.hand-emplacement.bottom',
-        '.game-emplacement.bottom',
-        '.graveyard-emplacement.bottom',
-        '.exile-emplacement.bottom'
-      ];
-
-      $card.draggable({
-        containment: '.game-area',
-        snap: snap_zones.join(', '),
-        grid: [10, 10],
-        drag: fn
-      });
-
-      $card.draggable('enable');
-    };
-
     // DOM Manipulation
     //------------------
-    function onDrag(e, ui) {
-      var $card = $(ui.helper);
-
-      // Update z index
-      _this.updateZ($card);
-
-      // Retrieving position and sending to opponent
-      var pos = {
-        left: ui.position.left,
-        top: ui.position.top,
-        zindex: $card.css('z-index'),
-        id: $card.attr('number')
-      };
-
-      _this.dispatchRealtimeEvent('card.dragged', pos);
-    }
-
     function drawCard(d, e) {
 
       // Appending to DOM
@@ -83,7 +47,7 @@
         $card.removeClass('flipped');
 
         // Register draggable
-        _this.makeDraggable($card, onDrag);
+        playground.registers.drag.add($card);
 
       }
       else {
@@ -114,7 +78,7 @@
         var to_position = left + _this.offset * i;
 
         // z-index
-        _this.updateZ($(this));
+        playground.helpers.updateZ($(this));
 
         // Animating
         $(this).animate({
@@ -140,9 +104,6 @@
 
     // Receptors
     //-----------
-    this.onUpdate(function(cards) {
-      console.log(cards);
-    });
     this.onEvent('card.drawn', drawCard);
     this.onEvent('hand.reorganize', reorganize);
 

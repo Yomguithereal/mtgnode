@@ -27,7 +27,7 @@
   });
 
   function _m(fn, args) {
-    _controller.addModule(fn, args);
+    return _controller.addModule(fn, args);
   }
 
   // Delayed Modules
@@ -66,6 +66,7 @@
       op: {}
     },
     delayed: _m(DelayedModules),
+    drag: _m(playground.modules.drag),
     realtime: _m(dominoRealtime.module),
     modals: {
       deckChoice: _m(playground.modules.modals.deckChoice)

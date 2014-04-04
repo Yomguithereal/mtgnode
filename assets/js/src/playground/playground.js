@@ -7,11 +7,15 @@
    *
    * Register some global configuration.
    */
-  var _config = {},
-      _drivers = {
-        my: new mtgnode.driver('my'),
-        op: new mtgnode.driver('op')
-      };
+  var _config = {
+    baseZ: 30,
+    maxZ: 30
+  };
+
+  var _drivers = {
+    my: new mtgnode.driver('my'),
+    op: new mtgnode.driver('op')
+  };
 
   /**
    * Exporting

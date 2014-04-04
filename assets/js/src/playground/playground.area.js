@@ -6,16 +6,12 @@
    * =============================
    *
    */
-  var baseZ = 30,
-      maxZ = 30;
-
   function Area(side) {
     realtime.bootstrap(this);
     var _this = this;
 
     // Properties
     this.side = side;
-    this.maxZ = maxZ;
     this.driver = playground.drivers[this.side];
     this.pos = this.side === 'my' ? 'bottom' : 'top';
     this.cards = '.card-min.in-' + this.name + '.' + this.side;
@@ -84,14 +80,6 @@
         id: id,
         event: e
       });
-    };
-
-    this.updateZ = function($card) {
-      if ($card.hasClass('enchantment') &&
-          $card.hasClass('ui-draggable-dragging'))
-        $card.css('z-index', this.maxZ);
-      else
-        $card.css('z-index', ++this.maxZ);
     };
 
     this.selectCard = function(card) {
