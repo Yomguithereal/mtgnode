@@ -33,7 +33,6 @@
     domino: function(game_id) {
       return {
         module: function() {
-          domino.module.call(this);
           var _this = this;
 
           socket.on('game', function(e) {
@@ -65,13 +64,6 @@
       };
     }
   };
-
-  // Creating the dispatchRealtimeEvent
-  if (domino !== undefined)
-    domino.mtgnode = function() {
-      domino.module.call(this);
-      _realtime.bootstrap(this);
-    }
 
   // Firehose Debug
   if (mtgnode.config.realtime.debug)

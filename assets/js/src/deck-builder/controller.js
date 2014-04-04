@@ -257,7 +257,6 @@
   // Left Panel
   //============
   function LeftPanel() {
-    domino.module.call(this);
 
     // Variables
     var _this = this,
@@ -295,7 +294,6 @@
   // Right Panel
   //=============
   function RightPanel() {
-    domino.module.call(this);
 
     // Variables
     var _this = this,
@@ -333,7 +331,6 @@
   // Controls
   //==========
   function Controls() {
-    domino.module.call(this);
 
     // Variables
     var _this = this;

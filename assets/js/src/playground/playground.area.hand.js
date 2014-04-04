@@ -15,18 +15,15 @@
 
     // Selectors
     var $game = $('#game_block');
-    this.$library = ('#' + this.pos + '_library');
+    this.$library = $('#' + this.pos + '_library');
 
     // Properties
     this.revealed = false;
     this.baseOffset = 77;
     this.offset = this.baseOffset;
+    this.top = (side === 'op') ? 0 : $game.height() - this.$library.height();
 
     // Helpers
-    this.top = function(side) {
-      return side === 'op' ? 0 : $game.height() - this.$library.height();
-    };
-
     this.makeDraggable = function($card, fn) {
       var snap_zones = [
         '.hand-emplacement.bottom',
@@ -64,23 +61,23 @@
       _this.dispatchRealtimeEvent('card.dragged', pos);
     }
 
-    function drawCard(side, card) {
+    function drawCard(d, e) {
 
       // Appending to DOM
-      var $card = $(card.html);
+      var $card = $(e.data.card.html);
       $game.append($card);
 
       // Position
       $card.css({
         left: _this.$library.position().left,
-        top: _this.top(side)
+        top: _this.top
       });
 
       // Reorganizing
-      reorganize(side);
+      reorganize();
 
       // Specific to my side
-      if (side === 'my') {
+      if (_this.side === 'my') {
 
         // Reveal the card
         $card.removeClass('flipped');
@@ -97,7 +94,7 @@
       }
     }
 
-    function reorganize(side) {
+    function reorganize() {
       var $cards = $(_this.cards);
       $cards.show();
 
@@ -105,7 +102,7 @@
       var $area = _this.$area,
           width = $area.width(),
           left = $area.position().left,
-          top = _this.top(side);
+          top = _this.top;
 
       // Is there place in the hand?
       if ($cards.length * _this.offset > width)
@@ -127,9 +124,27 @@
       });
     }
 
+    // Emitters
+    //----------
+    this.drop = {
+      tolerance: 'intersect',
+      onSameArea: function() {
+
+        // Reorganize hand
+        _this.dispatchBothEvents('hand.reorganize', {reason: 'move-in-hand'});
+
+        // Breaking
+        return false;
+      }
+    };
+
     // Receptors
     //-----------
-    this.onUpdate(drawCard);
+    this.onUpdate(function(cards) {
+      console.log(cards);
+    });
+    this.onEvent('card.drawn', drawCard);
+    this.onEvent('hand.reorganize', reorganize);
 
     this.init();
   }
@@ -138,5 +153,6 @@
    * Exporting
    * ----------
    */
+  playground.helpers.addToHacks(['hand.reorganize']);
   utilities.pkg('playground.areas.hand', Hand);
 }).call(this);

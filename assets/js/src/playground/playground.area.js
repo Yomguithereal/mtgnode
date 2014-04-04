@@ -10,7 +10,7 @@
       maxZ = 30;
 
   function Area(side) {
-    domino.mtgnode.call(this);
+    realtime.bootstrap(this);
     var _this = this;
 
     // Properties
@@ -27,17 +27,62 @@
     // Methods
     this.init = function() {
 
-      // Workflow
-      if (this.side === 'my' && sidethis.emitters !== undefined)
-        this.emitters();
+      // My workflow
+      if (this.side === 'my') {
+
+        // Emitters
+        if (this.emitters !== undefined)
+          this.emitters();
+
+        // Droppable
+        if (this.drop !== undefined)
+          (this.drop.$sel || this.$area).droppable({
+            tolerance: this.drop.tolerance || 'intersect',
+            drop: function(e, ui) {
+              var $card = $(ui.draggable),
+                  cls = _.find($card.attr('class').split(' '), function(c) {
+                    return c.slice(0, 3) === 'in-';
+                  }).slice(3);
+
+              // Case when the model is the same
+              if (cls === _this.name) {
+                var shouldBreak = true;
+
+                if (_this.drop.onSameArea !== undefined)
+                  shouldBreak = !_this.drop.onSameArea($card);
+                
+                if (shouldBreak)
+                  return false;
+              }
+
+              // Moving the card accordingly
+              _this.moveFrom(cls, $card.attr('number'));
+
+              // Updating classes
+              $card.removeClass('in-' + cls);
+              $card.addClass('in-' + _this.name);
+            }
+          });
+      }
     };
 
-    this.moveTo = function(area, id) {
+    this.moveTo = function(area, id, e) {
       this.dispatchEvent('card.move', {
         side: 'my',
         from: this.name,
         to: area,
-        id: id
+        id: id,
+        event: e
+      });
+    };
+
+    this.moveFrom = function(area, id, e) {
+      this.dispatchEvent('card.move', {
+        side: 'my',
+        from: area,
+        to: this.name,
+        id: id,
+        event: e
       });
     };
 
@@ -57,14 +102,14 @@
       var e = this.side + '-' + this.name + '.updated';
 
       this.triggers.events[e] = function(d, e) {
-        var cards = d.get(this.side + '-' + this.name);
+        var cards = d.get(_this.side + '-' + _this.name);
         fn(cards);
       };
     }
 
     this.onEvent = function(name, fn) {
       this.triggers.events[name] = function(d, e) {
-        if (e.side === _this.side)
+        if (e.data.side === _this.side)
           fn(d, e);
       };
     };

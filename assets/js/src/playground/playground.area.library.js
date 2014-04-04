@@ -23,12 +23,14 @@
       // Clicking the library to draw a card
       this.$area.on('click', '.card-dummy', function() {
 
-        _this.moveTo('hand');
+        _this.moveTo('hand', undefined, 'card.drawn');
       });
     };
 
     // Receptors
     //-----------
+
+    // Dummy card to display?
     this.onUpdate(function(cards) {
 
       // Case when the deck might be empty
@@ -36,12 +38,7 @@
         _this.$area.empty();
       else
         if (!_this.$area.children().length)
-          _this.$area.append(dummy);
-    });
-
-    // On deck selected
-    this.onEvent('deck.selected', function(d, e) {
-      _this.$area.append(_this.dummy);
+          _this.$area.append(_this.dummy);
     });
 
     this.init();

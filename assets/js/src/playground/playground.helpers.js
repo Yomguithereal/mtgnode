@@ -13,11 +13,11 @@
     // Converts an array of names into an array of domino hacks
     toHacks: function(array) {
       return array.map(function(e) {
-        return {triggers: e};
+        return typeof e === 'object' ? e : {triggers: e};
       });
     },
     addToHacks: function(array) {
-      playground.hacks = playground.hacks.concat(array);
+      playground.hacks = playground.hacks.concat(_helpers.toHacks(array));
     },
     overloadCards: function(driver, cards, side) {
       return cards.map(function(card, i) {

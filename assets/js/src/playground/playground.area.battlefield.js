@@ -2,16 +2,22 @@
   'use strict';
 
   /**
-   * Playground Battelfield Area
+   * Playground Battlefield Area
    * ============================
    *
    */
-  function Battelfield(side) {
+  function Battlefield(side) {
     var _this = this;
-    this.name = 'battelfield';
+    this.name = 'battlefield';
 
     // Extending
     playground.area.call(this, side);
+
+    // Drop events
+    this.drop = {
+      tolerance: 'intersect',
+      $sel: $('.game-emplacement')
+    };
 
     this.init();
   }
@@ -20,5 +26,5 @@
    * Exporting
    * ----------
    */
-  utilities.pkg('playground.areas.battelfield', Battelfield);
+  utilities.pkg('playground.areas.battlefield', Battlefield);
 }).call(this);

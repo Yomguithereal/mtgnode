@@ -9,7 +9,7 @@
    */
 
   // Modules
-  utilities.pkg('playground.modules');
+  utilities.pkg('playground.registers');
   var areas = ['library', 'hand', 'exile', 'graveyard', 'battlefield'];
 
   // Domino settings
@@ -32,21 +32,36 @@
 
   // Delayed Modules
   function DelayedModules() {
-    domino.module.call(this);
 
     this.triggers.events['modules.delayed'] = function() {
-      
-      // Registering areas for both my and op side
+
+      // Registering areas for both my and op side and some interface
       areas.map(function(area) {
-        playground.modules.areas.my[area] = _m(playground.areas[area], ['my']);
-        playground.modules.areas.op[area] = _m(playground.areas[area], ['op']);
+
+        // Areas
+        playground.registers.areas.my[area] = _m(playground.areas[area], ['my']);
+        playground.registers.areas.op[area] = _m(playground.areas[area], ['op']);
+
+        // Interface
+        playground.registers.counters.my[area] = _m(
+          playground.modules.counter,
+          [area, 'my']
+        );
+        playground.registers.counters.op[area] = _m(
+          playground.modules.counter,
+          [area, 'op']
+        );
       });
     };
   }
 
   // Basic Modules
-  playground.modules = {
+  playground.registers = {
     areas: {
+      my: {},
+      op: {}
+    },
+    counters: {
       my: {},
       op: {}
     },

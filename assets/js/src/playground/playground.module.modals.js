@@ -9,7 +9,7 @@
    */
 
   function DeckChoiceModal() {
-    domino.mtgnode.call(this);
+    realtime.bootstrap(this);
     var _this = this;
 
     // Selectors

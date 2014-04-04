@@ -61,17 +61,26 @@
               id: card.id,
               side: 'op',
               from: e.data.from,
-              to: e.data.to
+              to: e.data.to,
+              event: e.data.event
             }
           });
+
+          if (e.data.event !== undefined) {
+            this.dispatchEvent(e.data.event, {card: card, side: 'my'});
+          }
         }
         else {
-          playground.helpers.fromTo(
+          var card = playground.helpers.fromTo(
             this,
             'op-' + e.data.from,
             'op-' + e.data.to,
             e.data.id
           );
+
+          if (e.data.event !== undefined) {
+            this.dispatchEvent(e.data.event, {card: card, side: 'op'});
+          }
         }
       }
     },
