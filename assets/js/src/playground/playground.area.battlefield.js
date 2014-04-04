@@ -16,7 +16,10 @@
     // Drop events
     this.drop = {
       tolerance: 'intersect',
-      $sel: $('.game-emplacement')
+      $sel: $('.game-emplacement'),
+      to: function($card) {
+        $card.removeClass('flipped');
+      }
     };
 
     this.init();

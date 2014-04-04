@@ -55,6 +55,9 @@
     };
 
     // Receptors
+    //-----------
+
+    // Reacting to a dragged card by op
     this.triggers.events['card.dragged'] = function(d, e) {
       var $card = $('#' + e.data.side + '_' + e.data.id);
 

@@ -14,14 +14,13 @@
     playground.area.call(this, side);
 
     // Selectors
-    var $game = $('#game_block');
     this.$library = $('#' + this.pos + '_library');
 
     // Properties
     this.revealed = false;
     this.baseOffset = 77;
     this.offset = this.baseOffset;
-    this.top = (side === 'op') ? 0 : $game.height() - this.$library.height();
+    this.top = (side === 'op') ? 0 : this.$game.height() - this.$library.height();
 
     // DOM Manipulation
     //------------------
@@ -29,7 +28,7 @@
 
       // Appending to DOM
       var $card = $(e.data.card.html);
-      $game.append($card);
+      _this.$game.append($card);
 
       // Position
       $card.css({
@@ -48,7 +47,6 @@
 
         // Register draggable
         playground.registers.drag.add($card);
-
       }
       else {
 
@@ -92,20 +90,21 @@
     //----------
     this.drop = {
       tolerance: 'intersect',
-      onSameArea: function() {
+      onSameArea: reorganize,
+      to: function($card) {
+        if (this.side === 'op') {
+          $card.addClass('flipped');
+        }
 
-        // Reorganize hand
-        _this.dispatchBothEvents('hand.reorganize', {reason: 'move-in-hand'});
-
-        // Breaking
-        return false;
-      }
+        $card.removeClass('tapped');
+        reorganize();
+      },
+      from: reorganize
     };
 
     // Receptors
     //-----------
     this.onEvent('card.drawn', drawCard);
-    this.onEvent('hand.reorganize', reorganize);
 
     this.init();
   }
@@ -114,6 +113,5 @@
    * Exporting
    * ----------
    */
-  playground.helpers.addToHacks(['hand.reorganize']);
   utilities.pkg('playground.areas.hand', Hand);
 }).call(this);

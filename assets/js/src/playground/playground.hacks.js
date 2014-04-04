@@ -86,6 +86,9 @@
     },
     {
       triggers: 'card.dragged'
+    },
+    {
+      triggers: 'card.dropped'
     }
   ];
 

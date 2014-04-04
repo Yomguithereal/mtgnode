@@ -13,6 +13,14 @@
     // Extending
     playground.area.call(this, side);
 
+    // Drop events
+    this.drop = {
+      tolerance: 'intersect',
+      to: function($card) {
+        this.slurp($card);
+      }
+    };
+
     this.init();
   }
 

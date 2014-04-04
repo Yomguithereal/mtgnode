@@ -19,11 +19,17 @@
     }, _root);
   };
 
+  function _otpcall(scope, fn) {
+    if (fn !== undefined)
+      fn.apply(scope, Array.prototype.slice.call(arguments, 2));
+  }
+
   /**
    * Exporting
    * ----------
    */
   this.utilities = {
+    optcall: _otpcall,
     pkg: _pkg
   };
 }).call(this);
