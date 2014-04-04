@@ -9,36 +9,33 @@
   var baseZ = 30,
       maxZ = 30;
 
-  function Area(id) {
+  function Area(side) {
     domino.mtgnode.call(this);
-    var _this = this,
-        _name = id;
+    var _this = this;
 
     // Properties
-    this.$context = $('#' + _name + '_context_menu');
+    this.side = side;
     this.maxZ = maxZ;
+    this.driver = playground.drivers[this.side];
+    this.pos = this.side === 'my' ? 'bottom' : 'top';
+    this.cards = '.card-min.in-' + this.name + '.' + this.side;
 
-    this.my = {
-      $area: $('#bottom_' + _name),
-      cards: '.card-min.in-' + _name + '.my'
-    };
-    this.op = {
-      $area: $('#top_' + _name),
-      cards: '.card-min.in-' + _name + '.op'
-    };
+    // Selectors
+    this.$context = $('#' + this.name + '_context_menu');
+    this.$area = $('#' + this.pos + '_' + this.name);
 
     // Methods
     this.init = function() {
 
       // Workflow
-      if (this.emitters !== undefined)
+      if (this.side === 'my' && sidethis.emitters !== undefined)
         this.emitters();
     };
 
     this.moveTo = function(area, id) {
       this.dispatchEvent('card.move', {
         side: 'my',
-        from: _name,
+        from: this.name,
         to: area,
         id: id
       });
@@ -53,21 +50,24 @@
     };
 
     this.selectCard = function(card) {
-      return $('#' + card.side + '_' + card.id);
+      return $('#' + this.side + '_' + card.id);
     };
 
     this.onUpdate = function(fn) {
+      var e = this.side + '-' + this.name + '.updated';
 
-      this.triggers.events['my-' + _name + '.updated'] = function(d, e) {
-        var cards = d.get('my-' + _name);
-        fn('my', cards[0], cards);
-      };
-
-      this.triggers.events['op-' + _name + '.updated'] = function(d, e) {
-        var cards = d.get('op-' + _name);
-        fn('op', cards[0], cards);
+      this.triggers.events[e] = function(d, e) {
+        var cards = d.get(this.side + '-' + this.name);
+        fn(cards);
       };
     }
+
+    this.onEvent = function(name, fn) {
+      this.triggers.events[name] = function(d, e) {
+        if (e.side === _this.side)
+          fn(d, e);
+      };
+    };
   }
 
   /**

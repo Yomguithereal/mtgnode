@@ -6,12 +6,12 @@
    * ============================
    *
    */
-  function Battelfield() {
-    var _this = this,
-        _name = 'battelfield';
+  function Battelfield(side) {
+    var _this = this;
+    this.name = 'battelfield';
 
     // Extending
-    playground.area.call(this, _name);
+    playground.area.call(this, side);
 
     this.init();
   }

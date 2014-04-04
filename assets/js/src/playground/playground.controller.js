@@ -36,15 +36,20 @@
 
     this.triggers.events['modules.delayed'] = function() {
       
+      // Registering areas for both my and op side
       areas.map(function(area) {
-        playground.modules.areas[area] = _m(playground.areas[area]);
+        playground.modules.areas.my[area] = _m(playground.areas[area], ['my']);
+        playground.modules.areas.op[area] = _m(playground.areas[area], ['op']);
       });
     };
   }
 
   // Basic Modules
   playground.modules = {
-    areas: {},
+    areas: {
+      my: {},
+      op: {}
+    },
     delayed: _m(DelayedModules),
     realtime: _m(dominoRealtime.module),
     modals: {

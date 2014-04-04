@@ -6,12 +6,12 @@
    * ========================
    *
    */
-  function Graveyard() {
-    var _this = this,
-        _name = 'graveyard';
+  function Graveyard(side) {
+    var _this = this;
+    this.name = 'graveyard';
 
     // Extending
-    playground.area.call(this, _name);
+    playground.area.call(this, side);
 
     this.init();
   }

@@ -6,17 +6,16 @@
    * =====================
    *
    */
-  function Hand() {
-    var _this = this,
-        _name = 'hand';
+  function Hand(side) {
+    var _this = this;
+    this.name = 'hand';
 
     // Extending
-    playground.area.call(this, _name);
+    playground.area.call(this, side);
 
     // Selectors
     var $game = $('#game_block');
-    this.my.$library = $('#bottom_library');
-    this.op.$library = $('#top_library');
+    this.$library = ('#' + this.pos + '_library');
 
     // Properties
     this.revealed = false;
@@ -25,7 +24,7 @@
 
     // Helpers
     this.top = function(side) {
-      return side === 'op' ? 0 : $game.height() - this.my.$library.height();
+      return side === 'op' ? 0 : $game.height() - this.$library.height();
     };
 
     this.makeDraggable = function($card, fn) {
@@ -73,7 +72,7 @@
 
       // Position
       $card.css({
-        left: _this[side].$library.position().left,
+        left: _this.$library.position().left,
         top: _this.top(side)
       });
 
@@ -99,11 +98,11 @@
     }
 
     function reorganize(side) {
-      var $cards = $(_this[side].cards);
+      var $cards = $(_this.cards);
       $cards.show();
 
       // Position
-      var $area = _this[side].$area,
+      var $area = _this.$area,
           width = $area.width(),
           left = $area.position().left,
           top = _this.top(side);

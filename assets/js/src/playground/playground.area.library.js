@@ -6,22 +6,22 @@
    * ========================
    *
    */
-  function Library() {
-    var _this = this,
-        _name = 'library';
+  function Library(side) {
+    var _this = this;
+    this.name = 'library';
 
     // Extending
-    playground.area.call(this, _name);
+    playground.area.call(this, side);
 
     // Properties
-    this.dummy = playground.drivers.my.renderDummy();
+    this.dummy = this.driver.renderDummy();
 
     // Emitters
     //----------
     this.emitters = function() {
 
       // Clicking the library to draw a card
-      this.my.$area.on('click', '.card-dummy', function() {
+      this.$area.on('click', '.card-dummy', function() {
 
         _this.moveTo('hand');
       });
@@ -29,20 +29,20 @@
 
     // Receptors
     //-----------
-    this.onUpdate(function(side, card, cards) {
-      var $area = _this[side].$area;
+    this.onUpdate(function(cards) {
 
+      // Case when the deck might be empty
       if (!cards.length)
-        $area.empty();
+        _this.$area.empty();
       else
-        if (!$area.children().length)
-          $area.append(dummy);
+        if (!_this.$area.children().length)
+          _this.$area.append(dummy);
     });
 
-    this.triggers.events['deck.selected'] = function(d, e) {
-
-      _this[e.data.side].$area.append(_this.dummy);
-    };
+    // On deck selected
+    this.onEvent('deck.selected', function(d, e) {
+      _this.$area.append(_this.dummy);
+    });
 
     this.init();
   }

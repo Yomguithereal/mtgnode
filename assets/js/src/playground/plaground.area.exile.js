@@ -6,12 +6,12 @@
    * ======================
    *
    */
-  function Exile() {
-    var _this = this,
-        _name = 'exile';
+  function Exile(side) {
+    var _this = this;
+    this.name = 'exile';
 
     // Extending
-    playground.area.call(this, _name);
+    playground.area.call(this, side);
 
     this.init();
   }
