@@ -24,7 +24,6 @@
     this.$area = $('#' + this.pos + '_' + this.name);
 
     // TODO: context menu for cards and zone
-    // TODO: bind event to the cards of the area
 
     // Methods
     //---------
@@ -34,8 +33,7 @@
       if (this.side === 'my') {
 
         // Emitters
-        if (this.emitters !== undefined)
-          this.emitters();
+        utilities.optcall(this, this.emitters);
 
         // Droppable
         if (this.drop !== undefined)
@@ -113,6 +111,10 @@
           fn(d, e);
       };
     };
+
+    this.bindEventOnCards = function(name, fn) {
+      this.$game.on(name, this.cards, fn);
+    }
 
     // Generic Receptors
     //-------------------
