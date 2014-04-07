@@ -117,6 +117,14 @@
     {
       triggers: 'cards.untap',
       description: 'Dispatched when a player untaps all his cards.'
+    },
+    {
+      triggers: 'hand.reveal',
+      description: 'Dispatched when a player reveals his hand.'
+    },
+    {
+      triggers: 'hand.conceal',
+      description: 'Dispatched when a player conceals his hand.'
     }
   ];
 

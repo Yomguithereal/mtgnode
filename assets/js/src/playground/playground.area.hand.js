@@ -88,6 +88,20 @@
 
     // Emitters
     //----------
+
+    // Context menu
+    this.menu = {
+      area: {
+        revealHand: function() {
+          this.revealed = !this.revealed;
+          this.dispatchRealtimeEvent(
+            (this.revealed) ? 'hand.conceal' : 'hand.reveal'
+          );
+        }
+      }
+    }
+
+    // Drop events
     this.drop = {
       tolerance: 'intersect',
       onSameArea: reorganize,
@@ -105,6 +119,16 @@
     // Receptors
     //-----------
     this.receive('card.drawn', drawCard);
+
+    this.receive('hand.reveal', function(d, e) {
+      $('[data-action="revealHand"]').text('Conceal hand');
+      $(this.cards).removeClass('flipped');
+    });
+
+    this.receive('hand.conceal', function(d, e) {
+      $('[data-action="revealHand"]').text('Reveal hand');
+      $(this.cards).addClass('flipped');
+    });
 
     this.init();
   }

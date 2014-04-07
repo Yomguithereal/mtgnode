@@ -38,7 +38,9 @@
         utilities.optcall(this, this.emitters);
 
         // Context menu
-        if (this.menu !== undefined)
+        if (this.menu !== undefined) {
+
+          // Context menu on area
           if (this.menu.area !== undefined)
             this.$menu.contextualize({
               position: this.menu.position || 'bottom',
@@ -46,6 +48,7 @@
               scope: this,
               actions: this.menu.area
             });
+        }
 
         // Droppable
         if (this.drop !== undefined)
