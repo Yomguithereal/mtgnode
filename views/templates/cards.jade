@@ -1,0 +1,23 @@
+//- Card Display Templates
+
+//- TODO: script x-handlebars templates
+
+mixin deckBuilderCardTemplate()
+  script#tpl_card(type=TEMPLATE_MIME)
+    img.card-min-deckbuilder(id="{{id_prefix}}_{{number}}", index="{{number}}", src="{{src}}", multiverseid="{{multiverseid}}")
+
+mixin searchCardTemplate()
+  script#tpl_search_card(type=TEMPLATE_MIME)
+    img.card-min-deckbuilder.card-search(index="{{number}}", src="{{src}}")
+
+mixin playgroundCardTemplate()
+  script#tpl_card(type=TEMPLATE_MIME)
+    div(id="{{id_prefix}}_{{number}}", side="{{side}}", number="{{number}}", class="{{side}} card-min draggable in-hand flipped {{type}}")
+      img(src="/images/card-back.jpeg", class="back-side {{side}}")
+      img(src="{{src}}", class="front-side {{side}}")
+
+mixin dummyCardTemplate()
+  script#tpl_dummy_card(type=TEMPLATE_MIME)
+    div(class="card-min card-dummy {{side}}")
+      img(index="{{number}}", src="/images/card-back.jpeg", class="front-side {{side}}" style="margin-top: 0px;")
+      

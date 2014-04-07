@@ -1,0 +1,14 @@
+extends ../layout
+
+block body
+  div#mainframe
+    p Welcome to MTGNode
+    div.alert.alert-danger.alert-dismissable.hide
+      button.close(data-dismiss='alert', aria-hidden='true') &times;
+      strong Unauthorized Attempt!
+    each user in users
+      div
+        button.btn.btn-default.override-connect(type='button', username=user.username, password=user.password) Connect as #{user.username}
+
+block contextual_js
+  script(type="text/javascript", src="/js/src/simple/login.js")

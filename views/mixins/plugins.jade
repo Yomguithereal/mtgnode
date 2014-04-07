@@ -1,0 +1,15 @@
+//- Plugins
+
+mixin card_viewer_widget()
+  div#card_viewer_block
+    img#card_viewer_widget(src='/images/card-back.jpeg')
+
+mixin chat_widget()
+  div#chat_container.hide
+    div.modal-content
+      div.modal-body
+        div#chat_messages.well
+        div#chat_controls.input-group
+          input#chat_new_message.form-control.input-sm(type='text')
+          span.input-group-btn
+            button#chat_send.btn.btn-primary.btn-sm(type='button') Send

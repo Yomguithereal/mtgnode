@@ -1,0 +1,11 @@
+extends layout
+
+block body
+  h1 Internal Server Error
+  h2 Something isn't right here.
+  if (typeof errors !== 'undefined')
+    pre.error
+      code
+        - _.each(errors, function (error) {
+          = error.stack
+        - });

@@ -1,0 +1,126 @@
+extends ../layout
+include ../mixins/card_drivers
+include ../mixins/modals
+include ../mixins/selects
+include ../mixins/context_menus
+include ../mixins/plugins
+include ../mixins/exposure
+include ../templates/cards
+
+block body
+  +chat_widget()
+  div#mainframe.clearfix
+    div#helper_block
+      div#top_helper_block
+        div.hitpoints-block.btn-group
+          button.btn.btn-default.lose.update-hitpoints.top(type="button") -
+          button.btn.btn-default.hitpoints-counter.top(type="button") 20
+          button.btn.btn-default.gain.update-hitpoints.top(type="button") +
+        div.infection-block.btn-group
+          button.btn.btn-default.lose.update-infection.top(type="button") -
+          button.btn.btn-default.infection-counter.top(type="button") 0
+          button.btn.btn-default.gain.update-infection.top(type="button") +
+        div.message-receiver.top &nbsp;
+        div.counters.top
+          div.btn-group
+            button.btn.btn-default.btn-xs(type="button") Library
+            button.btn.btn-default.btn-xs.library-counter.top(type="button") 0
+          div.btn-group
+            button.btn.btn-default.btn-xs(type="button") Hand
+            button.btn.btn-default.btn-xs.hand-counter.top(type="button") 0
+          div.btn-group
+            button.btn.btn-default.btn-xs(type="button") Graveyard
+            button.btn.btn-default.btn-xs.graveyard-counter.top(type="button") 0
+          div.btn-group
+            button.btn.btn-default.btn-xs(type="button") Battlefield
+            button.btn.btn-default.btn-xs.battlefield-counter.top(type="button") 0
+          div.btn-group
+            button.btn.btn-default.btn-xs(type="button") Exile
+            button.btn.btn-default.btn-xs.exile-counter.top(type="button") 0
+      +card_viewer_widget()
+      div#bottom_helper_block
+        div.hitpoints-block.btn-group
+          button.btn.btn-default.top.lose.update-hitpoints(type="button") -
+          button.btn.btn-default.hitpoints-counter.top(type="button") 20
+          button.btn.btn-default.bottom.gain.update-hitpoints(type="button") +
+        div.infection-block.btn-group
+          button.btn.btn-default.lose.update-infection.bottom(type="button") -
+          button.btn.btn-default.infection-counter.bottom(type="button") 0
+          button.btn.btn-default.gain.update-infection.bottom(type="button") +
+        div.message-receiver.bottom &nbsp;
+        div.counters.bottom
+          div.btn-group
+            button.btn.btn-default.btn-xs(type="button") Library
+            button.btn.btn-default.btn-xs.library-counter.bottom(type="button") 0
+          div.btn-group
+            button.btn.btn-default.btn-xs(type="button") Hand
+            button.btn.btn-default.btn-xs.hand-counter.bottom(type="button") 0
+          div.btn-group
+            button.btn.btn-default.btn-xs(type="button") Graveyard
+            button.btn.btn-default.btn-xs.graveyard-counter.bottom(type="button") 0
+          div.btn-group
+            button.btn.btn-default.btn-xs(type="button") Battlefield
+            button.btn.btn-default.btn-xs.battlefield-counter.bottom(type="button") 0
+          div.btn-group
+            button.btn.btn-default.btn-xs(type="button") Exile
+            button.btn.btn-default.btn-xs.exile-counter.bottom(type="button") 0
+        div.chat
+          br
+          button#chat_trigger.btn.btn-primary(type="button") Chat
+    div#game_block.game-area
+      div#top_game_block.top.player-side
+        div#top_handlogic.library-and-hand.top
+          div#top_exile.exile-emplacement.top
+          div#top_graveyard.graveyard-emplacement.top
+          div#top_library.library-emplacement.top
+          div#top_hand.hand-emplacement.top
+        div#top_battlefield.game-emplacement.top.valid-drag-zone
+      div#bottom_game_block.bottom.player-side
+        div#bottom_battlefield.game-emplacement.bottom.valid-drag-zone
+        div#bottom_handlogic.library-and-hand.bottom.valid-drag-zone
+          div#bottom_exile.exile-emplacement.bottom
+          div#bottom_graveyard.graveyard-emplacement.bottom
+          div#bottom_library.library-emplacement.bottom
+          div#bottom_hand.hand-emplacement.bottom
+
+block modals
+  +deck_choice_modal(decks)
+  +card_choice_modal()
+
+block context_menus
+  +battlefield_context_menu()
+  +deck_context_menu()
+  +hand_context_menu()
+  +graveyard_context_menu()
+  +exile_context_menu()
+
+block templates
+  +playgroundCardTemplate()
+  +dummyCardTemplate()
+  +searchCardTemplate()
+
+block global_js
+  +user_exposure()
+  +game_exposure()
+
+block contextual_js
+  +load_driver()
+
+  //- Generic
+  script(type="text/javascript", src="/js/src/plugins/card_viewer.js")
+  script(type="text/javascript", src="/js/src/plugins/context_menu.js")
+  script(type="text/javascript", src="/js/src/generic/realtime.js")
+
+  //- Specific
+  script(type="text/javascript", src="/js/src/playground/playground.js")
+  script(type="text/javascript", src="/js/src/playground/playground.helpers.js")
+  script(type="text/javascript", src="/js/src/playground/playground.hacks.js")
+  script(type="text/javascript", src="/js/src/playground/playground.properties.js")
+  script(type="text/javascript", src="/js/src/playground/playground.services.js")
+  script(type="text/javascript", src="/js/src/playground/playground.area.js")
+
+  for module in ['modals', 'counter', 'points', 'drag', 'chat']
+    script(type="text/javascript", src="/js/src/playground/playground.module." + module + ".js")
+  for area in ['library', 'hand', 'exile', 'graveyard', 'battlefield']
+    script(type="text/javascript", src="/js/src/playground/playground.area." + area + ".js")
+  script(type="text/javascript", src="/js/src/playground/playground.controller.js")
