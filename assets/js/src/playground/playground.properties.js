@@ -49,7 +49,7 @@
         id: 'my-infection',
         type: 'number',
         value: 0,
-        dispatch: 'my-infection.updated'
+        dispatch: 'my-infection.updated',
         triggers: 'my-infection.update'
       },
       {

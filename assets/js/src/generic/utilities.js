@@ -9,7 +9,8 @@
    */
   var _root = this;
 
-  var _pkg = function(pkgName, content) {
+  // Define a package
+  function pkg(pkgName, content) {
     content = (content !== undefined) ? content : {};
 
     return (pkgName || '').split('.').reduce(function(context, objName, i, a) {
@@ -19,8 +20,15 @@
     }, _root);
   };
 
-  function _otpcall(scope, fn) {
-    if (fn !== undefined)
+  // Apply a function if it exists
+  function optapply(scope, fn, args) {
+    if (_.isFunction(fn) && fn !== undefined)
+      fn.apply(scope, args);
+  }
+
+  // Call a function if it exists
+  function otpcall(scope, fn) {
+    if (_.isFunction(fn) && fn !== undefined)
       fn.apply(scope, Array.prototype.slice.call(arguments, 2));
   }
 
@@ -29,7 +37,8 @@
    * ----------
    */
   this.utilities = {
-    optcall: _otpcall,
-    pkg: _pkg
+    optapply: optapply,
+    optcall: otpcall,
+    pkg: pkg
   };
 }).call(this);

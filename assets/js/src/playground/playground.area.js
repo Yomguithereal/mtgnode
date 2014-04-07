@@ -17,6 +17,7 @@
     this.driver = playground.drivers[this.side];
     this.pos = this.side === 'my' ? 'bottom' : 'top';
     this.cards = '.card-min.in-' + this.name + '.' + this.side;
+    this.updatedEvent = this.side + '-' + this.name + '.updated';
 
     // Selectors
     this.$game = $game;
@@ -96,28 +97,27 @@
       return $('#' + this.side + '_' + id);
     };
 
-    this.onUpdate = function(fn) {
-      var e = this.side + '-' + this.name + '.updated';
-
-      this.triggers.events[e] = function(d, e) {
-        var cards = d.get(_this.side + '-' + _this.name);
-        fn(cards);
-      };
-    }
-
-    this.onEvent = function(name, fn) {
+    this.receive = function(name, fn) {
       this.triggers.events[name] = function(d, e) {
         if (e.data.side === _this.side)
           fn(d, e);
       };
     };
 
-    this.bindEventOnCards = function(name, fn) {
+    this.bindOnCards = function(name, fn) {
       this.$game.on(name, this.cards, fn);
     }
 
     // Generic Receptors
     //-------------------
+
+    // Linked model updated
+    this.triggers.events[this.updatedEvent] = function(d, e) {
+      var cards = d.get(_this.side + '-' + _this.name);
+      utilities.optcall(_this, _this.onUpdate, cards);
+    };
+
+    // Card dropped in area
     this.triggers.events['card.dropped'] = function(d, e) {
       var $card = _this.selectCard(e.data.id);
 

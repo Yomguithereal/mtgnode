@@ -28,7 +28,7 @@
     this.emitters = function() {
 
       // Tapping the cards
-      this.bindEventOnCards('click', function() {
+      this.bindOnCards('click', function() {
         _this.dispatchBothEvents('card.tapped', {id: $(this).attr('number')});
       });
     };

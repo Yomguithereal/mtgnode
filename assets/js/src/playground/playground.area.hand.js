@@ -104,7 +104,7 @@
 
     // Receptors
     //-----------
-    this.onEvent('card.drawn', drawCard);
+    this.receive('card.drawn', drawCard);
 
     this.init();
   }

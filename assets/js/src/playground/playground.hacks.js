@@ -9,6 +9,7 @@
   var _hacks = [
     {
       triggers: 'game.start',
+      description: 'Dispatched when the game has to start.',
       method: function(e) {
 
         // Player sides
@@ -29,6 +30,7 @@
     },
     {
       triggers: ['deck.selected'],
+      description: 'Dispatched when a player has selected his deck.',
       method: function(e) {
         var service = (e.data.side === 'my') ?
           'getMyDeckCards' :
@@ -43,6 +45,7 @@
     },
     {
       triggers: ['card.move'],
+      description: 'Dispatched when a card moves from one model to another.',
       method: function(e) {
         if (e.data.side === 'my') {
           var card = playground.helpers.fromTo(
@@ -85,10 +88,25 @@
       }
     },
     {
-      triggers: 'card.dragged'
+      triggers: 'points.update',
+      description: 'Dispatched when either hitpoints or infection are updated.',
+      method: function(e) {
+        var property = e.data.side + '-' + e.data.model,
+            originalValue = this.get(property);
+
+        if (e.data.increment)
+          this[property] = originalValue + 1;
+        else
+          this[property] = originalValue - 1;
+      }
     },
     {
-      triggers: 'card.dropped'
+      triggers: 'card.dragged',
+      description: 'Dispatched when a card is dragged on the game area.'
+    },
+    {
+      triggers: 'card.dropped',
+      description: 'Dispatched when a card is dropped on an precise area.'
     }
   ];
 

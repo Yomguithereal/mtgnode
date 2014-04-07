@@ -31,7 +31,7 @@
     //-----------
 
     // Dummy card to display?
-    this.onUpdate(function(cards) {
+    this.onUpdate = function(cards) {
 
       // Case when the deck might be empty
       if (!cards.length)
@@ -39,7 +39,7 @@
       else
         if (!_this.$area.children().length)
           _this.$area.append(_this.dummy);
-    });
+    };
 
     this.init();
   }

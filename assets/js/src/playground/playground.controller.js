@@ -75,6 +75,10 @@
       my: {},
       op: {}
     },
+    points: {
+      my: {},
+      op: {}
+    },
     delayed: _m(DelayedModules),
     drag: _m(playground.modules.drag),
     realtime: _m(dominoRealtime.module),
