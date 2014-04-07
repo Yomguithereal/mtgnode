@@ -1,4 +1,6 @@
 //- Card Drivers Selection
 mixin load_driver()
+  script(type="text/javascript").
+    var DRIVER = !{JSON.stringify({lang: LANG})};
   script(type="text/javascript", src="/js/src/driver/" + CARD_DRIVER + ".js")
   script(type="text/javascript", src="/js/src/driver/template.js")

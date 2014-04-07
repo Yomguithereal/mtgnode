@@ -11,6 +11,9 @@ module.exports = function (req, res, ok) {
   // Handlebars scripts
   res.locals.TEMPLATE_MIME = 'text/x-handlebars-template';
 
+  // Lang for the driver
+  res.locals.LANG = config.lang;
+
   // Session relevant information
   if (req.session.authenticated)
     res.locals.SESSION = {

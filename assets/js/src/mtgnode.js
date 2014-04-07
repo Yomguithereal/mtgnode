@@ -8,7 +8,6 @@
    * Register some global configuration.
    */
   var _config = {
-    lang: 'en',
     domino: {
       verbose: true
     },

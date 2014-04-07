@@ -132,12 +132,13 @@
 
   // Properties
   //------------
-  var baseUrl = 'http://magiccards.info/scans/en/';
+  var baseUrl = 'http://magiccards.info/scans/';
 
   // Driver
   //--------
   this.currentDriver = function(card) {
     return baseUrl +
+           DRIVER.lang + '/' +
            (setConversion[card.set] || card.set.toLowerCase()) +
            '/' +
            card.number
