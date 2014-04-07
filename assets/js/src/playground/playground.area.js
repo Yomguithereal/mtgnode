@@ -39,7 +39,14 @@
         // Droppable
         if (this.drop !== undefined)
           (this.drop.$sel || this.$area).droppable({
+
+            // Basic tolerance
             tolerance: this.drop.tolerance || 'intersect',
+
+            // Accept cards only
+            accept: '.card-min',
+
+            // General callback
             drop: function(e, ui) {
               var $card = $(ui.draggable),
                   cls = _.find($card.attr('class').split(' '), function(c) {
@@ -141,6 +148,8 @@
     // DOM Generic Manipulation
     //--------------------------
     this.slurp = function($card, classes, cb) {
+      classes = classes || {};
+
       $card.addClass(classes.add || '');
       $card.removeClass(classes.remove || 'tapped flipped');
 

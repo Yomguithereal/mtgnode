@@ -35,7 +35,6 @@
       tolerance: 'intersect',
       to: function($card) {
         this.slurp($card, {add: 'flipped', remove: ''}, function() {
-          console.log('ici');
           $card.remove();
         });
       }

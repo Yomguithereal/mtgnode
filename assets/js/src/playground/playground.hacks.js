@@ -107,6 +107,10 @@
     {
       triggers: 'card.dropped',
       description: 'Dispatched when a card is dropped on an precise area.'
+    },
+    {
+      triggers: 'chat.message',
+      description: 'Dispatched when a chat message is sent.'
     }
   ];
 

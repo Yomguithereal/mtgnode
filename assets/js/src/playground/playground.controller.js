@@ -45,6 +45,9 @@
       playground.registers.points.op.hitpoints = _m(
         playground.modules.points, ['infection', 'op']);
 
+      // Chat
+      playground.registers.chat = _m(playground.modules.chat);
+
       // Registering areas for both my and op side and some interface
       areas.map(function(area) {
 

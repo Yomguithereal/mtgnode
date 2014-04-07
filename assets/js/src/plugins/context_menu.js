@@ -62,7 +62,6 @@
         if (_this.settings.actions[action] !== undefined)
           _this.settings.actions[action]();
 
-
         // Closing menu
         _this.$selector.hide();
 
