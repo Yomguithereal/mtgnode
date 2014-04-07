@@ -74,9 +74,9 @@ block body
           div#top_graveyard.graveyard-emplacement.top
           div#top_library.library-emplacement.top
           div#top_hand.hand-emplacement.top
-        div#top_game_zone.game-emplacement.top.valid-drag-zone
+        div#top_battlefield.game-emplacement.top.valid-drag-zone
       div#bottom_game_block.bottom.player-side
-        div#bottom_game_zone.game-emplacement.bottom.valid-drag-zone
+        div#bottom_battlefield.game-emplacement.bottom.valid-drag-zone
         div#bottom_handlogic.library-and-hand.bottom.valid-drag-zone
           div#bottom_exile.exile-emplacement.bottom
           div#bottom_graveyard.graveyard-emplacement.bottom
@@ -108,6 +108,7 @@ block contextual_js
 
   //- Generic
   script(type="text/javascript", src="/js/src/plugins/card_viewer.js")
+  script(type="text/javascript", src="/js/src/plugins/context_menu.js")
   script(type="text/javascript", src="/js/src/generic/realtime.js")
 
   //- Specific

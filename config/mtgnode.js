@@ -2,6 +2,6 @@
  * MTGNode Global Configuration
  */
 module.exports = {
-  lang: 'fr',
+  lang: 'en',
   driver: 'magiccards.info'
 }

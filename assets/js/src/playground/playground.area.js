@@ -18,11 +18,12 @@
     this.pos = this.side === 'my' ? 'bottom' : 'top';
     this.cards = '.card-min.in-' + this.name + '.' + this.side;
     this.updatedEvent = this.side + '-' + this.name + '.updated';
+    this.area = '#' + this.pos + '_' + this.name;
 
     // Selectors
     this.$game = $game;
-    this.$context = $('#' + this.name + '_context_menu');
-    this.$area = $('#' + this.pos + '_' + this.name);
+    this.$menu = $('#' + this.name + '_context_menu');
+    this.$area = $(this.area);
 
     // TODO: context menu for cards and zone
 
@@ -35,6 +36,16 @@
 
         // Emitters
         utilities.optcall(this, this.emitters);
+
+        // Context menu
+        if (this.menu !== undefined)
+          if (this.menu.area !== undefined)
+            this.$menu.contextualize({
+              position: this.menu.position || 'bottom',
+              selector: this.area,
+              scope: this,
+              actions: this.menu.area
+            });
 
         // Droppable
         if (this.drop !== undefined)
@@ -107,7 +118,7 @@
     this.receive = function(name, fn) {
       this.triggers.events[name] = function(d, e) {
         if (e.data.side === _this.side)
-          fn(d, e);
+          fn.call(_this, d, e);
       };
     };
 

@@ -99,8 +99,10 @@
         else
           this[property] = originalValue - 1;
       }
-    },
-    {
+    }
+  ];
+  
+  var _loneHacks = [{
       triggers: 'card.dragged',
       description: 'Dispatched when a card is dragged on the game area.'
     },
@@ -111,6 +113,10 @@
     {
       triggers: 'chat.message',
       description: 'Dispatched when a chat message is sent.'
+    },
+    {
+      triggers: 'cards.untap',
+      description: 'Dispatched when a player untaps all his cards.'
     }
   ];
 
@@ -118,5 +124,5 @@
    * Exporting
    * ----------
    */
-  utilities.pkg('playground.hacks', _hacks);
+  utilities.pkg('playground.hacks', _hacks.concat(_loneHacks));
 }).call(this);

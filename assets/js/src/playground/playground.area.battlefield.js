@@ -13,6 +13,18 @@
     // Extending
     playground.area.call(this, side);
 
+    // Emitters
+    //----------
+
+    // Context menu
+    this.menu = {
+      area: {
+        untapAll: function() {
+          this.dispatchBothEvents('cards.untap');
+        }
+      }
+    };
+
     // Drop events
     this.drop = {
       tolerance: 'intersect',
@@ -22,9 +34,7 @@
       }
     };
 
-    // Emitters
-    //----------
-
+    // Basic
     this.emitters = function() {
 
       // Tapping the cards
@@ -36,14 +46,16 @@
     // Receptors
     //-----------
 
-    // TODO: faire un module cards?
-    this.triggers.events['card.tapped'] = function(d, e) {
-      if (e.data.side !== _this.side)
-        return;
-
+    // Tapping cards
+    this.receive('card.tapped', function(d, e) {
       var $card = _this.selectCard(e.data.id);
       $card.toggleClass('tapped');
-    };
+    });
+
+    // Untapping every cards
+    this.receive('cards.untap', function(d, e) {
+      $(this.cards).removeClass('tapped');
+    });
 
     this.init();
   }

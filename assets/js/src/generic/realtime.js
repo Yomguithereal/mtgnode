@@ -11,8 +11,12 @@
   // Connecting
   var socket = io.connect();
 
+  // Helpers
+  function addSide(o, side) {
+    return _.merge((o || {}), {side: side});
+  }
+
   // Functions namespace
-  // TODO: generalize?
   var _realtime = {
     connect: function(url, cb) {
       socket.get(url, cb);
@@ -21,13 +25,13 @@
       o.dispatchRealtimeEvent = function(head, body) {
         this.dispatchEvent('realtime.send', {
           head: head,
-          body: _.merge(body, {side: 'op'})
+          body: addSide(body, 'op')
         });
       };
 
       o.dispatchBothEvents = function(head, body) {
         this.dispatchRealtimeEvent(head, body);
-        this.dispatchEvent(head, _.merge(body, {side: 'my'}));
+        this.dispatchEvent(head, addSide(body, 'my'));
       };
     },
     domino: function(game_id) {

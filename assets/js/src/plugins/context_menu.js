@@ -12,7 +12,8 @@
   var pluginName = "contextualize";
   var defaults = {
     container: '#context_menu',
-    position: 'bottom'
+    position: 'bottom',
+    scope: this,
   };
 
   // Actual Constructor
@@ -22,6 +23,8 @@
     this.settings = $.extend( {}, defaults, options );
     this._defaults = defaults;
     this._name = pluginName;
+
+    // Launching
     this.init();
   }
 
@@ -59,8 +62,8 @@
         // Getting action and trigger callback
         var action = $(this).attr('data-action');
 
-        if (_this.settings.actions[action] !== undefined)
-          _this.settings.actions[action]();
+        // Callback if present
+        utilities.optcall(_this.settings.scope, _this.settings.actions[action]);
 
         // Closing menu
         _this.$selector.hide();
@@ -68,7 +71,7 @@
         return false;
       });
 
-      // If user click away
+      // If user clicks away
       $(document).click(function() {
         _this.$selector.hide();
       });
