@@ -140,15 +140,16 @@
 
     // DOM Generic Manipulation
     //--------------------------
-    this.slurp = function($card) {
-      $card.removeClass('tapped flipped');
+    this.slurp = function($card, classes, cb) {
+      $card.addClass(classes.add || '');
+      $card.removeClass(classes.remove || 'tapped flipped');
 
       $card.animate({
         left: this.$area.position().left,
         top: (this.pos === 'top') ?
           0 :
           this.$game.height() - this.$area.height()
-      }, 'fast');
+      }, 'fast', cb);
     };
   }
 

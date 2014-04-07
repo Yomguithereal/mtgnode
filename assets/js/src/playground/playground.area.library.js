@@ -30,6 +30,17 @@
     // Receptors
     //-----------
 
+    // Drop events
+    this.drop = {
+      tolerance: 'intersect',
+      to: function($card) {
+        this.slurp($card, {add: 'flipped', remove: ''}, function() {
+          console.log('ici');
+          $card.remove();
+        });
+      }
+    };
+
     // Dummy card to display?
     this.onUpdate = function(cards) {
 
