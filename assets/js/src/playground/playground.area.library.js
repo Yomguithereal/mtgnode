@@ -30,6 +30,11 @@
     // Receptors
     //-----------
 
+    // Contextual menu
+    this.menu = {
+
+    };
+
     // Drop events
     this.drop = {
       tolerance: 'intersect',
