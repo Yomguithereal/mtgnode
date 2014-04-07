@@ -3,5 +3,5 @@
  */
 module.exports = {
   lang: 'en',
-  driver: 'magiccards.info'
+  driver: 'mtgimage'
 }
