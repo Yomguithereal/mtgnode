@@ -1,5 +1,4 @@
 #Magic the Gathering for Node.js
-
 Version 0.3.0
 
 ##About
@@ -61,3 +60,17 @@ You are always the bottom player on your screen.
 To draw a card, click the deck. Then drag the card where you want.
 
 You also have access to some contextual actions with your right click.
+
+##Card display driver
+This application does not provide the cards images so it can stay lightweight. In order to display card, it uses what is called a `driver` which will fetch the required images on some remote site hosting them.
+
+### Available drivers
+* mtgimage (default)
+* magiccards.info
+* gatherers
+
+### Changing the driver
+To change the display driver, go to `config/mtgnode.js` and change for the wanted driver.
+
+##Thanks
+This app run on [MTGJSON](http://mtgjson.com/) data.
