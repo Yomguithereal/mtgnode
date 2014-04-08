@@ -2,8 +2,15 @@
   "name": "mtgnode",
   "private": true,
   "version": "0.3.0",
-  "description": "a Sails application",
-  "keywords": [],
+  "description": "A realtime web application for Magic the Gathering with node.js and socket.io",
+  "keywords": [
+    "mtg",
+    "magic the gathering",
+    "cards",
+    "realtime",
+    "web",
+    "application"
+  ],
   "dependencies": {
     "sails": "~0.10.0-rc4",
     "sails-disk": "~0.10.0",
@@ -33,8 +40,8 @@
   "main": "app.js",
   "repository": {
     "type": "git",
-    "url": "git://github.com/Yomgui/mtgnode.git"
+    "url": "git://github.com/Yomguithereal/mtgnode.git"
   },
-  "author": "Yomgui",
-  "license": ""
+  "author": "Yomguithereal",
+  "license": "MIT"
 }
