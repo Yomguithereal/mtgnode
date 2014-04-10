@@ -1,25 +1,33 @@
-#Magic the Gathering for Node.js
+# Magic the Gathering for Node.js
 Version 0.3.0
 
-##About
+## About
 MTG Node is a personal experiment with node.js and socket.io. My intention is to create a simple web application enabling you to play Magic the Gathering with friends through a web browser. My goal is not to enforce the rules of the game whatsoever but just to provide a digital interface that could be played the same way you would with real cards.
 
 The application is still pretty ugly and basic but does the job.
 
-##Warning
+## Warning
 You should use a modern web browser (Chrome, Firefox and Safari would do the trick - forget right away about Internet Explorer you fool). You should also use a quite modern computer since the game makes use of 3D rotations and since a old computer will not render the game correctly otherwise. I will develop fallbacks later on.
 
 Also, note that this application is not secured in any way and should not be used to launch a server on the
 Internet. I recommend its use through LAN only.
 
-##Installation
+## Installation
 To start the server on which every one will connect, you need to install [node.js](http://nodejs.org/).
 
-Then clone this repository and install the dependencies likewise.
+Once this is done, you'll have to install some npm packages.
+
+```
+# Use sudo if you run into access rights errors
+npm install -g grunt-cli grunt bower
+```
+
+Finally clone this repository and install the dependencies likewise.
 ```
 git clone git@github.com:Yomguithereal/mtgnode.git
 cd mtgnode
 npm install
+bower install
 ```
 
 ## Usage
@@ -43,25 +51,28 @@ If you want other people to connect to your server (on a LAN, typically), just g
 and let them type it on their browser with port 3000.
 
 ```bash
-#Example
+#  Example
 192.168.1.13:3000
 ```
 
-##Pages
+## Pages
 Once connected, you have access to four differents locations.
 
 * A main lobby displaying hosted games and serving as a hub for other pages.
-* A deck-builder enabling you to search cards and create decks for your user. (Popular deck format parsing coming soon).
+* A deck-builder enabling you to search cards and create decks for your user.
 * A game debugging zone (basically, you will play against yourself in a mirrored fashion).
 
-##Game Controls
+## Game Controls
 You are always the bottom player on your screen.
 
 To draw a card, click the deck. Then drag the card where you want.
 
 You also have access to some contextual actions with your right click.
 
-##Card display driver
+## Database
+This application runs without a database server and keeps a json file of its user and decks data. So, if you want to save or transfer the data from one of your instances to another one, the file is located at `database/mtgnode.db`.
+
+## Card display driver
 This application does not provide the cards images so it can stay lightweight. In order to display card, it uses what is called a `driver` which will fetch the required images on some remote site hosting them.
 
 ### Available drivers
