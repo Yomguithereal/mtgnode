@@ -2,7 +2,7 @@
   "name": "mtgnode",
   "private": true,
   "version": "0.3.0",
-  "description": "A realtime web application for Magic the Gathering with node.js and socket.io",
+  "description": "A realtime web application for Magic the Gathering.",
   "keywords": [
     "mtg",
     "magic the gathering",
