@@ -33,7 +33,7 @@ module.exports = {
           res.json(404, {error: 'inexistant_room'});
         else
           res.view('playground/playground', {
-            game_id: game.id,
+            game_id: game[0].id,
             debug: false,
             decks: decks
           });
@@ -46,7 +46,7 @@ module.exports = {
     var gid = req.param('id'),
         uid = req.session.user.id;
 
-    Game.findOne(gid).done(function(err, g) {
+    Game.findOne(gid, function(err, g) {
 
       // Player 1
       if (!g.player1.connected &&
