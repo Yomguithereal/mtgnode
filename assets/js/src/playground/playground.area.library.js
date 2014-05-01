@@ -32,7 +32,20 @@
 
     // Contextual menu
     this.menu = {
-
+      position: 'top',
+      area: {
+        drawHand: function() {
+          
+          // Clicking seven times on library
+          var i = 1;
+          (function draw() {
+            $(_this.area + ' .card-dummy').click();
+            if (i < 7)
+              setTimeout(draw, 300);
+            i++;
+          })();
+        }
+      }
     };
 
     // Drop events
@@ -50,10 +63,10 @@
 
       // Case when the deck might be empty
       if (!cards.length)
-        _this.$area.empty();
+        this.$area.empty();
       else
-        if (!_this.$area.children().length)
-          _this.$area.append(_this.dummy);
+        if (!this.$area.children().length)
+          this.$area.append(this.dummy);
     };
 
     this.init();
