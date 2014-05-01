@@ -44,6 +44,9 @@
               setTimeout(draw, 300);
             i++;
           })();
+        },
+        shuffle: function() {
+          this.dispatchBothEvents('library.shuffle');
         }
       }
     };

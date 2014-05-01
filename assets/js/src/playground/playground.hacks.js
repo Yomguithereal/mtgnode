@@ -125,6 +125,17 @@
     {
       triggers: 'hand.conceal',
       description: 'Dispatched when a player conceals his hand.'
+    },
+    {
+      triggers: 'library.shuffle',
+      description: 'Dispatched when a player shuffle his deck',
+      method: function(e) {
+        if (e.data.side !== 'my')
+          return;
+
+        var library = e.data.side + '-library';
+        this[library] = _.shuffle(this.get(library));
+      }
     }
   ];
 
