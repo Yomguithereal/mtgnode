@@ -1,0 +1,228 @@
+/*
+| -------------------------------------------------------------------
+|  MTG Node LESS Layout
+| -------------------------------------------------------------------
+|
+|
+|   Author : Yomguithereal
+|   Version : 1.0
+*/
+BODY {
+  margin:0px;
+}
+
+#mainframe {
+  margin: 0px auto;
+  margin-top:10px;
+  padding:0px;
+  width: 1289px;
+  min-height:760px;
+}
+
+#helper_block {
+  width: @playground-left-panel-width;
+  margin:0px;
+  height:760px;
+  float:left;
+  border:1px solid black;
+  border-right:none;
+}
+
+#top_helper_block, #bottom_helper_block {
+  height:200px;
+}
+
+#top_helper_block {
+  border-bottom : 1px solid black;
+}
+
+#bottom_helper_block {
+  border-top : 1px solid black;
+}
+
+#card_viewer_block {
+  height:@card-viewer-height;
+}
+
+#deck_builder_container {
+  width: 1039px;
+  margin: 0px;
+  height:760px;
+  float:right;
+  border:1px solid black;
+}
+
+#left_panel {
+  border-right:1px solid black;
+  float:left;
+  width:517px;
+  height:100%;
+  overflow-y:scroll;
+}
+
+#right_panel {
+  float:right;
+  width:517px;
+  height:100%;
+  text-align: left;
+  overflow-y:scroll;
+}
+
+#game_block {
+  width: 974px;
+  margin-left: @playground-left-panel-width;
+  height:760px;
+  border:1px solid black;
+}
+
+.game-area {
+  position : relative;
+}
+
+#top_game_block {
+  height: 380px;
+  position: relative;
+}
+
+#bottom_game_block {
+  height: 379px;
+  border-top:1px solid black;
+  position: relative;
+}
+
+#top_game_block.opponent,
+#bottom_game_block.opponent {
+  background-color: #cccccc;
+}
+
+.library-and-hand {
+  position:absolute;
+  width:974px;
+  height:@card-min-height;
+
+  &.top {
+    top:0px;
+    border-bottom:1px solid black;
+  }
+
+  &.bottom {
+    bottom:0px;
+    border-top: 1px solid black;
+  }
+}
+
+.hand-emplacement {
+  height:@card-min-height;
+  width: @hand-width;
+  position: absolute;
+  left: (@card-min-width + 1) * 3;
+}
+
+.exile-emplacement {
+  width:@card-min-width;
+  height:@card-min-height;
+  position: absolute;
+  left: 0px;
+
+  &.top {
+    border-right:1px solid black;
+  }
+
+  &.bottom {
+    bottom:0px;
+    border-right:1px solid black;
+    border-top:1px solid black;
+  }
+}
+
+.library-emplacement {
+  width:@card-min-width;
+  height:@card-min-height;
+  position: absolute;
+  left: (@card-min-width + 1) * 2;
+
+  &.top {
+    border-right:1px solid black;
+  }
+
+  &.bottom {
+    bottom:0px;
+    border-right:1px solid black;
+    border-top:1px solid black;
+  }
+}
+
+.graveyard-emplacement {
+  width:@card-min-width;
+  height:@card-min-height;
+  position: absolute;
+  left: (@card-min-width + 1);
+
+  &.top {
+    border-bottom: 1px solid black;
+    border-right: 1px solid black;
+  }
+
+  &.bottom  {
+    bottom:0px;
+    border-top:1px solid black;
+    border-right:1px solid black;
+  }
+}
+
+.game-emplacement {
+  height:268px;
+  width:974px;
+  position:absolute;
+  z-index:10;
+}
+
+#top_game_zone {
+  bottom:0px;
+}
+
+.context-menu {
+  position: absolute;
+  display:none;
+  z-index: @modal-zindex - 2;
+}
+
+.modal-body-search {
+  height: 500px;
+  overflow-y: scroll;
+  text-align: center;
+}
+
+.card-container {
+  position:absolute;
+  top:0px;
+  left:0px;
+}
+
+.valid {
+  color:green;
+}
+.error {
+  color:red;
+}
+
+#chat_container {
+  position: absolute;
+  z-index: @modal-zindex - 1;
+}
+
+#chat_container > .modal-content{
+  width: 300px;
+  height: 230px;
+  cursor: pointer;
+}
+
+#chat_messages {
+  height: 130px;
+  overflow-y: scroll;
+  font-size: 12px;
+}
+
+#deck_to_parse {
+  height: 400px;
+}

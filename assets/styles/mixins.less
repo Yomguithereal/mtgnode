@@ -1,0 +1,108 @@
+/*
+| -------------------------------------------------------------------
+|  MTG Node LESS Mixins
+| -------------------------------------------------------------------
+|
+|
+|   Author : Yomguithereal
+|   Version : 1.0
+*/
+.transform(...) {
+  -webkit-transform: @arguments;
+  -moz-transform: @arguments;
+  -o-transform: @arguments;
+  -ms-transform: @arguments;
+  transform: @arguments;
+}
+
+.rotation(@deg) {
+  .transform(rotate(@deg));
+}
+
+.rotate-3d(@arg1, @arg2, @arg3, @arg4) {
+  -webkit-transform: rotate3d(@arg1, @arg2, @arg3, @arg4) translate3d(0,0,0);
+  -moz-transform: rotate3d(@arg1, @arg2, @arg3, @arg4) translate3d(0,0,0);
+  -ms-transform: rotate3d(@arg1, @arg2, @arg3, @arg4) translate3d(0,0,0);
+  -o-transform: rotate3d(@arg1, @arg2, @arg3, @arg4) translate3d(0,0,0);
+  transform: rotate3d(@arg1, @arg2, @arg3, @arg4) translate3d(0,0,0);
+}
+
+.transition(@duration:0.2s, @ease:ease-out) {
+  -webkit-transition: all @duration @ease;
+  -moz-transition: all @duration @ease;
+  -o-transition: all @duration @ease;
+  transition: all @duration @ease;
+}
+
+.transform-transition(@duration:0.2s, @ease:ease) {
+  -webkit-transition: -webkit-transform @duration @ease;
+  -moz-transition: -moz-transform @duration @ease;
+  -o-transition: -o-transform @duration @ease;
+  transition: transform @duration @ease;
+}
+
+.transform-origin(@origin) {
+  -webkit-transform-origin: @origin;
+  -moz-transform-origin: @origin;
+  transform-origin: @origin;
+  -o-transform-origin: @origin;
+  -ms-transform-origin: @origin;
+}
+
+.preserve-3d() {
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  -o-transform-style: preserve-3d;
+  -ms-transform-style: preserve-3d;
+}
+
+.perspective(@distance) {
+  -webkit-perspective: @distance;
+  -moz-perspective: @distance;
+  perspective: @distance;
+  -o-perspective: @distance;
+  -ms-perspective: @distance;
+}
+
+.backface-visibility(@visibility) {
+  -webkit-backface-visibility: @visibility;
+  -moz-backface-visibility: @visibility;
+  backface-visibility: @visibility;
+  -o-backface-visibility: @visibility;
+  -ms-backface-visibility: @visibility;
+}
+
+.box-sizing(@property:border-box) {
+  box-sizing:@property;
+  -moz-box-sizing:@property;
+  -webkit-box-sizing:@property;
+}
+
+.border-radius(@topright: 0, @bottomright: 0, @bottomleft: 0, @topleft: 0) {
+  -webkit-border-top-right-radius: @topright;
+  -webkit-border-bottom-right-radius: @bottomright;
+  -webkit-border-bottom-left-radius: @bottomleft;
+  -webkit-border-top-left-radius: @topleft;
+  -moz-border-radius-topright: @topright;
+  -moz-border-radius-bottomright: @bottomright;
+  -moz-border-radius-bottomleft: @bottomleft;
+  -moz-border-radius-topleft: @topleft;
+  border-top-right-radius: @topright;
+  border-bottom-right-radius: @bottomright;
+  border-bottom-left-radius: @bottomleft;
+  border-top-left-radius: @topleft;
+  .background-clip(padding-box);
+}
+
+.rounded(@radius: 2px) {
+  -webkit-border-radius: @radius;
+  -moz-border-radius: @radius;
+  border-radius: @radius;
+}
+
+.box-shadow(@arguments) {
+  -webkit-box-shadow: @arguments;
+  -moz-box-shadow: @arguments;
+  box-shadow: @arguments;
+}

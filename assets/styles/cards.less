@@ -1,0 +1,123 @@
+/*
+| -------------------------------------------------------------------
+|  MTG Node LESS Cards
+| -------------------------------------------------------------------
+|
+|
+|   Author : Yomguithereal
+|   Version : 1.0
+*/
+.card-min {
+  width:@card-min-width;
+  height:@card-min-height;
+  cursor:pointer;
+  z-index:40;
+
+  position: absolute;
+  .transform-transition(0.3s);
+  .preserve-3d();
+  .perspective(1000);
+
+  // .transform(rotateY(0deg) translate3d(0,0,0));
+
+  // Tapped Card
+  &.tapped {
+    .transform(rotate(90deg) scale(1) translate3d(0,0,0));
+  }
+
+  // In deck card
+  &.in-library {
+    top:0px;
+  }
+
+  // In hand card
+  &.in-hand {
+
+  }
+
+  // In game card
+  &.in-game {
+    .box-shadow(@card-shadow);
+  }
+
+
+  // Deck builder
+  &.deck-builder {
+    position:relative;
+  }
+
+  // Flipped
+  &.flipped {
+    .transform(rotateY(180deg));
+  }
+}
+
+.card-min-deckbuilder {
+  width:@card-min-width;
+  height:@card-min-height;
+  cursor:pointer;
+}
+
+.card-search {
+  width:@card-min-width;
+  height:@card-min-height;
+  cursor:pointer;
+  margin:8px;
+  border:2px solid transparent;
+
+  &.selected {
+    border:2px solid blue;
+  }
+}
+
+.front-side, .back-side {
+  // .transform(rotateZ(0px) translate3d(0,0,0));
+  .backface-visibility(hidden);
+  display:block;
+
+  &.my {
+    .transform(translateZ(0px));
+  }
+
+  &.op {
+    .transform(translateZ(0px) rotateZ(180deg));
+  }
+}
+
+.back-side {
+  // .transform(rotateY(180deg) translateZ(1px) translate3d(0,0,0));
+  border:1px solid black;
+
+  &.my {
+    .transform(rotateY(180deg) translateZ(1px));
+  }
+
+  &.op {
+    .transform(rotateY(180deg) translateZ(1px) rotateZ(180deg));
+  }
+}
+
+.front-side {
+  margin-top:-(@card-min-height)-1;
+  margin-left:1px;
+}
+
+
+.card-min img {
+  width:@card-min-width;
+  height:@card-min-height;
+  .rounded(4px);
+}
+
+.card-dummy {
+  z-index: @modal-zindex - 3;
+}
+
+.card-min-deckbuilder.card-search.selected {
+  border: 2px solid blue;
+}
+
+#card_viewer_widget {
+  width: @card-viewer-width;
+  height: @card-viewer-height;
+}
