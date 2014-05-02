@@ -86,7 +86,8 @@
     drag: _m(playground.modules.drag),
     realtime: _m(dominoRealtime.module),
     modals: {
-      deckChoice: _m(playground.modules.modals.deckChoice)
+      deckChoice: _m(playground.modules.modals.deckChoice),
+      cardsSearch: _m(playground.modules.modals.cardsSearch)
     }
   };
 

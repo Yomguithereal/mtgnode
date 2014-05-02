@@ -44,7 +44,7 @@
       }
     },
     {
-      triggers: ['card.move'],
+      triggers: 'card.move',
       description: 'Dispatched when a card moves from one model to another.',
       method: function(e) {
         if (e.data.side === 'my') {
@@ -69,7 +69,7 @@
             }
           });
 
-          if (e.data.event !== undefined) {
+          if (e.data.event) {
             this.dispatchEvent(e.data.event, {card: card, side: 'my'});
           }
         }
@@ -81,7 +81,7 @@
             e.data.id
           );
 
-          if (e.data.event !== undefined) {
+          if (e.data.event) {
             this.dispatchEvent(e.data.event, {card: card, side: 'op'});
           }
         }
@@ -98,6 +98,17 @@
           this[property] = originalValue + 1;
         else
           this[property] = originalValue - 1;
+      }
+    },
+    {
+      triggers: 'library.shuffle',
+      description: 'Dispatched when a player shuffle his deck',
+      method: function(e) {
+        if (e.data.side !== 'my')
+          return;
+
+        var library = e.data.side + '-library';
+        this[library] = _.shuffle(this.get(library));
       }
     }
   ];
@@ -119,23 +130,16 @@
       description: 'Dispatched when a player untaps all his cards.'
     },
     {
+      triggers: 'cards.search',
+      description: 'Dispatched when a player wants to search cards.'
+    },
+    {
       triggers: 'hand.reveal',
       description: 'Dispatched when a player reveals his hand.'
     },
     {
       triggers: 'hand.conceal',
       description: 'Dispatched when a player conceals his hand.'
-    },
-    {
-      triggers: 'library.shuffle',
-      description: 'Dispatched when a player shuffle his deck',
-      method: function(e) {
-        if (e.data.side !== 'my')
-          return;
-
-        var library = e.data.side + '-library';
-        this[library] = _.shuffle(this.get(library));
-      }
     }
   ];
 

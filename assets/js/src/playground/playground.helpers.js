@@ -43,7 +43,7 @@
 
         // Html
         card.html = driver.render(card, card.id);
-        card.search_html = driver.renderSearch(card, card.id);
+        card.searchHtml = driver.renderSearch(card, card.id);
 
         return card;
       });

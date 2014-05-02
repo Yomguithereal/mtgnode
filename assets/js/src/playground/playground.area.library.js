@@ -47,6 +47,11 @@
         },
         shuffle: function() {
           this.dispatchBothEvents('library.shuffle');
+        },
+        searchCards: function() {
+          this.dispatchEvent('cards.search', {
+            model: 'library'
+          });
         }
       }
     };
