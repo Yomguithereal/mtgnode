@@ -57,7 +57,9 @@
             number: index,
             multiverseid: card.multiverseid,
             src: _driver(card),
-            side: this.prefix
+            side: this.prefix,
+            name: card.name,
+            set: card.set
           };
 
       // Apply special cases

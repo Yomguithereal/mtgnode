@@ -1,10 +1,13 @@
 //- Card Display Templates
-
-//- TODO: script x-handlebars templates
-
 mixin deckBuilderCardTemplate()
   script#tpl_card(type=TEMPLATE_MIME)
-    img.card-min-deckbuilder(id="{{id_prefix}}_{{number}}", index="{{number}}", src="{{src}}", multiverseid="{{multiverseid}}")
+    img.card-min-deckbuilder(
+      id="{{id_prefix}}_{{number}}",
+      alt="{{multiverseid}} -- {{name}} -- {{set}}",
+      index="{{number}}",
+      src="{{src}}",
+      multiverseid="{{multiverseid}}"
+    )
 
 mixin searchCardTemplate()
   script#tpl_search_card(type=TEMPLATE_MIME)
