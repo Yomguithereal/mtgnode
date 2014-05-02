@@ -70,7 +70,12 @@
           });
 
           if (e.data.event) {
-            this.dispatchEvent(e.data.event, {card: card, side: 'my'});
+            this.dispatchEvent(e.data.event, {
+              card: card,
+              side: 'my',
+              from: e.data.from,
+              to: e.data.to
+            });
           }
         }
         else {
@@ -82,7 +87,12 @@
           );
 
           if (e.data.event) {
-            this.dispatchEvent(e.data.event, {card: card, side: 'op'});
+            this.dispatchEvent(e.data.event, {
+              card: card,
+              side: 'op',
+              from: e.data.from,
+              to: e.data.to
+            });
           }
         }
       }

@@ -69,7 +69,9 @@
           side: 'my',
           to: 'hand',
           from: _this.searchedModel,
-          event: (_this.searchedModel === 'library') ? 'card.drawn' : false
+          event: (_this.searchedModel === 'library') ?
+            'card.drawn' :
+            'card.dropped'
         });
       });
 

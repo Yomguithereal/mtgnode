@@ -22,13 +22,13 @@
 
   // Apply a function if it exists
   function optapply(scope, fn, args) {
-    if (_.isFunction(fn) && fn !== undefined)
+    if (typeof fn === 'function')
       fn.apply(scope, args);
   }
 
   // Call a function if it exists
   function otpcall(scope, fn) {
-    if (_.isFunction(fn) && fn !== undefined)
+    if (typeof fn === 'function')
       fn.apply(scope, Array.prototype.slice.call(arguments, 2));
   }
 

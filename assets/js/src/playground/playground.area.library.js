@@ -50,7 +50,7 @@
         },
         searchCards: function() {
           this.dispatchEvent('cards.search', {
-            model: 'library'
+            model: this.name
           });
         }
       }

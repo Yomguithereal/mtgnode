@@ -25,8 +25,6 @@
     this.$menu = $('#' + this.name + '_context_menu');
     this.$area = $(this.area);
 
-    // TODO: context menu for cards and zone
-
     // Methods
     //---------
     this.init = function() {
@@ -48,6 +46,14 @@
               scope: this,
               actions: this.menu.area
             });
+
+          // Context menu on cards
+          this.$menu.contextualize({
+            position: this.menu.position || 'bottom',
+            selector: this.cards,
+            scope: this,
+            actions: this.menu.cards
+          });
         }
 
         // Droppable
@@ -140,16 +146,18 @@
 
     // Card dropped in area
     this.triggers.events['card.dropped'] = function(d, e) {
-      var $card = _this.selectCard(e.data.id);
+      if (!_this.drop ||
+          (_this.name !== e.data.from && _this.name !== e.data.to)) {
+        return;
+    }
+
+      var $card = _this.selectCard(e.data.id || e.data.card.id);
 
       // Applying new classes to dropped elements
       $card.removeClass('in-' + e.data.from);
       $card.addClass('in-' + e.data.to);
 
       // Executing drop callbacks
-      if (_this.drop === undefined)
-        return;
-
       if (e.data.type === 'same')
         utilities.optcall(_this, _this.drop.onSameArea, $card);
       else

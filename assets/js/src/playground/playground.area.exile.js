@@ -13,6 +13,18 @@
     // Extending
     playground.area.call(this, side);
 
+    // Contextual menu
+    this.menu = {
+      position: 'top',
+      cards: {
+        searchCards: function() {
+          this.dispatchEvent('cards.search', {
+            model: this.name
+          });
+        }
+      }
+    };
+
     // Drop events
     this.drop = {
       tolerance: 'intersect',

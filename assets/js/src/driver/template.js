@@ -39,7 +39,7 @@
     };
 
     // Special cases
-    this.specialCases = function(card, context) {
+    function specialCases(card, context) {
 
       if (card.types !== undefined && ~card.types.indexOf('Land'))
         context.type = 'land';
@@ -63,7 +63,7 @@
           };
 
       // Apply special cases
-      context = this.specialCases(card, context);
+      context = specialCases(card, context);
 
       // Render
       return this.templates.standard(context);
