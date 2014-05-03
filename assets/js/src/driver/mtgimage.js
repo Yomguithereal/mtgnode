@@ -11,11 +11,18 @@
 
   // Properties
   //------------
-  var baseUrl = 'http://mtgimage.com/multiverseid/';
+  var urls = {
+    multiverseid: 'http://mtgimage.com/multiverseid/',
+    cardname: 'http://mtgimage.com/set/'
+  };
 
   // Driver
   //--------
   this.currentDriver = function(card) {
-    return baseUrl + card.multiverseid + '.jpg';
+
+    if (card.multiverseid)
+      return urls.multiverseid + card.multiverseid + '.jpg';
+    else
+      return urls.cardname + card.set + '/' + card.name + '.jpg';
   };
 }).call(this);
