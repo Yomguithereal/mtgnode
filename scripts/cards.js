@@ -10,11 +10,20 @@ var _ = require('lodash'),
 var cards_array = [],
     missing_set_numbers = [];
 
+var blacklist = [
+  'DKM',
+  'HHO',
+  'DPA'
+];
+
 for (var set in sets) {
 
   // Looping through cards
   sets[set].cards.forEach(function(card, index) {
     card['set'] = set;
+
+    if (~blacklist.indexOf(card.set))
+      return;
 
     // Registering missing set
     if(!~missing_set_numbers.indexOf(set) && card.number === undefined) {
