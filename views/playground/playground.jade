@@ -6,6 +6,7 @@ include ../mixins/context_menus
 include ../mixins/plugins
 include ../mixins/exposure
 include ../templates/cards
+include ../templates/counters
 
 block body
   +chat_widget()
@@ -95,9 +96,10 @@ block context_menus
   +exile_context_menu()
 
 block templates
-  +playgroundCardTemplate()
-  +dummyCardTemplate()
-  +searchCardTemplate()
+  +playground_card_template()
+  +dummy_card_template()
+  +search_card_template()
+  +plus_one_counter_template()
 
 block global_js
   +user_exposure()
