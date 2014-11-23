@@ -13,7 +13,8 @@ var express = require('express'),
     validate = middlewares.validate,
     compendium = require('./model/compendium.js'),
     users = new (require('./model/user.js'))(false)
-    fs = require('fs');
+    fs = require('fs'),
+    _ = require('lodash');
 
 /**
  * Application definition
@@ -37,7 +38,7 @@ app.use(session({
  */
 app.get('/', function(req, res) {
   fs.readFile(__dirname + '/../index.html', 'utf-8', function(err, data) {
-    return res.status(200).send(data);
+    return res.status(200).send(_.template(data, {session: JSON.stringify(false)}));
   });
 });
 

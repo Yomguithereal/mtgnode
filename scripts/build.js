@@ -15,7 +15,7 @@ var browserify = require('browserify'),
 // Creating bundle
 module.exports = function(callback) {
   var bundler = browserify({
-    entries: [__dirname + '/../public/js/app.js'],
+    entries: [__dirname + '/../public/js/app.jsx'],
     debug: true,
     transform: [es6, react],
     cache: {},
