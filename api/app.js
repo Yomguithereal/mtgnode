@@ -7,17 +7,41 @@
 var express = require('express'),
     morgan = require('morgan'),
     bodyParser = require('body-parser'),
+    cookieParser = require('cookie-parser'),
+    session = require('express-session'),
     middlewares = require('./middlewares.js'),
     validate = middlewares.validate,
-    compendium = require('./model/compendium.js');
+    compendium = require('./model/compendium.js'),
+    fs = require('fs');
 
-// Defining application
+/**
+ * Application definition
+ */
 var app = express();
 if (process.env.NODE_ENV !== 'test')
   app.use(morgan('dev'));
 
 app.use(bodyParser.urlencoded({limit: '5mb', extended: true}));
 app.use(bodyParser.json({limit: '5mb'}));
+app.use(cookieParser());
+app.use(session({
+  secret: 'shawarma',
+  trustProxy: false,
+  resave: true,
+  saveUninitialized: true
+}));
+
+/**
+ * Home & Static
+ */
+app.get('/', function(req, res) {
+  fs.readFile(__dirname + '/../index.html', 'utf-8', function(err, data) {
+    return res.status(200).send(data);
+  });
+});
+
+app.use('/public', express.static(__dirname + '/../public'));
+
 
 /**
  * Cards Router

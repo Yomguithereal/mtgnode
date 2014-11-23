@@ -8,7 +8,7 @@ node_modules
 .DS_Store
 
 # Useless files
-.npm-debug.log
+npm-debug.log
 
 # Configuration files
 config.json
