@@ -6,14 +6,19 @@
  */
 var sets = require('../data/mtgjson.json'),
     fs = require('fs'),
-    output = {},
+    helpers = require('./helpers.js'),
     _ = require('lodash');
 
 // Looping over sets
-Object.keys(sets).map(function(setName) {
-  output[setName] = _.omit(sets[setName], 'cards');
-  output[setName]['nb_cards'] = sets[setName].cards.length;
-});
+for (var set in sets) {
+  if (helpers.validSet(sets[set])) {
+    sets[set]['nb_cards'] = sets[set].cards.length;
+    delete sets[set].cards;
+  }
+  else {
+    delete sets[set];
+  }
+}
 
 // Outputting
-fs.writeFileSync(__dirname + '/../data/sets.json', JSON.stringify(output));
+fs.writeFileSync(__dirname + '/../data/sets.json', JSON.stringify(sets));

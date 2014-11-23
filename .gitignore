@@ -6,3 +6,6 @@ node_modules
 
 # Nasty OSX files
 .DS_Store
+
+# Useless files
+.npm-debug.log
