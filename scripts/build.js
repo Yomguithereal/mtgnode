@@ -9,7 +9,8 @@ var browserify = require('browserify'),
     source = require('vinyl-source-stream'),
     es6 = require('es6ify'),
     watchify = require('watchify'),
-    gulp = require('gulp');
+    gulp = require('gulp'),
+    chalk = require('chalk');
 
 // Creating bundle
 module.exports = function(callback) {
@@ -27,7 +28,7 @@ module.exports = function(callback) {
   function build(firstTime) {
 
     if (!firstTime)
-      console.log('Updating bundle...');
+      console.log(chalk.cyan('Updating') + ' bundle...');
     watcher.bundle()
       .pipe(source('app.bundle.js'))
       .pipe(gulp.dest(__dirname + '/../public/build'))
@@ -35,7 +36,7 @@ module.exports = function(callback) {
         if (firstTime)
           callback();
         else
-          console.log('Bundle updated.');
+          console.log('Bundle ' + chalk.green('updated.'));
       });
   }
 

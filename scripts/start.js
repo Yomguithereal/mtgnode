@@ -9,24 +9,25 @@ var config = require('../config.json'),
     build = require('./build.js'),
     realtime = require('../api/realtime.js'),
     async = require('async'),
+    chalk = require('chalk'),
     server;
 
 async.series({
   build: function(next) {
-    console.log('Building files...');
+    console.log(chalk.cyan('Building') + ' files...');
     build(next);
   },
   server: function(next) {
-    console.log('Listening to port ' + config.port + '...');
+    console.log('Listening to port ' + chalk.yellow(config.port) + '...');
     server = app.listen(config.port);
     next();
   },
   realtime: function(next) {
-    console.log('Launching socket server...');
+    console.log('Launching ' + chalk.blue('socket') + ' server...');
     realtime(server);
     next();
   }
 }, function(err) {
   if (err) throw err;
-  console.log('Everything is ready to go!\n');
+  console.log('Everything is ' + chalk.green('ready') + ' to go!\n');
 });
