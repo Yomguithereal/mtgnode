@@ -9,3 +9,6 @@ node_modules
 
 # Useless files
 .npm-debug.log
+
+# Configuration files
+config.json

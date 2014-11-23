@@ -12,7 +12,7 @@ var sets = require('../data/mtgjson.json'),
 // Looping over sets
 for (var set in sets) {
   if (helpers.validSet(sets[set])) {
-    sets[set]['nb_cards'] = sets[set].cards.length;
+    sets[set].nb_cards = sets[set].cards.length;
     delete sets[set].cards;
   }
   else {

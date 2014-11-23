@@ -4,8 +4,9 @@
   "description": "A realtime web application for Magic the Gathering.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build-data": "node ./scripts/build.js"
+    "test": "NODE_ENV='test' mocha -R spec ./test/endpoint.js",
+    "build-data": "node ./scripts/build.js",
+    "start": "node ./scripts/start.js"
   },
   "repository": {
     "type": "git",
@@ -18,10 +19,18 @@
   },
   "homepage": "https://github.com/Yomguithereal/mtgnode",
   "dependencies": {
+    "body-parser": "^1.9.3",
+    "dirty": "^0.9.9",
+    "express": "^4.10.2",
     "lodash": "^2.4.1",
-    "mtg-parser": "~0.1.0"
+    "morgan": "^1.5.0",
+    "mtg-parser": "~0.1.0",
+    "typology": "^0.1.1"
   },
   "devDependencies": {
-    "gulp": "^3.8.10"
+    "gulp": "^3.8.10",
+    "gulp-jshint": "^1.9.0",
+    "gulp-mocha": "^2.0.0",
+    "supertest": "^0.15.0"
   }
 }
