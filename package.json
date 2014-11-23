@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "NODE_ENV='test' mocha -R spec ./test/endpoint.js",
-    "build-data": "node ./scripts/build.js",
+    "build-data": "node ./scripts/sets.js && node ./scripts/cards.js",
     "start": "node ./scripts/start.js"
   },
   "repository": {
@@ -20,17 +20,22 @@
   "homepage": "https://github.com/Yomguithereal/mtgnode",
   "dependencies": {
     "body-parser": "^1.9.3",
+    "browserify": "^6.3.2",
     "cookie-parser": "^1.3.3",
     "dirty": "^0.9.9",
+    "es6ify": "^1.5.1",
     "express": "^4.10.2",
     "express-session": "^1.9.2",
+    "gulp": "^3.8.10",
     "lodash": "^2.4.1",
     "morgan": "^1.5.0",
     "mtg-parser": "~0.1.0",
-    "typology": "^0.1.1"
+    "reactify": "^0.17.1",
+    "typology": "^0.1.1",
+    "vinyl-source-stream": "^1.0.0",
+    "watchify": "^2.1.1"
   },
   "devDependencies": {
-    "gulp": "^3.8.10",
     "gulp-jshint": "^1.9.0",
     "gulp-mocha": "^2.0.0",
     "supertest": "^0.15.0"
