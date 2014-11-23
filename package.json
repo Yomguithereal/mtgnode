@@ -1,0 +1,27 @@
+{
+  "name": "mtgnode",
+  "version": "0.4.0",
+  "description": "A realtime web application for Magic the Gathering.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build-data": "node ./scripts/build.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/Yomguithereal/mtgnode.git"
+  },
+  "author": "yomguithereal <kropotkinepiotr@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Yomguithereal/mtgnode/issues"
+  },
+  "homepage": "https://github.com/Yomguithereal/mtgnode",
+  "dependencies": {
+    "lodash": "^2.4.1",
+    "mtg-parser": "~0.1.0"
+  },
+  "devDependencies": {
+    "gulp": "^3.8.10"
+  }
+}

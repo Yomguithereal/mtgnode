@@ -1,0 +1,8 @@
+# Original Data
+data/mtgjson.json
+
+# Folders
+node_modules
+
+# Nasty OSX files
+.DS_Store
