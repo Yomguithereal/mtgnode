@@ -31,6 +31,11 @@ var controller = new domino({
       type: '?array',
       value: null
     }
+  },
+  facets: {
+    logged: function() {
+      return !!this.get('user');
+    }
   }
 });
 
@@ -58,3 +63,8 @@ var routes = (
 Router.run(routes, function(Handler) {
   React.render(<Handler />, $('#application')[0]);
 });
+
+// Exporting
+module.exports = {
+  control: controller
+};

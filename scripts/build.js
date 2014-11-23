@@ -17,6 +17,7 @@ module.exports = function(callback) {
   var bundler = browserify({
     entries: [__dirname + '/../public/js/app.jsx'],
     debug: true,
+    standalone: 'app',
     transform: [es6, react],
     cache: {},
     packageCache: {},
