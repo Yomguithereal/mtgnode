@@ -12,3 +12,6 @@ npm-debug.log
 
 # Configuration files
 config.json
+
+# Build files
+public/build

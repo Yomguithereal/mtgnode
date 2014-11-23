@@ -4,5 +4,5 @@
  *
  * Main client file in charge of loading the client.
  */
-console.log('tada');
-console.log('hello');
+var socket = require('socket.io-client')();
+console.log('hey');

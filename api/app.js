@@ -69,8 +69,14 @@ cardsRouter.post('/cards',
   }
 );
 
-// Registering routers
+
+/**
+ * Registrations
+ */
 app.use(cardsRouter);
 
-// Exporting
+
+/**
+ * Exporting
+ */
 module.exports = app;
