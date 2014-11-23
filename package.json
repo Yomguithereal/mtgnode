@@ -36,6 +36,7 @@
     "socket.io": "^1.2.1",
     "socket.io-client": "^1.2.1",
     "typology": "^0.1.1",
+    "uuid": "^2.0.1",
     "vinyl-source-stream": "^1.0.0",
     "watchify": "^2.1.1"
   },

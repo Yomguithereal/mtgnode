@@ -12,6 +12,7 @@ var express = require('express'),
     middlewares = require('./middlewares.js'),
     validate = middlewares.validate,
     compendium = require('./model/compendium.js'),
+    users = new (require('./model/user.js'))(false)
     fs = require('fs');
 
 /**
@@ -46,10 +47,10 @@ app.use('/public', express.static(__dirname + '/../public'));
 /**
  * Cards Router
  */
-var cardsRouter = express.Router();
+var cardRouter = express.Router();
 
 // Retrieving a single card by id
-cardsRouter.get('/card/:id',
+cardRouter.get('/card/:id',
   validate({id: 'string'}),
   function(req, res) {
     var card = compendium.getCardById(+req.param('id'));
@@ -62,7 +63,7 @@ cardsRouter.get('/card/:id',
 );
 
 // Retrieving a batch of cards by id
-cardsRouter.post('/cards',
+cardRouter.post('/cards',
   validate({cards: 'array'}),
   function(req, res) {
     return res.json(compendium.getCardsById(req.param('cards')));
@@ -71,9 +72,38 @@ cardsRouter.post('/cards',
 
 
 /**
+ * User Router
+ */
+var userRouter = express.Router();
+
+// Creating a user
+userRouter.post('/:name',
+  validate({name: 'string'}),
+  function(req, res) {
+    users.create(req.param('name'), function(err, user) {
+      return res.json(user);
+    });
+  }
+);
+
+// Getting a user
+userRouter.get('/:name',
+  validate({name: 'string'}),
+  function(req, res) {
+    var user = users.get(req.param('name'));
+
+    if (!user)
+      return res.status(400).send('Not Found');
+    else
+      return res.json(user);
+  }
+);
+
+/**
  * Registrations
  */
-app.use(cardsRouter);
+app.use(cardRouter);
+app.use('/user', userRouter);
 
 
 /**

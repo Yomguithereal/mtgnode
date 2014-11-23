@@ -1,5 +1,6 @@
-# Original Data
+# Data
 data/mtgjson.json
+data/mtgnode.db
 
 # Folders
 node_modules
