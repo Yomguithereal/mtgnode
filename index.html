@@ -7,7 +7,9 @@
 </head>
 <body>
   <div id="application"></div>
-  <input id="session" type="hidden" name="session" value="<%= session %>" />
+  <script type="text/javascript">
+    var SESSION = <%= session %>;
+  </script>
   <script type="text/javascript" src="public/build/app.bundle.js"></script>
 </body>
 </html>

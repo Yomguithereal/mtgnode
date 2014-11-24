@@ -38,7 +38,15 @@ app.use(session({
  */
 app.get('/', function(req, res) {
   fs.readFile(__dirname + '/../index.html', 'utf-8', function(err, data) {
-    return res.status(200).send(_.template(data, {session: JSON.stringify(false)}));
+    var name = req.session.logged && req.session.name,
+        html = _.template(
+          data,
+          {
+            session: JSON.stringify(users.get(req.session.name) || {name: false})
+          }
+        );
+
+    return res.status(200).send(html);
   });
 });
 
@@ -78,7 +86,7 @@ cardRouter.post('/cards',
 var userRouter = express.Router();
 
 // Creating a user
-userRouter.post('user/:name',
+userRouter.post('/user/:name',
   validate({name: 'string'}),
   function(req, res) {
     users.create(req.param('name'), function(err, user) {
@@ -88,13 +96,13 @@ userRouter.post('user/:name',
 );
 
 // Getting a user
-userRouter.get('user/:name',
+userRouter.get('/user/:name',
   validate({name: 'string'}),
   function(req, res) {
     var user = users.get(req.param('name'));
 
     if (!user)
-      return res.status(400).send('Not Found');
+      return res.status(404).send('Not Found');
     else
       return res.json(user);
   }
@@ -103,6 +111,28 @@ userRouter.get('user/:name',
 // Getting every users
 userRouter.get('/users', function(req, res) {
   return res.json(users.list());
+});
+
+// Log
+userRouter.get('/log/:name',
+  validate({name: 'string'}),
+  function(req, res) {
+    var user = users.get(req.param('name'));
+
+    if (!user)
+      return res.status(400).send('Not Found');
+
+    req.session.logged = true;
+    req.session.name = user.name;
+    return res.json(user);
+  }
+);
+
+// Logout
+userRouter.get('/logout', function(req, res) {
+  req.session.logged = false;
+  req.session.name = null;
+  return res.json({ok: true});
 });
 
 /**

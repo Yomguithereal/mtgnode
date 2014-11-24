@@ -11,6 +11,7 @@ var controller = require('./controllers/main.js'),
     Router = require('react-router'),
     Route = Router.Route,
     NotFoundRoute = Router.NotFoundRoute,
+    DefaultRoute = Router.DefaultRoute,
     Application = require('./components/application.jsx'),
     Login = require('./components/login/login.jsx'),
     Lobby = require('./components/lobby/lobby.jsx'),
@@ -18,7 +19,9 @@ var controller = require('./controllers/main.js'),
     $ = require('jquery');
 
 // Handling session
-var initialSession = JSON.parse($('#session').val());
+var initialSession = SESSION;
+if (initialSession.name)
+  controller.update('user', initialSession);
 
 // Fetching user list
 controller.request('retrieveUsers');
@@ -26,6 +29,7 @@ controller.request('retrieveUsers');
 // Routing
 var routes = (
   <Route name="app" path="/" handler={Application}>
+    <DefaultRoute handler={Lobby} />
     <Route name="login" handler={Login} />
     <Route name="lobby" handler={Lobby} />
     <NotFoundRoute handler={Unknown} />

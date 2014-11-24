@@ -14,7 +14,7 @@ module.exports = React.createClass({
   statics: {
     willTransitionTo: function(transition) {
       if (!controller.get('logged'))
-        return transition.abort();
+        return transition.redirect('/login');
     }
   }
 });
