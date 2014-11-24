@@ -10,8 +10,11 @@ var React = require('react'),
 module.exports = React.createClass({
   render: function() {
     return (
-      <div id="container">
-        <RouteHandler />
+      <div>
+        <nav className="navbar navbar-default main-nav" />
+        <div id="container">
+          <RouteHandler />
+        </div>
       </div>
     );
   }

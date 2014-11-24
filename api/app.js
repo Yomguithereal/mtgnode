@@ -78,7 +78,7 @@ cardRouter.post('/cards',
 var userRouter = express.Router();
 
 // Creating a user
-userRouter.post('/:name',
+userRouter.post('user/:name',
   validate({name: 'string'}),
   function(req, res) {
     users.create(req.param('name'), function(err, user) {
@@ -88,7 +88,7 @@ userRouter.post('/:name',
 );
 
 // Getting a user
-userRouter.get('/:name',
+userRouter.get('user/:name',
   validate({name: 'string'}),
   function(req, res) {
     var user = users.get(req.param('name'));
@@ -100,11 +100,16 @@ userRouter.get('/:name',
   }
 );
 
+// Getting every users
+userRouter.get('/users', function(req, res) {
+  return res.json(users.list());
+});
+
 /**
  * Registrations
  */
 app.use(cardRouter);
-app.use('/user', userRouter);
+app.use(userRouter);
 
 
 /**

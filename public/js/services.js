@@ -6,8 +6,11 @@
  */
 
 var services = {
-  users: {
-
+  retrieveUsers: {
+    url: '/users',
+    success: function(data) {
+      this.update('users', data);
+    }
   }
 };
 

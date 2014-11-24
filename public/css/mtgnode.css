@@ -4,3 +4,11 @@
   margin-left: auto;
   margin-right: auto;
 }
+
+.main-nav {
+  border-radius: 0px;
+}
+
+.login-picker {
+  text-align: center;
+}

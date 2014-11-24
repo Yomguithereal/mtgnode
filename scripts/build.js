@@ -5,24 +5,28 @@
  * Script creating the browserify bundle and watching the files for changes.
  */
 var browserify = require('browserify'),
-    react = require('reactify'),
+    reactify = require('reactify'),
     source = require('vinyl-source-stream'),
-    es6 = require('es6ify'),
+    es6ify = require('es6ify'),
     watchify = require('watchify'),
     gulp = require('gulp'),
     chalk = require('chalk');
 
 // Creating bundle
 module.exports = function(callback) {
-  var bundler = browserify({
-    entries: [__dirname + '/../public/js/app.jsx'],
+  var opts = {
     debug: true,
+    entries: [__dirname + '/../public/js/app.jsx'],
     standalone: 'app',
-    transform: [es6, react],
     cache: {},
     packageCache: {},
     fullPaths: true
-  });
+  };
+
+  var bundler = browserify(opts)
+    // .add(es6ify.runtime)
+    .transform(reactify)
+    .transform(es6ify.configure(/.jsx/));
 
   var watcher = watchify(bundler);
 
@@ -30,9 +34,13 @@ module.exports = function(callback) {
 
     if (!firstTime)
       console.log(chalk.cyan('Updating') + ' bundle...');
+
     watcher.bundle()
       .pipe(source('app.bundle.js'))
       .pipe(gulp.dest(__dirname + '/../public/build'))
+      .on('error', function(err) {
+        console.log(err);
+      })
       .on('end', function() {
         if (firstTime)
           callback();

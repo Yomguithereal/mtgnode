@@ -50,6 +50,14 @@ Model.prototype.get = function(name) {
   return this.db.get(name);
 };
 
+Model.prototype.list = function() {
+  var users = [];
+  this.db.forEach(function(key, val) {
+    users.push(key);
+  });
+  return users;
+};
+
 Model.prototype.addDeck = function(name, deck, callback) {
   if (!types.check(deck, 'deck'))
     throw Error('mtgnode.user.addDeck: invalid deck.');

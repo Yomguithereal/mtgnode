@@ -5,11 +5,8 @@
  * Main client file intializing the whole application.
  */
 
-// Execution
-require('./types.js');
-
 // Dependencies
-var domino = require('domino-js'),
+var controller = require('./controllers/main.js'),
     React = require('react'),
     Router = require('react-router'),
     Route = Router.Route,
@@ -20,35 +17,11 @@ var domino = require('domino-js'),
     Unknown = require('./components/unknown.jsx'),
     $ = require('jquery');
 
-// Intantiating the main controller
-var controller = new domino({
-  properties: {
-    user: {
-      type: '?User',
-      value: null
-    },
-    users: {
-      type: '?array',
-      value: null
-    }
-  },
-  facets: {
-    logged: function() {
-      return !!this.get('user');
-    }
-  }
-});
-
-// Basics events
-controller.on('route:update', function(e) {
-  window.location.hash = e.data;
-});
-
 // Handling session
 var initialSession = JSON.parse($('#session').val());
 
-// if (!initialSession)
-//   controller.request('users');
+// Fetching user list
+controller.request('retrieveUsers');
 
 // Routing
 var routes = (
