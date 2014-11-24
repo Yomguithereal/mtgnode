@@ -10,10 +10,13 @@ var React = require('React'),
 
 // User Button
 var UserButton = React.createClass({
+  handleClick: function() {
+    controller.emit('login:attempt', {name: this.props.name});
+  },
   render: function() {
     var name = this.props.name;
 
-    return <Button bsStyle="default">{name}</Button>;
+    return <Button onClick={this.handleClick} bsStyle="default">{name}</Button>;
   }
 });
 

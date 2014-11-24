@@ -15,6 +15,7 @@ var controller = new domino({
   properties: {
     user: {
       type: '?User',
+      emit: 'user:updated',
       value: null
     },
     users: {
@@ -32,8 +33,21 @@ var controller = new domino({
 });
 
 // Events
-controller.on('route:update', function(e) {
-  window.location.hash = e.data;
+controller.on({
+
+  // Route events
+  'route:update': function(e) {
+    window.location.hash = e.data;
+  },
+
+  // Login events
+  'login:attempt': function(e) {
+    this.request('log', {name: e.data});
+  },
+  'user:updated': function(e) {
+
+    // TODO: wait for answer concerning domino specs
+  }
 });
 
 // Exporting

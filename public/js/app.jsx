@@ -19,9 +19,8 @@ var controller = require('./controllers/main.js'),
     $ = require('jquery');
 
 // Handling session
-var initialSession = SESSION;
-if (initialSession.name)
-  controller.update('user', initialSession);
+if (SESSION.name)
+  controller.update('user', SESSION);
 
 // Fetching user list
 controller.request('retrieveUsers');
