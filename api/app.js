@@ -125,7 +125,7 @@ userRouter.get('/log/:name',
     var user = users.get(req.param('name'));
 
     if (!user)
-      return res.status(400).send('Not Found');
+      return res.status(401).send('Not Found');
 
     req.session.logged = true;
     req.session.name = user.name;

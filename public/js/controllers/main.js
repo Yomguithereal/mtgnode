@@ -19,7 +19,7 @@ var state = new Baobab({
   data: {
     users: [],
     sets: []
-  }
+  },
 
   // Deck builder
   builder: {
