@@ -8,6 +8,16 @@ var CARDS = require('../../data/cards.json'),
     SETS = require('../../data/sets.json'),
     _ = require('lodash');
 
+// Datasets
+var data = {
+  lightSets: _(SETS).values().map(function(s) {
+    return {
+      name: s.name,
+      code: s.code
+    };
+  }).value()
+};
+
 var model = {
   getCardById: function(mid) {
     return _.find(CARDS, function(card) {
@@ -25,6 +35,9 @@ var model = {
     });
 
     return cards;
+  },
+  getSetsInfo: function() {
+    return data.lightSets;
   }
 };
 

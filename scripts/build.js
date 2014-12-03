@@ -16,7 +16,7 @@ var browserify = require('browserify'),
 module.exports = function(callback) {
   var opts = {
     debug: true,
-    entries: [__dirname + '/../public/js/app.jsx'],
+    entries: [__dirname + '/../public/js/main.jsx'],
     standalone: 'app',
     cache: {},
     packageCache: {},

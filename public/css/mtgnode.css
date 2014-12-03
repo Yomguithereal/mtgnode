@@ -1,4 +1,8 @@
-/* MTGNode CSS */
+/**
+ * MTGNode CSS
+ */
+
+/* -- General -- */
 #container {
   width: 1170px;
   margin-left: auto;
@@ -9,6 +13,29 @@
   border-radius: 0px;
 }
 
+.full-height {
+  min-height: 650px;
+}
+
+/* -- Login -- */
 .login-picker {
   text-align: center;
+}
+
+.login-picker ul {
+  list-style-type: none;
+  padding-left: 0px;
+}
+
+.login-picker li {
+  margin-bottom: 10px;
+}
+
+.login-picker button {
+  min-width: 200px;
+}
+
+/* -- Deck Builder -- */
+#deck-builder .cards-panel, #deck-builder .deck-panel {
+  overflow-y: scroll;
 }

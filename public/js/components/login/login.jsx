@@ -16,21 +16,29 @@ var UserButton = React.createClass({
   render: function() {
     var name = this.props.name;
 
-    return <Button onClick={this.handleClick} bsStyle="default">{name}</Button>;
+    return (
+      <li>
+        <Button onClick={this.handleClick} bsStyle="default">{name}</Button>
+      </li>
+    );
   }
 });
 
 // Picker
 var Picker = React.createClass({
   mixins: [controller.mixin],
-  renderOn: 'users:updated',
+  cursor: ['data', 'users'],
   renderButton: function(user) {
-    return <UserButton key={user} name={user} />
+    return <UserButton key={user} name={user} />;
   },
   render: function() {
+    var users = this.cursor.get();
+
     return (
       <Well className="login-picker">
-        {this.control.get('users').map(this.renderButton)}
+        <ul>
+          {users.map(this.renderButton)}
+        </ul>
       </Well>
     );
   }

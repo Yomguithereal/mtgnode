@@ -17,6 +17,9 @@ module.exports = React.createClass({
             <NavItem href="#/lobby">
               <b>MTGNode</b>
             </NavItem>
+            <NavItem href="#/builder">
+              Deck Builder
+            </NavItem>
           </Nav>
         </Navbar>
         <div id="container">

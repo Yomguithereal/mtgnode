@@ -79,6 +79,11 @@ cardRouter.post('/cards',
   }
 );
 
+// Retrieving a list of sets
+cardRouter.get('/sets', function(req, res) {
+  return res.json(compendium.getSetsInfo());
+});
+
 
 /**
  * User Router

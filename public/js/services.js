@@ -7,11 +7,27 @@
 
 var services = {
 
+  /**
+   * Cards API
+   */
+
+  // Retrieve set informations
+  setsInformation: {
+    url: '/sets',
+    success: function(data) {
+      this.select('data', 'sets').set(data);
+    }
+  },
+
+  /**
+   * Users API
+   */
+
   // Retrieve a list of existant users
   retrieveUsers: {
     url: '/users',
     success: function(data) {
-      this.update('users', data);
+      this.select('data', 'users').set(data);
     }
   },
 
@@ -19,7 +35,8 @@ var services = {
   log: {
     url: '/log/:name',
     success: function(data) {
-      this.update('user', data);
+      this.set('user', data);
+      this.emit('route:update', '/lobby');
     }
   }
 };
