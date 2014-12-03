@@ -20,6 +20,11 @@ var state = new Baobab({
     users: [],
     sets: []
   }
+
+  // Deck builder
+  builder: {
+    cards: []
+  }
 }, {toJS: true});
 
 // Controller
