@@ -4,7 +4,7 @@
  *
  * This simple component enables the visitor to pick its user.
  */
-var React = require('React'),
+var React = require('react'),
     controller = require('../../controllers/main.js'),
     {Grid, Row, Col, Well, Button} = require('react-bootstrap');
 
