@@ -25,7 +25,7 @@ var state = new Baobab({
   builder: {
     cards: []
   }
-}, {toJS: true});
+});
 
 // Controller
 var controller = new domino({
@@ -39,6 +39,7 @@ controller.get = state.get.bind(state);
 controller.set = state.set.bind(state);
 controller.update = state.update.bind(state);
 controller.mixin = state.mixin;
+controller.state = state;
 
 // Events
 controller.on({
