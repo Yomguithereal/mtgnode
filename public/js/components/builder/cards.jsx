@@ -12,7 +12,6 @@ var React = require('react'),
 // Component displaying a single card
 var Card = React.createClass({
   handleMouseOver: function() {
-    console.log('ici');
     controller.emit('card:focus', this.props.card);
   },
   render: function() {
