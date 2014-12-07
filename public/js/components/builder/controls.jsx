@@ -6,13 +6,21 @@
  */
 var React = require('react'),
     {Well} = require('react-bootstrap'),
+    CardViewer = require('../misc/card_viewer.jsx'),
     controller = require('../../controllers/main.js');
 
 // Item of the set list
 var SetListItem = React.createClass({
+  renderOption: function(set) {
+    return <option key={set.code} value={set.code}>{set.name}</option>;
+  },
   render: function() {
+    var group = this.props.group;
+
     return (
-      <option value={this.props.code}>{this.props.name}</option>
+      <optgroup label={group.block}>
+        {group.sets.map(this.renderOption)}
+      </optgroup>
     );
   }
 });
@@ -23,15 +31,19 @@ var SetList = React.createClass({
   cursor: ['data', 'sets'],
   handleChange: function(e) {
     var value = e.target.value;
-    console.log(value);
+
+    if (value !== 'no-choice')
+      controller.emit('setCards:retrieve', value);
+    else
+      controller.select('builder', 'cards').set([]);
   },
   renderItem: function(data) {
-    return <SetListItem key={data.code} code={data.code} name={data.name} />;
+    return <SetListItem key={data.block} group={data} />;
   },
   render: function() {
     return (
       <select onChange={this.handleChange} className='form-control'>
-        <SetListItem key='choice' code={false} name='--Set--' />
+        <option value='no-choice'></option>
         {this.cursor.get().map(this.renderItem)}
       </select>
     );
@@ -54,6 +66,7 @@ module.exports = React.createClass({
     return (
       <Well className='full-height'>
         <Search />
+        <CardViewer />
       </Well>
     );
   }

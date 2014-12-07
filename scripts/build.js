@@ -26,7 +26,7 @@ module.exports = function(callback) {
   var bundler = browserify(opts)
     // .add(es6ify.runtime)
     .transform(reactify)
-    .transform(es6ify.configure(/.jsx/));
+    .transform(es6ify.configure(/.jsx?/));
 
   var watcher = watchify(bundler);
 

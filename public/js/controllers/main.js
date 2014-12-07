@@ -23,7 +23,8 @@ var state = new Baobab({
 
   // Deck builder
   builder: {
-    cards: []
+    cards: [],
+    currentDeck: null
   }
 });
 
@@ -53,6 +54,10 @@ controller.on({
   'sets:retrieve': function() {
     if (!this.get('data', 'sets').length)
       this.request('setsInformation');
+  },
+
+  'setCards:retrieve': function(e) {
+    this.request('setCards', {code: e.data});
   },
 
   // Login events

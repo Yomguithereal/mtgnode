@@ -84,6 +84,31 @@ cardRouter.get('/sets', function(req, res) {
   return res.json(compendium.getSetsInfo());
 });
 
+// Set information
+cardRouter.get('/set/:code',
+  validate({code: 'string'}),
+  function(req, res) {
+    var info = compendium.getSetInfo(req.param('code'));
+
+    if (!info)
+      return res.status(404).send('Not Found');
+    else
+      return res.json(info);
+  }
+);
+
+// Set cards
+cardRouter.get('/set/:code/cards',
+  validate({code: 'string'}),
+  function(req, res) {
+    var cards = compendium.getSetCards(req.param('code'));
+
+    if (!cards.length)
+      return res.status(404).send('Not Found');
+    else
+      return res.json(cards);
+  }
+);
 
 /**
  * User Router

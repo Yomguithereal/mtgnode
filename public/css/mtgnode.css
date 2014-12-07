@@ -14,7 +14,7 @@
 }
 
 .full-height {
-  min-height: 650px;
+  height: 650px;
 }
 
 /* -- Login -- */
@@ -38,4 +38,9 @@
 /* -- Deck Builder -- */
 #deck-builder .cards-panel, #deck-builder .deck-panel {
   overflow-y: scroll;
+}
+
+.search-card img{
+  width: 50px;
+  cursor: pointer;
 }

@@ -20,7 +20,9 @@ for (var set in sets) {
   if (validSet(sets[set])) {
 
     // Saving card
-    cards = cards.concat(sets[set].cards);
+    cards = cards.concat(sets[set].cards.map(function(c) {
+      return _.merge(c, {set: set});
+    }));
 
     // Registering set
     sets[set].nb_cards = sets[set].cards.length;

@@ -10,12 +10,25 @@ var CARDS = require('../../data/cards.json'),
 
 // Datasets
 var data = {
-  lightSets: _(SETS).values().map(function(s) {
-    return {
-      name: s.name,
-      code: s.code
-    };
-  }).value()
+  lightSets: _(SETS)
+    .values()
+    .map(function(s) {
+      return {
+        block: s.block || 'standard',
+        name: s.name,
+        code: s.code
+      };
+    })
+    .groupBy('block')
+    .map(function(sets) {
+      return {
+        block: sets[0].block,
+        sets: _.map(sets, function(s) {
+          return _.omit(s, 'block');
+        })
+      }
+    })
+    .value()
 };
 
 var model = {
@@ -38,6 +51,16 @@ var model = {
   },
   getSetsInfo: function() {
     return data.lightSets;
+  },
+  getSetInfo: function(setCode) {
+    return SETS[setCode];
+  },
+  getSetCards: function(setCode) {
+
+    // TODO: optimize
+    return CARDS.filter(function(c) {
+      return c.set === setCode;
+    });
   }
 };
 

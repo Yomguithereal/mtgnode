@@ -19,6 +19,14 @@ var services = {
     }
   },
 
+  // Retrieve cards corresponding to a set
+  setCards: {
+    url: '/set/:code/cards',
+    success: function(data) {
+      this.select('builder', 'cards').set(data);
+    }
+  },
+
   /**
    * Users API
    */
