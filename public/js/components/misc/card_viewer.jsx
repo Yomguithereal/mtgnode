@@ -29,7 +29,7 @@ module.exports = React.createClass({
       'public/img/card-back.jpeg';
 
     return (
-      <div class='card-viewer'>
+      <div className='card-viewer'>
         <img width={this.props.height || '222'} src={src} />
       </div>
     );

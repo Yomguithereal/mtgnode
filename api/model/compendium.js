@@ -58,9 +58,11 @@ var model = {
   getSetCards: function(setCode) {
 
     // TODO: optimize
-    return CARDS.filter(function(c) {
-      return c.set === setCode;
-    });
+    // TODO: finer sorting
+    return _(CARDS)
+      .filter({set: setCode})
+      .sortBy('name')
+      .value();
   }
 };
 
