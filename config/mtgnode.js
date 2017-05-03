@@ -11,5 +11,5 @@ module.exports = {
   //   * mtgimage
   //   * magiccards.info
   //   * gatherers
-  driver: 'mtgimage'
+  driver: 'magiccards.info'
 }

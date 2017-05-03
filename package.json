@@ -12,8 +12,8 @@
     "application"
   ],
   "dependencies": {
-    "sails": "~0.10.0-rc4",
-    "sails-disk": "~0.10.0",
+    "sails": "0.10.0-rc4",
+    "sails-disk": "0.10.0-rc4",
     "rc": "~0.3.3",
     "include-all": "~0.1.3",
     "grunt": "0.4.2",
