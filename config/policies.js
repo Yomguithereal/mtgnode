@@ -11,6 +11,7 @@
  * http://sailsjs.org/#documentation
  */
 var standard_procedure = ['authentication', 'views_globals'];
+var admin_only = ['authentication', 'admin']
 
 module.exports.policies = {
 
@@ -19,7 +20,11 @@ module.exports.policies = {
   '*': true,
   LobbyController: standard_procedure,
   DeckBuilderController: standard_procedure,
-  PlaygroundController: standard_procedure
+  PlaygroundController: standard_procedure,
+  UserController: {
+  	create: 'admin',
+  	'*': true
+  }
 
   /*
 	// Here's an example of adding some policies to a controller
