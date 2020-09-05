@@ -83,5 +83,5 @@ This application does not provide the cards images so it can stay lightweight. I
 ### Changing the driver
 To change the display driver, go to `config/mtgnode.js` and change for the wanted driver.
 
-##Thanks
+## Thanks
 This app runs on [mtgjson](http://mtgjson.com/)'s data.
